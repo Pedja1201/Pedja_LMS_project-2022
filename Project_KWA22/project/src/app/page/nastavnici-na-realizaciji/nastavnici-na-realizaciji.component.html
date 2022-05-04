@@ -1,0 +1,10 @@
+<h2>{{title}}</h2>
+
+
+<app-forma-nastavnika-na-realizaciji (createEvent)="create($event)"></app-forma-nastavnika-na-realizaciji>
+
+<app-tabela-nastavnika-na-realizaciji [elementi]="nastavnici" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-nastavnika-na-realizaciji>
+
+
+<app-forma-nastavnika-na-realizaciji [nastavnikNaRealizaciji]="itemUpdate" (createEvent)="update($event)"></app-forma-nastavnika-na-realizaciji>

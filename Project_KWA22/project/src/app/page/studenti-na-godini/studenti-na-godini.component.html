@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+
+<app-forma-studenta-na-godini (createEvent)="create($event)"></app-forma-studenta-na-godini>
+
+<app-tabela-studenta-na-godini [elementi]="studentiNaGodini" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-studenta-na-godini>
+
+<app-forma-studenta-na-godini [studentNaGodini]="itemUpdate" (createEvent)="update($event)"></app-forma-studenta-na-godini>

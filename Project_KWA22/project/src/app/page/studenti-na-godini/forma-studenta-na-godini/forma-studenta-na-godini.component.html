@@ -1,0 +1,21 @@
+<h2>{{title}}</h2>
+<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+        <label>Datum upisa: <input  formControlName="datumUpisa"  name="datumUpisa" type="date" required></label>
+      </div>
+    <div>
+      <label>Broj indeksa: <input formControlName="brojIndeksa"  name="brojIndeksa" type="text" required></label>
+    </div>
+    <div>
+        <label>Godina studija:
+          <select name="godinaStudija" formControlName="godinaStudija" [compareWith]="comparator"  required>
+            <option *ngFor="let godinaStudija of godineStudija"  [ngValue]="godinaStudija">
+              {{godinaStudija.godina}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form>

@@ -1,0 +1,9 @@
+<ul>
+    <li>ID: {{student["id"]}}</li>
+    <li>JMBG: {{student["jmbg"]}}</li>
+    <li>Ime: {{student["ime"]}}</li>
+    <li>Adresa: <span *ngIf="student['adresa']">{{student["adresa"]["ulica"]}}</span></li>
+    <li>Pohadjanje predmeta: <span *ngIf="student['pohadjanjePredmeta']">{{student["pohadjanjePredmeta"]["konacnaOcena"]}}=Konacna ocena</span></li>
+    <li>Student na godini: <span *ngIf="student['studentNaGodini']">{{student["studentNaGodini"]["brojIndeksa"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

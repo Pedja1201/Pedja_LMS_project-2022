@@ -1,0 +1,40 @@
+<h1>{{title}}</h1>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ime</th>
+        <th>Biografija</th>
+        <th>JMBG</th>
+        <th>Adresa</th>
+        <th>Zvanje</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody *appPorukaOGresci="elementi; poruka : praznaTabela" >                        
+      <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
+      <tr *ngFor="let e of elementi" [appProveraNepostojecihVrednosti]="e['jmbg']" 
+              [bojaTeksta]="undefined" appPomeranjeKursora>
+        <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+        <td>{{e["ime"]}}</td>
+        <td>{{e["biografija"]}}</td>
+        <td><span *ngIf="e['jmbg']; else praznoPolje">{{e["jmbg"]}}</span></td>
+        <td><span *ngIf="e['adresa']">{{e["adresa"]["ulica"]}}</span></td>
+        <td><span *ngIf="e['zvanje']">{{e["zvanje"]["datumIzbora"]}}</span></td>
+        <td>
+          <button (click)="ukloni(e['id'])">Ukloni</button>
+          <button (click)="izmeni(e)">Izmeni</button>
+        </td>
+  
+      </tr>
+    </tbody>
+  </table>
+  
+  <ng-template #praznoPolje>-</ng-template>
+  <ng-template #praznaTabela>
+    <tbody>
+      <tr>
+        <td colspan="7">Nema sadrzaja prikaz</td>
+      </tr>
+    </tbody>
+  </ng-template>

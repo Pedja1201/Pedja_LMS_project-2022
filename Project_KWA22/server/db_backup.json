@@ -1,0 +1,43 @@
+{
+  "permissions": {},
+  "klijenti": [
+    {
+      "id": 1,
+      "ime": "Petar",
+      "prezime": "Jovanović"
+    },
+    {
+      "id": 2,
+      "ime": "Jovana",
+      "prezime": "Savić"
+    }
+  ],
+  "transakcije": [
+    {
+      "id": 1,
+      "klijentId": 1,
+      "racunId": 2,
+      "iznos": 2000,
+      "datumTransakcije": "2022-03-01"
+    },
+    {
+      "id": 2,
+      "klijentId": 2,
+      "racunId": 1,
+      "iznos": 5600.5,
+      "datumTransakcije": "2022-01-03"
+    }
+  ],
+  "racuni": [
+    {
+      "id": 1,
+      "brojRacuna": "12340004321",
+      "stanje": 10000
+    },
+    {
+      "id": 2,
+      "brojRacuna": "55220001122",
+      "stanje": 56200.2
+    }
+  ]
+}

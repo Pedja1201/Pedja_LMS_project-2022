@@ -1,0 +1,19 @@
+<h2>{{title}}</h2>
+<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+      <label>Naziv: <input formControlName="naziv"  name="naziv" type="text" required></label>
+    </div>
+
+    <div>
+        <label>Zvanje:
+          <select name="zvanje" formControlName="zvanje" [compareWith]="comparator"  required>
+            <option *ngFor="let zvanje of zvanja"  [ngValue]="zvanje">
+                {{zvanje.id}},{{zvanje.datumIzbora}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form>

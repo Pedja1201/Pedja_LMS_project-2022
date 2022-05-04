@@ -1,0 +1,9 @@
+<ul>
+    <li>ID: {{nastavnik["id"]}}</li>
+    <li>Ime: {{nastavnik["ime"]}}</li>
+    <li>Biografija: {{nastavnik["biografija"]}}</li>
+    <li>JMBG: {{nastavnik["jmbg"]}}</li>
+    <li>Adresa: <span *ngIf="nastavnik['adresa']">{{nastavnik["adresa"]["ulica"]}}</span></li>
+    <li>Zvanje: <span *ngIf="nastavnik['zvanje']">{{nastavnik["zvanje"]["datumIzbora"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

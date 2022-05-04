@@ -1,0 +1,7 @@
+<ul>
+    <li>ID: {{adresa["id"]}}</li>
+    <li>Ulica: {{adresa["ulica"]}}</li>
+    <li>Broj: {{adresa["broj"]}}</li>
+    <li>Mesto: <span *ngIf="adresa['mesto']">{{adresa["mesto"]["naziv"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

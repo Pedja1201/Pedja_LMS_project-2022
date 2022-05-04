@@ -1,0 +1,7 @@
+<ul>
+    <li>ID: {{ishod["id"]}}</li>
+    <li>Opis: {{ishod["opis"]}}</li>
+    <li>Predmet: <span *ngIf="ishod['predmet']">{{ishod["predmet"]["naziv"]}}</span></li>
+
+</ul>
+<button (click)="back()">Nazad</button>

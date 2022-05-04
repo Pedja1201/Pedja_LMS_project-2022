@@ -1,0 +1,6 @@
+<ul>
+    <li>ID: {{mesto["id"]}}</li>
+    <li>Naziv: {{mesto["naziv"]}}</li>
+    <li>Drzava: <span *ngIf="mesto['drzava']">{{mesto["drzava"]["naziv"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

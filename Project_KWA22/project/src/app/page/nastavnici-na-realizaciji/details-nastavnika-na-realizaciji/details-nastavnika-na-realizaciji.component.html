@@ -1,0 +1,7 @@
+<ul>
+    <li>ID: {{nastavnikNaRealizaciji["id"]}}</li>
+    <li>Broj casova: {{nastavnikNaRealizaciji["brojCasova"]}}</li>
+    <li>Nastavnik: <span *ngIf="nastavnikNaRealizaciji['nastavnik']">{{nastavnikNaRealizaciji["nastavnik"]["ime"]}}</span></li>
+    <li>Tip nastave: <span *ngIf="nastavnikNaRealizaciji['tipNastave']">{{nastavnikNaRealizaciji["tipNastave"]["naziv"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

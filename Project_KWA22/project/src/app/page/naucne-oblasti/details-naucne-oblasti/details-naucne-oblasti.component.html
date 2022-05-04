@@ -1,0 +1,6 @@
+<ul>
+    <li>ID: {{naucnaOblast["id"]}}</li>
+    <li>Naziv: {{naucnaOblast["naziv"]}}</li>
+    <li>Zvanje: <span *ngIf="naucnaOblast['zvanje']">{{naucnaOblast["zvanje"]["datumIzbora"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

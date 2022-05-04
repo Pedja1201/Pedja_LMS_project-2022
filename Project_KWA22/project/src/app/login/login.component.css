@@ -1,0 +1,9 @@
+p{
+    color: red;
+}
+form,h2,p{
+    margin-left: 30%;
+}
+input{
+    margin: 10px;
+}

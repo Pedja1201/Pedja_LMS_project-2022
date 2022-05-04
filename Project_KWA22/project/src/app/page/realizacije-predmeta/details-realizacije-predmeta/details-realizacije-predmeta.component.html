@@ -1,0 +1,7 @@
+<ul>
+    <li>ID: {{realizacijaPredmeta["id"]}}</li>
+    <li>Naziv: {{realizacijaPredmeta["naziv"]}}</li>
+    <li>Nastavnik na realizaciji: <span *ngIf="realizacijaPredmeta['nastavnikNaRealizaciji']">{{realizacijaPredmeta["nastavnikNaRealizaciji"]["id"]}}</span></li>
+    <li>Predmet: <span *ngIf="realizacijaPredmeta['predmet']">{{realizacijaPredmeta["predmet"]["naziv"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

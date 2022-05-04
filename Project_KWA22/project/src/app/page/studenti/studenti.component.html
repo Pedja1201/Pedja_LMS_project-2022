@@ -1,0 +1,10 @@
+<h2>{{title}}</h2>
+
+<app-pretraga-studenta (pretraga)="search($event)" ></app-pretraga-studenta>
+
+<app-forma-studenta (createEvent)="create($event)"></app-forma-studenta>
+
+<app-tabela-studenta [elementi]="studenti" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-studenta>
+
+<app-forma-studenta [student]="studentUpdate" (createEvent)="update($event)"></app-forma-studenta>

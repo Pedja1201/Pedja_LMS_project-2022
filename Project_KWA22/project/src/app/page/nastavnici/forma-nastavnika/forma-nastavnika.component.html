@@ -1,0 +1,33 @@
+<h2>{{title}}</h2>
+<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+      <label>Ime: <input formControlName="ime"  name="ime" type="text" required></label>
+    </div>
+    <div>
+      <label>Biografija: <input formControlName="biografija"  name="biografija" type="text" required></label>
+    </div>
+    <div>
+      <label>JMBG: <input  formControlName="jmbg"  name="jmbg" type="text" required></label>
+    </div>
+    <div>
+        <label>Adresa:
+          <select name="adresa" formControlName="adresa" [compareWith]="comparator1"  required>
+            <option *ngFor="let adresa of adrese"  [ngValue]="adresa">
+              {{adresa.ulica}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>Zvanje:
+          <select name="zvanje" formControlName="zvanje" [compareWith]="comparator2"  required>
+            <option *ngFor="let zvanje of zvanja"  [ngValue]="zvanje">
+                {{zvanje.id}},{{zvanje.datumIzbora}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form>

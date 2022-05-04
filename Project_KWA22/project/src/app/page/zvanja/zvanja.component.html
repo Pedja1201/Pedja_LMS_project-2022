@@ -1,0 +1,9 @@
+<h2>{{title}}</h2>
+
+<app-forma-zvanja (createEvent)="create($event)"></app-forma-zvanja>
+
+<app-tabela-zvanja [elementi]="zvanja" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-zvanja>
+
+
+<app-forma-zvanja [zvanje]="zvanjeUpdate" (createEvent)="update($event)"></app-forma-zvanja>

@@ -1,0 +1,8 @@
+<ul>
+    <li>ID: {{zvanje["id"]}}</li>
+    <li>Datum Izbora: {{zvanje["datumIzbora"]}}</li>
+    <li>Datum prestanka: {{zvanje["datumPrestanka"]}}</li>
+    <li>Naucna oblast: <span *ngIf="zvanje['naucnaOblast']">{{zvanje["naucnaOblast"]["naziv"]}}</span></li>
+    <li>Tip zvanja: <span *ngIf="zvanje['tipZvanja']">{{zvanje["tipZvanja"]["naziv"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

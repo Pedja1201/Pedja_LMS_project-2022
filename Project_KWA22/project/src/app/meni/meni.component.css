@@ -1,0 +1,8 @@
+.meni {
+    display:block;
+    justify-content: space-around;
+    padding: 10px;
+}
+button{
+    margin: 10px;
+}

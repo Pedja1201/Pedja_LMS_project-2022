@@ -1,0 +1,9 @@
+<h2>{{title}}</h2>
+
+
+<app-forma-realizacije-predmeta (createEvent)="create($event)"></app-forma-realizacije-predmeta>
+
+<app-tabela-realizacije-predmeta [elementi]="realizacijePredmeta" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)" ></app-tabela-realizacije-predmeta>
+
+<app-forma-realizacije-predmeta [realizacijaPredmeta]="itemUpdate" (createEvent)="update($event)"></app-forma-realizacije-predmeta>

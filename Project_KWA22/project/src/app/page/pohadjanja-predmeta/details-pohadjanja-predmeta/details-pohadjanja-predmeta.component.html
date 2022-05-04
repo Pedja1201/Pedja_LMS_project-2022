@@ -1,0 +1,7 @@
+<ul>
+    <li>ID: {{pohadjanjePredmeta["id"]}}</li>
+    <li>Konacna ocena: {{pohadjanjePredmeta["konacnaOcena"]}}</li>
+    <li>Realizacija predmeta: <span *ngIf="pohadjanjePredmeta['realizacijaPredmeta']">{{pohadjanjePredmeta["realizacijaPredmeta"]["naziv"]}}</span></li>
+
+</ul>
+<button (click)="back()">Nazad</button>

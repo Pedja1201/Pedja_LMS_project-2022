@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Opis</th>
+        <th>Predmet</th>
+
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>                        
+
+      <tr *ngFor="let e of elementi">
+        <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+        <td>{{e["opis"]}}</td>
+        <td><span *ngIf="e['predmet']">{{e["predmet"]["naziv"]}}</span></td>
+        <td>
+          <button (click)="ukloni(e['id'])">Ukloni</button>
+          <button (click)="izmeni(e)">Izmeni</button>
+        </td>
+  
+      </tr>
+    </tbody>
+  </table>
+  
+  <ng-template #praznoPolje>-</ng-template>

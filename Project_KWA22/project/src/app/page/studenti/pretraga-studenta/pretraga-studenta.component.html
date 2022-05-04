@@ -1,0 +1,40 @@
+<h2>{{title}}</h2>
+<form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
+  <div>
+    <label>ID: <input formControlName="id" name="id" type="number" step="1" required></label>
+  </div>
+    <div>
+        <label>JMBG: <input formControlName="jmbg" name="jmbg" type="text"></label>
+    </div>
+    <div>
+        <label>Ime: <input formControlName="ime" name="ime" type="text"></label>
+    </div>
+
+  <div>
+    <label>Adresa:
+      <select name="adresa" formControlName="adresa">
+        <option *ngFor="let adresa of adrese; trackBy: itemTrackBy1" [ngValue]="adresa">{{adresa.ulica}}</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>Pohadjanje predmeta:
+      <select name="pohadjanjePredmeta" formControlName="pohadjanjePredmeta">
+        <option *ngFor="let pohadjanjePredmeta of pohadjanjaPredmeta; trackBy: itemTrackBy2" [ngValue]="pohadjanjePredmeta">
+           -Ocena:{{pohadjanjePredmeta.konacnaOcena}}</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>Student na godini:
+      <select name="studentNaGodini" formControlName="studentNaGodini">
+        <option *ngFor="let studentNaGodini of studentiNaGodini; trackBy: itemTrackBy3" [ngValue]="studentNaGodini">
+            {{studentNaGodini.brojIndeksa}}</option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <button type="submit">Pretrazi </button>
+  </div>
+</form>

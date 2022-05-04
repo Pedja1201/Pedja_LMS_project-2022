@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+
+<app-forma-studijskih-programa (createEvent)="create($event)"></app-forma-studijskih-programa>
+
+<app-tabela-studijskih-programa [elementi]="studijskiProgrami" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-studijskih-programa>
+
+<app-forma-studijskih-programa [studijskiProgram]="itemUpdate" (createEvent)="update($event)"></app-forma-studijskih-programa>

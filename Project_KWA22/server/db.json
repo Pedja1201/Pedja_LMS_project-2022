@@ -1,0 +1,462 @@
+{
+  "permissions": {
+    "/fakulteti": [
+      "ROLE_ADMIN"
+    ],
+    "/nastavnici": [
+      "ROLE_ADMIN"
+    ],
+    "/univerziteti": [
+      "ROLE_ADMIN"
+    ],
+    "/studenti": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/adrese": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/drzave": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/godineStudija": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/ishodi": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/mesta": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/nastavniciNaRealizaciji": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/naucneOblasti": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/pohadjanjaPredmeta": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/predmeti": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/realizacijePredmeta": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/studentiNaGodini": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/studijskiProgrami": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/tipoviNastave": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/tipoviZvanja": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/zvanja": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ]
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "korisnik",
+      "password": "korisnik",
+      "roles": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 2,
+      "username": "admin",
+      "password": "admin",
+      "roles": [
+        "ROLE_ADMIN"
+      ]
+    }
+  ],
+  "adrese": [
+    {
+      "id": 1,
+      "ulica": "Prvomajska",
+      "broj": "23",
+      "mesto": {
+        "id": 1,
+        "naziv": "Vrsac"
+      }
+    },
+    {
+      "id": 2,
+      "ulica": "Bosanska",
+      "broj": "2",
+      "mesto": {
+        "id": 2,
+        "naziv": "Prijedor"
+      }
+    }
+  ],
+  "drzave": [
+    {
+      "id": 1,
+      "naziv": "Srbija"
+    },
+    {
+      "id": 2,
+      "naziv": "Rumunija"
+    },
+    {
+      "id": 3,
+      "naziv": "Bosna i Hercegovina"
+    }
+  ],
+  "fakulteti": [
+    {
+      "id": 1,
+      "naziv": "Tehnicki fakultet",
+      "univerzitet": {
+        "id": 1,
+        "naziv": "Singidunum",
+        "datumVremeOsnivanja": "2021-05-25"
+      },
+      "adresa": {
+        "id": 2,
+        "ulica": "Bosanska",
+        "broj": "2"
+      },
+      "nastavnik": {
+        "id": 1,
+        "ime": "Milorad",
+        "biografija": "Uspesna saradnja u prethodnim ustanovama",
+        "jmbg": "90876543"
+      }
+    }
+  ],
+  "godineStudija": [
+    {
+      "id": 1,
+      "godina": "2021-05-25",
+      "predmet": {
+        "id": 1,
+        "naziv": "Internet arhiteture",
+        "espb": 8,
+        "obavezan": false,
+        "brojPredavanja": 12,
+        "brojVezbi": 12,
+        "drugiObliciNastave": 2,
+        "istrazivackiRad": 2,
+        "ostaliCasovi": 2
+      }
+    },
+    {
+      "godina": "2022-04-04",
+      "predmet": {
+        "id": 2,
+        "naziv": "Klijentske Web aplikacije",
+        "espb": 6,
+        "obavezan": true,
+        "brojPredavanja": 12,
+        "brojVezbi": 12,
+        "drugiObliciNastave": 2,
+        "istrazivackiRad": 2,
+        "ostaliCasovi": 3
+      },
+      "id": 2
+    }
+  ],
+  "ishodi": [
+    {
+      "id": 1,
+      "opis": "Student će po uspešnom završetku kursa umeti da koristi ",
+      "predmet": {
+        "id": 1,
+        "naziv": "Internet arhiteture",
+        "espb": 8,
+        "obavezan": false,
+        "brojPredavanja": 12,
+        "brojVezbi": 12,
+        "drugiObliciNastave": 2,
+        "istrazivackiRad": 2,
+        "ostaliCasovi": 2
+      }
+    },
+    {
+      "id": 2,
+      "opis": "Studenti će po završetku kursa umeti da naprave klijentski deo web aplikacije korišćenjem",
+      "predmet": {
+        "id": 2,
+        "naziv": "Klijentske Web aplikacije",
+        "espb": 6,
+        "obavezan": true,
+        "brojPredavanja": 12,
+        "brojVezbi": 12,
+        "drugiObliciNastave": 2,
+        "istrazivackiRad": 2,
+        "ostaliCasovi": 3
+      }
+    }
+  ],
+  "mesta": [
+    {
+      "id": 1,
+      "naziv": "Vrsac",
+      "drzava": {
+        "id": 1,
+        "naziv": "Srbija"
+      }
+    },
+    {
+      "id": 2,
+      "naziv": "Prijedor",
+      "drzava": {
+        "id": 3,
+        "naziv": "Bosna i Hercegovina"
+      }
+    },
+    {
+      "naziv": "Pedja",
+      "drzava": {
+        "id": 2,
+        "naziv": "Rumunija"
+      },
+      "id": 3
+    }
+  ],
+  "nastavnici": [
+    {
+      "id": 1,
+      "ime": "Milorad",
+      "biografija": "Uspesna saradnja u prethodnim ustanovama",
+      "jmbg": "90876543",
+      "adresa": {
+        "id": 1,
+        "ulica": "Prvomajska",
+        "broj": "23"
+      },
+      "zvanje": {
+        "id": 1,
+        "datumIzbora": "2021-05-25",
+        "datumPrestanka": "2021-05-25"
+      }
+    }
+  ],
+  "nastavniciNaRealizaciji": [
+    {
+      "id": 1,
+      "brojCasova": 4,
+      "nastavnik": {
+        "id": 1,
+        "ime": "Milorad",
+        "biografija": "Uspesna saradnja u prethodnim ustanovama",
+        "jmbg": "90876543"
+      },
+      "tipNastave": {
+        "id": 1,
+        "naziv": "Predavanja"
+      }
+    }
+  ],
+  "naucneOblasti": [
+    {
+      "naziv": "Softverski inzenjer",
+      "zvanje": {
+        "id": 1,
+        "datumIzbora": "2021-05-25",
+        "datumPrestanka": "2021-05-25",
+        "naucnaOblast": {
+          "id": 1,
+          "naziv": "Softverski inzenjer"
+        },
+        "tipZvanja": {
+          "id": 1,
+          "naziv": "Profesor"
+        }
+      },
+      "id": 1
+    }
+  ],
+  "pohadjanjaPredmeta": [
+    {
+      "id": 1,
+      "konacnaOcena": 10,
+      "realizacijaPredmeta": {
+        "id": 1,
+        "naziv": "Polaganje predmetnog projekta"
+      }
+    }
+  ],
+  "predmeti": [
+    {
+      "id": 1,
+      "naziv": "Internet arhiteture",
+      "espb": 8,
+      "obavezan": false,
+      "brojPredavanja": 12,
+      "brojVezbi": 12,
+      "drugiObliciNastave": 2,
+      "istrazivackiRad": 2,
+      "ostaliCasovi": 2
+    },
+    {
+      "id": 2,
+      "naziv": "Klijentske Web aplikacije",
+      "espb": 6,
+      "obavezan": true,
+      "brojPredavanja": 12,
+      "brojVezbi": 12,
+      "drugiObliciNastave": 2,
+      "istrazivackiRad": 2,
+      "ostaliCasovi": 3
+    }
+  ],
+  "realizacijePredmeta": [
+    {
+      "id": 1,
+      "naziv": "Polaganje predmetnog projekta",
+      "nastavnikNaRealizaciji": {
+        "id": 1,
+        "brojCasova": 4
+      },
+      "predmet": {
+        "id": 1,
+        "naziv": "Internet arhiteture",
+        "espb": 8,
+        "obavezan": false,
+        "brojPredavanja": 12,
+        "brojVezbi": 12,
+        "drugiObliciNastave": 2,
+        "istrazivackiRad": 2,
+        "ostaliCasovi": 2
+      }
+    }
+  ],
+  "studenti": [
+    {
+      "id": 1,
+      "jmbg": "129098766",
+      "ime": "Predrag",
+      "adresa": {
+        "id": 1,
+        "ulica": "Prvomajska",
+        "broj": "23"
+      },
+      "pohadjanjePredmeta": {
+        "id": 1,
+        "konacnaOcena": 10
+      },
+      "studentNaGodini": {
+        "id": 1,
+        "datumUpisa": "2021-05-25",
+        "brojIndeksa": "2019270487"
+      }
+    }
+  ],
+  "studentiNaGodini": [
+    {
+      "id": 1,
+      "datumUpisa": "2021-05-25",
+      "brojIndeksa": "2019270487",
+      "godinaStudija": {
+        "id": 1,
+        "godina": "2021-05-25"
+      }
+    }
+  ],
+  "studijskiProgrami": [
+    {
+      "id": 1,
+      "naziv": "Informatika i Racunarstvo",
+      "fakultet": {
+        "id": 1,
+        "naziv": "Tehnicki fakultet"
+      },
+      "nastavnik": {
+        "id": 1,
+        "ime": "Milorad",
+        "biografija": "Uspesna saradnja u prethodnim ustanovama",
+        "jmbg": "90876543"
+      },
+      "godinaStudija": {
+        "id": 1,
+        "godina": "2021-05-25"
+      }
+    }
+  ],
+  "tipoviNastave": [
+    {
+      "id": 1,
+      "naziv": "Predavanja"
+    },
+    {
+      "id": 2,
+      "naziv": "Vezbe"
+    },
+    {
+      "id": 3,
+      "naziv": "Mentorska nastava"
+    }
+  ],
+  "tipoviZvanja": [
+    {
+      "id": 1,
+      "naziv": "Profesor"
+    },
+    {
+      "id": 2,
+      "naziv": "Asistent"
+    },
+    {
+      "id": 3,
+      "naziv": "Mentor"
+    }
+  ],
+  "univerziteti": [
+    {
+      "id": 1,
+      "naziv": "Singidunum",
+      "datumVremeOsnivanja": "2021-05-25",
+      "adresa": {
+        "id": 1,
+        "ulica": "Prvomajska",
+        "broj": "23"
+      },
+      "nastavnik": {
+        "id": 1,
+        "ime": "Milorad",
+        "biografija": "Uspesna saradnja u prethodnim ustanovama",
+        "jmbg": "90876543"
+      }
+    }
+  ],
+  "zvanja": [
+    {
+      "id": 1,
+      "datumIzbora": "2021-05-25",
+      "datumPrestanka": "2021-05-25",
+      "naucnaOblast": {
+        "id": 1,
+        "naziv": "Softverski inzenjer"
+      },
+      "tipZvanja": {
+        "id": 1,
+        "naziv": "Profesor"
+      }
+    }
+  ]
+}

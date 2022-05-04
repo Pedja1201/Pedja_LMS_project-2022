@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+
+<app-forma-univerziteta (createEvent)="create($event)"></app-forma-univerziteta>
+
+<app-tabela-univerziteta [elementi]="univerziteti" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-univerziteta>
+
+<app-forma-univerziteta [univerzitet]="univerzitetUpdate" (createEvent)="update($event)"></app-forma-univerziteta>

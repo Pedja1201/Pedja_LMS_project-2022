@@ -1,0 +1,27 @@
+<h2>{{title}}</h2>
+<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+      <label>Broj casova: <input formControlName="brojCasova"  name="brojCasova" type="number" step="0,1" required></label>
+    </div>
+    <div>
+        <label>Nastavnik:
+          <select name="nastavnik" formControlName="nastavnik" [compareWith]="comparator1"  required>
+            <option *ngFor="let nastavnik of nastavnici"  [ngValue]="nastavnik">
+              {{nastavnik.ime}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>Tip nastave:
+          <select name="tipNastave" formControlName="tipNastave" [compareWith]="comparator2"  required>
+            <option *ngFor="let tipNastave of tipoviNastave"  [ngValue]="tipNastave">
+              {{tipNastave.naziv}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form>

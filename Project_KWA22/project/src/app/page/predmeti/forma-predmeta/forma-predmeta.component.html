@@ -1,0 +1,31 @@
+<h2>{{title}}</h2>
+<form (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+        <label>Naziv: <input name="naziv" formControlName="naziv" type="text" required></label>
+    </div>
+    <div>
+      <label>ESPB: <input formControlName="espb" name="espb" type="number" min="2" max="8" required></label>
+    </div>
+    <div>
+        <label>Obavezan: <input formControlName="obavezan" name="obavezan" type="checkbox" ></label>
+      </div>
+      <div>
+        <label>Broj predavanja: <input formControlName="brojPredavanja" name="brojPredavanja" type="number" required></label>
+      </div>
+      <div>
+        <label>Broj vezbi: <input formControlName="brojVezbi" name="brojVezbi" type="number" required></label>
+      </div>
+      <div>
+        <label>Drugi oblici nastave: <input formControlName="drugiObliciNastave" name="drugiObliciNastave" type="number" required></label>
+      </div>
+      <div>
+        <label>Istrazivacki rad: <input formControlName="istrazivackiRad" name="istrazivackiRad" type="number" required></label>
+      </div>
+      <div>
+        <label>Ostali casovi: <input formControlName="ostaliCasovi" name="ostaliCasovi" type="number" required></label>
+      </div>
+
+    <div>
+      <button type="submit">Dodaj</button>
+    </div>
+  </form>

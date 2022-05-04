@@ -1,0 +1,34 @@
+<h2>{{title}}</h2>
+<form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
+  <div>
+    <label>ID: <input formControlName="id" name="id" type="number" step="1" required></label>
+  </div>
+    <div>
+        <label>Ime: <input formControlName="ime" name="ime" type="text"></label>
+    </div>
+    <div>
+        <label>Biografija: <input formControlName="biografija" name="biografija" type="text"></label>
+    </div>
+    <div>
+        <label>JMBG: <input formControlName="jmbg" name="jmbg" type="text" required></label>
+    </div>
+  <div>
+    <label>Adresa:
+      <select name="adresa" formControlName="adresa">
+        <option *ngFor="let adresa of adrese; trackBy: itemTrackBy1" [ngValue]="adresa">{{adresa.ulica}}</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>Zvanje:
+      <select name="zvanje" formControlName="zvanje">
+        <option *ngFor="let zvanje of zvanja; trackBy: itemTrackBy2" [ngValue]="zvanje">
+            {{zvanje.datumIzbora}},{{zvanje.datumIzbora}}</option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <button type="submit">Pretrazi rezervaciju</button>
+  </div>
+</form>

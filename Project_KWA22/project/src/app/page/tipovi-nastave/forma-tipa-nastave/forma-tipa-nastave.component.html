@@ -1,0 +1,11 @@
+<h2>{{title}}</h2>
+<form (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+
+    <div>
+      <label>Naziv: <input formControlName="naziv" name="naziv" type="text" required></label>
+    </div>
+
+    <div>
+      <button type="submit">Dodaj</button>
+    </div>
+  </form>

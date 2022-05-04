@@ -1,0 +1,7 @@
+<ul>
+    <li>ID: {{godinaStudija["id"]}}</li>
+    <li>Godina: {{godinaStudija["godina"]}}</li>
+    <li>Smer: <span *ngIf="godinaStudija['predmet']">{{godinaStudija["predmet"]["naziv"]}}</span></li>
+
+</ul>
+<button (click)="back()">Nazad</button>

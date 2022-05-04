@@ -1,0 +1,28 @@
+<h1>{{title}}</h1>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naziv</th>
+        <th>Nastavnik na realizaciji</th>
+        <th>Predmet</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>                        
+                                    <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
+      <tr *ngFor="let e of elementi">
+        <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+        <td>{{e["naziv"]}}</td>
+        <td><span *ngIf="e['nastavnikNaRealizaciji']">{{e["nastavnikNaRealizaciji"]["id"]}}</span></td>
+        <td><span *ngIf="e['predmet']">{{e["predmet"]["naziv"]}}</span></td>
+        <td>
+          <button (click)="ukloni(e['id'])">Ukloni</button>
+          <button (click)="izmeni(e)">Izmeni</button>
+        </td>
+  
+      </tr>
+    </tbody>
+  </table>
+  
+  <ng-template #praznoPolje>-</ng-template>

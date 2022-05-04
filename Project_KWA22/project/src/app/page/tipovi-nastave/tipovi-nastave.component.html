@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+
+<app-forma-tipa-nastave (createEvent)="create($event)"></app-forma-tipa-nastave>
+
+<app-tabela-tipa-nastave [elementi]="tipoviNastave" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-tipa-nastave>
+
+<app-forma-tipa-nastave [tipNastave]="itemUpdate" (createEvent)="update($event)"></app-forma-tipa-nastave>

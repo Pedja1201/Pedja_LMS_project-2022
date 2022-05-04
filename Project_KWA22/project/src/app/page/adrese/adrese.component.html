@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+
+<app-forma-adrese (createEvent)="create($event)"></app-forma-adrese>
+
+<app-tabela-adrese  [elementi]="adrese" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-adrese>
+
+<app-forma-adrese [adresa]="adresaUpdate" (createEvent)="update($event)"></app-forma-adrese>

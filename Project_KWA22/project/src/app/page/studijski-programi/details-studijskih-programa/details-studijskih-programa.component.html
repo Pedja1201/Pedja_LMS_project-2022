@@ -1,0 +1,8 @@
+<ul>
+    <li>ID: {{studijskiProgram["id"]}}</li>
+    <li>Naziv: {{studijskiProgram["naziv"]}}</li>
+    <li>Fakultet: <span *ngIf="studijskiProgram['fakultet']">{{studijskiProgram["fakultet"]["naziv"]}}</span></li>
+    <li>Nastavnik: <span *ngIf="studijskiProgram['nastavnik']">{{studijskiProgram["nastavnik"]["ime"]}}</span></li>
+    <li>Godina studija: <span *ngIf="studijskiProgram['godinaStudija']">{{studijskiProgram["godinaStudija"]["godina"]}}</span></li>
+</ul>
+<button (click)="back()">Nazad</button>

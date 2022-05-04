@@ -1,0 +1,8 @@
+<ul>
+    <li>ID: {{studentNaGodini["id"]}}</li>
+    <li>Datum upisa: {{studentNaGodini["datumUpisa"]}}</li>
+    <li>Broj indeksa: {{studentNaGodini["brojIndeksa"]}}</li>
+    <li>Godina studija: <span *ngIf="studentNaGodini['godinaStudija']">{{studentNaGodini["godinaStudija"]["godina"]}}</span></li>
+
+</ul>
+<button (click)="back()">Nazad</button>

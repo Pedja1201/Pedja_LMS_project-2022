@@ -1,0 +1,41 @@
+<h2>{{title}}</h2>
+<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+      <label>JMBG: <input formControlName="jmbg"  name="jmbg" type="text" required></label>
+    </div>
+    <div>
+      <label>Ime: <input formControlName="ime"  name="ime" type="text" required></label>
+    </div>
+
+    <div>
+        <label>Adresa:
+          <select name="adresa" formControlName="adresa" [compareWith]="comparator1"  required>
+            <option *ngFor="let adresa of adrese"  [ngValue]="adresa">
+              {{adresa.ulica}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>Pohadjanje predmeta:
+          <select name="pohadjanjePredmeta" formControlName="pohadjanjePredmeta" [compareWith]="comparator2"  required>
+            <option *ngFor="let pohadjanjePredmeta of pohadjanjaPredmeta"  [ngValue]="pohadjanjePredmeta">
+              -Ocena:{{pohadjanjePredmeta.konacnaOcena}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>Student na godini:
+          <select name="studentNaGodini" formControlName="studentNaGodini" [compareWith]="comparator3"  required>
+            <option *ngFor="let studentNaGodini of studentiNaGodini"  [ngValue]="studentNaGodini">
+              {{studentNaGodini.brojIndeksa}}
+            </option>
+          </select>
+        </label>
+      </div>
+
+      <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form>

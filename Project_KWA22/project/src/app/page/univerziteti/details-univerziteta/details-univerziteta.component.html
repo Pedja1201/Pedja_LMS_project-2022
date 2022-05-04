@@ -1,0 +1,9 @@
+<ul>
+    <li>ID: {{univerzitet["id"]}}</li>
+    <li>Naziv: {{univerzitet["naziv"]}}</li>
+    <li>Datum vreme osnivanja: {{univerzitet["datumVremeOsnivanja"]}}</li>
+    <li>Adresa: <span *ngIf="univerzitet['adresa']">{{univerzitet["adresa"]["ulica"]}}</span></li>
+    <li>Nastavnik: <span *ngIf="univerzitet['nastavnik']">{{univerzitet["nastavnik"]["ime"]}} ({{univerzitet["nastavnik"]["biografija"]}})</span></li>
+
+</ul>
+<button (click)="back()">Nazad</button>

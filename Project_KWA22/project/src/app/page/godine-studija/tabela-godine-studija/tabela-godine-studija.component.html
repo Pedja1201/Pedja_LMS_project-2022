@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Godina</th>
+        <th>Predmet</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody *appPorukaOGresci="elementi; poruka : praznaTabela" >                        
+        <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
+        <tr *ngFor="let e of elementi" [appProveraNepostojecihVrednosti]="e['godina']" 
+                [bojaTeksta]="undefined" appPomeranjeKursora>
+            <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+            <td><span *ngIf="e['godina']; else praznoPolje">{{e["godina"]}}</span></td>
+            <td><span *ngIf="e['predmet']">{{e["predmet"]["naziv"]}}</span></td>
+            <td>
+            <button (click)="ukloni(e['id'])">Ukloni</button>
+            <button (click)="izmeni(e)">Izmeni</button>
+            </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #praznoPolje>-</ng-template>
+  <ng-template #praznaTabela>
+    <tbody>
+      <tr>
+        <td colspan="7">Nema sadrzaja prikaz</td>
+      </tr>
+    </tbody>
+  </ng-template>

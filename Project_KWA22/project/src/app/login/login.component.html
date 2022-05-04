@@ -1,0 +1,15 @@
+<h2>{{title}}</h2>
+<form (ngSubmit)="login()" [formGroup]="loginForma" ngNativeValidate>
+    <div>
+      <label>Username: <input name="username" formControlName="username" type="text" required></label>
+    </div>
+    <div>
+      <label>Password: <input formControlName="password"  name="password" type="password" required></label>
+    </div>
+    <div>
+      <button type="submit">Login</button>
+      <button *ngIf="loginService.user" (click)="loginService.logout()">Logout</button>
+    </div>
+  </form>
+  <p *ngIf="loginFailed">Login failed!</p>
+  <p *ngIf="loginService.loggedOut">Successfully logged out!</p>

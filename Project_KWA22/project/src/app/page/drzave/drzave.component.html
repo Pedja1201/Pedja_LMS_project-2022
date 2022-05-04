@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+
+<app-forma-drzave (createEvent)="create($event)"></app-forma-drzave>
+
+<app-tabela-drzave  [elementi]="drzave" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-drzave>
+
+<app-forma-drzave [drzava]="drzavaUpdate" (createEvent)="update($event)"></app-forma-drzave>

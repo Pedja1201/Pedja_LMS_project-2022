@@ -1,0 +1,18 @@
+<h2>{{title}}</h2>
+<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+      <label>Konacna ocena: <input formControlName="konacnaOcena"  name="konacnaOcena" type="number" min="5" max="10" required></label>
+    </div>
+    <div>
+        <label>Realizacija predmeta:
+          <select name="realizacijaPredmeta" formControlName="realizacijaPredmeta" [compareWith]="comparator"  required>
+            <option *ngFor="let realizacijaPredmeta of realizacijePredmeta"  [ngValue]="realizacijaPredmeta">
+              {{realizacijaPredmeta.naziv}}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form>

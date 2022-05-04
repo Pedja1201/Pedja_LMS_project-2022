@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+
+<app-forma-pohadjanja-predmeta (createEvent)="create($event)"></app-forma-pohadjanja-predmeta>
+
+<app-tabela-pohadjanja-predmeta [elementi]="pohadjanjaPredmeta" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-pohadjanja-predmeta>
+
+<app-forma-pohadjanja-predmeta [pohadjanjePredmeta]="itemUpdate" (createEvent)="update($event)"></app-forma-pohadjanja-predmeta>

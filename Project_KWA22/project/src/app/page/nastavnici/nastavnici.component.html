@@ -1,0 +1,10 @@
+<h2>{{title}}</h2>
+
+<app-pretraga-nastavnika (pretraga)="search($event)" ></app-pretraga-nastavnika>
+
+<app-forma-nastavnika (createEvent)="create($event)"></app-forma-nastavnika>
+
+<app-tabela-nastavnika [elementi]="nastavnici" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-nastavnika>
+
+<app-forma-nastavnika [nastavnik]="nastavnikUpdate" (createEvent)="update($event)"></app-forma-nastavnika>

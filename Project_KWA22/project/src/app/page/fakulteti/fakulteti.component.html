@@ -1,0 +1,9 @@
+<h2>{{title}}</h2>
+
+
+<app-forma-fakulteta (createEvent)="create($event)"></app-forma-fakulteta>
+
+<app-tabela-fakulteta [elementi]="fakulteti" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-tabela-fakulteta>
+
+<app-forma-fakulteta [fakultet]="fakultetUpdate" (createEvent)="update($event)"></app-forma-fakulteta>

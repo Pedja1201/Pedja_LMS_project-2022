@@ -1,0 +1,40 @@
+<h1>{{title}}</h1>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>JMBG</th>
+        <th>Ime</th>
+        <th>Adresa</th>
+        <th>Pohadjanje predmeta</th>
+        <th>Student na godini</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody *appPorukaOGresci="elementi; poruka : praznaTabela" >                        
+      <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
+      <tr *ngFor="let e of elementi" [appProveraNepostojecihVrednosti]="e['jmbg']" 
+              [bojaTeksta]="undefined" appPomeranjeKursora>
+        <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+        <td><span *ngIf="e['jmbg']; else praznoPolje">{{e["jmbg"]}}</span></td>
+        <td>{{e["ime"]}}</td>
+        <td><span *ngIf="e['adresa']">{{e["adresa"]["ulica"]}}</span></td>
+        <td><span *ngIf="e['pohadjanjePredmeta']">Ocena: {{e["pohadjanjePredmeta"]["konacnaOcena"]}}</span></td>
+        <td><span *ngIf="e['studentNaGodini']">{{e["studentNaGodini"]["brojIndeksa"]}}</span></td>
+        <td>
+          <button (click)="ukloni(e['id'])">Ukloni</button>
+          <button (click)="izmeni(e)">Izmeni</button>
+        </td>
+  
+      </tr>
+    </tbody>
+  </table>
+  
+  <ng-template #praznoPolje>-</ng-template>
+  <ng-template #praznaTabela>
+    <tbody>
+      <tr>
+        <td colspan="7">Nema sadrzaja prikaz</td>
+      </tr>
+    </tbody>
+  </ng-template>
