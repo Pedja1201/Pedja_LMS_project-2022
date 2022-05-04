@@ -42,6 +42,7 @@ import { UniverzitetiComponent } from './page/univerziteti/univerziteti.componen
 import { WelcomeComponent } from './page/welcome/welcome.component';
 import { DetailsZvanjaComponent } from './page/zvanja/details-zvanja/details-zvanja.component';
 import { ZvanjaComponent } from './page/zvanja/zvanja.component';
+import { TreeViewComponent } from './tree-view/tree-view.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},
@@ -58,7 +59,7 @@ const routes: Routes = [
 
   //fakulteti
   {path: 'fakulteti', component: FakultetiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "fakulteti/:id", component: DetailsFakultetaComponent},
 
   //godineStudija
@@ -78,7 +79,7 @@ const routes: Routes = [
 
   //nastavnici
   {path: 'nastavnici', component: NastavniciComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "nastavnici/:id", component: DetailsNastavnikaComponent},
 
   //nastavniciNaRealizaciji
@@ -133,13 +134,16 @@ const routes: Routes = [
 
   //univerziteti
   {path: 'univerziteti', component: UniverzitetiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "univerziteti/:id", component: DetailsUniverzitetaComponent},
 
   //zvanja
   {path: 'zvanja', component: ZvanjaComponent, 
         data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "zvanja/:id", component: DetailsZvanjaComponent},
+
+  //Stablo
+  {path:"tree", component:TreeViewComponent},
 
   //Login
   {path:"login", component:LoginComponent},

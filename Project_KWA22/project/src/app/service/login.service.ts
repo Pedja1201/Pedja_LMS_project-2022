@@ -14,7 +14,7 @@ export class LoginService {
   token : null | string = null;
   user : any = null;
   rolesSubject: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set([]));
-  loggedOut = false;
+  loggedOut = false;  //Ispis da je uspesno izlogovan
 
   constructor(private client : HttpClient) { }
 
@@ -31,7 +31,7 @@ export class LoginService {
     this.token = null;
     this.user = null;
     this.rolesSubject.next(new Set<string>([]));
-    this.loggedOut = true;
+    this.loggedOut = true; //Ispis da je uspesno izlogovan
   }
 
   //Za proveru prava pristupa rutiranja
@@ -47,4 +47,30 @@ export class LoginService {
     }
     return false;
   }
+
+            //Za proveru prava sa dodatnim metodama any i all
+  // validateRoles(roles: any, method="any") {
+  //   if (this.user) {
+  //     // @ts-ignore
+  //     let userRoles = new Set(this.user.roles);
+  //     roles=new Set(roles);
+  //     let intersection = new Set();
+
+  //     for(let r of roles){
+  //       if(userRoles.has(r)){
+  //         intersection.add(r);
+  //       }
+  //     }
+
+  //     if(method == "any"){
+  //       return intersection.size > 0;
+  //     }else if(method == "all"){
+  //       return intersection.size == roles.size;
+  //     }
+
+  //   }
+  //   return false;
+  // }
+
+
 }

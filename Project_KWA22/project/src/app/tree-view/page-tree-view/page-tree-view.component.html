@@ -1,0 +1,8 @@
+
+<button *ngIf="expandable && data.childern.length > 0" (click)="toggleExpanded()">V</button>
+<ul *ngIf="expanded">
+    <li *ngFor="let c of data.childern">
+        {{c.value}}
+        <app-page-tree-view [expandable]="true" [data]="c"></app-page-tree-view>
+    </li>
+</ul>

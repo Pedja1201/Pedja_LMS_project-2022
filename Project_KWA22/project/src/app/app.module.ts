@@ -92,6 +92,8 @@ import { DetailsUniverzitetaComponent } from './page/univerziteti/details-univer
 import { TabelaZvanjaComponent } from './page/zvanja/tabela-zvanja/tabela-zvanja.component';
 import { FormaZvanjaComponent } from './page/zvanja/forma-zvanja/forma-zvanja.component';
 import { DetailsZvanjaComponent } from './page/zvanja/details-zvanja/details-zvanja.component';
+import { TreeViewComponent } from './tree-view/tree-view.component';
+import { PageTreeViewComponent } from './tree-view/page-tree-view/page-tree-view.component';
 
 @NgModule({
   declarations: [
@@ -180,7 +182,9 @@ import { DetailsZvanjaComponent } from './page/zvanja/details-zvanja/details-zva
     DetailsUniverzitetaComponent,
     TabelaZvanjaComponent,
     FormaZvanjaComponent,
-    DetailsZvanjaComponent
+    DetailsZvanjaComponent,
+    TreeViewComponent,
+    PageTreeViewComponent
   ],
   imports: [
     BrowserModule,
