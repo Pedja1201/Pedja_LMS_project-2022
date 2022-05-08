@@ -1,0 +1,6 @@
+
+Dodatni modul za osluskivanje poruka i dogadjaja u sklopu sa ne relacionom bazom MongoDB.
+ +Pokrenuti ActiveMQ instancu
+ +Pokrenuti mongoDB -comman (bin\mongod.exe --dbpath=data)
+
+
