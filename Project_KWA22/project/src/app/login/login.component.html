@@ -3,14 +3,20 @@
 <h2>{{title}}</h2>
 <form (ngSubmit)="login()" [formGroup]="loginForma" ngNativeValidate>
     <div>
-      <label>Username: <input name="username" formControlName="username" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput name="username" formControlName="username" type="text" required>
+      </mat-form-field>
     </div>
     <div>
-      <label>Password: <input formControlName="password"  name="password" type="password" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput name="password" formControlName="password" type="password" required>
+      </mat-form-field>
     </div>
     <div>
-      <button type="submit">Login</button>
-      <button *ngIf="loginService.user" (click)="loginService.logout()">Logout</button>
+      <button type="submit" mat-raised-button color="primary">Login</button>
+      <button *ngIf="loginService.user" (click)="loginService.logout()"  mat-raised-button color="warn">Logout</button>
     </div>
   </form>
   <p *ngIf="loginFailed">Login failed!</p>

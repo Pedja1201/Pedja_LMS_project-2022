@@ -1,4 +1,6 @@
 <h1>{{title}}</h1>
+
+<div cdkDropListGroup>
 <table>
     <thead>
       <tr>
@@ -9,9 +11,8 @@
         <th>Akcije</th>
       </tr>
     </thead>
-    <tbody>                        
-                                    <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
-      <tr *ngFor="let e of elementi">
+    <tbody [cdkDropListData]="elementi" cdkDropList (cdkDropListDropped)="drop($event)">                        
+      <tr cdkDrag *ngFor="let e of elementi">
         <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
         <td>{{e["naziv"]}}</td>
         <td><span *ngIf="e['nastavnikNaRealizaciji']">{{e["nastavnikNaRealizaciji"]["id"]}}</span></td>
@@ -24,5 +25,26 @@
       </tr>
     </tbody>
   </table>
-  
   <ng-template #praznoPolje>-</ng-template>
+  <br>
+                                                 <!-- dragAndDrop table-->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naziv</th>
+        <th>Nastavnik na realizaciji</th>
+        <th>Predmet</th>
+      </tr>
+    </thead>
+    <tbody [cdkDropListData]="dropped" cdkDropList (cdkDropListDropped)="drop($event)">                        
+      <tr cdkDrag *ngFor="let e of dropped">
+        <td>{{e["id"]}}</td>
+        <td>{{e["naziv"]}}</td>
+        <td><span *ngIf="e['nastavnikNaRealizaciji']">{{e["nastavnikNaRealizaciji"]["id"]}}</span></td>
+        <td><span *ngIf="e['predmet']">{{e["predmet"]["naziv"]}}</span></td>  
+      </tr>
+    </tbody>
+  </table>
+
+</div>
