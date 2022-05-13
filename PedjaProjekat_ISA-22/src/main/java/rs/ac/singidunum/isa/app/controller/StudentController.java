@@ -31,7 +31,7 @@ public class StudentController {
         ArrayList<StudentDTO> studenti = new ArrayList<StudentDTO>();
 
         for (Student student : studentService.findAll()) {
-            studenti.add(new StudentDTO(student.getId(),student.getJmbg(), student.getIme(),
+            studenti.add(new StudentDTO(student.getId(),student.getKorisnickoIme(), student.getLozinka(),student.getJmbg(), student.getIme(),
                     new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
                             student.getAdresa().getBroj(),null),
                     new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
@@ -47,7 +47,8 @@ public class StudentController {
     public ResponseEntity<StudentDTO> get(@PathVariable("studentId") Long studentId) {
         Optional<Student> student = studentService.findOne(studentId);
         if (student.isPresent()) {
-            StudentDTO studentDTO = new StudentDTO(student.get().getId(),student.get().getJmbg(), student.get().getIme(),
+            StudentDTO studentDTO = new StudentDTO(student.get().getId(),student.get().getKorisnickoIme(),student.get().getLozinka(),
+                                            student.get().getJmbg(), student.get().getIme(),
                     new AdresaDTO(student.get().getAdresa().getId(), student.get().getAdresa().getUlica(),
                             student.get().getAdresa().getBroj(), null),
                     new PohadjanjePredmetaDTO(student.get().getPohadjanjePredmeta().getId(),

@@ -3,40 +3,29 @@ package rs.ac.singidunum.isa.app.model;
 import javax.persistence.*;
 
 @Entity
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Student extends Korisnik{
     @Column(nullable = false)
     private String jmbg;
     @Column(nullable = false)
     private String ime;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Adresa adresa;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private PohadjanjePredmeta pohadjanjePredmeta;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private StudentNaGodini studentNaGodini;
 
     public Student() {super();
     }
 
-    public Student(Long id, String jmbg, String ime, Adresa adresa, PohadjanjePredmeta pohadjanjePredmeta, StudentNaGodini studentNaGodini) {
-        this.id = id;
+    public Student(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, Adresa adresa, PohadjanjePredmeta pohadjanjePredmeta, StudentNaGodini studentNaGodini) {
+        super(id, korisnickoIme, lozinka);
         this.jmbg = jmbg;
         this.ime = ime;
         this.adresa = adresa;
         this.pohadjanjePredmeta = pohadjanjePredmeta;
         this.studentNaGodini = studentNaGodini;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getJmbg() {

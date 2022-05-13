@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.dto.KorisnikDTO;
+import rs.ac.singidunum.isa.app.dto.StudentDTO;
 import rs.ac.singidunum.isa.app.dto.TokenDTO;
-import rs.ac.singidunum.isa.app.model.Korisnik;
-import rs.ac.singidunum.isa.app.model.UserPermission;
+import rs.ac.singidunum.isa.app.model.*;
 import rs.ac.singidunum.isa.app.service.KorisnikService;
 import rs.ac.singidunum.isa.app.service.PermissionService;
+import rs.ac.singidunum.isa.app.service.StudentService;
 import rs.ac.singidunum.isa.app.utlis.TokenUtils;
 
 import java.util.HashSet;
@@ -38,7 +39,7 @@ public class LoginController {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private KorisnikService korisnikService;
+    private StudentService studentService;
 
     @Autowired
     private PermissionService permissionService;
@@ -70,19 +71,24 @@ public class LoginController {
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public ResponseEntity<KorisnikDTO> register(@RequestBody KorisnikDTO korisnik) {
+    public ResponseEntity<StudentDTO> register(@RequestBody StudentDTO korisnik) {
         // Novi korisnik se registruje kreiranjem instance korisnika
         // cija je lozinka enkodovana.
-        Korisnik noviKorisnik = new Korisnik(null, korisnik.getKorisnickoIme(),
-                passwordEncoder.encode(korisnik.getLozinka()));
-        noviKorisnik = korisnikService.save(noviKorisnik);
+        Student noviKorisnik = new Student(null, korisnik.getKorisnickoIme(),
+                passwordEncoder.encode(korisnik.getLozinka()), korisnik.getJmbg(), korisnik.getIme(),
+                new Adresa(korisnik.getAdresa().getId(), korisnik.getAdresa().getUlica(), korisnik.getAdresa().getBroj(),null),
+                new PohadjanjePredmeta(korisnik.getPohadjanjePredmeta().getId(), korisnik.getPohadjanjePredmeta().getKonacnaOcena(),null),
+                new StudentNaGodini(korisnik.getStudentNaGodini().getId(), korisnik.getStudentNaGodini().getDatumUpisa(),
+                            korisnik.getStudentNaGodini().getBrojIndeksa(), null));
+        noviKorisnik = studentService.save(noviKorisnik);
         // Dodavanje prava pristupa.
         noviKorisnik.setUserPermissions(new HashSet<UserPermission>());
         noviKorisnik.getUserPermissions()
                 .add(new UserPermission(null, noviKorisnik, permissionService.findOne(1l).get()));
-        korisnikService.save(noviKorisnik);
+        studentService.save(noviKorisnik);
 
-        return new ResponseEntity<KorisnikDTO>(
-                new KorisnikDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null), HttpStatus.OK);
+        return new ResponseEntity<StudentDTO>(
+                new StudentDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null,
+                        noviKorisnik.getJmbg(), noviKorisnik.getIme()), HttpStatus.OK);
     }
 }

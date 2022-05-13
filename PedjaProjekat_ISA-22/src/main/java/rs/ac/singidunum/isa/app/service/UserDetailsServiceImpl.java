@@ -3,6 +3,7 @@ package rs.ac.singidunum.isa.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -38,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             }
 
             // Kreiranje korisnika na osnovu korisnickog imena, lozinke i dodeljenih prava pristupa.
-            return new org.springframework.security.core.userdetails.User(korisnik.get().getKorisnickoIme(), korisnik.get().getLozinka(), grantedAuthorities);
+            return new User(korisnik.get().getKorisnickoIme(), korisnik.get().getLozinka(), grantedAuthorities);
         }
         return null;
     }

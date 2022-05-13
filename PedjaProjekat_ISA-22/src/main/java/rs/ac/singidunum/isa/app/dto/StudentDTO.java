@@ -1,9 +1,6 @@
 package rs.ac.singidunum.isa.app.dto;
 
-
-
-public class StudentDTO {
-    private Long id;
+public class StudentDTO extends KorisnikDTO {
     private String jmbg;
     private String ime;
     private AdresaDTO adresa;
@@ -13,8 +10,8 @@ public class StudentDTO {
     public StudentDTO() {super();
     }
 
-    public StudentDTO(Long id, String jmbg, String ime, AdresaDTO adresa, PohadjanjePredmetaDTO pohadjanjePredmeta, StudentNaGodiniDTO studentNaGodini) {
-        this.id = id;
+    public StudentDTO(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, AdresaDTO adresa, PohadjanjePredmetaDTO pohadjanjePredmeta, StudentNaGodiniDTO studentNaGodini) {
+        super(id, korisnickoIme, lozinka);
         this.jmbg = jmbg;
         this.ime = ime;
         this.adresa = adresa;
@@ -22,12 +19,10 @@ public class StudentDTO {
         this.studentNaGodini = studentNaGodini;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public StudentDTO(Long id, String korisnickoIme, String lozinka, String jmbg, String ime) {
+        super(id, korisnickoIme, lozinka);
+        this.jmbg = jmbg;
+        this.ime = ime;
     }
 
     public String getJmbg() {

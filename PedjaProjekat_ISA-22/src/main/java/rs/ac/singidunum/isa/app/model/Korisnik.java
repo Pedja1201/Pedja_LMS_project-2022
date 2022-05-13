@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Korisnik")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Korisnik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
