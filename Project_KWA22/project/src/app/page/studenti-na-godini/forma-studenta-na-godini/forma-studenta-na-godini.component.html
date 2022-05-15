@@ -1,21 +1,28 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-        <label>Datum upisa: <input  formControlName="datumUpisa"  name="datumUpisa" type="date" required></label>
-      </div>
-    <div>
-      <label>Broj indeksa: <input formControlName="brojIndeksa"  name="brojIndeksa" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Datum upisa: </mat-label>
+        <input matInput formControlName="datumUpisa" name="datumUpisa" type="date" required>
+      </mat-form-field>
     </div>
     <div>
-        <label>Godina studija:
-          <select name="godinaStudija" formControlName="godinaStudija" [compareWith]="comparator"  required>
-            <option *ngFor="let godinaStudija of godineStudija"  [ngValue]="godinaStudija">
+      <mat-form-field appearance="fill">
+        <mat-label>Broj indeksa: </mat-label>
+        <input matInput formControlName="brojIndeksa" name="brojIndeksa" type="text" required>
+      </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Godina studija:</mat-label>
+          <mat-select name="godinaStudija" formControlName="godinaStudija" [compareWith]="comparator" required>
+            <mat-option *ngFor="let godinaStudija of godineStudija"  [value]="godinaStudija"> 
               {{godinaStudija.godina}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <button type="submit">Dodaj</button>
+        <button  mat-raised-button color="primary"  type="submit">Dodaj</button>
     </div>
 </form>

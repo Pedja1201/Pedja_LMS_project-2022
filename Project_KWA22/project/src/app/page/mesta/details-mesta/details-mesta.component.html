@@ -1,6 +1,6 @@
-<ul>
-    <li>ID: {{mesto["id"]}}</li>
-    <li>Naziv: {{mesto["naziv"]}}</li>
-    <li>Drzava: <span *ngIf="mesto['drzava']">{{mesto["drzava"]["naziv"]}}</span></li>
-</ul>
-<button (click)="back()">Nazad</button>
+<mat-list>
+    <mat-list-item>ID: {{mesto["id"]}}</mat-list-item>
+    <mat-list-item>Naziv: {{mesto["naziv"]}}</mat-list-item>
+    <mat-list-item>Drzava: <span *ngIf="mesto['drzava']">{{mesto["drzava"]["naziv"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary"  (click)="back()">Nazad</button>

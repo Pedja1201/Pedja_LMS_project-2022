@@ -1,33 +1,44 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <label>Ime: <input formControlName="ime"  name="ime" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Ime:</mat-label>
+            <input matInput formControlName="ime"  name="ime" type="text" required>
+        </mat-form-field>
     </div>
     <div>
-      <label>Biografija: <input formControlName="biografija"  name="biografija" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Biografija:</mat-label>
+          <textarea matInput formControlName="biografija"  name="biografija" type="text" required></textarea>
+        </mat-form-field>
     </div>
     <div>
-      <label>JMBG: <input  formControlName="jmbg"  name="jmbg" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>JMBG:</mat-label>
+            <input matInput formControlName="jmbg"  name="jmbg" type="text" required>
+        </mat-form-field>
     </div>
     <div>
-        <label>Adresa:
-          <select name="adresa" formControlName="adresa" [compareWith]="comparator1"  required>
-            <option *ngFor="let adresa of adrese"  [ngValue]="adresa">
+        <mat-form-field appearance="fill">
+          <mat-label>Adresa:</mat-label>
+          <mat-select name="adresa" formControlName="adresa" [compareWith]="comparator1" required>
+            <mat-option *ngFor="let adresa of adrese"  [value]="adresa"> 
               {{adresa.ulica}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <label>Zvanje:
-          <select name="zvanje" formControlName="zvanje" [compareWith]="comparator2"  required>
-            <option *ngFor="let zvanje of zvanja"  [ngValue]="zvanje">
-                {{zvanje.id}},{{zvanje.datumIzbora}}
-            </option>
-          </select>
-        </label>
+        <mat-form-field appearance="fill">
+          <mat-label>Zvanje:</mat-label>
+          <mat-select name="zvanje" formControlName="zvanje" [compareWith]="comparator2" required>
+            <mat-option *ngFor="let zvanje of zvanja"  [value]="zvanje"> 
+              {{zvanje.id}},{{zvanje.datumIzbora}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <button type="submit">Dodaj</button>
+        <button  mat-raised-button color="primary"  type="submit">Dodaj</button>
     </div>
 </form>

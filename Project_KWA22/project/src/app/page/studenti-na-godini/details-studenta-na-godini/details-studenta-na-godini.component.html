@@ -1,8 +1,8 @@
-<ul>
-    <li>ID: {{studentNaGodini["id"]}}</li>
-    <li>Datum upisa: {{studentNaGodini["datumUpisa"]}}</li>
-    <li>Broj indeksa: {{studentNaGodini["brojIndeksa"]}}</li>
-    <li>Godina studija: <span *ngIf="studentNaGodini['godinaStudija']">{{studentNaGodini["godinaStudija"]["godina"]}}</span></li>
+<mat-list>
+    <mat-list-item>ID: {{studentNaGodini["id"]}}</mat-list-item>
+    <mat-list-item>Datum upisa: {{studentNaGodini["datumUpisa"]}}</mat-list-item>
+    <mat-list-item>Broj indeksa: {{studentNaGodini["brojIndeksa"]}}</mat-list-item>
+    <mat-list-item>Godina studija: <span *ngIf="studentNaGodini['godinaStudija']">{{studentNaGodini["godinaStudija"]["godina"]}}</span></mat-list-item>
 
-</ul>
-<button (click)="back()">Nazad</button>
+</mat-list>
+<button mat-raised-button color="primary"  (click)="back()">Nazad</button>

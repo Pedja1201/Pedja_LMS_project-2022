@@ -4,6 +4,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -198,7 +202,11 @@ import { PageTreeViewComponent } from './tree-view/page-tree-view/page-tree-view
     BrowserAnimationsModule,
     MatInputModule,  //AngularMaterial forma
     MatButtonModule,
-    DragDropModule
+    DragDropModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatSelectModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login
   bootstrap: [AppComponent]

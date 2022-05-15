@@ -1,31 +1,39 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <label>Datum izbora: <input formControlName="datumIzbora"  name="datumIzbora" type="date" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Datum izbora: </mat-label>
+          <input matInput formControlName="datumIzbora"  name="datumIzbora" type="date" required>
+      </mat-form-field>
     </div>
     <div>
-      <label>Datum prestanka: <input  formControlName="datumPrestanka"  name="datumPrestanka" type="date" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Datum prestanka:</mat-label>
+          <input matInput formControlName="datumPrestanka"  name="datumPrestanka" type="date" required>
+      </mat-form-field>
     </div>
     <div>
-        <label>Naucna oblast:
-          <select name="naucnaOblast" formControlName="naucnaOblast" [compareWith]="comparator1"  required>
-            <option *ngFor="let naucnaOblast of naucneOblasti"  [ngValue]="naucnaOblast">
-              {{naucnaOblast.naziv}}
-            </option>
-          </select>
-        </label>
+      <mat-form-field appearance="fill">
+        <mat-label>Naucna oblast:</mat-label>
+        <mat-select name="naucnaOblast" formControlName="naucnaOblast" [compareWith]="comparator1" required>
+          <mat-option *ngFor="let naucnaOblast of naucneOblasti"  [value]="naucnaOblast"> 
+            {{naucnaOblast.naziv}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       </div>
       <div>
-        <label>Tip zvanja:
-          <select name="tipZvanja" formControlName="tipZvanja" [compareWith]="comparator2"  required>
-            <option *ngFor="let tipZvanja of tipoviZvanja"  [ngValue]="tipZvanja">
+        <mat-form-field appearance="fill">
+          <mat-label>Tip zvanja:</mat-label>
+          <mat-select name="tipZvanja" formControlName="tipZvanja" [compareWith]="comparator2" required>
+            <mat-option *ngFor="let tipZvanja of tipoviZvanja"  [value]="tipZvanja"> 
               {{tipZvanja.naziv}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <div>
-        <button type="submit">Dodaj</button>
+        <button mat-raised-button color="primary"  type="submit">Dodaj</button>
     </div>
 </form>

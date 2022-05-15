@@ -1,6 +1,5 @@
-ul li {
-    background: #cce5ff;
-    color: darkblue;
-    margin: 5px;
-    width: 40%;
-  }
+mat-list-item {
+  background: #cce5ff;
+  margin: 5px;
+  width: 40%;
+}

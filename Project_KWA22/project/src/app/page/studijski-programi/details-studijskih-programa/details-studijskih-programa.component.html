@@ -1,8 +1,8 @@
-<ul>
-    <li>ID: {{studijskiProgram["id"]}}</li>
-    <li>Naziv: {{studijskiProgram["naziv"]}}</li>
-    <li>Fakultet: <span *ngIf="studijskiProgram['fakultet']">{{studijskiProgram["fakultet"]["naziv"]}}</span></li>
-    <li>Nastavnik: <span *ngIf="studijskiProgram['nastavnik']">{{studijskiProgram["nastavnik"]["ime"]}}</span></li>
-    <li>Godina studija: <span *ngIf="studijskiProgram['godinaStudija']">{{studijskiProgram["godinaStudija"]["godina"]}}</span></li>
-</ul>
-<button (click)="back()">Nazad</button>
+<mat-list>
+    <mat-list-item>ID: {{studijskiProgram["id"]}}</mat-list-item>
+    <mat-list-item>Naziv: {{studijskiProgram["naziv"]}}</mat-list-item>
+    <mat-list-item>Fakultet: <span *ngIf="studijskiProgram['fakultet']">{{studijskiProgram["fakultet"]["naziv"]}}</span></mat-list-item>
+    <mat-list-item>Nastavnik: <span *ngIf="studijskiProgram['nastavnik']">{{studijskiProgram["nastavnik"]["ime"]}}</span></mat-list-item>
+    <mat-list-item>Godina studija: <span *ngIf="studijskiProgram['godinaStudija']">{{studijskiProgram["godinaStudija"]["godina"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

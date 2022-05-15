@@ -1,9 +1,9 @@
-<ul>
-    <li>ID: {{fakultet["id"]}}</li>
-    <li>Naziv: {{fakultet["naziv"]}}</li>
-    <li>Univerzitet: <span *ngIf="fakultet['univerzitet']">{{fakultet["univerzitet"]["naziv"]}}</span></li>
-    <li>Adresa: <span *ngIf="fakultet['adresa']">{{fakultet["adresa"]["ulica"]}}</span></li>
-    <li>Nastavnik: <span *ngIf="fakultet['nastavnik']">{{fakultet["nastavnik"]["ime"]}}</span></li>
+<mat-list>
+    <mat-list-item>ID: {{fakultet["id"]}}</mat-list-item>
+    <mat-list-item>Naziv: {{fakultet["naziv"]}}</mat-list-item>
+    <mat-list-item>Univerzitet: <span *ngIf="fakultet['univerzitet']">{{fakultet["univerzitet"]["naziv"]}}</span></mat-list-item>
+    <mat-list-item>Adresa: <span *ngIf="fakultet['adresa']">{{fakultet["adresa"]["ulica"]}}</span></mat-list-item>
+    <mat-list-item>Nastavnik: <span *ngIf="fakultet['nastavnik']">{{fakultet["nastavnik"]["ime"]}}</span></mat-list-item>
 
-</ul>
-<button (click)="back()">Nazad</button>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

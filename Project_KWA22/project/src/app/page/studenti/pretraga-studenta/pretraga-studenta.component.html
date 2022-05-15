@@ -1,40 +1,56 @@
 <h2>{{title}}</h2>
 <form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
   <div>
-    <label>ID: <input formControlName="id" name="id" type="number" step="1" required></label>
+    <mat-form-field appearance="fill">
+      <mat-label>ID: </mat-label>
+      <input matInput name="id" formControlName="id" type="number">
+    </mat-form-field>
   </div>
     <div>
-        <label>JMBG: <input formControlName="jmbg" name="jmbg" type="text"></label>
+      <mat-form-field appearance="fill">
+        <mat-label>JMBG: </mat-label>
+        <input matInput name="jmbg" formControlName="jmbg" type="text" >
+      </mat-form-field>
     </div>
     <div>
-        <label>Ime: <input formControlName="ime" name="ime" type="text"></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Ime: </mat-label>
+        <input matInput name="ime" formControlName="ime" type="text" >
+      </mat-form-field>
     </div>
 
   <div>
-    <label>Adresa:
-      <select name="adresa" formControlName="adresa">
-        <option *ngFor="let adresa of adrese; trackBy: itemTrackBy1" [ngValue]="adresa">{{adresa.ulica}}</option>
-      </select>
-    </label>
+    <mat-form-field appearance="fill">
+      <mat-label>Adresa:</mat-label>
+      <mat-select name="adresa" formControlName="adresa">
+        <mat-option *ngFor="let adresa of adrese; trackBy: itemTrackBy1"  [value]="adresa"> 
+          {{adresa.ulica}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div>
-    <label>Pohadjanje predmeta:
-      <select name="pohadjanjePredmeta" formControlName="pohadjanjePredmeta">
-        <option *ngFor="let pohadjanjePredmeta of pohadjanjaPredmeta; trackBy: itemTrackBy2" [ngValue]="pohadjanjePredmeta">
-           -Ocena:{{pohadjanjePredmeta.konacnaOcena}}</option>
-      </select>
-    </label>
+    <mat-form-field appearance="fill">
+      <mat-label>Pohadjanje predmeta:</mat-label>
+      <mat-select name="pohadjanjePredmeta" formControlName="pohadjanjePredmeta">
+        <mat-option *ngFor="let pohadjanjePredmeta of pohadjanjaPredmeta;trackBy: itemTrackBy2"  [value]="pohadjanjePredmeta"> 
+          -Ocena:{{pohadjanjePredmeta.konacnaOcena}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div>
-    <label>Student na godini:
-      <select name="studentNaGodini" formControlName="studentNaGodini">
-        <option *ngFor="let studentNaGodini of studentiNaGodini; trackBy: itemTrackBy3" [ngValue]="studentNaGodini">
-            {{studentNaGodini.brojIndeksa}}</option>
-      </select>
-    </label>
+    <mat-form-field appearance="fill">
+      <mat-label>Student na godini:</mat-label>
+      <mat-select name="studentNaGodini" formControlName="studentNaGodini">
+        <mat-option *ngFor="let studentNaGodini of studentiNaGodini; trackBy: itemTrackBy3"  [value]="studentNaGodini"> 
+          {{studentNaGodini.brojIndeksa}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div>
-    <button type="submit">Pretrazi </button>
+    <button mat-raised-button type="submit">Pretrazi </button>
   </div>
 </form>

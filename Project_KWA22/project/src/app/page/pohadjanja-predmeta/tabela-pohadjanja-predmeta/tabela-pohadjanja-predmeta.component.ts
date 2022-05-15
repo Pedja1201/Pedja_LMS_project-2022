@@ -43,8 +43,8 @@ export class TabelaPohadjanjaPredmetaComponent implements OnInit {
     this.izmena.emit(id);
   }
 
-  //DragAndDrop metoda
-  drop(event:CdkDragDrop<any>){
+   //DragAndDrop metoda
+   drop(event:CdkDragDrop<any>){
     if (event.previousContainer === event.container){
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else{

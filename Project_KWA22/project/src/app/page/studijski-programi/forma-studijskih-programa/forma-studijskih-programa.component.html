@@ -1,37 +1,43 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <label>Naziv: <input formControlName="naziv"  name="naziv" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Naziv: </mat-label>
+        <input matInput formControlName="naziv" name="naziv" type="text" required>
+      </mat-form-field>
     </div>
     <div>
-        <label>Fakultet:
-          <select name="fakultet" formControlName="fakultet" [compareWith]="comparator1"  required>
-            <option *ngFor="let fakultet of fakulteti"  [ngValue]="fakultet">
-              {{fakultet.naziv}}
-            </option>
-          </select>
-        </label>
+      <mat-form-field appearance="fill">
+        <mat-label>Fakultet:</mat-label>
+        <mat-select name="fakultet" formControlName="fakultet" [compareWith]="comparator1" required>
+          <mat-option *ngFor="let fakultet of fakulteti"  [value]="fakultet"> 
+            {{fakultet.naziv}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       </div>
       <div>
-        <label>Nastavnik:
-          <select name="nastavnik" formControlName="nastavnik" [compareWith]="comparator2"  required>
-            <option *ngFor="let nastavnik of nastavnici"  [ngValue]="nastavnik">
+        <mat-form-field appearance="fill">
+          <mat-label>Nastavnik:</mat-label>
+          <mat-select name="nastavnik" formControlName="nastavnik" [compareWith]="comparator2" required>
+            <mat-option *ngFor="let nastavnik of nastavnici"  [value]="nastavnik"> 
               {{nastavnik.ime}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <label>Godina studija:
-          <select name="godinaStudija" formControlName="godinaStudija" [compareWith]="comparator3"  required>
-            <option *ngFor="let godinaStudija of godineStudija"  [ngValue]="godinaStudija">
+        <mat-form-field appearance="fill">
+          <mat-label>Godina studija:</mat-label>
+          <mat-select name="godinaStudija" formControlName="godinaStudija" [compareWith]="comparator3" required>
+            <mat-option *ngFor="let godinaStudija of godineStudija"  [value]="godinaStudija"> 
               {{godinaStudija.godina}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <div>
-        <button type="submit">Dodaj</button>
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
     </div>
 </form>

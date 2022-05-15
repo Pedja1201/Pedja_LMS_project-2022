@@ -1,10 +1,8 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnd, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RealizacijaPredmeta } from 'src/app/model/realizacija-predmeta';
-import { Student } from 'src/app/model/student';
 import { RealizacijePredmetaService } from 'src/app/service/realizacije-predmeta.service';
-import { StudentiService } from 'src/app/service/studenti.service';
 
 @Component({
   selector: 'app-tabela-realizacije-predmeta',
@@ -44,8 +42,8 @@ export class TabelaRealizacijePredmetaComponent implements OnInit {
     this.izmena.emit(id);
   }
 
-  //DragAndDrop metoda
-  drop(event:CdkDragDrop<any>){
+   //DragAndDrop metoda
+   drop(event:CdkDragDrop<any>){
     if (event.previousContainer === event.container){
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else{

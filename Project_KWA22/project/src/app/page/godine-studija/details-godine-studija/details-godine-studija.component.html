@@ -1,7 +1,7 @@
-<ul>
-    <li>ID: {{godinaStudija["id"]}}</li>
-    <li>Godina: {{godinaStudija["godina"]}}</li>
-    <li>Smer: <span *ngIf="godinaStudija['predmet']">{{godinaStudija["predmet"]["naziv"]}}</span></li>
+<mat-list>
+    <mat-list-item>ID: {{godinaStudija["id"]}}</mat-list-item>
+    <mat-list-item>Godina: {{godinaStudija["godina"]}}</mat-list-item>
+    <mat-list-item>Smer: <span *ngIf="godinaStudija['predmet']">{{godinaStudija["predmet"]["naziv"]}}</span></mat-list-item>
 
-</ul>
-<button (click)="back()">Nazad</button>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

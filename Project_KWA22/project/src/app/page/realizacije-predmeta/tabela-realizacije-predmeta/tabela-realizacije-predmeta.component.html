@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <div cdkDropListGroup>
-<table>
+<table mat-table class="mat-elevation-z20">
     <thead>
       <tr>
         <th>ID</th>
@@ -13,13 +13,13 @@
     </thead>
     <tbody [cdkDropListData]="elementi" cdkDropList (cdkDropListDropped)="drop($event)">                        
       <tr cdkDrag *ngFor="let e of elementi">
-        <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+        <td><button mat-stroked-button  (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
         <td>{{e["naziv"]}}</td>
         <td><span *ngIf="e['nastavnikNaRealizaciji']">{{e["nastavnikNaRealizaciji"]["id"]}}</span></td>
         <td><span *ngIf="e['predmet']">{{e["predmet"]["naziv"]}}</span></td>
         <td>
-          <button (click)="ukloni(e['id'])">Ukloni</button>
-          <button (click)="izmeni(e)">Izmeni</button>
+          <button mat-stroked-button color="warn" (click)="ukloni(e['id'])">Ukloni</button>
+          <button mat-stroked-button  (click)="izmeni(e)">Izmeni</button>
         </td>
   
       </tr>
@@ -28,7 +28,7 @@
   <ng-template #praznoPolje>-</ng-template>
   <br>
                                                  <!-- dragAndDrop table-->
-  <table>
+  <table mat-table class="mat-elevation-z20">
     <thead>
       <tr>
         <th>ID</th>

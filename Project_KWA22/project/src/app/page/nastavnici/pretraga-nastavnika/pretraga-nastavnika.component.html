@@ -1,34 +1,51 @@
 <h2>{{title}}</h2>
 <form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
   <div>
-    <label>ID: <input formControlName="id" name="id" type="number" step="1" required></label>
+    <mat-form-field appearance="fill">
+      <mat-label>ID:</mat-label>
+          <input matInput formControlName="id"  name="id" type="number"  step="1">
+      </mat-form-field>
   </div>
     <div>
-        <label>Ime: <input formControlName="ime" name="ime" type="text"></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Ime:</mat-label>
+            <input matInput formControlName="ime"  name="ime" type="text">
+        </mat-form-field>
     </div>
     <div>
-        <label>Biografija: <input formControlName="biografija" name="biografija" type="text"></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Biografija:</mat-label>
+          <textarea matInput formControlName="biografija"  name="biografija" type="text" ></textarea>
+        </mat-form-field>
     </div>
     <div>
-        <label>JMBG: <input formControlName="jmbg" name="jmbg" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>JMBG:</mat-label>
+            <input matInput formControlName="jmbg"  name="jmbg" type="text" >
+        </mat-form-field>
     </div>
   <div>
-    <label>Adresa:
-      <select name="adresa" formControlName="adresa">
-        <option *ngFor="let adresa of adrese; trackBy: itemTrackBy1" [ngValue]="adresa">{{adresa.ulica}}</option>
-      </select>
-    </label>
+    <mat-form-field appearance="fill">
+      <mat-label>Adresa:</mat-label>
+      <mat-select name="adresa" formControlName="adresa">
+        <mat-option *ngFor="let adresa of adrese; trackBy: itemTrackBy1"  [value]="adresa"> 
+          {{adresa.ulica}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div>
-    <label>Zvanje:
-      <select name="zvanje" formControlName="zvanje">
-        <option *ngFor="let zvanje of zvanja; trackBy: itemTrackBy2" [ngValue]="zvanje">
-            {{zvanje.datumIzbora}},{{zvanje.datumIzbora}}</option>
-      </select>
-    </label>
+    <mat-form-field appearance="fill">
+      <mat-label>Zvanje:</mat-label>
+      <mat-select name="zvanje" formControlName="zvanje" >
+        <mat-option *ngFor="let zvanje of zvanja; trackBy: itemTrackBy2"  [value]="zvanje"> 
+          {{zvanje.id}},{{zvanje.datumIzbora}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div>
-    <button type="submit">Pretrazi rezervaciju</button>
+    <button mat-raised-button type="submit">Pretrazi rezervaciju</button>
   </div>
 </form>

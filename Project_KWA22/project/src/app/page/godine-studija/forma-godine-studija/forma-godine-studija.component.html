@@ -1,18 +1,22 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <label>Godina: <input formControlName="godina"  name="godina" type="date" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Godina:</mat-label>
+          <input matInput formControlName="godina"  name="godina" type="date"  required>
+      </mat-form-field>
     </div>
     <div>
-        <label>Predmet:
-          <select name="predmet" formControlName="predmet" [compareWith]="comparator"  required>
-            <option *ngFor="let predmet of predmeti"  [ngValue]="predmet">
+        <mat-form-field appearance="fill">
+          <mat-label>Predmet: </mat-label>
+          <mat-select name="predmet" formControlName="predmet" [compareWith]="comparator" required>
+            <mat-option *ngFor="let predmet of predmeti"  [value]="predmet"> 
               {{predmet.naziv}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <button type="submit">Dodaj</button>
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
     </div>
 </form>

@@ -1,36 +1,42 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <label>Naziv: <input formControlName="naziv"  name="naziv" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Naziv:</mat-label>
+          <input matInput formControlName="naziv"  name="naziv" type="text" required>
+      </mat-form-field >
     </div>
     <div>
-        <label>Univerzitet:
-          <select name="univerzitet" formControlName="univerzitet" [compareWith]="comparatorUniverzitet"  required>
-            <option *ngFor="let univerzitet of univerziteti"  [ngValue]="univerzitet">
-              {{univerzitet.naziv}}
-            </option>
-          </select>
-        </label>
+      <mat-form-field appearance="fill">
+        <mat-label>Univerzitet:</mat-label>
+        <mat-select name="univerzitet" formControlName="univerzitet" [compareWith]="comparatorUniverzitet"  required>
+          <mat-option *ngFor="let univerzitet of univerziteti"  [value]="univerzitet">
+            {{univerzitet.naziv}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       </div>
       <div>
-        <label>Adresa:
-          <select name="adresa" formControlName="adresa" [compareWith]="comparatorAdresa"  required>
-            <option *ngFor="let adresa of adrese"  [ngValue]="adresa">
+        <mat-form-field appearance="fill">
+          <mat-label>Adresa:</mat-label>
+          <mat-select name="adresa" formControlName="adresa" [compareWith]="comparatorAdresa"  required>
+            <mat-option *ngFor="let adresa of adrese"  [value]="adresa">
               {{adresa.ulica}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <label>Nastavnik:
-          <select name="nastavnik" formControlName="nastavnik" [compareWith]="comparatorNastavnik"  required>
-            <option *ngFor="let nastavnik of nastavnici"  [ngValue]="nastavnik">
+        <mat-form-field appearance="fill">
+          <mat-label>Nastavnik:</mat-label>
+          <mat-select name="nastavnik" formControlName="nastavnik" [compareWith]="comparatorAdresa"  required>
+            <mat-option *ngFor="let nastavnik of nastavnici"  [value]="nastavnik">
               {{nastavnik.ime}}
-            </option>
-          </select>
-        </label>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
-        <button type="submit">Dodaj</button>
+        <button mat-raised-button color="primary"  type="submit">Dodaj</button>
     </div>
 </form>

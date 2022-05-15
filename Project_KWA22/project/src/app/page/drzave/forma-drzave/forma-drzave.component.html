@@ -2,10 +2,13 @@
 <form (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
 
     <div>
-      <label>Naziv: <input formControlName="naziv" name="naziv" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Naziv:</mat-label>
+          <input matInput formControlName="naziv"  name="naziv" type="text" >
+      </mat-form-field>
     </div>
 
     <div>
-      <button type="submit">Dodaj</button>
+      <button mat-raised-button color="primary" type="submit">Dodaj</button>
     </div>
   </form>

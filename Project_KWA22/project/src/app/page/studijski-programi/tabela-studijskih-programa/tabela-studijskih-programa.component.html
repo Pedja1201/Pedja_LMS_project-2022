@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
-<table>
+<table mat-table class="mat-elevation-z20">
     <thead>
       <tr>
         <th>ID</th>
@@ -13,14 +13,14 @@
     <tbody>                        
                                     <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
       <tr *ngFor="let e of elementi">
-        <td><button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
+        <td><button mat-stroked-button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
         <td>{{e["naziv"]}}</td>
         <td><span *ngIf="e['fakultet']">{{e["fakultet"]["naziv"]}}</span></td>
         <td><span *ngIf="e['nastavnik']">{{e["nastavnik"]["ime"]}}</span></td>
         <td><span *ngIf="e['godinaStudija']">{{e["godinaStudija"]["godina"]}}</span></td>
         <td>
-          <button (click)="ukloni(e['id'])">Ukloni</button>
-          <button (click)="izmeni(e)">Izmeni</button>
+          <button mat-stroked-button color="warn"  (click)="ukloni(e['id'])">Ukloni</button>
+          <button mat-stroked-button (click)="izmeni(e)">Izmeni</button>
         </td>
   
       </tr>

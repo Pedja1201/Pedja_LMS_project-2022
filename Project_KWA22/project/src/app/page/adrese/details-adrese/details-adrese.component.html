@@ -1,7 +1,7 @@
-<ul>
-    <li>ID: {{adresa["id"]}}</li>
-    <li>Ulica: {{adresa["ulica"]}}</li>
-    <li>Broj: {{adresa["broj"]}}</li>
-    <li>Mesto: <span *ngIf="adresa['mesto']">{{adresa["mesto"]["naziv"]}}</span></li>
-</ul>
-<button (click)="back()">Nazad</button>
+<mat-list>
+    <mat-list-item>ID: {{adresa["id"]}}</mat-list-item>
+    <mat-list-item>Ulica: {{adresa["ulica"]}}</mat-list-item>
+    <mat-list-item>Broj: {{adresa["broj"]}}</mat-list-item>
+    <mat-list-item>Mesto: <span *ngIf="adresa['mesto']">{{adresa["mesto"]["naziv"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

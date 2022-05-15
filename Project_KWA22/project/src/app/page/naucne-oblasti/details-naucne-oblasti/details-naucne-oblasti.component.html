@@ -1,6 +1,6 @@
-<ul>
-    <li>ID: {{naucnaOblast["id"]}}</li>
-    <li>Naziv: {{naucnaOblast["naziv"]}}</li>
-    <li>Zvanje: <span *ngIf="naucnaOblast['zvanje']">{{naucnaOblast["zvanje"]["datumIzbora"]}}</span></li>
-</ul>
-<button (click)="back()">Nazad</button>
+<mat-list>
+    <mat-list-item>ID: {{naucnaOblast["id"]}}</mat-list-item>
+    <mat-list-item>Naziv: {{naucnaOblast["naziv"]}}</mat-list-item>
+    <mat-list-item>Zvanje: <span *ngIf="naucnaOblast['zvanje']">{{naucnaOblast["zvanje"]["datumIzbora"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

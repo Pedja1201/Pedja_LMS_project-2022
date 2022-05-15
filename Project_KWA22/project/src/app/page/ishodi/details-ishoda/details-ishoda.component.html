@@ -1,7 +1,7 @@
-<ul>
-    <li>ID: {{ishod["id"]}}</li>
-    <li>Opis: {{ishod["opis"]}}</li>
-    <li>Predmet: <span *ngIf="ishod['predmet']">{{ishod["predmet"]["naziv"]}}</span></li>
+<mat-list>
+    <mat-list-item>ID: {{ishod["id"]}}</mat-list-item>
+    <mat-list-item>Opis: {{ishod["opis"]}}</mat-list-item>
+    <mat-list-item>Predmet: <span *ngIf="ishod['predmet']">{{ishod["predmet"]["naziv"]}}</span></mat-list-item>
 
-</ul>
-<button (click)="back()">Nazad</button>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

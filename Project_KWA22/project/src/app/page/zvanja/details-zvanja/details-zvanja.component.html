@@ -1,8 +1,8 @@
-<ul>
-    <li>ID: {{zvanje["id"]}}</li>
-    <li>Datum Izbora: {{zvanje["datumIzbora"]}}</li>
-    <li>Datum prestanka: {{zvanje["datumPrestanka"]}}</li>
-    <li>Naucna oblast: <span *ngIf="zvanje['naucnaOblast']">{{zvanje["naucnaOblast"]["naziv"]}}</span></li>
-    <li>Tip zvanja: <span *ngIf="zvanje['tipZvanja']">{{zvanje["tipZvanja"]["naziv"]}}</span></li>
-</ul>
-<button (click)="back()">Nazad</button>
+<mat-list>
+    <mat-list-item>ID: {{zvanje["id"]}}</mat-list-item>
+    <mat-list-item>Datum Izbora: {{zvanje["datumIzbora"]}}</mat-list-item>
+    <mat-list-item>Datum prestanka: {{zvanje["datumPrestanka"]}}</mat-list-item>
+    <mat-list-item>Naucna oblast: <span *ngIf="zvanje['naucnaOblast']">{{zvanje["naucnaOblast"]["naziv"]}}</span></mat-list-item>
+    <mat-list-item>Tip zvanja: <span *ngIf="zvanje['tipZvanja']">{{zvanje["tipZvanja"]["naziv"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

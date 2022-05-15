@@ -1,7 +1,7 @@
-<ul>
-    <li>ID: {{pohadjanjePredmeta["id"]}}</li>
-    <li>Konacna ocena: {{pohadjanjePredmeta["konacnaOcena"]}}</li>
-    <li>Realizacija predmeta: <span *ngIf="pohadjanjePredmeta['realizacijaPredmeta']">{{pohadjanjePredmeta["realizacijaPredmeta"]["naziv"]}}</span></li>
+<mat-list>
+    <mat-list-item>ID: {{pohadjanjePredmeta["id"]}}</mat-list-item>
+    <mat-list-item>Konacna ocena: {{pohadjanjePredmeta["konacnaOcena"]}}</mat-list-item>
+    <mat-list-item>Realizacija predmeta: <span *ngIf="pohadjanjePredmeta['realizacijaPredmeta']">{{pohadjanjePredmeta["realizacijaPredmeta"]["naziv"]}}</span></mat-list-item>
 
-</ul>
-<button (click)="back()">Nazad</button>
+</mat-list>
+<button mat-raised-button color="primary"  (click)="back()">Nazad</button>

@@ -1,31 +1,55 @@
 <h2>{{title}}</h2>
 <form (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-        <label>Naziv: <input name="naziv" formControlName="naziv" type="text" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>Naziv:</mat-label>
+          <input matInput formControlName="naziv"  name="naziv" type="text" required>
+      </mat-form-field>
     </div>
     <div>
-      <label>ESPB: <input formControlName="espb" name="espb" type="number" min="2" max="8" required></label>
+      <mat-form-field appearance="fill">
+        <mat-label>ESPB:</mat-label>
+          <input matInput formControlName="espb"  name="espb"type="number" min="2" max="8"  required>
+      </mat-form-field>
     </div>
     <div>
-        <label>Obavezan: <input formControlName="obavezan" name="obavezan" type="checkbox" ></label>
+      <section class="example-section">
+        <mat-checkbox  formControlName="obavezan"  name="obavezan"  class="example-margin">Obavezan</mat-checkbox>
+      </section>
+    </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Broj predavanja: </mat-label>
+            <input matInput formControlName="brojPredavanja" name="brojPredavanja" type="number" required>
+        </mat-form-field>
       </div>
       <div>
-        <label>Broj predavanja: <input formControlName="brojPredavanja" name="brojPredavanja" type="number" required></label>
+        <mat-form-field appearance="fill">
+          <mat-label>Broj prevezbidavanja: </mat-label>
+            <input matInput formControlName="brojVezbi" name="brojVezbi" type="number" required>
+        </mat-form-field>
       </div>
       <div>
-        <label>Broj vezbi: <input formControlName="brojVezbi" name="brojVezbi" type="number" required></label>
+        <mat-form-field appearance="fill">
+          <mat-label>Drugi oblici nastave: </mat-label>
+            <input matInput formControlName="drugiObliciNastave" name="drugiObliciNastave" type="number" required>
+        </mat-form-field>
       </div>
       <div>
-        <label>Drugi oblici nastave: <input formControlName="drugiObliciNastave" name="drugiObliciNastave" type="number" required></label>
+        <mat-form-field appearance="fill">
+          <mat-label>Istrazivacki rad:  </mat-label>
+            <input matInput formControlName="istrazivackiRad" name="istrazivackiRad" type="number" required>
+        </mat-form-field>
       </div>
       <div>
-        <label>Istrazivacki rad: <input formControlName="istrazivackiRad" name="istrazivackiRad" type="number" required></label>
-      </div>
-      <div>
-        <label>Ostali casovi: <input formControlName="ostaliCasovi" name="ostaliCasovi" type="number" required></label>
+        <mat-form-field appearance="fill">
+          <mat-label>Ostali casovi:  </mat-label>
+            <input matInput formControlName="ostaliCasovi" name="ostaliCasovi" type="number" required>
+        </mat-form-field>
       </div>
 
     <div>
-      <button type="submit">Dodaj</button>
+      <button mat-raised-button color="primary"  type="submit">Dodaj</button>
     </div>
   </form>
