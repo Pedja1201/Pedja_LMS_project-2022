@@ -12,13 +12,13 @@ public class Fakultet {
     @Column(nullable = false)
     private String naziv;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Univerzitet univerzitet;
 
     @ManyToOne(optional = false)
     private Adresa adresa;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Nastavnik nastavnik;
 
     @OneToMany(mappedBy = "fakultet")

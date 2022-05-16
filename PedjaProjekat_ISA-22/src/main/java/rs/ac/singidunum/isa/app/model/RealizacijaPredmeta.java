@@ -12,7 +12,7 @@ public class RealizacijaPredmeta {
     @Column(nullable = false)
     private String naziv;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private NastavnikNaRealizaciji nastavnikNaRealizaciji;
 
     @ManyToOne(optional = false)

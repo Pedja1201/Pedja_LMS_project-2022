@@ -12,7 +12,7 @@ public class PohadjanjePredmeta {
     @Column(nullable = false)
     private int konacnaOcena;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private RealizacijaPredmeta realizacijaPredmeta;
 
     @OneToMany(mappedBy = "pohadjanjePredmeta")

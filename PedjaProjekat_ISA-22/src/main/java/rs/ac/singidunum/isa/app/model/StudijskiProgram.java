@@ -10,13 +10,13 @@ public class StudijskiProgram {
     @Column(nullable = false)
     private String naziv;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Fakultet fakultet;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Nastavnik nastavnik;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private GodinaStudija godinaStudija;
 
     public StudijskiProgram() {super();

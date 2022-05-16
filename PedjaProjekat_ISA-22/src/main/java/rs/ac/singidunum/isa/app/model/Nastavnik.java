@@ -8,14 +8,14 @@ import java.util.Set;
 public class Nastavnik extends Korisnik{
     @Column(nullable = false)
     private String ime;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String biografija;
     @Column(nullable = false, unique = true)
     private String jmbg;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Adresa adresa;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Zvanje zvanje;
 
     @OneToMany(mappedBy = "nastavnik")

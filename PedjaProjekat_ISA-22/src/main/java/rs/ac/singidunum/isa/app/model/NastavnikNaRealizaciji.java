@@ -12,9 +12,9 @@ public class NastavnikNaRealizaciji {
     @Column(nullable = false)
     private int brojCasova;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Nastavnik nastavnik;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TipNastave tipNastave;
 
     @OneToMany(mappedBy = "nastavnikNaRealizaciji")

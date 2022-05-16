@@ -19,7 +19,8 @@ public class Student extends Korisnik{
     public Student() {super();
     }
 
-    public Student(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, Adresa adresa, PohadjanjePredmeta pohadjanjePredmeta, StudentNaGodini studentNaGodini) {
+    public Student(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, Adresa adresa,
+                   PohadjanjePredmeta pohadjanjePredmeta, StudentNaGodini studentNaGodini) {
         super(id, korisnickoIme, lozinka);
         this.jmbg = jmbg;
         this.ime = ime;

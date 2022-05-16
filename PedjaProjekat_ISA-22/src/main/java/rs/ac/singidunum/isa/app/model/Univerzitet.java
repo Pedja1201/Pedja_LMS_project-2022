@@ -18,7 +18,7 @@ public class Univerzitet {
     @ManyToOne(optional = false)
     private Adresa adresa;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Nastavnik nastavnik;
 
     @OneToMany(mappedBy = "univerzitet")
