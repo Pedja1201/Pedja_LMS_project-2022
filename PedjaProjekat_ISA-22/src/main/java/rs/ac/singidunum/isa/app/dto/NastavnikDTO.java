@@ -3,8 +3,8 @@ package rs.ac.singidunum.isa.app.dto;
 
 import java.util.ArrayList;
 
-public class NastavnikDTO {
-    private Long id;
+public class NastavnikDTO extends KorisnikDTO{
+
     private String ime;
     private String biografija;
     private String jmbg;
@@ -22,21 +22,26 @@ public class NastavnikDTO {
     public NastavnikDTO() {super();
     }
 
-    public NastavnikDTO(Long id, String ime, String biografija, String jmbg, AdresaDTO adresa, ZvanjeDTO zvanje) {
-        this.id = id;
+    public NastavnikDTO(Long id, String korisnickoIme, String lozinka, String ime, String biografija, String jmbg, AdresaDTO adresa, ZvanjeDTO zvanje) {
+        super(id, korisnickoIme, lozinka);
         this.ime = ime;
         this.biografija = biografija;
         this.jmbg = jmbg;
         this.adresa = adresa;
         this.zvanje = zvanje;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    //RegisterController Nastavnika
+    public NastavnikDTO(Long id, String korisnickoIme, String lozinka, String ime, String biografija, String jmbg, AdresaDTO adresa, ZvanjeDTO zvanje, ArrayList<FakultetDTO> fakulteti, ArrayList<StudijskiProgramDTO> studijskiProgrami, ArrayList<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji, ArrayList<UniverzitetDTO> univerziteti) {
+        super(id, korisnickoIme, lozinka);
+        this.ime = ime;
+        this.biografija = biografija;
+        this.jmbg = jmbg;
+        this.adresa = adresa;
+        this.zvanje = zvanje;
+        this.fakulteti = fakulteti;
+        this.studijskiProgrami = studijskiProgrami;
+        this.nastavniciNaRealizaciji = nastavniciNaRealizaciji;
+        this.univerziteti = univerziteti;
     }
 
     public String getIme() {

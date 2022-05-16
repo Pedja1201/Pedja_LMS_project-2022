@@ -30,7 +30,7 @@ public class NastavnikController {
         ArrayList<NastavnikDTO> nastavnici = new ArrayList<NastavnikDTO>();
 
         for (Nastavnik nastavnik : nastavnikService.findAll()) {
-            nastavnici.add(new NastavnikDTO(nastavnik.getId(),nastavnik.getIme(),
+            nastavnici.add(new NastavnikDTO(nastavnik.getId(),nastavnik.getKorisnickoIme(),nastavnik.getLozinka(),nastavnik.getIme(),
                     nastavnik.getBiografija(), nastavnik.getJmbg(),
                     new AdresaDTO(nastavnik.getAdresa().getId(),nastavnik.getAdresa().getUlica(),nastavnik.getAdresa().getBroj(),null),
                     new ZvanjeDTO(nastavnik.getZvanje().getId(), nastavnik.getZvanje().getDatumIzbora(),
@@ -43,7 +43,7 @@ public class NastavnikController {
     public ResponseEntity<NastavnikDTO> getNastavnik(@PathVariable("nastavnikId") Long nastavnikId) {
         Optional<Nastavnik> nastavnik = nastavnikService.findOne(nastavnikId);
         if (nastavnik.isPresent()) {
-            NastavnikDTO kartaDTO = new NastavnikDTO(nastavnik.get().getId(),
+            NastavnikDTO kartaDTO = new NastavnikDTO(nastavnik.get().getId(),nastavnik.get().getKorisnickoIme(),nastavnik.get().getLozinka(),
                     nastavnik.get().getIme(),nastavnik.get().getBiografija(), nastavnik.get().getJmbg(),
                     new AdresaDTO(nastavnik.get().getAdresa().getId(), nastavnik.get().getAdresa().getUlica(),
                             nastavnik.get().getAdresa().getBroj(),null),

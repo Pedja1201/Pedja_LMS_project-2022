@@ -14,11 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import rs.ac.singidunum.isa.app.dto.KorisnikDTO;
-import rs.ac.singidunum.isa.app.dto.StudentDTO;
-import rs.ac.singidunum.isa.app.dto.TokenDTO;
+import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.*;
 import rs.ac.singidunum.isa.app.service.KorisnikService;
+import rs.ac.singidunum.isa.app.service.NastavnikService;
 import rs.ac.singidunum.isa.app.service.PermissionService;
 import rs.ac.singidunum.isa.app.service.StudentService;
 import rs.ac.singidunum.isa.app.utlis.TokenUtils;
@@ -40,6 +39,8 @@ public class LoginController {
 
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private NastavnikService nastavnikService;
 
     @Autowired
     private PermissionService permissionService;
@@ -89,6 +90,38 @@ public class LoginController {
 
         return new ResponseEntity<StudentDTO>(
                 new StudentDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null,
-                        noviKorisnik.getJmbg(), noviKorisnik.getIme()), HttpStatus.OK);
+                        noviKorisnik.getJmbg(), noviKorisnik.getIme(),
+                        new AdresaDTO(noviKorisnik.getAdresa().getId(),noviKorisnik.getAdresa().getUlica(),
+                                noviKorisnik.getAdresa().getBroj(),null),
+                        new PohadjanjePredmetaDTO(noviKorisnik.getPohadjanjePredmeta().getId(),
+                                noviKorisnik.getPohadjanjePredmeta().getKonacnaOcena(),null),
+                        new StudentNaGodiniDTO(noviKorisnik.getStudentNaGodini().getId(), noviKorisnik.getStudentNaGodini().getDatumUpisa(),
+                                noviKorisnik.getStudentNaGodini().getBrojIndeksa(),null)), HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/registerNastavnik", method = RequestMethod.POST)
+    public ResponseEntity<NastavnikDTO> registerNastavnik(@RequestBody NastavnikDTO korisnik) {
+        // Novi korisnik se registruje kreiranjem instance korisnika
+        // cija je lozinka enkodovana.
+        Nastavnik noviKorisnik = new Nastavnik(null, korisnik.getKorisnickoIme(),
+                passwordEncoder.encode(korisnik.getLozinka()), korisnik.getIme(),korisnik.getBiografija(),korisnik.getJmbg(),
+                new Adresa(korisnik.getAdresa().getId(), korisnik.getAdresa().getUlica(), korisnik.getAdresa().getBroj(),null),
+                new Zvanje(korisnik.getZvanje().getId(), korisnik.getZvanje().getDatumIzbora(),korisnik.getZvanje().getDatumPrestanka(),
+                        null,null));
+        noviKorisnik = nastavnikService.save(noviKorisnik);
+        // Dodavanje prava pristupa.
+        noviKorisnik.setUserPermissions(new HashSet<UserPermission>());
+        noviKorisnik.getUserPermissions()
+                .add(new UserPermission(null, noviKorisnik, permissionService.findOne(1l).get()));
+        nastavnikService.save(noviKorisnik);
+
+        return new ResponseEntity<NastavnikDTO>(
+                new NastavnikDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null,
+                        noviKorisnik.getIme(), noviKorisnik.getBiografija(),
+                        noviKorisnik.getJmbg(),
+                        new AdresaDTO(noviKorisnik.getAdresa().getId(),noviKorisnik.getAdresa().getUlica(),
+                                noviKorisnik.getAdresa().getBroj(),null),
+                        new ZvanjeDTO(noviKorisnik.getZvanje().getId(), noviKorisnik.getZvanje().getDatumIzbora(),
+                                noviKorisnik.getZvanje().getDatumPrestanka(),null,null)), HttpStatus.OK);
     }
 }

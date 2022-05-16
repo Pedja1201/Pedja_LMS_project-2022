@@ -5,11 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Nastavnik {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Nastavnik extends Korisnik{
     @Column(nullable = false)
     private String ime;
     @Column(nullable = false)
@@ -37,8 +33,8 @@ public class Nastavnik {
     public Nastavnik() {super();
     }
 
-    public Nastavnik(Long id, String ime, String biografija, String jmbg,Adresa adresa, Zvanje zvanje) {
-        this.id = id;
+    public Nastavnik(Long id, String korisnickoIme, String lozinka, String ime, String biografija, String jmbg, Adresa adresa, Zvanje zvanje) {
+        super(id, korisnickoIme, lozinka);
         this.ime = ime;
         this.biografija = biografija;
         this.jmbg = jmbg;
@@ -46,13 +42,6 @@ public class Nastavnik {
         this.zvanje = zvanje;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getIme() {
         return ime;

@@ -37,8 +37,8 @@ public class FakultetController {
                     new UniverzitetDTO(fakultet.getUniverzitet().getId(),fakultet.getUniverzitet().getNaziv(),
                             fakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null),
                     new AdresaDTO(fakultet.getAdresa().getId(), fakultet.getAdresa().getUlica(),fakultet.getAdresa().getBroj(),null),
-                    new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getIme(),
-                            fakultet.getNastavnik().getBiografija(), fakultet.getNastavnik().getJmbg(),null,null)));
+                    new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getKorisnickoIme(),fakultet.getNastavnik().getLozinka(),
+                            fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(), fakultet.getNastavnik().getJmbg(),null,null)));
         }
 
         return new ResponseEntity<Iterable<FakultetDTO>>(fakulteti, HttpStatus.OK);
@@ -53,7 +53,8 @@ public class FakultetController {
                             fakultet.get().getUniverzitet().getDatumVremeOsnivanja(),null,null),
                     new AdresaDTO(fakultet.get().getAdresa().getId(),fakultet.get().getAdresa().getUlica(),
                             fakultet.get().getAdresa().getBroj(),null),
-                    new NastavnikDTO(fakultet.get().getNastavnik().getId(), fakultet.get().getNastavnik().getIme(),
+                    new NastavnikDTO(fakultet.get().getNastavnik().getId(), fakultet.get().getNastavnik().getKorisnickoIme(),
+                            fakultet.get().getNastavnik().getLozinka(), fakultet.get().getNastavnik().getIme(),
                             fakultet.get().getNastavnik().getBiografija(),fakultet.get().getNastavnik().getJmbg(),null,null));
 
             return new ResponseEntity<FakultetDTO>(prodajaDTO, HttpStatus.OK);

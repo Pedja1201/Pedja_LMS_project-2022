@@ -35,7 +35,8 @@ public class UniverzitetController {
             univerziteti.add(new UniverzitetDTO(univerzitet.getId(),univerzitet.getNaziv(), univerzitet.getDatumVremeOsnivanja(),
                     new AdresaDTO(univerzitet.getAdresa().getId(), univerzitet.getAdresa().getUlica(),
                             univerzitet.getAdresa().getBroj(),null),
-                    new NastavnikDTO(univerzitet.getNastavnik().getId(), univerzitet.getNastavnik().getIme(),
+                    new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
+                            univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getIme(),
                             univerzitet.getNastavnik().getBiografija(), univerzitet.getNastavnik().getJmbg(),null,null)));
         }
 
@@ -50,7 +51,8 @@ public class UniverzitetController {
                                         univerzitet.get().getNaziv(), univerzitet.get().getDatumVremeOsnivanja(),
                     new AdresaDTO(univerzitet.get().getAdresa().getId(), univerzitet.get().getAdresa().getUlica(),
                             univerzitet.get().getAdresa().getBroj(),null),
-                    new NastavnikDTO(univerzitet.get().getNastavnik().getId(),univerzitet.get().getNastavnik().getIme(),
+                    new NastavnikDTO(univerzitet.get().getNastavnik().getId(),univerzitet.get().getNastavnik().getKorisnickoIme(),
+                            univerzitet.get().getNastavnik().getLozinka(),univerzitet.get().getNastavnik().getIme(),
                             univerzitet.get().getNastavnik().getBiografija(), univerzitet.get().getNastavnik().getJmbg(),
                                                      null,null));
 

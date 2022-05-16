@@ -32,7 +32,8 @@ public class StudijskiProgramController {
             studijskiProgrami.add(new StudijskiProgramDTO(studijskiProgram.getId(),studijskiProgram.getNaziv(),
                     new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
                                                                 null,null,null),
-                    new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getIme(),
+                    new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getKorisnickoIme(),
+                            studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getIme(),
                             studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),null,null),
                     new GodinaStudijaDTO(studijskiProgram.getGodinaStudija().getId(), studijskiProgram.getGodinaStudija().getGodina(),null)));
         }
@@ -46,7 +47,8 @@ public class StudijskiProgramController {
             StudijskiProgramDTO prodajaDTO = new StudijskiProgramDTO(studijskiProgram.get().getId(),studijskiProgram.get().getNaziv(),
                     new FakultetDTO(studijskiProgram.get().getFakultet().getId(),
                             studijskiProgram.get().getFakultet().getNaziv(),null,null,null),
-                    new NastavnikDTO(studijskiProgram.get().getNastavnik().getId(), studijskiProgram.get().getNastavnik().getIme(),
+                    new NastavnikDTO(studijskiProgram.get().getNastavnik().getId(),studijskiProgram.get().getNastavnik().getKorisnickoIme(),
+                            studijskiProgram.get().getNastavnik().getLozinka(),studijskiProgram.get().getNastavnik().getIme(),
                             studijskiProgram.get().getNastavnik().getBiografija(), studijskiProgram.get().getNastavnik().getJmbg(),
                                             null,null),
                     new GodinaStudijaDTO(studijskiProgram.get().getGodinaStudija().getId(),

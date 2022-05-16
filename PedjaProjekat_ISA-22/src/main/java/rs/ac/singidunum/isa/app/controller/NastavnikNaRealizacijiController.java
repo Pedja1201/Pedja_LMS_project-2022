@@ -28,8 +28,10 @@ public class NastavnikNaRealizacijiController {
         ArrayList<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji = new ArrayList<NastavnikNaRealizacijiDTO>();
 
         for (NastavnikNaRealizaciji nastavnikNaRealizaciji : nastavnikNaRealizacijiService.findAll()) {
-            nastavniciNaRealizaciji.add(new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.getId(),nastavnikNaRealizaciji.getBrojCasova(),
-                    new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(), nastavnikNaRealizaciji.getNastavnik().getIme(),
+            nastavniciNaRealizaciji.add(new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.getId(),
+                    nastavnikNaRealizaciji.getBrojCasova(),
+                    new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(),nastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
+                            nastavnikNaRealizaciji.getNastavnik().getLozinka(), nastavnikNaRealizaciji.getNastavnik().getIme(),
                             nastavnikNaRealizaciji.getNastavnik().getBiografija(), nastavnikNaRealizaciji.getNastavnik().getJmbg(),
                             null,null),
                     new TipNastaveDTO(nastavnikNaRealizaciji.getTipNastave().getId(), nastavnikNaRealizaciji.getTipNastave().getNaziv())));
@@ -44,7 +46,8 @@ public class NastavnikNaRealizacijiController {
         if (nastavnikNaRealizaciji.isPresent()) {
             NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO = new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.get().getId(),
                     nastavnikNaRealizaciji.get().getBrojCasova(),
-                    new NastavnikDTO(nastavnikNaRealizaciji.get().getNastavnik().getId(), nastavnikNaRealizaciji.get().getNastavnik().getIme(),
+                    new NastavnikDTO(nastavnikNaRealizaciji.get().getNastavnik().getId(), nastavnikNaRealizaciji.get().getNastavnik().getKorisnickoIme(),
+                            nastavnikNaRealizaciji.get().getNastavnik().getLozinka(),nastavnikNaRealizaciji.get().getNastavnik().getIme(),
                             nastavnikNaRealizaciji.get().getNastavnik().getBiografija(), nastavnikNaRealizaciji.get().getNastavnik().getJmbg(),
                             null,null),
                     new TipNastaveDTO(nastavnikNaRealizaciji.get().getTipNastave().getId(),
