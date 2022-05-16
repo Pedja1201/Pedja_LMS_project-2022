@@ -15,6 +15,7 @@ export class LoginService {
   user : any = null;
   rolesSubject: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set([]));
   loggedOut = false;  //Ispis da je uspesno izlogovan
+  loggedIn = false;  //Za prikaz dugmica nakkon Login-a
 
   constructor(private client : HttpClient) { }
 
@@ -23,6 +24,7 @@ export class LoginService {
       tap(token => {
         this.token = token.token;
         this.user = JSON.parse(atob(token.token.split(".")[1]));
+        this.loggedIn=true; //Za prikaz dugmica nakon Login-a
       })
     );
   }
