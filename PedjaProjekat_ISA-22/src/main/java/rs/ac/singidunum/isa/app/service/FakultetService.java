@@ -47,8 +47,8 @@ public class FakultetService {
         fakultetRepository.delete(fakultet);
     }
 
-    //Metoda za pronalazenje svih univerzitetu
-    public Iterable<Fakultet> findUniverzitet(Long id) {
-        return fakultetRepository.findUniverzitet(id);
+    //Metoda za pronalazenje  univerziteta
+    public Iterable<Fakultet> findUniverzitetFakulteta(String naziv) {
+        return fakultetRepository.findUniverzitetFakulteta(naziv);
     }
 }

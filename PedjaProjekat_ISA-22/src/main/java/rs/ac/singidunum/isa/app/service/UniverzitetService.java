@@ -50,5 +50,9 @@ public class UniverzitetService {
         univerzitetRepository.delete(univerzitet);
     }
 
+    //Metoda za pronalazenje svih nastavnika na Univerzitetu po imenu
+    public Iterable<Univerzitet> findNastavnikUniverziteta(String ime) {
+        return univerzitetRepository.findNastavnikUniverziteta(ime);
+    }
 
 }

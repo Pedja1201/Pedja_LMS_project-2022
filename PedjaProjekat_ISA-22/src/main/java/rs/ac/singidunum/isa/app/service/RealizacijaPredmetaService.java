@@ -49,4 +49,9 @@ public class RealizacijaPredmetaService {
     public void delete(RealizacijaPredmeta realizacijaPredmeta) {
         realizacijaPredmetaRepository.delete(realizacijaPredmeta);
     }
+
+    //Metoda za pronalazenje Predmeta
+    public Iterable<RealizacijaPredmeta> findPredmetURealizaciji(String naziv) {
+        return realizacijaPredmetaRepository.findPredmetURealizaciji(naziv);
+    }
 }

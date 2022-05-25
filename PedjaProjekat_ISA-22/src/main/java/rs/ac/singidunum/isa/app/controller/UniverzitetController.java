@@ -13,6 +13,7 @@ import rs.ac.singidunum.isa.app.aspect.Logged;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
 import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
 import rs.ac.singidunum.isa.app.dto.UniverzitetDTO;
+import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
 import rs.ac.singidunum.isa.app.model.Univerzitet;
 import rs.ac.singidunum.isa.app.service.UniverzitetService;
 
@@ -91,5 +92,23 @@ public class UniverzitetController {
             return new ResponseEntity<Univerzitet>(HttpStatus.OK);
         }
         return new ResponseEntity<Univerzitet>(HttpStatus.NOT_FOUND);
+    }
+
+    //DONE: Metoda i upit za pronalaženje svih nastavnika
+    @RequestMapping(path = "/findNastavnik/{nastavnikIme}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<UniverzitetDTO>> findNastavnikUniverziteta(@PathVariable("nastavnikIme") String nastavnikIme) {
+        ArrayList<UniverzitetDTO> univerzitetiDTO = new ArrayList<>();
+        for(Univerzitet univerzitet : univerzitetService.findNastavnikUniverziteta(nastavnikIme)) {
+            System.out.println(univerzitet.getNaziv());
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
+                    null,univerzitet.getNastavnik().getIme(),univerzitet.getNastavnik().getBiografija(),
+                    univerzitet.getNastavnik().getJmbg(),null,
+                    new ZvanjeDTO(univerzitet.getNastavnik().getZvanje().getId(), univerzitet.getNastavnik().getZvanje().getDatumIzbora(),
+                            univerzitet.getNastavnik().getZvanje().getDatumPrestanka(), null, null));
+            univerzitetiDTO.add(new UniverzitetDTO(univerzitet.getId(), univerzitet.getNaziv(),
+                    univerzitet.getDatumVremeOsnivanja(), null, nastavnikDTO));
+        }
+        return new ResponseEntity<Iterable<UniverzitetDTO>>(univerzitetiDTO, HttpStatus.OK);
+
     }
 }

@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.Logged;
-import rs.ac.singidunum.isa.app.dto.FakultetDTO;
-import rs.ac.singidunum.isa.app.dto.GodinaStudijaDTO;
-import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
-import rs.ac.singidunum.isa.app.dto.StudijskiProgramDTO;
+import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.StudijskiProgram;
 import rs.ac.singidunum.isa.app.service.StudijskiProgramService;
 
@@ -91,5 +88,24 @@ public class StudijskiProgramController {
             return new ResponseEntity<StudijskiProgram>(HttpStatus.OK);
         }
         return new ResponseEntity<StudijskiProgram>(HttpStatus.NOT_FOUND);
+    }
+
+    //DONE: Metoda i upit za pronalaženje Fakulteta u studijskom programu
+    @RequestMapping(path = "/findFakultet/{fakultetNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<StudijskiProgramDTO>> findFakultetStudijskogProgrmama(@PathVariable("fakultetNaziv") String fakultetNaziv) {
+        ArrayList<StudijskiProgramDTO> karteDTO = new ArrayList<>();
+        for(StudijskiProgram studijskiProgram : studijskiProgramService.findFakultetStudijskogProgrmama(fakultetNaziv)) {
+            System.out.println(studijskiProgram.getNaziv());
+            FakultetDTO fakultetDTO = new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
+                    new UniverzitetDTO(studijskiProgram.getFakultet().getUniverzitet().getId(), studijskiProgram.getFakultet().getUniverzitet().getNaziv(),
+                            studijskiProgram.getFakultet().getUniverzitet().getDatumVremeOsnivanja(),null,null),
+                    new AdresaDTO(studijskiProgram.getFakultet().getAdresa().getId(),studijskiProgram.getFakultet().getAdresa().getUlica(),
+                            studijskiProgram.getFakultet().getAdresa().getBroj(),null),
+                    null);
+            karteDTO.add(new StudijskiProgramDTO(studijskiProgram.getId(), studijskiProgram.getNaziv(),
+                    fakultetDTO, null, null));
+        }
+        return new ResponseEntity<Iterable<StudijskiProgramDTO>>(karteDTO, HttpStatus.OK);
+
     }
 }

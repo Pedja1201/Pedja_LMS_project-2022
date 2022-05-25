@@ -47,4 +47,9 @@ public class StudijskiProgramService {
         studijskiProgramRepository.delete(studijskiProgram);
     }
 
+    //Metoda za pronalazenje svih Fakulteta studijskih programa
+    public Iterable<StudijskiProgram> findFakultetStudijskogProgrmama(String naziv) {
+        return studijskiProgramRepository.findFakultetStudijskogProgrmama(naziv);
+    }
+
 }

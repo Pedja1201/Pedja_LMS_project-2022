@@ -91,4 +91,23 @@ public class RealizacijaPredmetaController {
         }
         return new ResponseEntity<RealizacijaPredmeta>(HttpStatus.NOT_FOUND);
     }
+
+    //DONE: Metoda i upit za pronalaženje Predmeta u realizcaiji
+    @RequestMapping(path = "/findPredmet/{predmetNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<RealizacijaPredmetaDTO>> findPredmetURealizaciji(@PathVariable("predmetNaziv") String predmetNaziv) {
+        ArrayList<RealizacijaPredmetaDTO> realizacijePredmetaDTO = new ArrayList<>();
+        for(RealizacijaPredmeta realizacijaPredmeta : realizacijaPredmetaService.findPredmetURealizaciji(predmetNaziv)) {
+            System.out.println(realizacijaPredmeta.getNaziv());
+            PredmetDTO predmetDTO = new PredmetDTO(realizacijaPredmeta.getPredmet().getId(),realizacijaPredmeta.getPredmet().getNaziv(),
+                    realizacijaPredmeta.getPredmet().getEspb(),realizacijaPredmeta.getPredmet().isObavezan(),
+                    realizacijaPredmeta.getPredmet().getBrojPredavanja(), realizacijaPredmeta.getPredmet().getBrojVezbi(),
+                    realizacijaPredmeta.getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.getPredmet().getIstrazivackiRad(),
+                    realizacijaPredmeta.getPredmet().getOstaliCasovi());
+
+            realizacijePredmetaDTO.add(new RealizacijaPredmetaDTO(realizacijaPredmeta.getId(), realizacijaPredmeta.getNaziv(),
+                    null,predmetDTO));
+        }
+        return new ResponseEntity<Iterable<RealizacijaPredmetaDTO>>(realizacijePredmetaDTO, HttpStatus.OK);
+
+    }
 }

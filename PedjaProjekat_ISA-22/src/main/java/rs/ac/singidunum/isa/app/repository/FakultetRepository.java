@@ -7,7 +7,7 @@ import rs.ac.singidunum.isa.app.model.Fakultet;
 
 @Repository
 public interface FakultetRepository extends CrudRepository<Fakultet, Long> {
-    //Metoda i upit za pronalaženje svih  univerziteta
-    @Query(value = "SELECT f FROM Fakultet f WHERE f.univerzitet.id = :id")
-    public Iterable<Fakultet> findUniverzitet(Long id);
+    //Metoda i upit za pronalaženje   univerziteta
+    @Query(value = "SELECT f FROM Fakultet f WHERE f.univerzitet.naziv = :naziv")
+    public Iterable<Fakultet> findUniverzitetFakulteta(String naziv);
 }

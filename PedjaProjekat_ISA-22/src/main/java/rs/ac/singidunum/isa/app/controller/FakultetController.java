@@ -95,4 +95,20 @@ public class FakultetController {
         return new ResponseEntity<Fakultet>(HttpStatus.NOT_FOUND);
     }
 
+    //DONE: Metoda i upit za pronalaženje svih karata koje je kupio zadati putnik(Zadatak sa klk)
+    @RequestMapping(path = "/findUniverzitet/{univerzitetNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<FakultetDTO>> findUniverzitetFakulteta(@PathVariable("univerzitetNaziv") String univerzitetNaziv) {
+        ArrayList<FakultetDTO> fakultetiDTO = new ArrayList<>();
+        for(Fakultet fakultet : fakultetService.findUniverzitetFakulteta(univerzitetNaziv)) {
+            System.out.println(fakultet.getAdresa());
+            UniverzitetDTO univerzitetDTO = new UniverzitetDTO(fakultet.getUniverzitet().getId(),fakultet.getUniverzitet().getNaziv(),
+                    fakultet.getUniverzitet().getDatumVremeOsnivanja(),
+                    new AdresaDTO(fakultet.getUniverzitet().getAdresa().getId(),fakultet.getUniverzitet().getAdresa().getUlica(),
+                            fakultet.getUniverzitet().getAdresa().getBroj(), null), null);
+            fakultetiDTO.add(new FakultetDTO(fakultet.getId(), fakultet.getNaziv(), univerzitetDTO, null, null));
+        }
+        return new ResponseEntity<Iterable<FakultetDTO>>(fakultetiDTO, HttpStatus.OK);
+
+    }
+
 }
