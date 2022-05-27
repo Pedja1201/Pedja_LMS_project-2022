@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedUniverzitet;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
 import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
 import rs.ac.singidunum.isa.app.dto.UniverzitetDTO;
@@ -26,7 +27,7 @@ public class UniverzitetController {
     @Autowired
     private UniverzitetService univerzitetService;
 
-    @Logged
+    @LoggedUniverzitet
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Iterable<UniverzitetDTO>> getAll() {

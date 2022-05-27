@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedZvanje;
 import rs.ac.singidunum.isa.app.dto.NaucnaOblastDTO;
 import rs.ac.singidunum.isa.app.dto.TipZvanjaDTO;
 import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
@@ -24,7 +25,7 @@ public class ZvanjeController {
     @Autowired
     private ZvanjeService zvanjeService;
 
-    @Logged
+    @LoggedZvanje
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Iterable<ZvanjeDTO>> getAll() {
 
