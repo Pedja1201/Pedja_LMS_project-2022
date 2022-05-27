@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.*;
-import rs.ac.singidunum.isa.app.service.KorisnikService;
-import rs.ac.singidunum.isa.app.service.NastavnikService;
-import rs.ac.singidunum.isa.app.service.PermissionService;
-import rs.ac.singidunum.isa.app.service.StudentService;
+import rs.ac.singidunum.isa.app.service.*;
 import rs.ac.singidunum.isa.app.utlis.TokenUtils;
 
 import java.util.HashSet;
@@ -41,6 +38,8 @@ public class LoginController {
     private StudentService studentService;
     @Autowired
     private NastavnikService nastavnikService;
+    @Autowired
+    private AdministratorService administratorService;
 
     @Autowired
     private PermissionService permissionService;
@@ -123,5 +122,22 @@ public class LoginController {
                                 noviKorisnik.getAdresa().getBroj(),null),
                         new ZvanjeDTO(noviKorisnik.getZvanje().getId(), noviKorisnik.getZvanje().getDatumIzbora(),
                                 noviKorisnik.getZvanje().getDatumPrestanka(),null,null)), HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/registerAdministrator", method = RequestMethod.POST)
+    public ResponseEntity<AdministratorDTO> registerAdministrator(@RequestBody AdministratorDTO administratorDTO) {
+        // Novi korisnik se registruje kreiranjem instance korisnika
+        // cija je lozinka enkodovana.
+        Administrator noviAdministrator = new Administrator(null, administratorDTO.getKorisnickoIme(),
+                passwordEncoder.encode(administratorDTO.getLozinka()), administratorDTO.getIme(), administratorDTO.getJmbg());
+        noviAdministrator = administratorService.save(noviAdministrator);
+        // Dodavanje prava pristupa.
+        noviAdministrator.setUserPermissions(new HashSet<UserPermission>());
+        noviAdministrator.getUserPermissions()
+                .add(new UserPermission(null, noviAdministrator, permissionService.findOne(1l).get()));
+        administratorService.save(noviAdministrator);
+
+        return new ResponseEntity<AdministratorDTO>(
+                new AdministratorDTO(noviAdministrator.getId(), noviAdministrator.getKorisnickoIme(), noviAdministrator.getLozinka(), noviAdministrator.getIme(), noviAdministrator.getJmbg()), HttpStatus.OK);
     }
 }
