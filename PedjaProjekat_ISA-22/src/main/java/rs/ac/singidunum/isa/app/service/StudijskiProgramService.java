@@ -52,4 +52,9 @@ public class StudijskiProgramService {
         return studijskiProgramRepository.findFakultetStudijskogProgrmama(naziv);
     }
 
+    //Metoda za pronalazenje svih Nastavnika studijskih programa
+    public Iterable<StudijskiProgram> findNastavnikStudijskogProgrmama(String ime) {
+        return studijskiProgramRepository.findNastavnikStudijskogProgrmama(ime);
+    }
+
 }

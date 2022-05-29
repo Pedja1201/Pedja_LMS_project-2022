@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.Logged;
-import rs.ac.singidunum.isa.app.dto.AdresaDTO;
-import rs.ac.singidunum.isa.app.dto.FakultetDTO;
-import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
-import rs.ac.singidunum.isa.app.dto.UniverzitetDTO;
+import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Fakultet;
 import rs.ac.singidunum.isa.app.service.FakultetService;
 
@@ -106,6 +103,24 @@ public class FakultetController {
                     new AdresaDTO(fakultet.getUniverzitet().getAdresa().getId(),fakultet.getUniverzitet().getAdresa().getUlica(),
                             fakultet.getUniverzitet().getAdresa().getBroj(), null), null);
             fakultetiDTO.add(new FakultetDTO(fakultet.getId(), fakultet.getNaziv(), univerzitetDTO, null, null));
+        }
+        return new ResponseEntity<Iterable<FakultetDTO>>(fakultetiDTO, HttpStatus.OK);
+
+    }
+
+    //DONE: Metoda i upit za pronalaženje svih nastavnika
+    @RequestMapping(path = "/findNastavnik/{nastavnikIme}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<FakultetDTO>> findNastavnikaFakulteta(@PathVariable("nastavnikIme") String nastavnikIme) {
+        ArrayList<FakultetDTO> fakultetiDTO = new ArrayList<>();
+        for(Fakultet fakultet : fakultetService.findNastavnikaFakulteta(nastavnikIme)) {
+            System.out.println(fakultet.getAdresa());
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getKorisnickoIme(),null,
+                    fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(),fakultet.getNastavnik().getJmbg(),
+                    new AdresaDTO(fakultet.getNastavnik().getAdresa().getId(),fakultet.getNastavnik().getAdresa().getUlica(),
+                            fakultet.getNastavnik().getAdresa().getBroj(), null),
+                    new ZvanjeDTO(fakultet.getNastavnik().getZvanje().getId(),fakultet.getNastavnik().getZvanje().getDatumIzbora(),
+                            fakultet.getNastavnik().getZvanje().getDatumPrestanka(),null, null));
+            fakultetiDTO.add(new FakultetDTO(fakultet.getId(), fakultet.getNaziv(), null, null, nastavnikDTO));
         }
         return new ResponseEntity<Iterable<FakultetDTO>>(fakultetiDTO, HttpStatus.OK);
 

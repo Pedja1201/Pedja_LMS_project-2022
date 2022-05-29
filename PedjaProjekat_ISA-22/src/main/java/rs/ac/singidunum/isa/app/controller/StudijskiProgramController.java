@@ -90,10 +90,11 @@ public class StudijskiProgramController {
         return new ResponseEntity<StudijskiProgram>(HttpStatus.NOT_FOUND);
     }
 
+
     //DONE: Metoda i upit za pronalaženje Fakulteta u studijskom programu
     @RequestMapping(path = "/findFakultet/{fakultetNaziv}", method = RequestMethod.GET)
     public ResponseEntity<Iterable<StudijskiProgramDTO>> findFakultetStudijskogProgrmama(@PathVariable("fakultetNaziv") String fakultetNaziv) {
-        ArrayList<StudijskiProgramDTO> karteDTO = new ArrayList<>();
+        ArrayList<StudijskiProgramDTO> studijskiProgramiDTO = new ArrayList<>();
         for(StudijskiProgram studijskiProgram : studijskiProgramService.findFakultetStudijskogProgrmama(fakultetNaziv)) {
             System.out.println(studijskiProgram.getNaziv());
             FakultetDTO fakultetDTO = new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
@@ -102,10 +103,30 @@ public class StudijskiProgramController {
                     new AdresaDTO(studijskiProgram.getFakultet().getAdresa().getId(),studijskiProgram.getFakultet().getAdresa().getUlica(),
                             studijskiProgram.getFakultet().getAdresa().getBroj(),null),
                     null);
-            karteDTO.add(new StudijskiProgramDTO(studijskiProgram.getId(), studijskiProgram.getNaziv(),
+            studijskiProgramiDTO.add(new StudijskiProgramDTO(studijskiProgram.getId(), studijskiProgram.getNaziv(),
                     fakultetDTO, null, null));
         }
-        return new ResponseEntity<Iterable<StudijskiProgramDTO>>(karteDTO, HttpStatus.OK);
+        return new ResponseEntity<Iterable<StudijskiProgramDTO>>(studijskiProgramiDTO, HttpStatus.OK);
+
+    }
+
+    //DONE: Metoda i upit za pronalaženje Nastavnika u studijskom programu
+    @RequestMapping(path = "/findNastavnik/{nastavnikIme}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<StudijskiProgramDTO>> findNastavnikStudijskogProgrmama(@PathVariable("nastavnikIme") String nastavnikIme) {
+        ArrayList<StudijskiProgramDTO> studijskiProgramiDTO = new ArrayList<>();
+        for(StudijskiProgram studijskiProgram : studijskiProgramService.findNastavnikStudijskogProgrmama(nastavnikIme)) {
+            System.out.println(studijskiProgram.getNaziv());
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(studijskiProgram.getNastavnik().getId(),studijskiProgram.getNastavnik().getKorisnickoIme(),null,
+                    studijskiProgram.getNastavnik().getIme(), studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),
+                    new AdresaDTO(studijskiProgram.getNastavnik().getAdresa().getId(),studijskiProgram.getNastavnik().getAdresa().getUlica(),
+                            studijskiProgram.getNastavnik().getAdresa().getBroj(), null),
+                    new ZvanjeDTO(studijskiProgram.getNastavnik().getZvanje().getId(),studijskiProgram.getNastavnik().getZvanje().getDatumIzbora(),
+                            studijskiProgram.getNastavnik().getZvanje().getDatumPrestanka(),null, null));
+
+            studijskiProgramiDTO.add(new StudijskiProgramDTO(studijskiProgram.getId(), studijskiProgram.getNaziv(),
+                    null, nastavnikDTO, null));
+        }
+        return new ResponseEntity<Iterable<StudijskiProgramDTO>>(studijskiProgramiDTO, HttpStatus.OK);
 
     }
 }

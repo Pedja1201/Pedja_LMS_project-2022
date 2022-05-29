@@ -51,4 +51,9 @@ public class FakultetService {
     public Iterable<Fakultet> findUniverzitetFakulteta(String naziv) {
         return fakultetRepository.findUniverzitetFakulteta(naziv);
     }
+
+    //Metoda za pronalazenje  nastavnika
+    public Iterable<Fakultet> findNastavnikaFakulteta(String ime) {
+        return fakultetRepository.findNastavnikaFakulteta(ime);
+    }
 }

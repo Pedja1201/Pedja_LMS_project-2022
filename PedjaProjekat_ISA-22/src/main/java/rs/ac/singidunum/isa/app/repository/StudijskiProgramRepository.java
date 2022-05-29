@@ -10,4 +10,8 @@ public interface StudijskiProgramRepository extends CrudRepository<StudijskiProg
     //Metoda za pronalazenje svih Fakulteta studijskih programa
     @Query(value = "SELECT s FROM StudijskiProgram s WHERE s.fakultet.naziv = :naziv")
     public Iterable<StudijskiProgram> findFakultetStudijskogProgrmama(String naziv);
+
+    //Metoda za pronalazenje svih Nastavnika studijskih programa
+    @Query(value = "SELECT s FROM StudijskiProgram s WHERE s.nastavnik.ime = :ime")
+    public Iterable<StudijskiProgram> findNastavnikStudijskogProgrmama(String ime);
 }

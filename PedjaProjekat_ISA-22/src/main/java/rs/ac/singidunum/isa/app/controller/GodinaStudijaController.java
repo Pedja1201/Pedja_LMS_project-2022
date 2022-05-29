@@ -85,4 +85,19 @@ public class GodinaStudijaController {
         }
         return new ResponseEntity<GodinaStudija>(HttpStatus.NOT_FOUND);
     }
+
+    //DONE: Metoda i upit za pronalaženje predmeta na God.Studija
+    @RequestMapping(path = "/findPredmet/{predmetNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<GodinaStudijaDTO>> findPredmetGodineStudija(@PathVariable("predmetNaziv") String predmetNaziv) {
+        ArrayList<GodinaStudijaDTO> godineStudijaDTO = new ArrayList<>();
+        for(GodinaStudija godinaStudija : godinaStudijaService.findPredmetGodineStudija(predmetNaziv)) {
+            System.out.println(godinaStudija.getGodina());
+            PredmetDTO predmetDTO = new PredmetDTO(godinaStudija.getPredmet().getId(),godinaStudija.getPredmet().getNaziv(),
+                    godinaStudija.getPredmet().getEspb(), godinaStudija.getPredmet().isObavezan(), godinaStudija.getPredmet().getBrojPredavanja(),
+                    godinaStudija.getPredmet().getBrojVezbi(), godinaStudija.getPredmet().getDrugiObliciNastave(),
+                    godinaStudija.getPredmet().getIstrazivackiRad(),godinaStudija.getPredmet().getOstaliCasovi());
+            godineStudijaDTO.add(new GodinaStudijaDTO(godinaStudija.getId(), godinaStudija.getGodina(), predmetDTO));
+        }
+        return new ResponseEntity<Iterable<GodinaStudijaDTO>>(godineStudijaDTO, HttpStatus.OK);
+    }
 }

@@ -49,4 +49,9 @@ public class GodinaStudijaService {
     public void delete(GodinaStudija godinaStudija) {
         godinaStudijaRepository.delete(godinaStudija);
     }
+
+    //Metoda za pronalazenje predmeta na Godini studija
+    public Iterable<GodinaStudija> findPredmetGodineStudija(String naziv) {
+        return godinaStudijaRepository.findPredmetGodineStudija(naziv);
+    }
 }
