@@ -83,8 +83,8 @@ public class LoginController {
         noviKorisnik = studentService.save(noviKorisnik);
         // Dodavanje prava pristupa.
         noviKorisnik.setUserPermissions(new HashSet<UserPermission>());
-        noviKorisnik.getUserPermissions()
-                .add(new UserPermission(null, noviKorisnik, permissionService.findOne(1l).get()));
+        noviKorisnik.getUserPermissions()                                       //Id:2 jer je ROLE_USER=2 (Student=Korisnik)
+                .add(new UserPermission(null, noviKorisnik, permissionService.findOne(2l).get()));
         studentService.save(noviKorisnik);
 
         return new ResponseEntity<StudentDTO>(
@@ -110,8 +110,8 @@ public class LoginController {
         noviKorisnik = nastavnikService.save(noviKorisnik);
         // Dodavanje prava pristupa.
         noviKorisnik.setUserPermissions(new HashSet<UserPermission>());
-        noviKorisnik.getUserPermissions()
-                .add(new UserPermission(null, noviKorisnik, permissionService.findOne(1l).get()));
+        noviKorisnik.getUserPermissions()                               //Id:2 jer je ROLE_USER=2 (Nastavnik=Korisnik)
+                .add(new UserPermission(null, noviKorisnik, permissionService.findOne(2l).get()));
         nastavnikService.save(noviKorisnik);
 
         return new ResponseEntity<NastavnikDTO>(
@@ -133,7 +133,7 @@ public class LoginController {
         noviAdministrator = administratorService.save(noviAdministrator);
         // Dodavanje prava pristupa.
         noviAdministrator.setUserPermissions(new HashSet<UserPermission>());
-        noviAdministrator.getUserPermissions()
+        noviAdministrator.getUserPermissions()                                   //Id:1 jer je ROLE_ADMIN=1 (Administrator=Admin)
                 .add(new UserPermission(null, noviAdministrator, permissionService.findOne(1l).get()));
         administratorService.save(noviAdministrator);
 
