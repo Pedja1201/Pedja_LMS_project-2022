@@ -9,24 +9,34 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
+import rs.ac.singidunum.isa.app.dto.StudijskiProgramLogDTO;
 import rs.ac.singidunum.isa.app.model.StudijskiProgramLog;
 import rs.ac.singidunum.isa.app.service.StudijskiProgramLogService;
 
+import javax.jms.Queue;
 import java.time.LocalDateTime;
 
 @Aspect
 @Component
 public class StudijskiProgramLogger {
     @Autowired
+    private Queue logQueue;
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
     private StudijskiProgramLogService studijskiProgramLogService;
 
-    @Before("@annotation(Logged)")  //Jednostavniji nacin sa anotacijom '@logged'
+    @Before("@annotation(LoggedStudijskiProgram)")  //Jednostavniji nacin sa anotacijom '@logged'
     public void logPocetakIzvrsavanjaAnotacija(JoinPoint jp){
         System.out.println("Pre izvršavanja metode. [LOGGED]. ");
         System.out.println(jp.getSignature());
         //StudisjkiProgramLog za NoSQL mongoDB bazu
         studijskiProgramLogService.save(new StudijskiProgramLog(null, jp.getSignature().toLongString(), "Pre izvršavanja metode. [LOGGED]. ", LocalDateTime.now(), "INFO"));
+        //Saljemo tu poruku u ActiveMQ TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
+        jmsTemplate.convertAndSend(logQueue, new StudijskiProgramLogDTO(null,jp.getSignature().toLongString(), "Pre izvršavanja metode. [LOGGED]. ", LocalDateTime.now(), "INFO"));
 
         //Ispis argumenata u konzoli sa vrednostima
         for(Object o : jp.getArgs()){

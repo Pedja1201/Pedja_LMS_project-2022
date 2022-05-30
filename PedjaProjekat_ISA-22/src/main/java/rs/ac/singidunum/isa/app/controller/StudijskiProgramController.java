@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedStudijskiProgram;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.StudijskiProgram;
 import rs.ac.singidunum.isa.app.service.StudijskiProgramService;
@@ -22,7 +23,7 @@ public class StudijskiProgramController {
     @Autowired
     private StudijskiProgramService studijskiProgramService;
 
-    @Logged
+    @LoggedStudijskiProgram //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Iterable<StudijskiProgramDTO>> getAll() {
         ArrayList<StudijskiProgramDTO> studijskiProgrami = new ArrayList<StudijskiProgramDTO>();

@@ -1,9 +1,10 @@
 package rs.ac.singidunum.isa.app.dto;
 
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class StudijskiProgramLogDTO {
+public class StudijskiProgramLogDTO implements Serializable {
     private String id;
     private String signature;
     private String message;

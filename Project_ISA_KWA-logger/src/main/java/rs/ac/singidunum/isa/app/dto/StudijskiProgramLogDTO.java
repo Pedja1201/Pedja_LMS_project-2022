@@ -3,17 +3,19 @@ package rs.ac.singidunum.isa.app.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ZvanjeLogDTO implements Serializable {
+public class StudijskiProgramLogDTO implements Serializable {
+//    @Serial
+//    private static final long serialVersionUID = 3640248038100916891L;
     private String id;
     private String signature;
     private String message;
     private LocalDateTime dateTime;
     private String type;
 
-    public ZvanjeLogDTO() {super();
+    public StudijskiProgramLogDTO() {super();
     }
 
-    public ZvanjeLogDTO(String id, String signature, String message, LocalDateTime dateTime, String type) {
+    public StudijskiProgramLogDTO(String id, String signature, String message, LocalDateTime dateTime, String type) {
         this.id = id;
         this.signature = signature;
         this.message = message;

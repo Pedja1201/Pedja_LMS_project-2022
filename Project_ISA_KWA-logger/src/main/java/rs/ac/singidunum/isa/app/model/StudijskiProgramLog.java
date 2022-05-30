@@ -1,19 +1,23 @@
-package rs.ac.singidunum.isa.app.dto;
+package rs.ac.singidunum.isa.app.model;
 
-import java.io.Serializable;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
-public class ZvanjeLogDTO implements Serializable {
+@Document(collection = "studijskiProgramLogListener")
+public class StudijskiProgramLog {
+    @Id
     private String id;
     private String signature;
     private String message;
     private LocalDateTime dateTime;
     private String type;
 
-    public ZvanjeLogDTO() {super();
+    public StudijskiProgramLog() {super();
     }
 
-    public ZvanjeLogDTO(String id, String signature, String message, LocalDateTime dateTime, String type) {
+    public StudijskiProgramLog(String id, String signature, String message, LocalDateTime dateTime, String type) {
         this.id = id;
         this.signature = signature;
         this.message = message;

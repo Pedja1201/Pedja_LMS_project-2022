@@ -25,7 +25,7 @@ public class ZvanjeController {
     @Autowired
     private ZvanjeService zvanjeService;
 
-    @LoggedZvanje
+    @LoggedZvanje //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Iterable<ZvanjeDTO>> getAll() {
 

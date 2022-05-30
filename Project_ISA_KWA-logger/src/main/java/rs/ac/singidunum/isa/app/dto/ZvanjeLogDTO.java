@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ZvanjeLogDTO implements Serializable {
+//    @Serial
+//    private static final long serialVersionUID = 3540248038100916891L;
     private String id;
     private String signature;
     private String message;

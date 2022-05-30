@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import rs.ac.singidunum.isa.app.aspect.Logged;
 import rs.ac.singidunum.isa.app.dto.PredmetDTO;
 import rs.ac.singidunum.isa.app.model.Predmet;
 import rs.ac.singidunum.isa.app.service.PredmetService;
@@ -21,6 +22,7 @@ public class PredmetController {
     @Autowired
     private PredmetService predmetService;
 
+    @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Iterable<PredmetDTO>> getAll() {
         ArrayList<PredmetDTO> predmeti = new ArrayList<PredmetDTO>();
