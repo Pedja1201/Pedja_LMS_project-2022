@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
 import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
 import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
@@ -24,6 +25,7 @@ public class NastavnikController {
     @Autowired
     private NastavnikService nastavnikService;
 
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Iterable<NastavnikDTO>> getAllNastavnik() {

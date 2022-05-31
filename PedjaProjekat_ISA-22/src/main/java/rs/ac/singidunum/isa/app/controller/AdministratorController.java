@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.AdministratorDTO;
 import rs.ac.singidunum.isa.app.model.Administrator;
 import rs.ac.singidunum.isa.app.service.AdministratorService;
@@ -21,6 +22,7 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.GET)
 //        @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Iterable<AdministratorDTO>> getAllAdministrator() {
