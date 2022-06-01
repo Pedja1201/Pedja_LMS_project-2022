@@ -41,9 +41,6 @@ export class StudentiService {
       map(studenti => {
         return studenti.filter(student => {
           let rezultat = true;
-          if (student["id"] && parametri["id"]) {
-            rezultat &&= student["id"] == parametri["id"];
-          }
           if (student["jmbg"] && parametri["jmbg"]) {
             rezultat &&= student["jmbg"] == parametri["jmbg"];
           }

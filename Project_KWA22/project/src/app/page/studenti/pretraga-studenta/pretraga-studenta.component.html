@@ -1,11 +1,5 @@
 <h2>{{title}}</h2>
 <form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>ID: </mat-label>
-      <input matInput name="id" formControlName="id" type="number">
-    </mat-form-field>
-  </div>
     <div>
       <mat-form-field appearance="fill">
         <mat-label>JMBG: </mat-label>
@@ -19,36 +13,6 @@
       </mat-form-field>
     </div>
 
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Adresa:</mat-label>
-      <mat-select name="adresa" formControlName="adresa">
-        <mat-option *ngFor="let adresa of adrese; trackBy: itemTrackBy1"  [value]="adresa"> 
-          {{adresa.ulica}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Pohadjanje predmeta:</mat-label>
-      <mat-select name="pohadjanjePredmeta" formControlName="pohadjanjePredmeta">
-        <mat-option *ngFor="let pohadjanjePredmeta of pohadjanjaPredmeta;trackBy: itemTrackBy2"  [value]="pohadjanjePredmeta"> 
-          -Ocena:{{pohadjanjePredmeta.konacnaOcena}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Student na godini:</mat-label>
-      <mat-select name="studentNaGodini" formControlName="studentNaGodini">
-        <mat-option *ngFor="let studentNaGodini of studentiNaGodini; trackBy: itemTrackBy3"  [value]="studentNaGodini"> 
-          {{studentNaGodini.brojIndeksa}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 
   <div>
     <button mat-raised-button type="submit">Pretrazi </button>

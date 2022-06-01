@@ -41,8 +41,8 @@ export class NastavniciService {
       map(nastavnici => {
         return nastavnici.filter(nastavnik => {
           let rezultat = true;
-          if (nastavnik["id"] && parametri["id"]) {
-            rezultat &&= nastavnik["id"] == parametri["id"];
+          if (nastavnik["ime"] && parametri["ime"]) {
+            rezultat &&= nastavnik["ime"] == parametri["ime"];
           }
           if (nastavnik["jmbg"] && parametri["jmbg"]) {
             rezultat &&= nastavnik["jmbg"] == parametri["jmbg"];

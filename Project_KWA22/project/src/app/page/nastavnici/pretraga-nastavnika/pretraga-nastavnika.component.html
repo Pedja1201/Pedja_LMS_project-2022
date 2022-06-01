@@ -1,11 +1,5 @@
 <h2>{{title}}</h2>
 <form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>ID:</mat-label>
-          <input matInput formControlName="id"  name="id" type="number"  step="1">
-      </mat-form-field>
-  </div>
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Ime:</mat-label>
@@ -14,37 +8,10 @@
     </div>
     <div>
       <mat-form-field appearance="fill">
-        <mat-label>Biografija:</mat-label>
-          <textarea matInput formControlName="biografija"  name="biografija" type="text" ></textarea>
-        </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="fill">
         <mat-label>JMBG:</mat-label>
             <input matInput formControlName="jmbg"  name="jmbg" type="text" >
         </mat-form-field>
     </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Adresa:</mat-label>
-      <mat-select name="adresa" formControlName="adresa">
-        <mat-option *ngFor="let adresa of adrese; trackBy: itemTrackBy1"  [value]="adresa"> 
-          {{adresa.ulica}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Zvanje:</mat-label>
-      <mat-select name="zvanje" formControlName="zvanje" >
-        <mat-option *ngFor="let zvanje of zvanja; trackBy: itemTrackBy2"  [value]="zvanje"> 
-          {{zvanje.id}},{{zvanje.datumIzbora}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
   <div>
     <button mat-raised-button type="submit">Pretrazi rezervaciju</button>
   </div>

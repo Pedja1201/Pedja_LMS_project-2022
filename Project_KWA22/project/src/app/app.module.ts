@@ -9,6 +9,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -191,7 +195,7 @@ import { PageTreeViewComponent } from './tree-view/page-tree-view/page-tree-view
     FormaZvanjaComponent,
     DetailsZvanjaComponent,
     TreeViewComponent,
-    PageTreeViewComponent
+    PageTreeViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -206,7 +210,12 @@ import { PageTreeViewComponent } from './tree-view/page-tree-view/page-tree-view
     MatListModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSidenavModule
+
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login
   bootstrap: [AppComponent]

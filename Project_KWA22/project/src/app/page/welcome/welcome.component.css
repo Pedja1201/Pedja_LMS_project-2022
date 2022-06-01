@@ -1,4 +1,32 @@
-h1{
-    color: coral;
-    text-align: center;
+.portfolio-row{
+	margin-top: 20px;
+}
+
+.portfolio-button{
+	margin-top: 10px;
+}
+
+.portfolio-section{
+  text-align: center;
+}
+
+.portfolio-heading{
+  padding-bottom: 30px;
+}
+
+.portfolio-heading h2{
+  font-size: 32px;
+}
+
+.portfolio-heading h3{
+  font-size: 22px;
+}
+img{
+    margin-left: 20px;
+    width: 40%;
+    height:20%;
+
+}
+#podela{
+  display:grid;
 }

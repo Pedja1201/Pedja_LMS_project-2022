@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html>
+<section id="portfolio" >
+  <div class="container portfolio-card">
 
-<head>
-  <title>My Website</title>
-</head>
+    <div class="portfolio-section portfolio-heading mat-typography" fxLayout="column" fxLayoutAlign="center center">
+        <div>
+        <h2 >Dobrodošli na našu novu web stranicu!</h2>
+        </div>
+        <div>
+        <h3 >Kroz naših 200 godina postojanja uvek smo težili inovacijama i modernizaciji svega što radimo, a upravo se 
+                    te karakteristike objedinjuju u našoj novoj Web stranici. .</h3>
+        </div>
+    </div>
 
-  <h1>Welcome to our Page...</h1> 
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="nowrap" fxLayoutGap="30px" fxLayoutGap.sm="8px">
+      <div fxFlex="33.33" >
+        <mat-card class="p-0 m-0">
+          <img mat-card-image src="assets/img/singi1.jpg">
+          <mat-card-content>
+            <h5 class="mat-headline" >Univerzitet u Novom Sadu</h5>
+            <p class="mat-subheading-2" >
+              Univerzitet Singidunum u okviru svog Centra u Novom Sadu pruža mogućnost studiranja na osnovnim akademskim studijama na četiri studijska programa: Poslovna ekonomija, Turizam i hotelijerstvo, Informacione tehnologije i Softversko i informaciono inženjerstvo.
+            </p>
+            <mat-divider class="mb-1"></mat-divider>
+            <a href="https://eng.singidunum.ac.rs" target="_blank" class="portfolio-button" mat-icon-button><mat-icon class="text-muted">link1</mat-icon></a>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-</html> 
+    </div>
+
+  </div>
+</section>

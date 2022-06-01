@@ -1,8 +1,17 @@
 .meni {
     display:block;
     justify-content: space-around;
-    padding: 10px;
+    background-color: rgb(211, 211, 243);
+
 }
 button{
-    margin: 10px;
+    margin-left: 40px;
+    color:rgb(72, 72, 228);
+}
+
+#desno{
+    margin-left: 80%;
+}
+#desno2{
+    margin-left: 90%;
 }

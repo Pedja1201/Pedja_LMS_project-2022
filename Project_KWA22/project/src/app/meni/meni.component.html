@@ -1,26 +1,82 @@
-<div class="meni">
-  <button mat-stroked-button color="basic" [routerLink]="['/login']">Login</button>
-  <button mat-stroked-button color="basic" [routerLink]="['/']">Home</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/adrese']">Adrese</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/drzave']">Drzave</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/fakulteti']">Fakulteti</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/godineStudija']">Godine studija</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/ishodi']">Ishodi</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/mesta']">Mesta</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/nastavnici']">Nastavnici</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/nastavniciNaRealizaciji']">Nastavnici na realizaciji</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/naucneOblasti']">Naucne oblasti</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/pohadjanjaPredmeta']">Pohadjanja predmeta</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/predmeti']">Predmeti</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/realizacijePredmeta']">Realizacije predmeta</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/studenti']">Studenti</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/studentiNaGodini']">Studenti na godini</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/studijskiProgrami']">Studijski programi</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/tipoviNastave']">Tipovi nastave</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/tipoviZvanja']">Tipovi zvanja</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/univerziteti']">Univerziteti</button>
-  <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/zvanja']">Zvanja</button>
+<div class='md-padding meni'  layout="row" flex>
+  <button mat-icon-button color="primary"  mat-stroked-button color="basic" [routerLink]="['/']" aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button mat-button  mat-raised-button color="primary" [matMenuTriggerFor]="menu">Menu</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+  <button mat-button  mat-stroked-button color="basic" [matMenuTriggerFor]="menu1"><i>Šta da upišem?</i></button>
+  <mat-menu #menu1="matMenu">
+    <button mat-menu-item  [routerLink]="['/studijskiProgrami']">Studijski programi</button>
+    <button mat-menu-item [routerLink]="['/naucneOblasti']">Naučne oblasti</button>
+    <button mat-menu-item [routerLink]="['/ishodi']">Ishodi i očekivanja na izabranom predmetu</button>
+  </mat-menu>
+  <button mat-button  mat-stroked-button color="basic" [matMenuTriggerFor]="menu2"><i>Studije</i></button>
+  <mat-menu #menu2="matMenu">
+    <button mat-menu-item   [routerLink]="['/predmeti']">Predmeti</button>
+    <button mat-menu-item   [routerLink]="['/pohadjanjaPredmeta']">Pohadjanja predmeta</button>
+    <button mat-menu-item [routerLink]="['/realizacijePredmeta']">Realizacije predmeta</button>
+    <button mat-menu-item [routerLink]="['/godineStudija']">Godine studija</button>
+    <button mat-menu-item [routerLink]="['/tipoviNastave']">Tipovi nastave</button>
+  </mat-menu>
+  <button mat-button  mat-stroked-button color="basic" [matMenuTriggerFor]="menu3"><b><i>O Ustanovi</i></b></button>
+  <mat-menu #menu3="matMenu">
+    <button mat-menu-item [routerLink]="['/fakulteti']">Fakulteti</button>
+    <button mat-menu-item [routerLink]="['/univerziteti']">Univerziteti</button>
+  </mat-menu>
+  <button mat-button  mat-stroked-button color="basic" [matMenuTriggerFor]="menu4"><i>Opšti podaci</i></button>
+  <mat-menu #menu4="matMenu">
+    <button mat-menu-item [routerLink]="['/adrese']">Adrese</button>
+    <button mat-menu-item [routerLink]="['/mesta']">Mesta</button>
+    <button mat-menu-item  [routerLink]="['/drzave']">Drzave</button>
+  </mat-menu>
+
+  <button id='desno2'  mat-stroked-button color="basic" *ngIf="loginService.loggedIn" mat-button [matMenuTriggerFor]="menuSifarnik">Šifarnik</button>
+  <mat-menu #menuSifarnik="matMenu">
+    <button mat-menu-item  [routerLink]="['/studenti']">Administracija Studenata</button>
+    <button mat-menu-item [routerLink]="['/studentiNaGodini']">Pregled studenta na godini</button>
+    <button mat-menu-item  [routerLink]="['/studijskiProgrami']">Administracija Studijskih programa</button>
+    <button mat-menu-item [routerLink]="['/univerziteti']">Administracija univerziteta</button>
+    <button mat-menu-item [routerLink]="['/nastavnici']">Dodavanje nastavnika</button>
+    <button mat-menu-item [routerLink]="['/nastavniciNaRealizaciji']">Evidencija o Nastavnicima na realizaciji</button>
+    <button mat-menu-item [routerLink]="['/tipoviZvanja']">Tipovi zvanja</button>
+    <button mat-menu-item [routerLink]="['/zvanja']">Zvanja</button>
+  </mat-menu>
+
+  <button id='desno' mat-button  mat-raised-button color="primary" [matMenuTriggerFor]="menuPrijava">Prijavi se</button>
+  <mat-menu #menuPrijava="matMenu">
+    <button mat-menu-item  [routerLink]="['/login']" >Login</button>
+    <button mat-menu-item mat-stroked-button color="warn" *ngIf="loginService.user" (click)="loginService.logout()" >Logout</button>
+  </mat-menu>
 </div>
-<div>
+
+
+
+
+
+<!-- <div class="meni"> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/adrese']">Adrese</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/drzave']">Drzave</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/fakulteti']">Fakulteti</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/godineStudija']">Godine studija</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/ishodi']">Ishodi</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/mesta']">Mesta</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/nastavnici']">Nastavnici</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/nastavniciNaRealizaciji']">Nastavnici na realizaciji</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/naucneOblasti']">Naucne oblasti</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/pohadjanjaPredmeta']">Pohadjanja predmeta</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/predmeti']">Predmeti</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/realizacijePredmeta']">Realizacije predmeta</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/studenti']">Studenti</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/studentiNaGodini']">Studenti na godini</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/studijskiProgrami']">Studijski programi</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/tipoviNastave']">Tipovi nastave</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/tipoviZvanja']">Tipovi zvanja</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/univerziteti']">Univerziteti</button> -->
+  <!-- <button *ngIf="loginService.loggedIn"  mat-stroked-button color="basic" [routerLink]="['/zvanja']">Zvanja</button> -->
+<!-- </div> -->
+<!-- <div>
   <a [routerLink]="['/tree']">TreeView</a>
-</div>
+</div> -->
