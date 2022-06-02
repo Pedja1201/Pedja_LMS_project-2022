@@ -55,34 +55,44 @@ public class DrzavaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Drzava> create(@RequestBody Drzava drzava) {
+    public ResponseEntity<DrzavaDTO> create(@RequestBody Drzava drzava) {
         try {
             drzavaService.save(drzava);
-            return new ResponseEntity<Drzava>(drzava, HttpStatus.CREATED);
+            ArrayList<MestoDTO> mesta = new ArrayList<MestoDTO>();
+            for(Mesto mesto : drzava.getMesta()) {
+                mesta.add(new MestoDTO(mesto.getId(),mesto.getNaziv(),null));
+            }
+            DrzavaDTO drzavaDTO = new DrzavaDTO(drzava.getId(), drzava.getNaziv(), mesta);
+            return new ResponseEntity<DrzavaDTO>(drzavaDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Drzava>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<DrzavaDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{drzavaId}", method = RequestMethod.PUT)
-    public ResponseEntity<Drzava> update(@PathVariable("drzavaId") Long drzavaId,
+    public ResponseEntity<DrzavaDTO> update(@PathVariable("drzavaId") Long drzavaId,
                                                    @RequestBody Drzava izmenjenaDrzava) {
         Drzava drzava = drzavaService.findOne(drzavaId).orElse(null);
         if (drzava != null) {
             izmenjenaDrzava.setId(drzavaId);
             izmenjenaDrzava = drzavaService.save(izmenjenaDrzava);
-            return new ResponseEntity<Drzava>(izmenjenaDrzava, HttpStatus.OK);
+            ArrayList<MestoDTO> mesta = new ArrayList<MestoDTO>();
+            for(Mesto mesto : izmenjenaDrzava.getMesta()) {
+                mesta.add(new MestoDTO(mesto.getId(),mesto.getNaziv(),null));
+            }
+            DrzavaDTO drzavaDTO = new DrzavaDTO(izmenjenaDrzava.getId(), izmenjenaDrzava.getNaziv(), mesta);
+            return new ResponseEntity<DrzavaDTO>(drzavaDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Drzava>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<DrzavaDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{drzavaId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Drzava> delete(@PathVariable("drzavaId") Long drzavaId) {
+    public ResponseEntity<DrzavaDTO> delete(@PathVariable("drzavaId") Long drzavaId) {
         if (drzavaService.findOne(drzavaId).isPresent()) {
             drzavaService.delete(drzavaId);
-            return new ResponseEntity<Drzava>(HttpStatus.OK);
+            return new ResponseEntity<DrzavaDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<Drzava>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<DrzavaDTO>(HttpStatus.NOT_FOUND);
     }
 }

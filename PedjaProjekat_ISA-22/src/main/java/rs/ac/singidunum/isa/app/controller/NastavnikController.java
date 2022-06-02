@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
-import rs.ac.singidunum.isa.app.dto.AdresaDTO;
-import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
-import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
+import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Nastavnik;
 import rs.ac.singidunum.isa.app.service.NastavnikService;
 
@@ -57,26 +55,38 @@ public class NastavnikController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Nastavnik> create(@RequestBody Nastavnik nastavnik) {
+    public ResponseEntity<NastavnikDTO> create(@RequestBody Nastavnik nastavnik) {
         try {
             nastavnikService.save(nastavnik);
-            return new ResponseEntity<Nastavnik>(nastavnik, HttpStatus.CREATED);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(nastavnik.getId(),nastavnik.getKorisnickoIme(),nastavnik.getLozinka(),
+                    nastavnik.getIme(),nastavnik.getBiografija(), nastavnik.getJmbg(),
+                    new AdresaDTO(nastavnik.getAdresa().getId(), nastavnik.getAdresa().getUlica(),
+                            nastavnik.getAdresa().getBroj(), null),
+                    new ZvanjeDTO(nastavnik.getZvanje().getId(), nastavnik.getZvanje().getDatumIzbora(),
+                            nastavnik.getZvanje().getDatumPrestanka(), null, null));
+            return new ResponseEntity<NastavnikDTO>(nastavnikDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Nastavnik>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<NastavnikDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.PUT)
-    public ResponseEntity<Nastavnik> update(@PathVariable("nastavnikId") Long nastavnikId,
-                                             @RequestBody Nastavnik izmenjenNastavnik) {
+    public ResponseEntity<NastavnikDTO> update(@PathVariable("nastavnikId") Long nastavnikId,
+                                               @RequestBody Nastavnik izmenjenNastavnik) {
         Nastavnik nastavnik = nastavnikService.findOne(nastavnikId).orElse(null);
         if (nastavnik != null) {
             izmenjenNastavnik.setId(nastavnikId);
-            nastavnikService.save(izmenjenNastavnik); //FIXME: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
-            return new ResponseEntity<Nastavnik>(izmenjenNastavnik, HttpStatus.OK);
+            nastavnikService.save(izmenjenNastavnik); //DONE: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjenNastavnik.getId(),izmenjenNastavnik.getKorisnickoIme(),izmenjenNastavnik.getLozinka(),
+                    izmenjenNastavnik.getIme(),izmenjenNastavnik.getBiografija(), izmenjenNastavnik.getJmbg(),
+                    new AdresaDTO(izmenjenNastavnik.getAdresa().getId(), izmenjenNastavnik.getAdresa().getUlica(),
+                            izmenjenNastavnik.getAdresa().getBroj(),null),
+                    new ZvanjeDTO(izmenjenNastavnik.getZvanje().getId(), izmenjenNastavnik.getZvanje().getDatumIzbora(),
+                            izmenjenNastavnik.getZvanje().getDatumPrestanka(),null, null));
+            return new ResponseEntity<NastavnikDTO>(nastavnikDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Nastavnik>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<NastavnikDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.DELETE)

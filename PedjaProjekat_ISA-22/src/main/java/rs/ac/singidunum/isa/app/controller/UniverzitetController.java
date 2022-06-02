@@ -64,35 +64,52 @@ public class UniverzitetController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Univerzitet> create(@RequestBody Univerzitet univerzitet) {
+    public ResponseEntity<UniverzitetDTO> create(@RequestBody Univerzitet univerzitet) {
         try {
             univerzitetService.save(univerzitet);
-            return new ResponseEntity<Univerzitet>(univerzitet, HttpStatus.CREATED);
+            AdresaDTO adresaDTO = new AdresaDTO(univerzitet.getAdresa().getId(), univerzitet.getAdresa().getUlica(),
+                    univerzitet.getAdresa().getBroj(),null);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
+                    univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getIme(),
+                    univerzitet.getNastavnik().getBiografija(), univerzitet.getNastavnik().getJmbg(),null,null);
+
+            UniverzitetDTO univerzitetDTO = new UniverzitetDTO(univerzitet.getId(), univerzitet.getNaziv(),
+                    univerzitet.getDatumVremeOsnivanja(), adresaDTO, nastavnikDTO);
+
+            return new ResponseEntity<UniverzitetDTO>(univerzitetDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Univerzitet>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<UniverzitetDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.PUT)
-    public ResponseEntity<Univerzitet> update(@PathVariable("univerzitetId") Long univerzitetId,
+    public ResponseEntity<UniverzitetDTO> update(@PathVariable("univerzitetId") Long univerzitetId,
                                              @RequestBody Univerzitet izmenjenUniverzitet) {
         Univerzitet univerzitet = univerzitetService.findOne(univerzitetId).orElse(null);
         if (univerzitet != null) {
             izmenjenUniverzitet.setId(univerzitetId);
-            univerzitetService.save(izmenjenUniverzitet); //FIXME: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
-            return new ResponseEntity<Univerzitet>(izmenjenUniverzitet, HttpStatus.OK);
+            izmenjenUniverzitet = univerzitetService.save(izmenjenUniverzitet);
+            AdresaDTO adresaDTO = new AdresaDTO(izmenjenUniverzitet.getAdresa().getId(), izmenjenUniverzitet.getAdresa().getUlica(),
+                    izmenjenUniverzitet.getAdresa().getBroj(),null);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjenUniverzitet.getNastavnik().getId(),izmenjenUniverzitet.getNastavnik().getKorisnickoIme(),
+                    izmenjenUniverzitet.getNastavnik().getLozinka(),izmenjenUniverzitet.getNastavnik().getIme(),
+                    izmenjenUniverzitet.getNastavnik().getBiografija(), izmenjenUniverzitet.getNastavnik().getJmbg(),null,null);
+
+            UniverzitetDTO univerzitetDTO = new UniverzitetDTO(izmenjenUniverzitet.getId(), izmenjenUniverzitet.getNaziv(),
+                    izmenjenUniverzitet.getDatumVremeOsnivanja(), adresaDTO, nastavnikDTO);
+            return new ResponseEntity<UniverzitetDTO>(univerzitetDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Univerzitet>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<UniverzitetDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Univerzitet> delete(@PathVariable("univerzitetId") Long univerzitetId) {
+    public ResponseEntity<UniverzitetDTO> delete(@PathVariable("univerzitetId") Long univerzitetId) {
         if (univerzitetService.findOne(univerzitetId).isPresent()) {
             univerzitetService.delete(univerzitetId);
-            return new ResponseEntity<Univerzitet>(HttpStatus.OK);
+            return new ResponseEntity<UniverzitetDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<Univerzitet>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<UniverzitetDTO>(HttpStatus.NOT_FOUND);
     }
 
     //DONE: Metoda i upit za pronalaženje svih nastavnika

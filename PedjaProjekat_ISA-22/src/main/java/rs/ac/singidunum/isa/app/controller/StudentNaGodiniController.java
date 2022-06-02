@@ -50,34 +50,45 @@ public class StudentNaGodiniController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<StudentNaGodini> create(@RequestBody StudentNaGodini studentNaGodini) {
+    public ResponseEntity<StudentNaGodiniDTO> create(@RequestBody StudentNaGodini studentNaGodini) {
         try {
             studentNaGodiniService.save(studentNaGodini);
-            return new ResponseEntity<StudentNaGodini>(studentNaGodini, HttpStatus.CREATED);
+            GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(studentNaGodini.getGodinaStudija().getId(),
+                    studentNaGodini.getGodinaStudija().getGodina(),null);
+
+            StudentNaGodiniDTO studentNaGodiniDTO = new StudentNaGodiniDTO(studentNaGodini.getId(), studentNaGodini.getDatumUpisa(),
+                    studentNaGodini.getBrojIndeksa(), godinaStudijaDTO);
+
+            return new ResponseEntity<StudentNaGodiniDTO>(studentNaGodiniDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<StudentNaGodini>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<StudentNaGodiniDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{studentNaGodiniId}", method = RequestMethod.PUT)
-    public ResponseEntity<StudentNaGodini> update(@PathVariable("studentNaGodiniId") Long studentNaGodiniId,
+    public ResponseEntity<StudentNaGodiniDTO> update(@PathVariable("studentNaGodiniId") Long studentNaGodiniId,
                                                    @RequestBody StudentNaGodini izmenjeniStudentNaGodini) {
         StudentNaGodini studentNaGodini = studentNaGodiniService.findOne(studentNaGodiniId).orElse(null);
         if (studentNaGodini != null) {
             izmenjeniStudentNaGodini.setId(studentNaGodiniId);
-            studentNaGodiniService.save(izmenjeniStudentNaGodini);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<StudentNaGodini>(izmenjeniStudentNaGodini, HttpStatus.OK);
+            izmenjeniStudentNaGodini = studentNaGodiniService.save(izmenjeniStudentNaGodini);
+            GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(izmenjeniStudentNaGodini.getGodinaStudija().getId(),
+                    izmenjeniStudentNaGodini.getGodinaStudija().getGodina(),null);
+
+            StudentNaGodiniDTO studentNaGodiniDTO = new StudentNaGodiniDTO(izmenjeniStudentNaGodini.getId(), izmenjeniStudentNaGodini.getDatumUpisa(),
+                    izmenjeniStudentNaGodini.getBrojIndeksa(), godinaStudijaDTO);
+            return new ResponseEntity<StudentNaGodiniDTO>(studentNaGodiniDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<StudentNaGodini>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<StudentNaGodiniDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{studentNaGodiniId}", method = RequestMethod.DELETE)
-    public ResponseEntity<StudentNaGodini> delete(@PathVariable("studentNaGodiniId") Long studentNaGodiniId) {
+    public ResponseEntity<StudentNaGodiniDTO> delete(@PathVariable("studentNaGodiniId") Long studentNaGodiniId) {
         if (studentNaGodiniService.findOne(studentNaGodiniId).isPresent()) {
             studentNaGodiniService.delete(studentNaGodiniId);
-            return new ResponseEntity<StudentNaGodini>(HttpStatus.OK);
+            return new ResponseEntity<StudentNaGodiniDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<StudentNaGodini>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<StudentNaGodiniDTO>(HttpStatus.NOT_FOUND);
     }
 }

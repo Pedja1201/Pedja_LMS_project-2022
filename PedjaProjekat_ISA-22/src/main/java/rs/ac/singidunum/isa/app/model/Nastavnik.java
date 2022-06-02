@@ -18,6 +18,7 @@ public class Nastavnik extends Korisnik{
     @ManyToOne
     private Zvanje zvanje;
 
+    //nastavnik je Dekan za fukalutet
     @OneToMany(mappedBy = "nastavnik")
     private Set<Fakultet> fakulteti = new HashSet<Fakultet>();
 

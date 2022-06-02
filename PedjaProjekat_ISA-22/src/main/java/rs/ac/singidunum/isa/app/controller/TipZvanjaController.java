@@ -66,34 +66,48 @@ public class TipZvanjaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<TipZvanja> createTipZvanja(@RequestBody TipZvanja tipZvanja) {
+    public ResponseEntity<TipZvanjaDTO> createTipZvanja(@RequestBody TipZvanja tipZvanja) {
         try {
             tipZvanjaService.save(tipZvanja);
-            return new ResponseEntity<TipZvanja>(tipZvanja, HttpStatus.CREATED);
+            ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
+            for(Zvanje zvanje : tipZvanja.getZvanja()) {
+                zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
+                        new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(),
+                                zvanje.getNaucnaOblast().getNaziv(), null),null));
+            }
+            TipZvanjaDTO tipZvanjaDTO = new TipZvanjaDTO(tipZvanja.getId(), tipZvanja.getNaziv(),  zvanja);
+            return new ResponseEntity<TipZvanjaDTO>(tipZvanjaDTO,HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<TipZvanja>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<TipZvanjaDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{tipZvanjaId}", method = RequestMethod.PUT)
-    public ResponseEntity<TipZvanja> updateTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId,
+    public ResponseEntity<TipZvanjaDTO> updateTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId,
                                                            @RequestBody TipZvanja izmenjenTipZvanja) {
         TipZvanja tipZvanja = tipZvanjaService.findOne(tipZvanjaId).orElse(null);
         if (tipZvanja != null) {
             izmenjenTipZvanja.setId(tipZvanjaId);
             izmenjenTipZvanja = tipZvanjaService.save(izmenjenTipZvanja);
-            return new ResponseEntity<TipZvanja>(izmenjenTipZvanja, HttpStatus.OK);
+            ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
+            for(Zvanje zvanje : tipZvanja.getZvanja()) {
+                zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
+                        new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(),
+                                zvanje.getNaucnaOblast().getNaziv(), null),null));
+            }
+            TipZvanjaDTO tipZvanjaDTO = new TipZvanjaDTO(izmenjenTipZvanja.getId(), izmenjenTipZvanja.getNaziv(),  zvanja);
+            return new ResponseEntity<TipZvanjaDTO>(tipZvanjaDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<TipZvanja>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<TipZvanjaDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{tipZvanjaId}", method = RequestMethod.DELETE)
-    public ResponseEntity<TipZvanja> deleteTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId) {
+    public ResponseEntity<TipZvanjaDTO> deleteTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId) {
         if (tipZvanjaService.findOne(tipZvanjaId).isPresent()) {
             tipZvanjaService.delete(tipZvanjaId);
-            return new ResponseEntity<TipZvanja>(HttpStatus.OK);
+            return new ResponseEntity<TipZvanjaDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<TipZvanja>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<TipZvanjaDTO>(HttpStatus.NOT_FOUND);
     }
 }

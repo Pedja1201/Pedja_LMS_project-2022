@@ -61,35 +61,56 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<RealizacijaPredmeta> create(@RequestBody RealizacijaPredmeta realizacijaPredmeta) {
+    public ResponseEntity<RealizacijaPredmetaDTO> create(@RequestBody RealizacijaPredmeta realizacijaPredmeta) {
         try {
             realizacijaPredmetaService.save(realizacijaPredmeta);
-            return new ResponseEntity<RealizacijaPredmeta>(realizacijaPredmeta, HttpStatus.CREATED);
+            NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO = new NastavnikNaRealizacijiDTO(realizacijaPredmeta.getNastavnikNaRealizaciji().getId(),
+                    realizacijaPredmeta.getNastavnikNaRealizaciji().getBrojCasova(),null,null);
+            PredmetDTO predmetDTO = new PredmetDTO(realizacijaPredmeta.getPredmet().getId(), realizacijaPredmeta.getPredmet().getNaziv(),
+                    realizacijaPredmeta.getPredmet().getEspb(),realizacijaPredmeta.getPredmet().isObavezan(),
+                    realizacijaPredmeta.getPredmet().getBrojPredavanja(),realizacijaPredmeta.getPredmet().getBrojVezbi(),
+                    realizacijaPredmeta.getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.getPredmet().getIstrazivackiRad(),
+                    realizacijaPredmeta.getPredmet().getOstaliCasovi());
+
+            RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(realizacijaPredmeta.getId(),
+                    realizacijaPredmeta.getNaziv(),  nastavnikNaRealizacijiDTO, predmetDTO);
+
+            return new ResponseEntity<RealizacijaPredmetaDTO>(realizacijaPredmetaDTO, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<RealizacijaPredmeta>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.PUT)
-    public ResponseEntity<RealizacijaPredmeta> update(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId,
+    public ResponseEntity<RealizacijaPredmetaDTO> update(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId,
                                                    @RequestBody RealizacijaPredmeta izmenjenaRealizacijaPredmeta) {
         RealizacijaPredmeta realizacijaPredmeta = realizacijaPredmetaService.findOne(realizacijaPredmetaId).orElse(null);
         if (realizacijaPredmeta != null) {
             izmenjenaRealizacijaPredmeta.setId(realizacijaPredmetaId);
-            realizacijaPredmetaService.save(izmenjenaRealizacijaPredmeta);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<RealizacijaPredmeta>(izmenjenaRealizacijaPredmeta, HttpStatus.OK);
+            izmenjenaRealizacijaPredmeta = realizacijaPredmetaService.save(izmenjenaRealizacijaPredmeta);
+            NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO = new NastavnikNaRealizacijiDTO(izmenjenaRealizacijaPredmeta.getNastavnikNaRealizaciji().getId(),
+                    izmenjenaRealizacijaPredmeta.getNastavnikNaRealizaciji().getBrojCasova(),null,null);
+            PredmetDTO predmetDTO = new PredmetDTO(izmenjenaRealizacijaPredmeta.getPredmet().getId(), izmenjenaRealizacijaPredmeta.getPredmet().getNaziv(),
+                    izmenjenaRealizacijaPredmeta.getPredmet().getEspb(),izmenjenaRealizacijaPredmeta.getPredmet().isObavezan(),
+                    izmenjenaRealizacijaPredmeta.getPredmet().getBrojPredavanja(),izmenjenaRealizacijaPredmeta.getPredmet().getBrojVezbi(),
+                    izmenjenaRealizacijaPredmeta.getPredmet().getDrugiObliciNastave(),izmenjenaRealizacijaPredmeta.getPredmet().getIstrazivackiRad(),
+                    izmenjenaRealizacijaPredmeta.getPredmet().getOstaliCasovi());
+
+            RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(izmenjenaRealizacijaPredmeta.getId(),
+                    izmenjenaRealizacijaPredmeta.getNaziv(),  nastavnikNaRealizacijiDTO, predmetDTO);
+            return new ResponseEntity<RealizacijaPredmetaDTO>(realizacijaPredmetaDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<RealizacijaPredmeta>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.DELETE)
-    public ResponseEntity<RealizacijaPredmeta> delete(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId) {
+    public ResponseEntity<RealizacijaPredmetaDTO> delete(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId) {
         if (realizacijaPredmetaService.findOne(realizacijaPredmetaId).isPresent()) {
             realizacijaPredmetaService.delete(realizacijaPredmetaId);
-            return new ResponseEntity<RealizacijaPredmeta>(HttpStatus.OK);
+            return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<RealizacijaPredmeta>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.NOT_FOUND);
     }
 
     //DONE: Metoda i upit za pronalaženje Predmeta u realizcaiji

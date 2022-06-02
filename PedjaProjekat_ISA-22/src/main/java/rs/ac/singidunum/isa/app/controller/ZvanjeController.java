@@ -29,15 +29,15 @@ public class ZvanjeController {
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Iterable<ZvanjeDTO>> getAll() {
 
-        ArrayList<ZvanjeDTO> karte = new ArrayList<ZvanjeDTO>();
+        ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
 
         for (Zvanje zvanje : zvanjeService.findAll()) {
-            karte.add(new ZvanjeDTO(zvanje.getId(),zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
+            zvanja.add(new ZvanjeDTO(zvanje.getId(),zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
                     new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(), zvanje.getNaucnaOblast().getNaziv(),null),
                     new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(),null)));
         }
 
-        return new ResponseEntity<Iterable<ZvanjeDTO>>(karte, HttpStatus.OK);
+        return new ResponseEntity<Iterable<ZvanjeDTO>>(zvanja, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.GET)
@@ -53,35 +53,44 @@ public class ZvanjeController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Zvanje> create(@RequestBody Zvanje zvanje) {
+    public ResponseEntity<ZvanjeDTO> create(@RequestBody Zvanje zvanje) {
         try {
             zvanjeService.save(zvanje);
-            return new ResponseEntity<Zvanje>(zvanje, HttpStatus.CREATED);
+            NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(), zvanje.getNaucnaOblast().getNaziv(),null);
+            TipZvanjaDTO tipZvanjaDTO = new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(),null);
+            ZvanjeDTO zvanjeDTO = new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),naucnaOblastDTO, tipZvanjaDTO);
+
+            return new ResponseEntity<ZvanjeDTO>(zvanjeDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Zvanje>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ZvanjeDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.PUT)
-    public ResponseEntity<Zvanje> update(@PathVariable("zvanjeId") Long zvanjeId,
+    public ResponseEntity<ZvanjeDTO> update(@PathVariable("zvanjeId") Long zvanjeId,
                                              @RequestBody Zvanje izmenjenoZvanje) {
         Zvanje zvanje = zvanjeService.findOne(zvanjeId).orElse(null);
         if (zvanje != null) {
             izmenjenoZvanje.setId(zvanjeId);
-            zvanjeService.save(izmenjenoZvanje); //FIXME: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
-            return new ResponseEntity<Zvanje>(izmenjenoZvanje, HttpStatus.OK);
+            izmenjenoZvanje = zvanjeService.save(izmenjenoZvanje);
+            NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(izmenjenoZvanje.getNaucnaOblast().getId(), izmenjenoZvanje.getNaucnaOblast().getNaziv(),null);
+            TipZvanjaDTO tipZvanjaDTO = new TipZvanjaDTO(izmenjenoZvanje.getTipZvanja().getId(), izmenjenoZvanje.getTipZvanja().getNaziv(),null);
+
+            ZvanjeDTO zvanjeDTO = new ZvanjeDTO(izmenjenoZvanje.getId(), izmenjenoZvanje.getDatumIzbora(), izmenjenoZvanje.getDatumPrestanka(),naucnaOblastDTO, tipZvanjaDTO);
+
+            return new ResponseEntity<ZvanjeDTO>(zvanjeDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Zvanje>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ZvanjeDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Zvanje> delete(@PathVariable("zvanjeId") Long zvanjeId) {
+    public ResponseEntity<ZvanjeDTO> delete(@PathVariable("zvanjeId") Long zvanjeId) {
         if (zvanjeService.findOne(zvanjeId).isPresent()) {
             zvanjeService.delete(zvanjeId);
-            return new ResponseEntity<Zvanje>(HttpStatus.OK);
+            return new ResponseEntity<ZvanjeDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<Zvanje>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ZvanjeDTO>(HttpStatus.NOT_FOUND);
     }
 
 }

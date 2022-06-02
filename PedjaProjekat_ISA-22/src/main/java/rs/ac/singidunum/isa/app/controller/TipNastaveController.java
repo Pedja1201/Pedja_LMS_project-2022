@@ -44,34 +44,38 @@ public class TipNastaveController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<TipNastave> create(@RequestBody TipNastave tipNastave) {
+    public ResponseEntity<TipNastaveDTO> create(@RequestBody TipNastave tipNastave) {
         try {
             tipNastaveService.save(tipNastave);
-            return new ResponseEntity<TipNastave>(tipNastave, HttpStatus.CREATED);
+            TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(tipNastave.getId(), tipNastave.getNaziv());
+
+            return new ResponseEntity<TipNastaveDTO>(tipNastaveDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<TipNastave>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<TipNastaveDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{tipNastaveId}", method = RequestMethod.PUT)
-    public ResponseEntity<TipNastave> update(@PathVariable("tipNastaveId") Long tipNastaveId,
+    public ResponseEntity<TipNastaveDTO> update(@PathVariable("tipNastaveId") Long tipNastaveId,
                                              @RequestBody TipNastave izmenjenTipNastave) {
         TipNastave tipNastave = tipNastaveService.findOne(tipNastaveId).orElse(null);
         if (tipNastave != null) {
             izmenjenTipNastave.setId(tipNastaveId);
-            tipNastaveService.save(izmenjenTipNastave);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<TipNastave>(izmenjenTipNastave, HttpStatus.OK);
+            izmenjenTipNastave = tipNastaveService.save(izmenjenTipNastave);
+            TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(izmenjenTipNastave.getId(), izmenjenTipNastave.getNaziv());
+
+            return new ResponseEntity<TipNastaveDTO>(tipNastaveDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<TipNastave>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<TipNastaveDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{tipNastaveId}", method = RequestMethod.DELETE)
-    public ResponseEntity<TipNastave> delete(@PathVariable("tipNastaveId") Long tipNastaveId) {
+    public ResponseEntity<TipNastaveDTO> delete(@PathVariable("tipNastaveId") Long tipNastaveId) {
         if (tipNastaveService.findOne(tipNastaveId).isPresent()) {
             tipNastaveService.delete(tipNastaveId);
-            return new ResponseEntity<TipNastave>(HttpStatus.OK);
+            return new ResponseEntity<TipNastaveDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<TipNastave>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<TipNastaveDTO>(HttpStatus.NOT_FOUND);
     }
 }

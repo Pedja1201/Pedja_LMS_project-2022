@@ -49,34 +49,45 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<PohadjanjePredmeta> create(@RequestBody PohadjanjePredmeta pohadjanjePredmeta) {
+    public ResponseEntity<PohadjanjePredmetaDTO> create(@RequestBody PohadjanjePredmeta pohadjanjePredmeta) {
         try {
             pohadjanjePredmetaService.save(pohadjanjePredmeta);
-            return new ResponseEntity<PohadjanjePredmeta>(pohadjanjePredmeta, HttpStatus.CREATED);
+            RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
+                    pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null);
+
+            PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(),
+                    pohadjanjePredmeta.getKonacnaOcena(),realizacijaPredmetaDTO);
+
+            return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<PohadjanjePredmeta>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.PUT)
-    public ResponseEntity<PohadjanjePredmeta> update(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId,
+    public ResponseEntity<PohadjanjePredmetaDTO> update(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId,
                                                    @RequestBody PohadjanjePredmeta izmenjenaPohadjeniPredmet) {
         PohadjanjePredmeta pohadjanjePredmeta = pohadjanjePredmetaService.findOne(pohadjanjePredmetaId).orElse(null);
         if (pohadjanjePredmeta != null) {
             izmenjenaPohadjeniPredmet.setId(pohadjanjePredmetaId);
-            pohadjanjePredmetaService.save(izmenjenaPohadjeniPredmet);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<PohadjanjePredmeta>(izmenjenaPohadjeniPredmet, HttpStatus.OK);
+            izmenjenaPohadjeniPredmet = pohadjanjePredmetaService.save(izmenjenaPohadjeniPredmet);
+            RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getId(),
+                    izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getNaziv(),null,null);
+
+            PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(izmenjenaPohadjeniPredmet.getId(),
+                    izmenjenaPohadjeniPredmet.getKonacnaOcena(),realizacijaPredmetaDTO);
+            return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<PohadjanjePredmeta>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.DELETE)
-    public ResponseEntity<PohadjanjePredmeta> delete(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId) {
+    public ResponseEntity<PohadjanjePredmetaDTO> delete(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId) {
         if (pohadjanjePredmetaService.findOne(pohadjanjePredmetaId).isPresent()) {
             pohadjanjePredmetaService.delete(pohadjanjePredmetaId);
-            return new ResponseEntity<PohadjanjePredmeta>(HttpStatus.OK);
+            return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<PohadjanjePredmeta>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.NOT_FOUND);
     }
 }

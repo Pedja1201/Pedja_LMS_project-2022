@@ -60,36 +60,51 @@ public class FakultetController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Fakultet> create(@RequestBody Fakultet fakultet) {
+    public ResponseEntity<FakultetDTO> create(@RequestBody Fakultet fakultet) {
         try {
             fakultetService.save(fakultet);
-            return new ResponseEntity<Fakultet>(fakultet, HttpStatus.CREATED);
+            UniverzitetDTO univerzitetDTO = new UniverzitetDTO(fakultet.getUniverzitet().getId(),fakultet.getUniverzitet().getNaziv(),
+                    fakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null);
+            AdresaDTO adresaDTO = new AdresaDTO(fakultet.getAdresa().getId(), fakultet.getAdresa().getUlica(),fakultet.getAdresa().getBroj(),null);
+            NastavnikDTO nastavnikDTO =new NastavnikDTO(fakultet.getNastavnik().getId(), fakultet.getNastavnik().getKorisnickoIme(),
+                    fakultet.getNastavnik().getLozinka(), fakultet.getNastavnik().getIme(),
+                    fakultet.getNastavnik().getBiografija(),fakultet.getNastavnik().getJmbg(),null,null);
+
+            FakultetDTO fakultetDTO = new FakultetDTO(fakultet.getId(),fakultet.getNaziv(), univerzitetDTO, adresaDTO, nastavnikDTO);
+            return new ResponseEntity<FakultetDTO>(fakultetDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Fakultet>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<FakultetDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{fakultetId}", method = RequestMethod.PUT)
-    public ResponseEntity<Fakultet> update(@PathVariable("fakultetId") Long fakultetId,
+    public ResponseEntity<FakultetDTO> update(@PathVariable("fakultetId") Long fakultetId,
                                                @RequestBody Fakultet izmenjeniFakultet) {
         Fakultet fakultet = fakultetService.findOne(fakultetId).orElse(null);
         if (fakultet != null) {
             izmenjeniFakultet.setId(fakultetId);
-            fakultetService.save(izmenjeniFakultet); //FIXME: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
-//            izmenjeniFakultet = fakultetService.save(izmenjeniFakultet);
-            return new ResponseEntity<Fakultet>(izmenjeniFakultet, HttpStatus.OK);
+            izmenjeniFakultet = fakultetService.save(izmenjeniFakultet);
+            UniverzitetDTO univerzitetDTO = new UniverzitetDTO(izmenjeniFakultet.getUniverzitet().getId(),
+                    izmenjeniFakultet.getUniverzitet().getNaziv(), izmenjeniFakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null);
+            AdresaDTO adresaDTO = new AdresaDTO(izmenjeniFakultet.getAdresa().getId(), izmenjeniFakultet.getAdresa().getUlica(),izmenjeniFakultet.getAdresa().getBroj(),null);
+            NastavnikDTO nastavnikDTO =new NastavnikDTO(izmenjeniFakultet.getNastavnik().getId(), izmenjeniFakultet.getNastavnik().getKorisnickoIme(),
+                    izmenjeniFakultet.getNastavnik().getLozinka(), izmenjeniFakultet.getNastavnik().getIme(),
+                    izmenjeniFakultet.getNastavnik().getBiografija(),izmenjeniFakultet.getNastavnik().getJmbg(),null,null);
+
+            FakultetDTO fakultetDTO = new FakultetDTO(izmenjeniFakultet.getId(),izmenjeniFakultet.getNaziv(), univerzitetDTO, adresaDTO, nastavnikDTO);
+            return new ResponseEntity<FakultetDTO>(fakultetDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Fakultet>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<FakultetDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{fakultetId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Fakultet> delete(@PathVariable("fakultetId") Long fakultetId) {
+    public ResponseEntity<FakultetDTO> delete(@PathVariable("fakultetId") Long fakultetId) {
         if (fakultetService.findOne(fakultetId).isPresent()) {
             fakultetService.delete(fakultetId);
-            return new ResponseEntity<Fakultet>(HttpStatus.OK);
+            return new ResponseEntity<FakultetDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<Fakultet>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<FakultetDTO>(HttpStatus.NOT_FOUND);
     }
 
     //DONE: Metoda i upit za pronalaženje svih karata koje je kupio zadati putnik(Zadatak sa klk)

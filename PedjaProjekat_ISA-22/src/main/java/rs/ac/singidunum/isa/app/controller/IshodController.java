@@ -55,34 +55,49 @@ public class IshodController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Ishod> create(@RequestBody Ishod ishod) {
+    public ResponseEntity<IshodDTO> create(@RequestBody Ishod ishod) {
         try {
             ishodService.save(ishod);
-            return new ResponseEntity<Ishod>(ishod, HttpStatus.CREATED);
+            PredmetDTO predmetDTO = new PredmetDTO(ishod.getPredmet().getId(), ishod.getPredmet().getNaziv(),
+                    ishod.getPredmet().getEspb(), ishod.getPredmet().isObavezan(),
+                    ishod.getPredmet().getBrojPredavanja(), ishod.getPredmet().getBrojVezbi(),
+                    ishod.getPredmet().getDrugiObliciNastave(), ishod.getPredmet().getIstrazivackiRad(),
+                    ishod.getPredmet().getOstaliCasovi());
+
+            IshodDTO ishodDTO = new IshodDTO(ishod.getId(), ishod.getOpis(), predmetDTO);
+
+            return new ResponseEntity<IshodDTO>(ishodDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Ishod>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<IshodDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.PUT)
-    public ResponseEntity<Ishod> update(@PathVariable("ishodId") Long ishodId,
+    public ResponseEntity<IshodDTO> update(@PathVariable("ishodId") Long ishodId,
                                                 @RequestBody Ishod izmenjenIshod) {
         Ishod ishod = ishodService.findOne(ishodId).orElse(null);
         if (ishod != null) {
             izmenjenIshod.setId(ishodId);
-            ishodService.save(izmenjenIshod);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<Ishod>(izmenjenIshod, HttpStatus.OK);
+            izmenjenIshod = ishodService.save(izmenjenIshod);
+            PredmetDTO predmetDTO = new PredmetDTO(izmenjenIshod.getPredmet().getId(), izmenjenIshod.getPredmet().getNaziv(),
+                    izmenjenIshod.getPredmet().getEspb(), izmenjenIshod.getPredmet().isObavezan(),
+                    izmenjenIshod.getPredmet().getBrojPredavanja(), izmenjenIshod.getPredmet().getBrojVezbi(),
+                    izmenjenIshod.getPredmet().getDrugiObliciNastave(), izmenjenIshod.getPredmet().getIstrazivackiRad(),
+                    izmenjenIshod.getPredmet().getOstaliCasovi());
+
+            IshodDTO ishodDTO = new IshodDTO(izmenjenIshod.getId(), izmenjenIshod.getOpis(), predmetDTO);
+            return new ResponseEntity<IshodDTO>(ishodDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Ishod>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<IshodDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Ishod> delete(@PathVariable("ishodId") Long ishodId) {
+    public ResponseEntity<IshodDTO> delete(@PathVariable("ishodId") Long ishodId) {
         if (ishodService.findOne(ishodId).isPresent()) {
             ishodService.delete(ishodId);
-            return new ResponseEntity<Ishod>(HttpStatus.OK);
+            return new ResponseEntity<IshodDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<Ishod>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<IshodDTO>(HttpStatus.NOT_FOUND);
     }
 }

@@ -55,35 +55,50 @@ public class GodinaStudijaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<GodinaStudija> create(@RequestBody GodinaStudija godinaStudija) {
+    public ResponseEntity<GodinaStudijaDTO> create(@RequestBody GodinaStudija godinaStudija) {
         try {
             godinaStudijaService.save(godinaStudija);
-            return new ResponseEntity<GodinaStudija>(godinaStudija, HttpStatus.CREATED);
+            PredmetDTO predmetDTO = new PredmetDTO(godinaStudija.getPredmet().getId(), godinaStudija.getPredmet().getNaziv(),
+                    godinaStudija.getPredmet().getEspb(), godinaStudija.getPredmet().isObavezan(),
+                    godinaStudija.getPredmet().getBrojPredavanja(), godinaStudija.getPredmet().getBrojVezbi(),
+                    godinaStudija.getPredmet().getDrugiObliciNastave(), godinaStudija.getPredmet().getIstrazivackiRad(),
+                    godinaStudija.getPredmet().getOstaliCasovi());
+
+            GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(godinaStudija.getId(), godinaStudija.getGodina(), predmetDTO);
+
+            return new ResponseEntity<GodinaStudijaDTO>(godinaStudijaDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<GodinaStudija>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<GodinaStudijaDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{godinaStudijaId}", method = RequestMethod.PUT)
-    public ResponseEntity<GodinaStudija> update(@PathVariable("godinaStudijaaId") Long godinaStudijaId,
+    public ResponseEntity<GodinaStudijaDTO> update(@PathVariable("godinaStudijaId") Long godinaStudijaId,
                                                    @RequestBody GodinaStudija izmenjenaGodinaStudija) {
         GodinaStudija godinaStudija = godinaStudijaService.findOne(godinaStudijaId).orElse(null);
         if (godinaStudija != null) {
             izmenjenaGodinaStudija.setId(godinaStudijaId);
-            godinaStudijaService.save(izmenjenaGodinaStudija);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<GodinaStudija>(izmenjenaGodinaStudija, HttpStatus.OK);
+            izmenjenaGodinaStudija = godinaStudijaService.save(izmenjenaGodinaStudija);
+            PredmetDTO predmetDTO = new PredmetDTO(izmenjenaGodinaStudija.getPredmet().getId(), izmenjenaGodinaStudija.getPredmet().getNaziv(),
+                    izmenjenaGodinaStudija.getPredmet().getEspb(), izmenjenaGodinaStudija.getPredmet().isObavezan(),
+                    izmenjenaGodinaStudija.getPredmet().getBrojPredavanja(), izmenjenaGodinaStudija.getPredmet().getBrojVezbi(),
+                    izmenjenaGodinaStudija.getPredmet().getDrugiObliciNastave(), izmenjenaGodinaStudija.getPredmet().getIstrazivackiRad(),
+                    izmenjenaGodinaStudija.getPredmet().getOstaliCasovi());
+
+            GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(izmenjenaGodinaStudija.getId(), izmenjenaGodinaStudija.getGodina(), predmetDTO);
+            return new ResponseEntity<GodinaStudijaDTO>(godinaStudijaDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<GodinaStudija>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<GodinaStudijaDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{godinaStudijaId}", method = RequestMethod.DELETE)
-    public ResponseEntity<GodinaStudija> delete(@PathVariable("godinaStudijaId") Long godinaStudijaId) {
+    public ResponseEntity<GodinaStudijaDTO> delete(@PathVariable("godinaStudijaId") Long godinaStudijaId) {
         if (godinaStudijaService.findOne(godinaStudijaId).isPresent()) {
             godinaStudijaService.delete(godinaStudijaId);
-            return new ResponseEntity<GodinaStudija>(HttpStatus.OK);
+            return new ResponseEntity<GodinaStudijaDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<GodinaStudija>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<GodinaStudijaDTO>(HttpStatus.NOT_FOUND);
     }
 
     //DONE: Metoda i upit za pronalaženje predmeta na God.Studija

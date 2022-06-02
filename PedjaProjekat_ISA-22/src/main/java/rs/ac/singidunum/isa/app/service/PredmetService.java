@@ -2,6 +2,7 @@ package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rs.ac.singidunum.isa.app.model.Nastavnik;
 import rs.ac.singidunum.isa.app.model.Predmet;
 import rs.ac.singidunum.isa.app.repository.PredmetRepository;
 
@@ -48,5 +49,9 @@ public class PredmetService {
 
     public void delete(Predmet predmet) {
         predmetRepository.delete(predmet);
+    }
+
+    public Iterable<Predmet> findByNastavnik(Optional<Nastavnik> nastavnik){
+        return predmetRepository.findbyNastavnik(nastavnik);
     }
 }

@@ -46,34 +46,41 @@ public class MestoController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Mesto> create(@RequestBody Mesto mesto) {
+    public ResponseEntity<MestoDTO> create(@RequestBody Mesto mesto) {
         try {
             mestoService.save(mesto);
-            return new ResponseEntity<Mesto>(mesto, HttpStatus.CREATED);
+            DrzavaDTO drzavaDTO = new DrzavaDTO(mesto.getDrzava().getId(), mesto.getDrzava().getNaziv(),null);
+
+            MestoDTO mestoDTO = new MestoDTO(mesto.getId(), mesto.getNaziv(), drzavaDTO);
+
+            return new ResponseEntity<MestoDTO>(mestoDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Mesto>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<MestoDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.PUT)
-    public ResponseEntity<Mesto> update(@PathVariable("mestoId") Long mestoId,
+    public ResponseEntity<MestoDTO> update(@PathVariable("mestoId") Long mestoId,
                                                    @RequestBody Mesto izmenjenoMesto) {
         Mesto mesto = mestoService.findOne(mestoId).orElse(null);
         if (mesto != null) {
             izmenjenoMesto.setId(mestoId);
-            mestoService.save(izmenjenoMesto);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<Mesto>(izmenjenoMesto, HttpStatus.OK);
+            izmenjenoMesto = mestoService.save(izmenjenoMesto);
+            DrzavaDTO drzavaDTO = new DrzavaDTO(izmenjenoMesto.getDrzava().getId(), izmenjenoMesto.getDrzava().getNaziv(),null);
+
+            MestoDTO mestoDTO = new MestoDTO(izmenjenoMesto.getId(), izmenjenoMesto.getNaziv(), drzavaDTO);
+            return new ResponseEntity<MestoDTO>(mestoDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Mesto>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<MestoDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Mesto> delete(@PathVariable("mestoId") Long mestoId) {
+    public ResponseEntity<MestoDTO> delete(@PathVariable("mestoId") Long mestoId) {
         if (mestoService.findOne(mestoId).isPresent()) {
             mestoService.delete(mestoId);
-            return new ResponseEntity<Mesto>(HttpStatus.OK);
+            return new ResponseEntity<MestoDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<Mesto>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<MestoDTO>(HttpStatus.NOT_FOUND);
     }
 }

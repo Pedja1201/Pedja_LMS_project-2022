@@ -3,6 +3,7 @@ package rs.ac.singidunum.isa.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.AdministratorDTO;
+import rs.ac.singidunum.isa.app.dto.AdresaDTO;
+import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
+import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
 import rs.ac.singidunum.isa.app.model.Administrator;
+import rs.ac.singidunum.isa.app.model.Nastavnik;
 import rs.ac.singidunum.isa.app.service.AdministratorService;
+import rs.ac.singidunum.isa.app.service.NastavnikService;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -47,27 +53,29 @@ public class AdministratorController {
 
     @RequestMapping(path = "", method = RequestMethod.POST)
 //        @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Administrator> create(@RequestBody Administrator administrator) {
+    public ResponseEntity<AdministratorDTO> create(@RequestBody Administrator administrator) {
         try {
             administratorService.save(administrator);
-            return new ResponseEntity<Administrator>(administrator, HttpStatus.CREATED);
+            AdministratorDTO administratorDTO = new AdministratorDTO(administrator.getId(),administrator.getKorisnickoIme(),administrator.getLozinka(), administrator.getIme(), administrator.getJmbg());
+            return new ResponseEntity<AdministratorDTO>(administratorDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Administrator>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<AdministratorDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{administratorId}", method = RequestMethod.PUT)
 //        @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Administrator> update(@PathVariable("administratorID") Long administratorId,
-                                                @RequestBody Administrator izmenjenAdministrator) {
+    public ResponseEntity<AdministratorDTO> update(@PathVariable("administratorId") Long administratorId,
+                                                   @RequestBody Administrator izmenjenAdministrator) {
         Administrator administrator = administratorService.findOne(administratorId).orElse(null);
         if (administrator != null) {
             izmenjenAdministrator.setId(administratorId);
             administratorService.save(izmenjenAdministrator); //DONE: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
-            return new ResponseEntity<Administrator>(izmenjenAdministrator, HttpStatus.OK);
+            AdministratorDTO administratorDTO = new AdministratorDTO(izmenjenAdministrator.getId(),izmenjenAdministrator.getKorisnickoIme(),izmenjenAdministrator.getLozinka(), izmenjenAdministrator.getIme(), izmenjenAdministrator.getJmbg());
+            return new ResponseEntity<AdministratorDTO>(administratorDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Administrator>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<AdministratorDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{administratorId}", method = RequestMethod.DELETE)

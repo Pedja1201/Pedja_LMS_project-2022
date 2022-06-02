@@ -58,34 +58,51 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<NastavnikNaRealizaciji> create(@RequestBody NastavnikNaRealizaciji nastavnikNaRealizaciji) {
+    public ResponseEntity<NastavnikNaRealizacijiDTO> create(@RequestBody NastavnikNaRealizaciji nastavnikNaRealizaciji) {
         try {
             nastavnikNaRealizacijiService.save(nastavnikNaRealizaciji);
-            return new ResponseEntity<NastavnikNaRealizaciji>(nastavnikNaRealizaciji, HttpStatus.CREATED);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(),nastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
+                    nastavnikNaRealizaciji.getNastavnik().getLozinka(), nastavnikNaRealizaciji.getNastavnik().getIme(),
+                    nastavnikNaRealizaciji.getNastavnik().getBiografija(), nastavnikNaRealizaciji.getNastavnik().getJmbg(),
+                    null,null);
+            TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(nastavnikNaRealizaciji.getTipNastave().getId(), nastavnikNaRealizaciji.getTipNastave().getNaziv());
+
+            NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO = new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.getId(),
+                    nastavnikNaRealizaciji.getBrojCasova(),  nastavnikDTO, tipNastaveDTO);
+
+            return new ResponseEntity<NastavnikNaRealizacijiDTO>(nastavnikNaRealizacijiDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<NastavnikNaRealizaciji>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.PUT)
-    public ResponseEntity<NastavnikNaRealizaciji> update(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId,
+    public ResponseEntity<NastavnikNaRealizacijiDTO> update(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId,
                                                         @RequestBody NastavnikNaRealizaciji izmenjenNastavnikNaRealizaciji) {
         NastavnikNaRealizaciji nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId).orElse(null);
         if (nastavnikNaRealizaciji != null) {
             izmenjenNastavnikNaRealizaciji.setId(nastavnikNaRealizacijiId);
-            nastavnikNaRealizacijiService.save(izmenjenNastavnikNaRealizaciji);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<NastavnikNaRealizaciji>(izmenjenNastavnikNaRealizaciji, HttpStatus.OK);
+            izmenjenNastavnikNaRealizaciji = nastavnikNaRealizacijiService.save(izmenjenNastavnikNaRealizaciji);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjenNastavnikNaRealizaciji.getNastavnik().getId(),izmenjenNastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
+                    izmenjenNastavnikNaRealizaciji.getNastavnik().getLozinka(), izmenjenNastavnikNaRealizaciji.getNastavnik().getIme(),
+                    izmenjenNastavnikNaRealizaciji.getNastavnik().getBiografija(), izmenjenNastavnikNaRealizaciji.getNastavnik().getJmbg(),
+                    null,null);
+            TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(izmenjenNastavnikNaRealizaciji.getTipNastave().getId(), izmenjenNastavnikNaRealizaciji.getTipNastave().getNaziv());
+
+            NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO = new NastavnikNaRealizacijiDTO(izmenjenNastavnikNaRealizaciji.getId(),
+                    izmenjenNastavnikNaRealizaciji.getBrojCasova(),  nastavnikDTO, tipNastaveDTO);
+            return new ResponseEntity<NastavnikNaRealizacijiDTO>(nastavnikNaRealizacijiDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<NastavnikNaRealizaciji>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.DELETE)
-    public ResponseEntity<NastavnikNaRealizaciji> delete(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {
+    public ResponseEntity<NastavnikNaRealizacijiDTO> delete(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {
         if (nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId).isPresent()) {
             nastavnikNaRealizacijiService.delete(nastavnikNaRealizacijiId);
-            return new ResponseEntity<NastavnikNaRealizaciji>(HttpStatus.OK);
+            return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<NastavnikNaRealizaciji>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.NOT_FOUND);
     }
 }

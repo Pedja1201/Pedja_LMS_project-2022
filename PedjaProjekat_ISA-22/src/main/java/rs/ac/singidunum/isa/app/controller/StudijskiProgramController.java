@@ -60,35 +60,54 @@ public class StudijskiProgramController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<StudijskiProgram> create(@RequestBody StudijskiProgram studijskiProgram) {
+    public ResponseEntity<StudijskiProgramDTO> create(@RequestBody StudijskiProgram studijskiProgram) {
         try {
             studijskiProgramService.save(studijskiProgram);
-            return new ResponseEntity<StudijskiProgram>(studijskiProgram, HttpStatus.CREATED);
+            FakultetDTO fakultetDTO = new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
+                                                        null,null,null);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getKorisnickoIme(),
+                    studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getIme(),
+                    studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),null,null);
+            GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(studijskiProgram.getGodinaStudija().getId(), studijskiProgram.getGodinaStudija().getGodina(),null);
+
+            StudijskiProgramDTO studijskiProgramDTO = new StudijskiProgramDTO(studijskiProgram.getId(),
+                    studijskiProgram.getNaziv(),fakultetDTO, nastavnikDTO, godinaStudijaDTO);
+
+            return new ResponseEntity<StudijskiProgramDTO>(studijskiProgramDTO, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<StudijskiProgram>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{studisjkiProgramId}", method = RequestMethod.PUT)
-    public ResponseEntity<StudijskiProgram> update(@PathVariable("studisjkiProgramId") Long studisjkiProgramId,
+    public ResponseEntity<StudijskiProgramDTO> update(@PathVariable("studisjkiProgramId") Long studisjkiProgramId,
                                                @RequestBody StudijskiProgram izmenjeniStudijskiProgram) {
         StudijskiProgram studijskiProgram = studijskiProgramService.findOne(studisjkiProgramId).orElse(null);
         if (studijskiProgram != null) {
             izmenjeniStudijskiProgram.setId(studisjkiProgramId);
             izmenjeniStudijskiProgram = studijskiProgramService.save(izmenjeniStudijskiProgram);
-            return new ResponseEntity<StudijskiProgram>(izmenjeniStudijskiProgram, HttpStatus.OK);
+            FakultetDTO fakultetDTO = new FakultetDTO(izmenjeniStudijskiProgram.getFakultet().getId(),izmenjeniStudijskiProgram.getFakultet().getNaziv(),
+                    null,null,null);
+            NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjeniStudijskiProgram.getNastavnik().getId(), izmenjeniStudijskiProgram.getNastavnik().getKorisnickoIme(),
+                    izmenjeniStudijskiProgram.getNastavnik().getLozinka(),izmenjeniStudijskiProgram.getNastavnik().getIme(),
+                    izmenjeniStudijskiProgram.getNastavnik().getBiografija(),izmenjeniStudijskiProgram.getNastavnik().getJmbg(),null,null);
+            GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(izmenjeniStudijskiProgram.getGodinaStudija().getId(), izmenjeniStudijskiProgram.getGodinaStudija().getGodina(),null);
+
+            StudijskiProgramDTO studijskiProgramDTO = new StudijskiProgramDTO(izmenjeniStudijskiProgram.getId(),
+                    izmenjeniStudijskiProgram.getNaziv(),fakultetDTO, nastavnikDTO, godinaStudijaDTO);
+            return new ResponseEntity<StudijskiProgramDTO>(studijskiProgramDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<StudijskiProgram>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{studisjkiProgramId}", method = RequestMethod.DELETE)
-    public ResponseEntity<StudijskiProgram> delete(@PathVariable("studisjkiProgramId") Long studisjkiProgramId) {
+    public ResponseEntity<StudijskiProgramDTO> delete(@PathVariable("studisjkiProgramId") Long studisjkiProgramId) {
         if (studijskiProgramService.findOne(studisjkiProgramId).isPresent()) {
             studijskiProgramService.delete(studisjkiProgramId);
-            return new ResponseEntity<StudijskiProgram>(HttpStatus.OK);
+            return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<StudijskiProgram>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.NOT_FOUND);
     }
 
 

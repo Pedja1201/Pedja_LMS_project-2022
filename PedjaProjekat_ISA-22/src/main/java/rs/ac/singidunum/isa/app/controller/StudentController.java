@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.LoggedStudent;
-import rs.ac.singidunum.isa.app.dto.AdresaDTO;
-import rs.ac.singidunum.isa.app.dto.PohadjanjePredmetaDTO;
-import rs.ac.singidunum.isa.app.dto.StudentDTO;
-import rs.ac.singidunum.isa.app.dto.StudentNaGodiniDTO;
+import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Student;
 import rs.ac.singidunum.isa.app.service.StudentService;
 
@@ -33,7 +30,7 @@ public class StudentController {
         ArrayList<StudentDTO> studenti = new ArrayList<StudentDTO>();
 
         for (Student student : studentService.findAll()) {
-            studenti.add(new StudentDTO(student.getId(),student.getKorisnickoIme(), student.getLozinka(),student.getJmbg(), student.getIme(),
+            studenti.add(new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),student.getJmbg(),student.getIme(),
                     new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
                             student.getAdresa().getBroj(),null),
                     new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
@@ -50,7 +47,7 @@ public class StudentController {
         Optional<Student> student = studentService.findOne(studentId);
         if (student.isPresent()) {
             StudentDTO studentDTO = new StudentDTO(student.get().getId(),student.get().getKorisnickoIme(),student.get().getLozinka(),
-                                            student.get().getJmbg(), student.get().getIme(),
+                    student.get().getJmbg(),student.get().getIme(),
                     new AdresaDTO(student.get().getAdresa().getId(), student.get().getAdresa().getUlica(),
                             student.get().getAdresa().getBroj(), null),
                     new PohadjanjePredmetaDTO(student.get().getPohadjanjePredmeta().getId(),
@@ -64,23 +61,37 @@ public class StudentController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Student> create(@RequestBody Student student) {
+    public ResponseEntity<StudentDTO> create(@RequestBody Student student) {
         try {
             studentService.save(student);
-            return new ResponseEntity<Student>(student, HttpStatus.CREATED);
+            StudentDTO studentDTO = new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),student.getJmbg(), student.getIme(),
+                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
+                            student.getAdresa().getBroj(),null),
+                    new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
+                            null),
+                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
+                            student.getStudentNaGodini().getBrojIndeksa(),null));
+            return new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Student>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<StudentDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{studentId}", method = RequestMethod.PUT)
     public ResponseEntity<Student> update(@PathVariable("studentId") Long studentId,
-                                                   @RequestBody Student izmenjenStudent) {
+                                          @RequestBody Student izmenjenStudent) {
         Student student = studentService.findOne(studentId).orElse(null);
         if (student != null) {
             izmenjenStudent.setId(studentId);
-            studentService.save(izmenjenStudent);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
+            studentService.save(izmenjenStudent);  //DONE:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
+            StudentDTO studentDTO = new StudentDTO(izmenjenStudent.getId(),izmenjenStudent.getKorisnickoIme(),izmenjenStudent.getLozinka(),izmenjenStudent.getJmbg(), izmenjenStudent.getIme(),
+                    new AdresaDTO(izmenjenStudent.getAdresa().getId(), izmenjenStudent.getAdresa().getUlica(),
+                            izmenjenStudent.getAdresa().getBroj(),null),
+                    new PohadjanjePredmetaDTO(izmenjenStudent.getPohadjanjePredmeta().getId(), izmenjenStudent.getPohadjanjePredmeta().getKonacnaOcena(),
+                            null),
+                    new StudentNaGodiniDTO(izmenjenStudent.getStudentNaGodini().getId(), izmenjenStudent.getStudentNaGodini().getDatumUpisa(),
+                            izmenjenStudent.getStudentNaGodini().getBrojIndeksa(),null));
             return new ResponseEntity<Student>(izmenjenStudent, HttpStatus.OK);
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);

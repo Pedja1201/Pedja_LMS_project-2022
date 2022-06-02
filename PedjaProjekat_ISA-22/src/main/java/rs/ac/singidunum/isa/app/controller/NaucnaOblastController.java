@@ -65,34 +65,48 @@ public class NaucnaOblastController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<NaucnaOblast> createNaucnaOblast(@RequestBody NaucnaOblast naucnaOblast) {
+    public ResponseEntity<NaucnaOblastDTO> createNaucnaOblast(@RequestBody NaucnaOblast naucnaOblast) {
         try {
             naucnaOblastService.save(naucnaOblast);
-            return new ResponseEntity<NaucnaOblast>(naucnaOblast, HttpStatus.CREATED);
+            ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
+            for(Zvanje zvanje : naucnaOblast.getZvanja()) {
+                zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
+                        null,
+                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(), null)));
+            }
+            NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(naucnaOblast.getId(), naucnaOblast.getNaziv(), zvanja);
+            return new ResponseEntity<NaucnaOblastDTO>(naucnaOblastDTO,HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<NaucnaOblast>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.PUT)
-    public ResponseEntity<NaucnaOblast> updateNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId,
+    public ResponseEntity<NaucnaOblastDTO> updateNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId,
                                                @RequestBody NaucnaOblast izmenjenaNaucnaOblast) {
         NaucnaOblast naucnaOblast = naucnaOblastService.findOne(naucnaOblastId).orElse(null);
         if (naucnaOblast != null) {
             izmenjenaNaucnaOblast.setId(naucnaOblastId);
             izmenjenaNaucnaOblast = naucnaOblastService.save(izmenjenaNaucnaOblast);
-            return new ResponseEntity<NaucnaOblast>(izmenjenaNaucnaOblast, HttpStatus.OK);
+            ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
+            for(Zvanje zvanje : naucnaOblast.getZvanja()) {
+                zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
+                        null,
+                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(), null)));
+            }
+            NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(izmenjenaNaucnaOblast.getId(), izmenjenaNaucnaOblast.getNaziv(), zvanja);
+            return new ResponseEntity<NaucnaOblastDTO>(naucnaOblastDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<NaucnaOblast>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.DELETE)
-    public ResponseEntity<NaucnaOblast> deleteNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId) {
+    public ResponseEntity<NaucnaOblastDTO> deleteNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId) {
         if (naucnaOblastService.findOne(naucnaOblastId).isPresent()) {
             naucnaOblastService.delete(naucnaOblastId);
-            return new ResponseEntity<NaucnaOblast>(HttpStatus.OK);
+            return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.OK);
         }
-        return new ResponseEntity<NaucnaOblast>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.NOT_FOUND);
     }
 }

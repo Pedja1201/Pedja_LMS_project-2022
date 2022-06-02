@@ -47,26 +47,30 @@ public class KorisnikController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<Korisnik> create(@RequestBody Korisnik korisnik) {
+    public ResponseEntity<KorisnikDTO> create(@RequestBody Korisnik korisnik) {
         try {
             korisnikService.save(korisnik);
-            return new ResponseEntity<Korisnik>(korisnik, HttpStatus.CREATED);
+            KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(),
+                    korisnik.getKorisnickoIme(), korisnik.getLozinka());
+            return new ResponseEntity<KorisnikDTO>(korisnikDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Korisnik>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<KorisnikDTO>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(path = "/{korisnikId}", method = RequestMethod.PUT)
-    public ResponseEntity<Korisnik> update(@PathVariable("korisnikId") Long korisnikId,
-                                                   @RequestBody Korisnik izmenjenKorisnik) {
+    public ResponseEntity<KorisnikDTO> update(@PathVariable("korisnikId") Long korisnikId,
+                                              @RequestBody Korisnik izmenjenKorisnik) {
         Korisnik korisnik = korisnikService.findOne(korisnikId).orElse(null);
         if (korisnik != null) {
             izmenjenKorisnik.setId(korisnikId);
-            korisnikService.save(izmenjenKorisnik);  //FIXME:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            return new ResponseEntity<Korisnik>(izmenjenKorisnik, HttpStatus.OK);
+            korisnikService.save(izmenjenKorisnik);  //DONE:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
+            KorisnikDTO korisnikDTO = new KorisnikDTO(izmenjenKorisnik.getId(),
+                    izmenjenKorisnik.getKorisnickoIme(), izmenjenKorisnik.getLozinka());
+            return new ResponseEntity<KorisnikDTO>(korisnikDTO, HttpStatus.OK);
         }
-        return new ResponseEntity<Korisnik>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<KorisnikDTO>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(path = "/{korisnikId}", method = RequestMethod.DELETE)
