@@ -37,4 +37,9 @@ public class ZvanjeService {
         zvanjeRepository.delete(zvanje);
     }
 
+    //Metoda za pronalazenje naucne obleasti po nazivu
+    public Iterable<Zvanje> findNaucnaOblast(String naziv) {
+        return zvanjeRepository.findNaucnaOblast(naziv);
+    }
+
 }

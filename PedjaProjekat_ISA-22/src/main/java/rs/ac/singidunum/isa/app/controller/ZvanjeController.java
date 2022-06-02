@@ -93,4 +93,18 @@ public class ZvanjeController {
         return new ResponseEntity<ZvanjeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    //DONE: Metoda i upit za pronalaženje naucnih oblasti po nazivu
+    @RequestMapping(path = "/findNaucnaOblast/{nauznaOblastNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<ZvanjeDTO>> findNaucnaOblast(@PathVariable("nauznaOblastNaziv") String nauznaOblastNaziv) {
+        ArrayList<ZvanjeDTO> zvanjaDTO = new ArrayList<>();
+        for(Zvanje zvanje : zvanjeService.findNaucnaOblast(nauznaOblastNaziv)) {
+            System.out.println(zvanje.getNaucnaOblast());
+            NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(),zvanje.getNaucnaOblast().getNaziv(), null);
+
+            zvanjaDTO.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(), naucnaOblastDTO, null));
+        }
+        return new ResponseEntity<Iterable<ZvanjeDTO>>(zvanjaDTO, HttpStatus.OK);
+
+    }
+
 }
