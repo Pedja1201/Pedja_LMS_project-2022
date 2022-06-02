@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForma.valid){
       this.loginService.login(this.loginForma.value).subscribe(r => {
         console.log(r);
-        this.router.navigate(["/univerziteti"]);//Prebacivanje nakon logina na page
+        this.router.navigate([""]);//Prebacivanje nakon logina na page
       }, (err) => {
         this.loginFailed = true;
       });

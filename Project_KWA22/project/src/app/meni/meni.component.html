@@ -48,7 +48,7 @@
   <button id='desno' mat-button  mat-raised-button color="primary" [matMenuTriggerFor]="menuPrijava">Prijavi se</button>
   <mat-menu #menuPrijava="matMenu">
     <button mat-menu-item  [routerLink]="['/login']" >Login</button>
-    <button mat-menu-item mat-stroked-button color="warn" *ngIf="loginService.user" (click)="loginService.logout()" >Logout</button>
+    <button mat-menu-item style="color: red;" *ngIf="loginService.user" (click)="loginService.logout()" [routerLink]="['/login']" >Logout</button>
   </mat-menu>
 </div>
 
