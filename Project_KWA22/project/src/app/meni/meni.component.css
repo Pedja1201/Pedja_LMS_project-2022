@@ -5,13 +5,24 @@
 
 }
 button{
-    margin-left: 40px;
-    color:rgb(72, 72, 228);
+    margin-left: 20px;
+    outline: none;
+    border: 0;
+    background: transparent;
+    /* color:rgb(72, 72, 228); */
 }
 
-#desno{
-    margin-left: 80%;
+mat-icon{
+  color: aliceblue;
 }
-#desno2{
-    margin-left: 90%;
-}
+
+user {
+    font-size: 14px;
+  }
+
+  .user-image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+  }

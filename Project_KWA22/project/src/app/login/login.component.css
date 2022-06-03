@@ -7,3 +7,7 @@ form,h2,p{
 input{
     margin: 10px;
 }
+h2{
+    color: cornflowerblue;
+    font-style: italic;
+}
