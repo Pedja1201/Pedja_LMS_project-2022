@@ -1,8 +1,13 @@
 <h2>{{title}}</h2>
 
-<app-forma-ishoda (createEvent)="create($event)"></app-forma-ishoda>
-
+<mat-tab-group>
+<mat-tab label="Table Ishodi">
 <app-tabela-ishoda [elementi]="ishodi" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-ishoda>
 
 <app-forma-ishoda [ishod]="ishodUpdate" (createEvent)="update($event)"></app-forma-ishoda>
+</mat-tab>
+<mat-tab label="Add Ishod">
+    <app-forma-ishoda (createEvent)="create($event)"></app-forma-ishoda>
+</mat-tab>
+</mat-tab-group>

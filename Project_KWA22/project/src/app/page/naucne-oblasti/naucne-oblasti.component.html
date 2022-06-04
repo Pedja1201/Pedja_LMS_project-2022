@@ -1,9 +1,13 @@
 <h2>{{title}}</h2>
 
-
-<app-forma-naucne-oblasti (createEvent)="create($event)"></app-forma-naucne-oblasti>
-
+<mat-tab-group>
+<mat-tab label="Table Naucne oblasti">
 <app-tabela-naucne-oblasti [elementi]="naucneOblasti" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-naucne-oblasti>
 
 <app-forma-naucne-oblasti [naucnaOblast]="itemUpdate" (createEvent)="update($event)"></app-forma-naucne-oblasti>
+</mat-tab>
+<mat-tab label="Add Naucne oblasti">
+    <app-forma-naucne-oblasti (createEvent)="create($event)"></app-forma-naucne-oblasti>
+</mat-tab>
+</mat-tab-group>

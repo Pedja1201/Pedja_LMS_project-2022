@@ -13,6 +13,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';   
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -223,7 +225,9 @@ import { FormUsersComponent } from './page/users/form-users/form-users.component
     MatCardModule,
     MatIconModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTabsModule,
+    MatChipsModule
 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login

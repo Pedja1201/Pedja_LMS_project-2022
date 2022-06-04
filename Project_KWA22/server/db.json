@@ -110,6 +110,19 @@
         "id": 2,
         "naziv": "Prijedor"
       }
+    },
+    {
+      "ulica": "ada",
+      "broj": "2",
+      "mesto": {
+        "id": 2,
+        "naziv": "Prijedor",
+        "drzava": {
+          "id": 3,
+          "naziv": "Bosna i Hercegovina"
+        }
+      },
+      "id": 3
     }
   ],
   "drzave": [
@@ -254,6 +267,34 @@
         "datumIzbora": "2021-05-25",
         "datumPrestanka": "2021-05-25"
       }
+    },
+    {
+      "ime": "Ivana",
+      "biografija": "Preporuka",
+      "jmbg": "213214412",
+      "adresa": {
+        "id": 2,
+        "ulica": "Bosanska",
+        "broj": "2",
+        "mesto": {
+          "id": 2,
+          "naziv": "Prijedor"
+        }
+      },
+      "zvanje": {
+        "id": 1,
+        "datumIzbora": "2021-05-25",
+        "datumPrestanka": "2021-05-25",
+        "naucnaOblast": {
+          "id": 1,
+          "naziv": "Softverski inzenjer"
+        },
+        "tipZvanja": {
+          "id": 1,
+          "naziv": "Profesor"
+        }
+      },
+      "id": 2
     }
   ],
   "nastavniciNaRealizaciji": [

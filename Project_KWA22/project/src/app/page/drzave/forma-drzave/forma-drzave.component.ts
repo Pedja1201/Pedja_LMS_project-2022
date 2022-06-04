@@ -9,7 +9,7 @@ import { DrzaveService } from 'src/app/service/drzave.service';
   styleUrls: ['./forma-drzave.component.css']
 })
 export class FormaDrzaveComponent implements OnInit {
-  title='Forma smera'
+  title='Forma Drzave'
 
 
 

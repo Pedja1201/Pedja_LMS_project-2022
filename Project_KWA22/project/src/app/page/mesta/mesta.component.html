@@ -1,9 +1,13 @@
 <h2>{{title}}</h2>
 
-
-<app-forma-mesta (createEvent)="create($event)"></app-forma-mesta>
-
+<mat-tab-group>
+ <mat-tab label="Table Mesta">
 <app-tabela-mesta [elementi]="mesta" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-mesta>
 
 <app-forma-mesta [mesto]="mestoUpdate" (createEvent)="update($event)"></app-forma-mesta>
+ </mat-tab>
+ <mat-tab label="Add Mesto">
+    <app-forma-mesta (createEvent)="create($event)"></app-forma-mesta>
+ </mat-tab>
+</mat-tab-group>

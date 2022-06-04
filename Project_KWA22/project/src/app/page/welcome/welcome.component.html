@@ -1,4 +1,5 @@
-<section id="portfolio" >
+<mat-tab-group>
+  <mat-tab label="Main page"> 
   <div class="container portfolio-card">
 
     <div class="portfolio-section portfolio-heading mat-typography" fxLayout="column" fxLayoutAlign="center center">
@@ -27,6 +28,46 @@
       </div>
 
     </div>
-
   </div>
-</section>
+</mat-tab>
+<mat-tab label="Contact">
+    
+<mat-chip-list aria-label="Fish selection">  
+    <mat-chip color="primary" selected>  
+      Adresa  
+    </mat-chip>  
+        
+    <mat-chip color="accent" selected>  
+      Telefon  
+    </mat-chip>  
+        
+    <mat-chip color="warn" selected>  
+      Email 
+    </mat-chip>  
+        
+    <mat-chip>Radno vreme </mat-chip>  
+</mat-chip-list>  
+<br><br><br>  
+    
+<h3>Osnovni podaci</h3>  
+    
+<mat-chip-list class="mat-chip-list-stacked"  
+    aria-label="Fish selection">  
+        
+    <mat-chip color="primary" selected>  
+      <mat-icon> location_on</mat-icon> ul. Danijelova 32, prizemlje, 11000 Beograd
+    </mat-chip>  
+        
+    <mat-chip color="accent" selected>  
+      <mat-icon> contact_phone</mat-icon> 011/3094 094
+    </mat-chip>  
+        
+    <mat-chip color="warn" selected>  
+      <mat-icon> contact_mail</mat-icon> studije@singidunum.ac.rs
+    </mat-chip>  
+        <br>
+    <mat-chip><mat-icon>access_time</mat-icon>pon.-pet.: od 8.00 do 18.00 časova </mat-chip>  
+    <mat-chip><mat-icon>access_time</mat-icon>sub.: od 9.00 do 14.00 časova </mat-chip>  
+</mat-chip-list>  
+</mat-tab>
+</mat-tab-group>
