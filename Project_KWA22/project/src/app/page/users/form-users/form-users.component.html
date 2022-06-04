@@ -1,0 +1,19 @@
+<h2>{{title}}</h2>
+<form (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+    <div>
+      <mat-form-field>
+        <mat-label>Username: </mat-label>
+          <input matInput name="username" formControlName="username" type="text" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Password: </mat-label>
+          <input matInput name="password" formControlName="password" type="text" required>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-raised-button color="primary" type="submit">Dodaj</button>
+    </div>
+  </form>

@@ -1,7 +1,7 @@
 <p>Ulogovan: {{loginService.validateRoles(['ROLE_USER', 'ROLE_ADMIN'])}}</p>
 
 <h2>{{title}}</h2>
-<form (ngSubmit)="login()" [formGroup]="loginForma" ngNativeValidate>
+<form (ngSubmit)="login()" [formGroup]="loginForma" class="container" ngNativeValidate>
     <div>
       <mat-form-field appearance="fill">
         <mat-label> <mat-icon>account_circle</mat-icon>Username</mat-label>

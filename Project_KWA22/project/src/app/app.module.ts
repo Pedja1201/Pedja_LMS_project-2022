@@ -106,6 +106,10 @@ import { FormaZvanjaComponent } from './page/zvanja/forma-zvanja/forma-zvanja.co
 import { DetailsZvanjaComponent } from './page/zvanja/details-zvanja/details-zvanja.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { PageTreeViewComponent } from './tree-view/page-tree-view/page-tree-view.component';
+import { UsersComponent } from './page/users/users.component';
+import { DetailsUsersComponent } from './page/users/details-users/details-users.component';
+import { TableUsersComponent } from './page/users/table-users/table-users.component';
+import { FormUsersComponent } from './page/users/form-users/form-users.component';
 
 @NgModule({
   declarations: [
@@ -197,6 +201,10 @@ import { PageTreeViewComponent } from './tree-view/page-tree-view/page-tree-view
     DetailsZvanjaComponent,
     TreeViewComponent,
     PageTreeViewComponent,
+    UsersComponent,
+    DetailsUsersComponent,
+    TableUsersComponent,
+    FormUsersComponent,
   ],
   imports: [
     BrowserModule,

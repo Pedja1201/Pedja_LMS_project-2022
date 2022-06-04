@@ -43,10 +43,17 @@ import { WelcomeComponent } from './page/welcome/welcome.component';
 import { DetailsZvanjaComponent } from './page/zvanja/details-zvanja/details-zvanja.component';
 import { ZvanjaComponent } from './page/zvanja/zvanja.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
+import { UsersComponent } from './page/users/users.component';
+import { DetailsUsersComponent } from './page/users/details-users/details-users.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},
   {path:"", redirectTo: "", pathMatch:"full"}, ///Vraca na korensku rutu
+
+  //Users
+  {path: 'users',component: UsersComponent,
+      data: { allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: 'users/:id',component: DetailsUsersComponent},
   //Adrese
   {path: "adrese", component: AdreseComponent, 
         data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
