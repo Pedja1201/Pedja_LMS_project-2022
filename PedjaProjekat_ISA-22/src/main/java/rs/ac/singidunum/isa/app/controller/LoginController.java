@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.*;
-import rs.ac.singidunum.isa.app.service.*;
+import rs.ac.singidunum.isa.app.service.AdministratorService;
+import rs.ac.singidunum.isa.app.service.NastavnikService;
+import rs.ac.singidunum.isa.app.service.PermissionService;
+import rs.ac.singidunum.isa.app.service.StudentService;
 import rs.ac.singidunum.isa.app.utlis.TokenUtils;
 
 import java.util.HashSet;
@@ -70,8 +73,8 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public ResponseEntity<StudentDTO> register(@RequestBody StudentDTO korisnik) {
+    @RequestMapping(path = "/registerStudent", method = RequestMethod.POST)
+    public ResponseEntity<StudentDTO> registerStudent(@RequestBody StudentDTO korisnik) {
         // Novi korisnik se registruje kreiranjem instance korisnika
         // cija je lozinka enkodovana.
         Student noviKorisnik = new Student(null, korisnik.getKorisnickoIme(),
