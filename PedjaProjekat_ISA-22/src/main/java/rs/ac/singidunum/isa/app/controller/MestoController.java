@@ -83,4 +83,17 @@ public class MestoController {
         }
         return new ResponseEntity<MestoDTO>(HttpStatus.NOT_FOUND);
     }
+
+    //DOne: Metoda i upit za pronalaženje drzave po nazivu
+    @RequestMapping(path = "/findDrzava/{drzavaNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<MestoDTO>> findDrzava(@PathVariable("drzavaNaziv") String drzavaNaziv) {
+        ArrayList<MestoDTO> mestaDTO = new ArrayList<>();
+        for(Mesto mesto : mestoService.findDrzava(drzavaNaziv)) {
+            System.out.println(mesto.getNaziv());
+            DrzavaDTO drzavaDTO = new DrzavaDTO(mesto.getDrzava().getId(),mesto.getDrzava().getNaziv(), null);
+            mestaDTO.add(new MestoDTO(mesto.getId(), mesto.getNaziv(), drzavaDTO));
+        }
+        return new ResponseEntity<Iterable<MestoDTO>>(mestaDTO, HttpStatus.OK);
+
+    }
 }

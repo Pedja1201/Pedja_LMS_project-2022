@@ -49,4 +49,9 @@ public class MestoService {
     public void delete(Mesto mesto) {
         mestoRepository.delete(mesto);
     }
+
+    //Metoda za pronalazenje svih karata koje je putnik kupio (Zadatak sa klk)
+    public Iterable<Mesto> findDrzava(String naziv) {
+        return mestoRepository.findDrzava(naziv);
+    }
 }

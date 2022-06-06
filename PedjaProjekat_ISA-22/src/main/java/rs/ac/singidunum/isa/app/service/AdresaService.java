@@ -49,4 +49,10 @@ public class AdresaService {
     public void delete(Adresa adresa) {
         adresaRepository.delete(adresa);
     }
+
+    //Metoda za pronalazenje mesta po nazivu
+    public Iterable<Adresa> findMestoAdresee(String naziv) {
+        return adresaRepository.findMestoAdresee(naziv);
+    }
+
 }

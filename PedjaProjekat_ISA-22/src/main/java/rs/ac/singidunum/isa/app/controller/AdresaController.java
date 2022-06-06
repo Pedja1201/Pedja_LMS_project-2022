@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
+import rs.ac.singidunum.isa.app.dto.DrzavaDTO;
 import rs.ac.singidunum.isa.app.dto.MestoDTO;
 import rs.ac.singidunum.isa.app.model.Adresa;
 import rs.ac.singidunum.isa.app.service.AdresaService;
@@ -83,5 +84,19 @@ public class AdresaController {
             return new ResponseEntity<AdresaDTO>(HttpStatus.OK);
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.NOT_FOUND);
+    }
+
+    //DONE: Metoda i upit za pronalaženje mesta po nazivu
+    @RequestMapping(path = "/findMesto/{mestoNaziv}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<AdresaDTO>> findMestoAdresee(@PathVariable("mestoNaziv") String mestoNaziv) {
+        ArrayList<AdresaDTO> adreseDTO = new ArrayList<>();
+        for(Adresa adresa : adresaService.findMestoAdresee(mestoNaziv)) {
+            System.out.println(adresa.getUlica());
+            MestoDTO mestoDTO = new MestoDTO(adresa.getMesto().getId(),adresa.getMesto().getNaziv(),
+                    new DrzavaDTO(adresa.getMesto().getDrzava().getId(), adresa.getMesto().getDrzava().getNaziv(),null));
+            adreseDTO.add(new AdresaDTO(adresa.getId(), adresa.getUlica(), adresa.getBroj(), mestoDTO));
+        }
+        return new ResponseEntity<Iterable<AdresaDTO>>(adreseDTO, HttpStatus.OK);
+
     }
 }
