@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.StudentService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/studenti")
@@ -26,20 +29,24 @@ public class StudentController {
     @LoggedStudent
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Iterable<StudentDTO>> getAll() {
-        ArrayList<StudentDTO> studenti = new ArrayList<StudentDTO>();
-
-        for (Student student : studentService.findAll()) {
-            studenti.add(new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),student.getJmbg(),student.getIme(),
-                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
-                            student.getAdresa().getBroj(),null),
-                    new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
-                            null),
-                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
-                            student.getStudentNaGodini().getBrojIndeksa(),null)));
-        }
-
-        return new ResponseEntity<Iterable<StudentDTO>>(studenti, HttpStatus.OK);
+    public ResponseEntity<Page<StudentDTO>> getAll(Pageable pageable) {
+        Page<Student> student = studentService.findAll(pageable);
+        Page<StudentDTO> studenti = student.map(new Function<Student, StudentDTO>() {
+            public StudentDTO apply(Student student) {
+                StudentDTO studentDTO = new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),
+                        student.getJmbg(), student.getIme(),
+                        new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
+                                student.getAdresa().getBroj(),null),
+                        new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
+                                null),
+                        new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
+                                student.getStudentNaGodini().getBrojIndeksa(),null)
+                );
+                // Conversion logic
+                return studentDTO;
+            }
+        });
+        return new ResponseEntity<Page<StudentDTO>>(studenti, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{studentId}", method = RequestMethod.GET)

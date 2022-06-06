@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.DrzavaService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/api/drzave")
@@ -24,18 +27,14 @@ public class DrzavaController {
     private DrzavaService drzavaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<DrzavaDTO>> getAll() {
-        ArrayList<DrzavaDTO> drzave = new ArrayList<DrzavaDTO>();
-        for (Drzava drzava : drzavaService.findAll()) {
-            ArrayList<MestoDTO> mesta = new ArrayList<MestoDTO>();
-            for (Mesto mesto : drzava.getMesta()) {
-                mesta.add(new MestoDTO(mesto.getId(),mesto.getNaziv(),null));
-            }
-            drzave.add(
-                    new DrzavaDTO(drzava.getId(), drzava.getNaziv(), mesta));
-        }
-
-        return new ResponseEntity<Iterable<DrzavaDTO>>(drzave, HttpStatus.OK);
+    public ResponseEntity<Page<DrzavaDTO>> getAll(Pageable pageable) {
+        Page<Drzava> drzave = drzavaService.findAll(pageable);
+        return new ResponseEntity<Page<DrzavaDTO>>(
+                drzave.map(drzava -> new DrzavaDTO(drzava.getId(), drzava.getNaziv(),
+                        (ArrayList<MestoDTO>) drzava.getMesta().stream()
+                                .map(mesto -> new MestoDTO(mesto.getId(), mesto.getNaziv(),null))
+                                .collect(Collectors.toList()))),
+                HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{drzavaId}", method = RequestMethod.GET)

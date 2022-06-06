@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.StudentNaGodiniService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/studentNaGodini")
@@ -23,17 +26,20 @@ public class StudentNaGodiniController {
     private StudentNaGodiniService studentNaGodiniService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<StudentNaGodiniDTO>> getAll() {
-        ArrayList<StudentNaGodiniDTO> studentiNaGodini = new ArrayList<StudentNaGodiniDTO>();
-
-        for (StudentNaGodini studentNaGodini : studentNaGodiniService.findAll()) {
-            studentiNaGodini.add(new StudentNaGodiniDTO(studentNaGodini.getId(),
-                                            studentNaGodini.getDatumUpisa(),studentNaGodini.getBrojIndeksa(),
-                    new GodinaStudijaDTO(studentNaGodini.getGodinaStudija().getId(),
-                                studentNaGodini.getGodinaStudija().getGodina(),null)));
-        }
-
-        return new ResponseEntity<Iterable<StudentNaGodiniDTO>>(studentiNaGodini, HttpStatus.OK);
+    public ResponseEntity<Page<StudentNaGodiniDTO>> getAll(Pageable pageable) {
+        Page<StudentNaGodini> studentNaGodini = studentNaGodiniService.findAll(pageable);
+        Page<StudentNaGodiniDTO> studentiNaGodini = studentNaGodini.map(new Function<StudentNaGodini, StudentNaGodiniDTO>() {
+            public StudentNaGodiniDTO apply(StudentNaGodini studentNaGodini) {
+                StudentNaGodiniDTO studentNaGodiniDTO = new StudentNaGodiniDTO(studentNaGodini.getId(),
+                        studentNaGodini.getDatumUpisa(),studentNaGodini.getBrojIndeksa(),
+                        new GodinaStudijaDTO(studentNaGodini.getGodinaStudija().getId(),
+                                studentNaGodini.getGodinaStudija().getGodina(),null)
+                );
+                // Conversion logic
+                return studentNaGodiniDTO;
+            }
+        });
+        return new ResponseEntity<Page<StudentNaGodiniDTO>>(studentiNaGodini, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{studentNaGodiniId}", method = RequestMethod.GET)

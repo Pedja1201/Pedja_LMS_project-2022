@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.NastavnikNaRealizacijiService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/nastavniciNaRealizaciji")
@@ -24,20 +27,23 @@ public class NastavnikNaRealizacijiController {
     private NastavnikNaRealizacijiService nastavnikNaRealizacijiService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<NastavnikNaRealizacijiDTO>> getAll() {
-        ArrayList<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji = new ArrayList<NastavnikNaRealizacijiDTO>();
-
-        for (NastavnikNaRealizaciji nastavnikNaRealizaciji : nastavnikNaRealizacijiService.findAll()) {
-            nastavniciNaRealizaciji.add(new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.getId(),
-                    nastavnikNaRealizaciji.getBrojCasova(),
-                    new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(),nastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
-                            nastavnikNaRealizaciji.getNastavnik().getLozinka(), nastavnikNaRealizaciji.getNastavnik().getIme(),
-                            nastavnikNaRealizaciji.getNastavnik().getBiografija(), nastavnikNaRealizaciji.getNastavnik().getJmbg(),
-                            null,null),
-                    new TipNastaveDTO(nastavnikNaRealizaciji.getTipNastave().getId(), nastavnikNaRealizaciji.getTipNastave().getNaziv())));
-        }
-
-        return new ResponseEntity<Iterable<NastavnikNaRealizacijiDTO>>(nastavniciNaRealizaciji, HttpStatus.OK);
+    public ResponseEntity<Page<NastavnikNaRealizacijiDTO>> getAll(Pageable pageable) {
+        Page<NastavnikNaRealizaciji> nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findAll(pageable);
+        Page<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji = nastavnikNaRealizaciji.map(new Function<NastavnikNaRealizaciji, NastavnikNaRealizacijiDTO>() {
+            public NastavnikNaRealizacijiDTO apply(NastavnikNaRealizaciji nastavnikNaRealizaciji) {
+                NastavnikNaRealizacijiDTO naRealizacijiDTO = new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.getId(),
+                        nastavnikNaRealizaciji.getBrojCasova(),
+                        new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(), nastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
+                                nastavnikNaRealizaciji.getNastavnik().getLozinka(),nastavnikNaRealizaciji.getNastavnik().getIme(),
+                                nastavnikNaRealizaciji.getNastavnik().getBiografija(), nastavnikNaRealizaciji.getNastavnik().getJmbg(),
+                                null,null),
+                        new TipNastaveDTO(nastavnikNaRealizaciji.getTipNastave().getId(), nastavnikNaRealizaciji.getTipNastave().getNaziv())
+                );
+                // Conversion logic
+                return naRealizacijiDTO;
+            }
+        });
+        return new ResponseEntity<Page<NastavnikNaRealizacijiDTO>>(nastavniciNaRealizaciji, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.GET)

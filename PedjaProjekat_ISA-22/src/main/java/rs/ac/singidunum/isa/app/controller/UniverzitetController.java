@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -19,6 +21,7 @@ import rs.ac.singidunum.isa.app.service.UniverzitetService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/univerziteti")
@@ -29,19 +32,22 @@ public class UniverzitetController {
     @LoggedUniverzitet
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Iterable<UniverzitetDTO>> getAll() {
-        ArrayList<UniverzitetDTO> univerziteti = new ArrayList<UniverzitetDTO>();
-
-        for (Univerzitet univerzitet : univerzitetService.findAll()) {
-            univerziteti.add(new UniverzitetDTO(univerzitet.getId(),univerzitet.getNaziv(), univerzitet.getDatumVremeOsnivanja(),
-                    new AdresaDTO(univerzitet.getAdresa().getId(), univerzitet.getAdresa().getUlica(),
-                            univerzitet.getAdresa().getBroj(),null),
-                    new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
-                            univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getIme(),
-                            univerzitet.getNastavnik().getBiografija(), univerzitet.getNastavnik().getJmbg(),null,null)));
-        }
-
-        return new ResponseEntity<Iterable<UniverzitetDTO>>(univerziteti, HttpStatus.OK);
+    public ResponseEntity<Page<UniverzitetDTO>> getAll(Pageable pageable) {
+        Page<Univerzitet> univerzitet = univerzitetService.findAll(pageable);
+        Page<UniverzitetDTO> univerziteti = univerzitet.map(new Function<Univerzitet, UniverzitetDTO>() {
+            public UniverzitetDTO apply(Univerzitet univerzitet) {
+                UniverzitetDTO univerzitetDTO = new UniverzitetDTO(univerzitet.getId(),univerzitet.getNaziv(), univerzitet.getDatumVremeOsnivanja(),
+                        new AdresaDTO(univerzitet.getAdresa().getId(), univerzitet.getAdresa().getUlica(),
+                                univerzitet.getAdresa().getBroj(),null),
+                        new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
+                                univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getIme(),
+                                univerzitet.getNastavnik().getBiografija(), univerzitet.getNastavnik().getJmbg(),null,null)
+                );
+                // Conversion logic
+                return univerzitetDTO;
+            }
+        });
+        return new ResponseEntity<Page<UniverzitetDTO>>(univerziteti, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.GET)

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.TipZvanja;
 import rs.ac.singidunum.isa.app.repository.TipZvanjaRepository;
@@ -14,6 +16,10 @@ public class TipZvanjaService {
 
     public Iterable<TipZvanja> findAll() {
         return tipZvanjaRepository.findAll();
+    }
+
+    public Page<TipZvanja> findAll(Pageable pageable) {
+        return tipZvanjaRepository.findAll(pageable);
     }
 
     public Optional<TipZvanja> findOne(Long id) {

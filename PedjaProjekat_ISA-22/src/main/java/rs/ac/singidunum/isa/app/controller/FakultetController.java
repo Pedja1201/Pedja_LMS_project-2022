@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.FakultetService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/fakulteti")
@@ -26,22 +29,26 @@ public class FakultetController {
     @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Iterable<FakultetDTO>> getAll() {
-        ArrayList<FakultetDTO> fakulteti = new ArrayList<FakultetDTO>();
-
-        for (Fakultet fakultet : fakultetService.findAll()) {
-            fakulteti.add(new FakultetDTO(fakultet.getId(),fakultet.getNaziv(),
-                    new UniverzitetDTO(fakultet.getUniverzitet().getId(),fakultet.getUniverzitet().getNaziv(),
-                            fakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null),
-                    new AdresaDTO(fakultet.getAdresa().getId(), fakultet.getAdresa().getUlica(),fakultet.getAdresa().getBroj(),null),
-                    new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getKorisnickoIme(),fakultet.getNastavnik().getLozinka(),
-                            fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(), fakultet.getNastavnik().getJmbg(),null,null)));
-        }
-
-        return new ResponseEntity<Iterable<FakultetDTO>>(fakulteti, HttpStatus.OK);
+    public ResponseEntity<Page<FakultetDTO>> getAll(Pageable pageable) {
+        Page<Fakultet> fakultet = fakultetService.findAll(pageable);
+        Page<FakultetDTO> fakulteti = fakultet.map(new Function<Fakultet, FakultetDTO>() {
+            public FakultetDTO apply(Fakultet fakultet) {
+                FakultetDTO fakultetDTO = new FakultetDTO(fakultet.getId(), fakultet.getNaziv(),
+                        new UniverzitetDTO(fakultet.getUniverzitet().getId(),fakultet.getUniverzitet().getNaziv(),
+                                fakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null),
+                        new AdresaDTO(fakultet.getAdresa().getId(), fakultet.getAdresa().getUlica(),fakultet.getAdresa().getBroj(),null),
+                        new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getKorisnickoIme(),fakultet.getNastavnik().getLozinka(),
+                                fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(),
+                                fakultet.getNastavnik().getJmbg(),null,null)
+                );
+                // Conversion logic
+                return fakultetDTO;
+            }
+        });
+        return new ResponseEntity<Page<FakultetDTO>>(fakulteti, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/{fakultetId}", method = RequestMethod.GET)
+        @RequestMapping(path = "/{fakultetId}", method = RequestMethod.GET)
     public ResponseEntity<FakultetDTO> get(@PathVariable("fakultetId") Long fakultetId) {
         Optional<Fakultet> fakultet = fakultetService.findOne(fakultetId);
         if (fakultet.isPresent()) {

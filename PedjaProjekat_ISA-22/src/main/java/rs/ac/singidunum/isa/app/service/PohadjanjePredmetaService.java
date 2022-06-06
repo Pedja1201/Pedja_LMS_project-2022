@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.PohadjanjePredmeta;
 import rs.ac.singidunum.isa.app.repository.PohadjanjePredmetaRepository;
@@ -31,6 +33,10 @@ public class PohadjanjePredmetaService {
 
     public Iterable<PohadjanjePredmeta> findAll() {
         return pohadjanjePredmetaRepository.findAll();
+    }
+
+    public Page<PohadjanjePredmeta> findAll(Pageable pageable) {
+        return pohadjanjePredmetaRepository.findAll(pageable);
     }
 
     public Optional<PohadjanjePredmeta> findOne(Long id) {

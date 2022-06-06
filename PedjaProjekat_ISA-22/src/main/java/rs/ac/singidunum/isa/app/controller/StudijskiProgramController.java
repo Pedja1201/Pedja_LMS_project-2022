@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.StudijskiProgramService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/studijskiProgrami")
@@ -24,19 +27,23 @@ public class StudijskiProgramController {
 
     @LoggedStudijskiProgram //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<StudijskiProgramDTO>> getAll() {
-        ArrayList<StudijskiProgramDTO> studijskiProgrami = new ArrayList<StudijskiProgramDTO>();
-
-        for (StudijskiProgram studijskiProgram : studijskiProgramService.findAll()) {
-            studijskiProgrami.add(new StudijskiProgramDTO(studijskiProgram.getId(),studijskiProgram.getNaziv(),
-                    new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
-                                                                null,null,null),
-                    new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getKorisnickoIme(),
-                            studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getIme(),
-                            studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),null,null),
-                    new GodinaStudijaDTO(studijskiProgram.getGodinaStudija().getId(), studijskiProgram.getGodinaStudija().getGodina(),null)));
-        }
-        return new ResponseEntity<Iterable<StudijskiProgramDTO>>(studijskiProgrami, HttpStatus.OK);
+    public ResponseEntity<Page<StudijskiProgramDTO>> getAll(Pageable pageable) {
+        Page<StudijskiProgram> studijskiProgram = studijskiProgramService.findAll(pageable);
+        Page<StudijskiProgramDTO> studijskiProgrami = studijskiProgram.map(new Function<StudijskiProgram, StudijskiProgramDTO>() {
+            public StudijskiProgramDTO apply(StudijskiProgram studijskiProgram) {
+                StudijskiProgramDTO studijskiProgramDTO = new StudijskiProgramDTO(studijskiProgram.getId(),studijskiProgram.getNaziv(),
+                        new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
+                                null,null,null),
+                        new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getKorisnickoIme(),
+                                studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getIme(),
+                                studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),null,null),
+                        new GodinaStudijaDTO(studijskiProgram.getGodinaStudija().getId(), studijskiProgram.getGodinaStudija().getGodina(),null)
+                );
+                // Conversion logic
+                return studijskiProgramDTO;
+            }
+        });
+        return new ResponseEntity<Page<StudijskiProgramDTO>>(studijskiProgrami, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{studijskiProgramId}", method = RequestMethod.GET)

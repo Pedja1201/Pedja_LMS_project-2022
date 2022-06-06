@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import rs.ac.singidunum.isa.app.service.NaucnaOblastService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/api/naucneOblasti")
@@ -25,20 +28,16 @@ public class NaucnaOblastController {
     private NaucnaOblastService naucnaOblastService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<NaucnaOblastDTO>> getAllNaucnaOblast() {
-        ArrayList<NaucnaOblastDTO> naucneOblasti = new ArrayList<NaucnaOblastDTO>();
-        for (NaucnaOblast naucnaOblast : naucnaOblastService.findAll()) {
-            ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
-            for (Zvanje zvanje : naucnaOblast.getZvanja()) {
-                zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
-                        null,
-                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(), null)));
-            }
-            naucneOblasti.add(
-                    new NaucnaOblastDTO(naucnaOblast.getId(), naucnaOblast.getNaziv(), zvanja));
-        }
-
-        return new ResponseEntity<Iterable<NaucnaOblastDTO>>(naucneOblasti, HttpStatus.OK);
+    public ResponseEntity<Page<NaucnaOblastDTO>> getAllNaucnaOblast(Pageable pageable) {
+        Page<NaucnaOblast> naucneOblasti = naucnaOblastService.findAll(pageable);
+        return new ResponseEntity<Page<NaucnaOblastDTO>>(
+                naucneOblasti.map(naucnaOblast -> new NaucnaOblastDTO(naucnaOblast.getId(), naucnaOblast.getNaziv(),
+                        (ArrayList<ZvanjeDTO>) naucnaOblast.getZvanja().stream()
+                                .map(karta -> new ZvanjeDTO(karta.getId(), karta.getDatumIzbora(), karta.getDatumPrestanka(), null,
+                                        new TipZvanjaDTO(karta.getTipZvanja().getId(),
+                                                karta.getTipZvanja().getNaziv(), null)))
+                                .collect(Collectors.toList()))),
+                HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.GET)
@@ -53,8 +52,7 @@ public class NaucnaOblastController {
             for (Zvanje zvanje : naucnaOblast.get().getZvanja()) {
                 zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(),zvanje.getDatumPrestanka(),
                         null,
-                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(),
-                                zvanje.getTipZvanja().getNaziv(), null)));
+                         null));
             }
 
             naucnaOblastDTO = new NaucnaOblastDTO(naucnaOblast.get().getId(), naucnaOblast.get().getNaziv(), zvanja);
@@ -72,7 +70,7 @@ public class NaucnaOblastController {
             for(Zvanje zvanje : naucnaOblast.getZvanja()) {
                 zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
                         null,
-                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(), null)));
+                       null));
             }
             NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(naucnaOblast.getId(), naucnaOblast.getNaziv(), zvanja);
             return new ResponseEntity<NaucnaOblastDTO>(naucnaOblastDTO,HttpStatus.CREATED);
@@ -93,7 +91,7 @@ public class NaucnaOblastController {
             for(Zvanje zvanje : naucnaOblast.getZvanja()) {
                 zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
                         null,
-                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(), null)));
+                     null));
             }
             NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(izmenjenaNaucnaOblast.getId(), izmenjenaNaucnaOblast.getNaziv(), zvanja);
             return new ResponseEntity<NaucnaOblastDTO>(naucnaOblastDTO, HttpStatus.OK);

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.GodinaStudijaService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/godinaStudija")
@@ -23,19 +26,22 @@ public class GodinaStudijaController {
     private GodinaStudijaService godinaStudijaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<GodinaStudijaDTO>> getAll() {
-        ArrayList<GodinaStudijaDTO> godineStudija = new ArrayList<GodinaStudijaDTO>();
-
-        for (GodinaStudija godinaStudija : godinaStudijaService.findAll()) {
-            godineStudija.add(new GodinaStudijaDTO(godinaStudija.getId(),godinaStudija.getGodina(),
-                    new PredmetDTO(godinaStudija.getPredmet().getId(), godinaStudija.getPredmet().getNaziv(),
-                            godinaStudija.getPredmet().getEspb(), godinaStudija.getPredmet().isObavezan(),
-                            godinaStudija.getPredmet().getBrojPredavanja(), godinaStudija.getPredmet().getBrojVezbi(),
-                            godinaStudija.getPredmet().getDrugiObliciNastave(), godinaStudija.getPredmet().getIstrazivackiRad(),
-                            godinaStudija.getPredmet().getOstaliCasovi())));
-        }
-
-        return new ResponseEntity<Iterable<GodinaStudijaDTO>>(godineStudija, HttpStatus.OK);
+    public ResponseEntity<Page<GodinaStudijaDTO>> getAll(Pageable pageable) {
+        Page<GodinaStudija> godinaStudija = godinaStudijaService.findAll(pageable);
+        Page<GodinaStudijaDTO> godineStudija = godinaStudija.map(new Function<GodinaStudija, GodinaStudijaDTO>() {
+            public GodinaStudijaDTO apply(GodinaStudija godinaStudija) {
+                GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(godinaStudija.getId(), godinaStudija.getGodina(),
+                        new PredmetDTO(godinaStudija.getPredmet().getId(), godinaStudija.getPredmet().getNaziv(),
+                                godinaStudija.getPredmet().getEspb(), godinaStudija.getPredmet().isObavezan(),
+                                godinaStudija.getPredmet().getBrojPredavanja(), godinaStudija.getPredmet().getBrojVezbi(),
+                                godinaStudija.getPredmet().getDrugiObliciNastave(), godinaStudija.getPredmet().getIstrazivackiRad(),
+                                godinaStudija.getPredmet().getOstaliCasovi())
+                );
+                // Conversion logic
+                return godinaStudijaDTO;
+            }
+        });
+        return new ResponseEntity<Page<GodinaStudijaDTO>>(godineStudija, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{godinaStudijaId}", method = RequestMethod.GET)

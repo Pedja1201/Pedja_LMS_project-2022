@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.StudijskiProgram;
 import rs.ac.singidunum.isa.app.repository.StudijskiProgramRepository;
@@ -29,6 +31,10 @@ public class StudijskiProgramService {
 
     public Iterable<StudijskiProgram> findAll() {
         return studijskiProgramRepository.findAll();
+    }
+
+    public Page<StudijskiProgram> findAll(Pageable pageable) {
+        return studijskiProgramRepository.findAll(pageable);
     }
 
     public Optional<StudijskiProgram> findOne(Long id) {

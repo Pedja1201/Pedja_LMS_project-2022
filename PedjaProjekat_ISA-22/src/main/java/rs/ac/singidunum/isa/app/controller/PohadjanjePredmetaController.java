@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.PohadjanjePredmetaService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/pohadjanjePredmeta")
@@ -23,16 +26,19 @@ public class PohadjanjePredmetaController {
     private PohadjanjePredmetaService pohadjanjePredmetaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<PohadjanjePredmetaDTO>> getAll() {
-        ArrayList<PohadjanjePredmetaDTO> pohadjanjaPredmeta = new ArrayList<PohadjanjePredmetaDTO>();
-
-        for (PohadjanjePredmeta pohadjanjePredmeta : pohadjanjePredmetaService.findAll()) {
-            pohadjanjaPredmeta.add(new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(),pohadjanjePredmeta.getKonacnaOcena(),
-                    new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
-                            pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null)));
-        }
-
-        return new ResponseEntity<Iterable<PohadjanjePredmetaDTO>>(pohadjanjaPredmeta, HttpStatus.OK);
+    public ResponseEntity<Page<PohadjanjePredmetaDTO>> getAll(Pageable pageable) {
+        Page<PohadjanjePredmeta> pohadjanjePredmeta = pohadjanjePredmetaService.findAll(pageable);
+        Page<PohadjanjePredmetaDTO> pohadjanjaPredmeta = pohadjanjePredmeta.map(new Function<PohadjanjePredmeta, PohadjanjePredmetaDTO>() {
+            public PohadjanjePredmetaDTO apply(PohadjanjePredmeta pohadjanjePredmeta) {
+                PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(), pohadjanjePredmeta.getKonacnaOcena(),
+                        new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
+                                pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null)
+                );
+                // Conversion logic
+                return pohadjanjePredmetaDTO;
+            }
+        });
+        return new ResponseEntity<Page<PohadjanjePredmetaDTO>>(pohadjanjaPredmeta, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.GET)

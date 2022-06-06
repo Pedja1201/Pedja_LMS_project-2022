@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.RealizacijaPredmetaService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/realizacijaPredmeta")
@@ -24,21 +27,24 @@ public class RealizacijaPredmetaController {
     private RealizacijaPredmetaService realizacijaPredmetaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<RealizacijaPredmetaDTO>> getAll() {
-        ArrayList<RealizacijaPredmetaDTO> realizacijePredmeta = new ArrayList<RealizacijaPredmetaDTO>();
-
-        for (RealizacijaPredmeta realizacijaPredmeta : realizacijaPredmetaService.findAll()) {
-            realizacijePredmeta.add(new RealizacijaPredmetaDTO(realizacijaPredmeta.getId(),realizacijaPredmeta.getNaziv(),
-                    new NastavnikNaRealizacijiDTO(realizacijaPredmeta.getNastavnikNaRealizaciji().getId(),
-                            realizacijaPredmeta.getNastavnikNaRealizaciji().getBrojCasova(),null,null),
-                    new PredmetDTO(realizacijaPredmeta.getPredmet().getId(), realizacijaPredmeta.getPredmet().getNaziv(),
-                            realizacijaPredmeta.getPredmet().getEspb(),realizacijaPredmeta.getPredmet().isObavezan(),
-                            realizacijaPredmeta.getPredmet().getBrojPredavanja(),realizacijaPredmeta.getPredmet().getBrojVezbi(),
-                            realizacijaPredmeta.getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.getPredmet().getIstrazivackiRad(),
-                            realizacijaPredmeta.getPredmet().getOstaliCasovi())));
-        }
-
-        return new ResponseEntity<Iterable<RealizacijaPredmetaDTO>>(realizacijePredmeta, HttpStatus.OK);
+    public ResponseEntity<Page<RealizacijaPredmetaDTO>> getAll(Pageable pageable) {
+        Page<RealizacijaPredmeta> realizacijaPredmeta = realizacijaPredmetaService.findAll(pageable);
+        Page<RealizacijaPredmetaDTO> realizacijePredmeta = realizacijaPredmeta.map(new Function<RealizacijaPredmeta, RealizacijaPredmetaDTO>() {
+            public RealizacijaPredmetaDTO apply(RealizacijaPredmeta realizacijaPredmeta) {
+                RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(realizacijaPredmeta.getId(), realizacijaPredmeta.getNaziv(),
+                        new NastavnikNaRealizacijiDTO(realizacijaPredmeta.getNastavnikNaRealizaciji().getId(),
+                                realizacijaPredmeta.getNastavnikNaRealizaciji().getBrojCasova(),null,null),
+                        new PredmetDTO(realizacijaPredmeta.getPredmet().getId(), realizacijaPredmeta.getPredmet().getNaziv(),
+                                realizacijaPredmeta.getPredmet().getEspb(),realizacijaPredmeta.getPredmet().isObavezan(),
+                                realizacijaPredmeta.getPredmet().getBrojPredavanja(),realizacijaPredmeta.getPredmet().getBrojVezbi(),
+                                realizacijaPredmeta.getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.getPredmet().getIstrazivackiRad(),
+                                realizacijaPredmeta.getPredmet().getOstaliCasovi())
+                );
+                // Conversion logic
+                return realizacijaPredmetaDTO;
+            }
+        });
+        return new ResponseEntity<Page<RealizacijaPredmetaDTO>>(realizacijePredmeta, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.GET)

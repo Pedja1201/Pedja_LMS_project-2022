@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.IshodService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/ishodi")
@@ -23,19 +26,22 @@ public class IshodController {
     private IshodService ishodService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<IshodDTO>> getAll() {
-        ArrayList<IshodDTO> ishodi = new ArrayList<IshodDTO>();
-
-        for (Ishod ishod : ishodService.findAll()) {
-            ishodi.add(new IshodDTO(ishod.getId(),ishod.getOpis(),
-                    new PredmetDTO(ishod.getPredmet().getId(), ishod.getPredmet().getNaziv(),
-                            ishod.getPredmet().getEspb(), ishod.getPredmet().isObavezan(),
-                            ishod.getPredmet().getBrojPredavanja(), ishod.getPredmet().getBrojVezbi(),
-                            ishod.getPredmet().getDrugiObliciNastave(), ishod.getPredmet().getIstrazivackiRad(),
-                            ishod.getPredmet().getOstaliCasovi())));
-        }
-
-        return new ResponseEntity<Iterable<IshodDTO>>(ishodi, HttpStatus.OK);
+    public ResponseEntity<Page<IshodDTO>> getAll(Pageable pageable) {
+        Page<Ishod> ishod = ishodService.findAll(pageable);
+        Page<IshodDTO> ishodi = ishod.map(new Function<Ishod, IshodDTO>() {
+            public IshodDTO apply(Ishod ishod) {
+                IshodDTO ishodDTO = new IshodDTO(ishod.getId(), ishod.getOpis(),
+                        new PredmetDTO(ishod.getPredmet().getId(), ishod.getPredmet().getNaziv(),
+                                ishod.getPredmet().getEspb(), ishod.getPredmet().isObavezan(),
+                                ishod.getPredmet().getBrojPredavanja(), ishod.getPredmet().getBrojVezbi(),
+                                ishod.getPredmet().getDrugiObliciNastave(), ishod.getPredmet().getIstrazivackiRad(),
+                                ishod.getPredmet().getOstaliCasovi())
+                );
+                // Conversion logic
+                return ishodDTO;
+            }
+        });
+        return new ResponseEntity<Page<IshodDTO>>(ishodi, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.GET)

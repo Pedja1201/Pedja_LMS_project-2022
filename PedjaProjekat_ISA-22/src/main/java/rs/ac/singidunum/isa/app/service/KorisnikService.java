@@ -2,6 +2,8 @@ package rs.ac.singidunum.isa.app.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Korisnik;
 import rs.ac.singidunum.isa.app.repository.KorisnikRepository;
@@ -15,6 +17,10 @@ public class KorisnikService {
 
     public Iterable<Korisnik> findAll() {
         return korisnikRepository.findAll();
+    }
+
+    public Page<Korisnik> findAll(Pageable pageable) {
+        return korisnikRepository.findAll(pageable);
     }
 
     public Optional<Korisnik> findOne(Long id) {

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Nastavnik;
 import rs.ac.singidunum.isa.app.model.Predmet;
@@ -32,6 +34,10 @@ public class PredmetService {
 
     public Iterable<Predmet> findAll() {
         return predmetRepository.findAll();
+    }
+
+    public Page<Predmet> findAll(Pageable pageable) {
+        return predmetRepository.findAll(pageable);
     }
 
     public Optional<Predmet> findOne(Long id) {

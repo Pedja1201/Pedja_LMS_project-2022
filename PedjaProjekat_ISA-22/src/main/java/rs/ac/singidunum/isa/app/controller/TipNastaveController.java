@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import rs.ac.singidunum.isa.app.service.TipNastaveService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/tipNastave")
@@ -22,14 +25,17 @@ public class TipNastaveController {
     private TipNastaveService tipNastaveService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<TipNastaveDTO>> getAll() {
-        ArrayList<TipNastaveDTO> tipoviNastave = new ArrayList<TipNastaveDTO>();
-
-        for (TipNastave tipNastave : tipNastaveService.findAll()) {
-            tipoviNastave.add(new TipNastaveDTO(tipNastave.getId(), tipNastave.getNaziv()));
-        }
-
-        return new ResponseEntity<Iterable<TipNastaveDTO>>(tipoviNastave, HttpStatus.OK);
+    public ResponseEntity<Page<TipNastaveDTO>> getAll(Pageable pageable) {
+        Page<TipNastave> tipNastave = tipNastaveService.findAll(pageable);
+        Page<TipNastaveDTO> tipoviNastave = tipNastave.map(new Function<TipNastave, TipNastaveDTO>() {
+            public TipNastaveDTO apply(TipNastave tipNastave) {
+                TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(tipNastave.getId(), tipNastave.getNaziv()
+                );
+                // Conversion logic
+                return tipNastaveDTO;
+            }
+        });
+        return new ResponseEntity<Page<TipNastaveDTO>>(tipoviNastave, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{tipNastaveId}", method = RequestMethod.GET)

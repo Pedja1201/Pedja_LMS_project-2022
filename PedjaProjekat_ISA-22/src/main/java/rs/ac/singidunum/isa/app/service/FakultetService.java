@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Fakultet;
 import rs.ac.singidunum.isa.app.repository.FakultetRepository;
@@ -30,6 +32,11 @@ public class FakultetService {
     public Iterable<Fakultet> findAll() {
         return fakultetRepository.findAll();
     }
+
+    public Page<Fakultet> findAll(Pageable pageable) {
+        return fakultetRepository.findAll(pageable);
+    }
+
 
     public Optional<Fakultet> findOne(Long id) {
         return fakultetRepository.findById(id);

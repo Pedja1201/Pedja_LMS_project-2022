@@ -1,7 +1,10 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rs.ac.singidunum.isa.app.model.Administrator;
 import rs.ac.singidunum.isa.app.model.Adresa;
 import rs.ac.singidunum.isa.app.repository.AdresaRepository;
 
@@ -32,6 +35,11 @@ public class AdresaService {
     public Iterable<Adresa> findAll() {
         return adresaRepository.findAll();
     }
+
+    public Page<Adresa> findAll(Pageable pageable) {
+        return adresaRepository.findAll(pageable);
+    }
+
 
     public Optional<Adresa> findOne(Long id) {
         return adresaRepository.findById(id);

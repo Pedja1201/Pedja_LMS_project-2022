@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.KorisnikService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/korisnici")
@@ -24,15 +27,18 @@ public class KorisnikController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Iterable<KorisnikDTO>> getAll() {
-        ArrayList<KorisnikDTO> korisnici = new ArrayList<KorisnikDTO>();
-
-        for (Korisnik korisnik : korisnikService.findAll()) {
-            korisnici.add(new KorisnikDTO(korisnik.getId(),
-                    korisnik.getKorisnickoIme(), korisnik.getLozinka()));
-        }
-
-        return new ResponseEntity<Iterable<KorisnikDTO>>(korisnici, HttpStatus.OK);
+    public ResponseEntity<Page<KorisnikDTO>> getAll(Pageable pageable) {
+        Page<Korisnik> korisnik = korisnikService.findAll(pageable);
+        Page<KorisnikDTO> korisnici = korisnik.map(new Function<Korisnik, KorisnikDTO>() {
+            public KorisnikDTO apply(Korisnik korisnik) {
+                KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(),
+                        korisnik.getLozinka()
+                );
+                // Conversion logic
+                return korisnikDTO;
+            }
+        });
+        return new ResponseEntity<Page<KorisnikDTO>>(korisnici, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{korisnikId}", method = RequestMethod.GET)

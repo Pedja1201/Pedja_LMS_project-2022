@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.AdresaService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/adrese")
@@ -24,15 +27,18 @@ public class AdresaController {
     private AdresaService adresaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<AdresaDTO>> getAll() {
-        Iterable<Adresa> adrese = adresaService.findAll();
-        ArrayList<AdresaDTO> adreseDTO = new ArrayList<AdresaDTO>();
-        for (Adresa adresa : adrese) {
-            adreseDTO.add(new AdresaDTO(adresa.getId(), adresa.getUlica(),adresa.getBroj(),
-                    new MestoDTO(adresa.getMesto().getId(), adresa.getMesto().getNaziv(),null)));
-        }
-
-        return new ResponseEntity<Iterable<AdresaDTO>>(adreseDTO, HttpStatus.OK);
+    public ResponseEntity<Page<AdresaDTO>> getAll(Pageable pageable) {
+        Page<Adresa> adresa = adresaService.findAll(pageable);
+        Page<AdresaDTO> adrese = adresa.map(new Function<Adresa, AdresaDTO>() {
+            public AdresaDTO apply(Adresa adresa) {
+                AdresaDTO adresaDTO = new AdresaDTO(adresa.getId(), adresa.getUlica(), adresa.getBroj(),
+                        new MestoDTO(adresa.getMesto().getId(), adresa.getMesto().getNaziv(),null)
+                );
+                // Conversion logic
+                return adresaDTO;
+            }
+        });
+        return new ResponseEntity<Page<AdresaDTO>>(adrese, HttpStatus.OK);
     }
 
 

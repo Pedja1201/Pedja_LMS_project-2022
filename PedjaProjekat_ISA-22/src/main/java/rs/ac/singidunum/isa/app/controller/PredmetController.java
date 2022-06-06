@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.PredmetService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/predmeti")
@@ -28,16 +31,19 @@ public class PredmetController {
 
     @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<PredmetDTO>> getAll() {
-        ArrayList<PredmetDTO> predmeti = new ArrayList<PredmetDTO>();
-
-        for (Predmet predmet : predmetService.findAll()) {
-            predmeti.add(new PredmetDTO(predmet.getId(), predmet.getNaziv(), predmet.getEspb(),
-                    predmet.isObavezan(), predmet.getBrojPredavanja(), predmet.getBrojVezbi(),
-                    predmet.getDrugiObliciNastave(), predmet.getIstrazivackiRad(), predmet.getOstaliCasovi()));
-        }
-
-        return new ResponseEntity<Iterable<PredmetDTO>>(predmeti, HttpStatus.OK);
+    public ResponseEntity<Page<PredmetDTO>> getAll(Pageable pageable) {
+        Page<Predmet> predmet = predmetService.findAll(pageable);
+        Page<PredmetDTO> predmeti = predmet.map(new Function<Predmet, PredmetDTO>() {
+            public PredmetDTO apply(Predmet predmet) {
+                PredmetDTO predmetDTO = new PredmetDTO(predmet.getId(), predmet.getNaziv(), predmet.getEspb(),
+                        predmet.isObavezan(), predmet.getBrojPredavanja(), predmet.getBrojVezbi(),
+                        predmet.getDrugiObliciNastave(), predmet.getIstrazivackiRad(), predmet.getOstaliCasovi()
+                );
+                // Conversion logic
+                return predmetDTO;
+            }
+        });
+        return new ResponseEntity<Page<PredmetDTO>>(predmeti, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.GET)

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -16,6 +18,7 @@ import rs.ac.singidunum.isa.app.service.NastavnikService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/nastavnici")
@@ -26,17 +29,21 @@ public class NastavnikController {
     @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Iterable<NastavnikDTO>> getAllNastavnik() {
-        ArrayList<NastavnikDTO> nastavnici = new ArrayList<NastavnikDTO>();
-
-        for (Nastavnik nastavnik : nastavnikService.findAll()) {
-            nastavnici.add(new NastavnikDTO(nastavnik.getId(),nastavnik.getKorisnickoIme(),nastavnik.getLozinka(),nastavnik.getIme(),
-                    nastavnik.getBiografija(), nastavnik.getJmbg(),
-                    new AdresaDTO(nastavnik.getAdresa().getId(),nastavnik.getAdresa().getUlica(),nastavnik.getAdresa().getBroj(),null),
-                    new ZvanjeDTO(nastavnik.getZvanje().getId(), nastavnik.getZvanje().getDatumIzbora(),
-                            nastavnik.getZvanje().getDatumPrestanka(),null,null)));
-        }
-        return new ResponseEntity<Iterable<NastavnikDTO>>(nastavnici, HttpStatus.OK);
+    public ResponseEntity<Page<NastavnikDTO>> getAllNastavnik(Pageable pageable) {
+        Page<Nastavnik> nastavnik = nastavnikService.findAll(pageable);
+        Page<NastavnikDTO> nastavnici = nastavnik.map(new Function<Nastavnik, NastavnikDTO>() {
+            public NastavnikDTO apply(Nastavnik nastavnik) {
+                NastavnikDTO nastavnikDTO = new NastavnikDTO(nastavnik.getId(), nastavnik.getKorisnickoIme(),
+                        nastavnik.getLozinka(), nastavnik.getIme(),nastavnik.getBiografija(), nastavnik.getJmbg(),
+                        new AdresaDTO(nastavnik.getAdresa().getId(),nastavnik.getAdresa().getUlica(),nastavnik.getAdresa().getBroj(),null),
+                        new ZvanjeDTO(nastavnik.getZvanje().getId(), nastavnik.getZvanje().getDatumIzbora(),
+                                nastavnik.getZvanje().getDatumPrestanka(),null,null)
+                );
+                // Conversion logic
+                return nastavnikDTO;
+            }
+        });
+        return new ResponseEntity<Page<NastavnikDTO>>(nastavnici, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.GET)

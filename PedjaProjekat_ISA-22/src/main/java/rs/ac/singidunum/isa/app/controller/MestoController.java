@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.MestoService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/mesta")
@@ -23,15 +26,19 @@ public class MestoController {
     private MestoService mestoService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<MestoDTO>> getAll() {
-        ArrayList<MestoDTO> mesta = new ArrayList<MestoDTO>();
+    public ResponseEntity<Page<MestoDTO>> getAll(Pageable pageable) {
+        Page<Mesto> mesto = mestoService.findAll(pageable);
+        Page<MestoDTO> karte = mesto.map(new Function<Mesto, MestoDTO>() {
+            public MestoDTO apply(Mesto mesto) {
+                MestoDTO mestoDTO = new MestoDTO(mesto.getId(), mesto.getNaziv(),
+                        new DrzavaDTO(mesto.getDrzava().getId(), mesto.getDrzava().getNaziv(),null)
 
-        for (Mesto mesto : mestoService.findAll()) {
-            mesta.add(new MestoDTO(mesto.getId(),mesto.getNaziv(),
-                    new DrzavaDTO(mesto.getDrzava().getId(), mesto.getDrzava().getNaziv(),null)));
-        }
-
-        return new ResponseEntity<Iterable<MestoDTO>>(mesta, HttpStatus.OK);
+                );
+                // Conversion logic
+                return mestoDTO;
+            }
+        });
+        return new ResponseEntity<Page<MestoDTO>>(karte, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.GET)

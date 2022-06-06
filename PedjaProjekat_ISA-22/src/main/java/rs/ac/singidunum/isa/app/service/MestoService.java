@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Mesto;
 import rs.ac.singidunum.isa.app.repository.MestoRepository;
@@ -31,6 +33,10 @@ public class MestoService {
 
     public Iterable<Mesto> findAll() {
         return mestoRepository.findAll();
+    }
+
+    public Page<Mesto> findAll(Pageable pageable) {
+        return mestoRepository.findAll(pageable);
     }
 
     public Optional<Mesto> findOne(Long id) {

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Ishod;
 import rs.ac.singidunum.isa.app.repository.IshodRepository;
@@ -31,6 +33,10 @@ public class IshodService {
 
     public Iterable<Ishod> findAll() {
         return ishodRepository.findAll();
+    }
+
+    public Page<Ishod> findAll(Pageable pageable) {
+        return ishodRepository.findAll(pageable);
     }
 
     public Optional<Ishod> findOne(Long id) {

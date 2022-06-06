@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import rs.ac.singidunum.isa.app.service.AdministratorService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "api/administratori")
@@ -25,13 +28,18 @@ public class AdministratorController {
     @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.GET)
 //        @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<Iterable<AdministratorDTO>> getAllAdministrator() {
-        ArrayList<AdministratorDTO> administratorDTOS = new ArrayList<AdministratorDTO>();
-
-        for (Administrator administrator : administratorService.findAll()) {
-            administratorDTOS.add(new AdministratorDTO(administrator.getId(),administrator.getKorisnickoIme(),administrator.getLozinka(), administrator.getIme(), administrator.getJmbg()));
-        }
-        return new ResponseEntity<Iterable<AdministratorDTO>>(administratorDTOS, HttpStatus.OK);
+    public ResponseEntity<Page<AdministratorDTO>> getAllAdministrator(Pageable pageable) {
+        Page<Administrator> administrator = administratorService.findAll(pageable);
+        Page<AdministratorDTO> administratori = administrator.map(new Function<Administrator, AdministratorDTO>() {
+            public AdministratorDTO apply(Administrator administrator) {
+                AdministratorDTO administratorDTO = new AdministratorDTO(administrator.getId(),administrator.getKorisnickoIme(),
+                        administrator.getLozinka(), administrator.getIme(), administrator.getJmbg()
+                );
+                // Conversion logic
+                return administratorDTO;
+            }
+        });
+        return new ResponseEntity<Page<AdministratorDTO>>(administratori, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{administratorId}", method = RequestMethod.GET)

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Drzava;
 import rs.ac.singidunum.isa.app.repository.DrzavaRepository;
@@ -31,6 +33,10 @@ public class DrzavaService {
 
     public Iterable<Drzava> findAll() {
         return drzavaRepository.findAll();
+    }
+
+    public Page<Drzava> findAll(Pageable pageable) {
+        return drzavaRepository.findAll(pageable);
     }
 
     public Optional<Drzava> findOne(Long id) {
