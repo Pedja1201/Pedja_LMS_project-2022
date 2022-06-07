@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Project_Spring-Email" />
         <module name="PedjaProjekat_ISA-22" />
         <module name="Project_ISA_KWA-logger" />
       </profile>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="PedjaProjekat_ISA-22" options="-parameters" />
       <module name="Project_ISA_KWA-logger" options="-parameters" />
+      <module name="Project_Spring-Email" options="-parameters" />
     </option>
   </component>
 </project>

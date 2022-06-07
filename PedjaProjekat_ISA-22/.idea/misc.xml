@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../Project_ISA_KWA-logger/pom.xml" />
+        <option value="$PROJECT_DIR$/../Project_Spring-Email/pom.xml" />
       </list>
     </option>
   </component>
