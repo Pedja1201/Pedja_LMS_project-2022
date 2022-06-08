@@ -8,7 +8,8 @@ import { StudijskiProgramiService } from '../../service/studijski-programi.servi
   styleUrls: ['./studijski-programi.component.css']
 })
 export class StudijskiProgramiComponent implements OnInit {
-  title="Primer Studijskih programa"
+  title="Primer Studijskih programa";
+  prikaz = false;
   
   
   studijskiProgrami : StudijskiProgram[]=[];
@@ -64,6 +65,7 @@ export class StudijskiProgramiComponent implements OnInit {
 
   setUpdate(studijskiProgram: any) {
     this.itemUpdate = { ...studijskiProgram };
+    this.prikaz = true;
   }
 
 }

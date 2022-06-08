@@ -5,7 +5,7 @@
 <app-tabela-studijskih-programa [elementi]="studijskiProgrami" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-studijskih-programa>
 
-<app-forma-studijskih-programa [studijskiProgram]="itemUpdate" (createEvent)="update($event)"></app-forma-studijskih-programa>
+<app-forma-studijskih-programa *ngIf="prikaz"  [studijskiProgram]="itemUpdate" (createEvent)="update($event)"></app-forma-studijskih-programa>
 </mat-tab>
 <mat-tab label="Add Studijski program">
     <app-forma-studijskih-programa (createEvent)="create($event)"></app-forma-studijskih-programa>

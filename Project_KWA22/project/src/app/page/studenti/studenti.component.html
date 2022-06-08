@@ -7,7 +7,7 @@
 <app-tabela-studenta [elementi]="studenti" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-studenta>
 
-<app-forma-studenta [student]="studentUpdate" (createEvent)="update($event)"></app-forma-studenta>
+<app-forma-studenta *ngIf="prikaz"  [student]="studentUpdate" (createEvent)="update($event)"></app-forma-studenta>
 </mat-tab>
 <mat-tab label="Add Student">
     <app-forma-studenta (createEvent)="create($event)"></app-forma-studenta>

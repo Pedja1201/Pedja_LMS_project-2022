@@ -8,7 +8,8 @@ import { UsersService } from 'src/app/service/users.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  title="Users"
+  title="Users";
+  prikaz = false;
   
   //Users
   users : User[] = [];
@@ -61,6 +62,7 @@ export class UsersComponent implements OnInit {
 
   setUpdate(user: any) {
     this.userUpdate = { ...user };
+    this.prikaz = true;
   }
 
 

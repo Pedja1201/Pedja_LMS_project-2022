@@ -1,4 +1,44 @@
 <h1>{{title}}</h1>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Ulica Column -->
+  <ng-container matColumnDef="ulica">
+    <th mat-header-cell *matHeaderCellDef> Ulica </th>
+    <td mat-cell *matCellDef="let element"> {{element.ulica}} </td>
+  </ng-container>
+
+  <!-- Broj Column -->
+  <ng-container matColumnDef="broj">
+    <th mat-header-cell *matHeaderCellDef> Broj </th>
+    <td mat-cell *matCellDef="let element"> {{element.broj}} </td>
+  </ng-container>
+
+  <!-- Mesto Column -->
+  <ng-container matColumnDef="mesto">
+    <th mat-header-cell *matHeaderCellDef> Mesto </th>
+    <td mat-cell *matCellDef="let element">{{element.akcije}}</td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="akcije">
+    <th mat-header-cell *matHeaderCellDef> Akcija </th>
+    <button mat-stroked-button  color="warn" (click)="ukloni(e['id'])">Ukloni</button>
+    <button mat-stroked-button (click)="izmeni(e)">Izmeni</button>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- 
 <table mat-table class="mat-elevation-z20">
     <thead>
       <tr>
@@ -9,9 +49,9 @@
         <th>Akcije</th>
       </tr>
     </thead>
-    <tbody>                        
+    <tbody>                         -->
                                     <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
-      <tr *ngFor="let e of elementi">
+      <!-- <tr *ngFor="let e of elementi">
         <td><button mat-stroked-button  (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
         <td>{{e["ulica"]}}</td>
         <td><span *ngIf="e['broj']; else praznoPolje">{{e["broj"]}}</span></td>
@@ -25,4 +65,4 @@
     </tbody>
   </table>
   
-  <ng-template #praznoPolje>-</ng-template>
+  <ng-template #praznoPolje>-</ng-template> -->

@@ -5,7 +5,7 @@
 <app-tabela-tipa-nastave [elementi]="tipoviNastave" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-tipa-nastave>
 
-<app-forma-tipa-nastave [tipNastave]="itemUpdate" (createEvent)="update($event)"></app-forma-tipa-nastave>
+<app-forma-tipa-nastave *ngIf="prikaz"  [tipNastave]="itemUpdate" (createEvent)="update($event)"></app-forma-tipa-nastave>
 </mat-tab>
 <mat-tab label="Add Tip nastave">
     <app-forma-tipa-nastave (createEvent)="create($event)"></app-forma-tipa-nastave>

@@ -9,7 +9,8 @@ import { MestaService } from '../../service/mesta.service';
   styleUrls: ['./mesta.component.css']
 })
 export class MestaComponent implements OnInit {
-  title="Primer Mesto"
+  title="Primer Mesto";
+  prikaz = false;
   
   //Mesto
   mesta : Mesto[]=[];
@@ -65,6 +66,7 @@ export class MestaComponent implements OnInit {
 
   setUpdate(mesto: any) {
     this.mestoUpdate = { ...mesto };
+    this.prikaz = true;
   }
 
 }

@@ -5,7 +5,7 @@
 <app-table-users [elementi]="users" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-table-users>
 
-<app-form-users [user]="userUpdate" (createEvent)="update($event)"></app-form-users>
+<app-form-users *ngIf="prikaz"  [user]="userUpdate" (createEvent)="update($event)"></app-form-users>
 </mat-tab>
 <mat-tab label="Add Users">
     <app-form-users (createEvent)="create($event)"></app-form-users>

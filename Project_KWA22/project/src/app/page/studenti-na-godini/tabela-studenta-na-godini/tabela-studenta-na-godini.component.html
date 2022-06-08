@@ -17,8 +17,8 @@
         <td>{{e["brojIndeksa"]}}</td>
         <td><span *ngIf="e['godinaStudija']">{{e["godinaStudija"]["godina"]}}</span></td>
         <td>
-          <button mat-stroked-button color="warn"  (click)="ukloni(e['id'])">Ukloni</button>
-          <button  mat-stroked-button (click)="izmeni(e)">Izmeni</button>
+          <button mat-icon-button color="warn" (click)="ukloni(e['id'])"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="izmeni(e)"><mat-icon>edit</mat-icon></button>
         </td>
   
       </tr>

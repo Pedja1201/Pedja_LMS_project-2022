@@ -10,7 +10,8 @@ import { PredmetiService } from '../../service/predmeti.service';
   styleUrls: ['./ishodi.component.css']
 })
 export class IshodiComponent implements OnInit {
-  title="Primer Ishoda"
+  title="Primer Ishoda";
+  prikaz = false;
   
   //Ishod
   ishodi : Ishod[]=[];
@@ -66,6 +67,7 @@ export class IshodiComponent implements OnInit {
 
   setUpdate(ishod: any) {
     this.ishodUpdate = { ...ishod };
+    this.prikaz = true;
   }
 
 }

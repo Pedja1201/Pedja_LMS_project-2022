@@ -8,7 +8,8 @@ import { NastavniciService } from '../../service/nastavnici.service';
   styleUrls: ['./nastavnici.component.css']
 })
 export class NastavniciComponent implements OnInit {
-  title="Primer Nastavnika"
+  title="Primer Nastavnika";
+  prikaz = false;
   
   //Nastavnik
   nastavnici : Nastavnik[]=[];
@@ -65,6 +66,7 @@ export class NastavniciComponent implements OnInit {
 
   setUpdate(nastavnik: any) {
     this.nastavnikUpdate = { ...nastavnik };
+    this.prikaz = true;
   }
 
   // Pretraga

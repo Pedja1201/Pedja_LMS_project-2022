@@ -8,7 +8,8 @@ import { ZvanjaService } from '../../service/zvanja.service';
   styleUrls: ['./zvanja.component.css']
 })
 export class ZvanjaComponent implements OnInit {
-  title="Primer Zvanja"
+  title="Primer Zvanja";
+  prikaz = false;
   
   //Zvanje
   zvanja : Zvanje[]=[];
@@ -64,6 +65,7 @@ export class ZvanjaComponent implements OnInit {
 
   setUpdate(zvanje: any) {
     this.zvanjeUpdate = { ...zvanje };
+    this.prikaz = true;
   }
 
 

@@ -8,7 +8,8 @@ import { StudentiService } from '../../service/studenti.service';
   styleUrls: ['./studenti.component.css']
 })
 export class StudentiComponent implements OnInit {
-  title="Primer studenata"
+  title="Primer studenata";
+  prikaz = false;
   
   //Studenti
   studenti : Student[]=[];
@@ -65,6 +66,7 @@ export class StudentiComponent implements OnInit {
 
   setUpdate(student: any) {
     this.studentUpdate = { ...student };
+    this.prikaz = true;
   }
 
   // Pretraga

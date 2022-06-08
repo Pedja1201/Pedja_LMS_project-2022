@@ -45,15 +45,20 @@ import { ZvanjaComponent } from './page/zvanja/zvanja.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { UsersComponent } from './page/users/users.component';
 import { DetailsUsersComponent } from './page/users/details-users/details-users.component';
+import { TableUsersComponent } from './page/users/table-users/table-users.component';
+import { FormUsersComponent } from './page/users/form-users/form-users.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},
   {path:"", redirectTo: "", pathMatch:"full"}, ///Vraca na korensku rutu
 
   //Users
-  {path: 'users',component: UsersComponent,
-      data: { allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]}, //Login pre otvaranja
-  {path: 'users/:id',component: DetailsUsersComponent},
+  {path: 'users',component: UsersComponent, data: { allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard],
+  children: [
+      {component: TableUsersComponent, path: '', data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]},
+      {component: FormUsersComponent, path: 'create', data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},
+      {component: FormUsersComponent, path: ':id/update', data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},
+    ]},{path: 'users/:id',component: DetailsUsersComponent},
   //Adrese
   {path: "adrese", component: AdreseComponent, 
         data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
@@ -151,6 +156,9 @@ const routes: Routes = [
 
   //Stablo
   {path:"tree", component:TreeViewComponent},
+
+    //About
+  {path:"about", component:AboutComponent},
 
   //Login
   {path:"login", component:LoginComponent},

@@ -12,7 +12,8 @@ import { UniverzitetiService } from '../../service/univerziteti.service';
 })
 export class FakultetiComponent implements OnInit {
 
-  title="Primer Fakulteta"
+  title="Primer Fakulteta";
+  prikaz = false;
   
   //Fakulteti
   fakulteti : Fakultet[]=[];
@@ -67,6 +68,7 @@ export class FakultetiComponent implements OnInit {
 
   setUpdate(fakultet: any) {
     this.fakultetUpdate = { ...fakultet };
+    this.prikaz = true;
   }
 
 }

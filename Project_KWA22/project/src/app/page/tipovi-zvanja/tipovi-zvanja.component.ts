@@ -8,7 +8,8 @@ import { TipoviZvanjaService } from '../../service/tipovi-zvanja.service';
   styleUrls: ['./tipovi-zvanja.component.css']
 })
 export class TipoviZvanjaComponent implements OnInit {
-  title="Primer Tipa zvanja"
+  title="Primer Tipa zvanja";
+  prikaz = false;
   
   tipoviZvanja : TipZvanja[] = [];
   itemUpdate: TipZvanja | null = null;
@@ -60,6 +61,7 @@ export class TipoviZvanjaComponent implements OnInit {
 
   setUpdate(tipZvanja: any) {
     this.itemUpdate = { ...tipZvanja };
+    this.prikaz = true;
   }
 
 }

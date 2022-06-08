@@ -8,7 +8,8 @@ import { UniverzitetiService } from '../../service/univerziteti.service';
   styleUrls: ['./univerziteti.component.css']
 })
 export class UniverzitetiComponent implements OnInit {
-  title="Primer Univerziteta"
+  title="Primer Univerziteta";
+  prikaz = false;
   
   //Univerzitet
   univerziteti : Univerzitet[]=[];
@@ -64,6 +65,7 @@ export class UniverzitetiComponent implements OnInit {
 
   setUpdate(univerzitet: any) {
     this.univerzitetUpdate = { ...univerzitet };
+    this.prikaz = true;
   }
 
 

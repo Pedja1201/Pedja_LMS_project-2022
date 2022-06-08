@@ -8,7 +8,8 @@ import { AdreseService } from '../../service/adrese.service';
   styleUrls: ['./adrese.component.css']
 })
 export class AdreseComponent implements OnInit {
-  title="Primer Adrese"
+  title="Primer Adrese";
+  prikaz = false;
   
   //Adresa
   adrese : Adresa[] = [];
@@ -61,6 +62,7 @@ export class AdreseComponent implements OnInit {
 
   setUpdate(adresa: any) {
     this.adresaUpdate = { ...adresa };
+    this.prikaz = true;
   }
 
 }

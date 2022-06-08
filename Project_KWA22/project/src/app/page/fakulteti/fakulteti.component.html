@@ -5,7 +5,7 @@
 <app-tabela-fakulteta [elementi]="fakulteti" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-fakulteta>
 
-<app-forma-fakulteta [fakultet]="fakultetUpdate" (createEvent)="update($event)"></app-forma-fakulteta>
+<app-forma-fakulteta *ngIf="prikaz"  [fakultet]="fakultetUpdate" (createEvent)="update($event)"></app-forma-fakulteta>
 </mat-tab>
 <mat-tab label="Add Fakultet">
     <app-forma-fakulteta (createEvent)="create($event)"></app-forma-fakulteta>

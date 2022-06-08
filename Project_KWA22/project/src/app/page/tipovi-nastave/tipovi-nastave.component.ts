@@ -8,7 +8,8 @@ import { TipoviNastaveService } from '../../service/tipovi-nastave.service';
   styleUrls: ['./tipovi-nastave.component.css']
 })
 export class TipoviNastaveComponent implements OnInit {
-  title="Primer Tip nastave"
+  title="Primer Tip nastave";
+  prikaz = false;
   
   tipoviNastave : TipNastave[] = [];
   itemUpdate: TipNastave | null = null;
@@ -60,6 +61,7 @@ export class TipoviNastaveComponent implements OnInit {
 
   setUpdate(tipNastave: any) {
     this.itemUpdate = { ...tipNastave };
+    this.prikaz = true;
   }
 
 }

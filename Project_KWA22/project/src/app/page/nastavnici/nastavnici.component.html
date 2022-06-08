@@ -6,7 +6,7 @@
 <app-tabela-nastavnika [elementi]="nastavnici" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-nastavnika>
 
-<app-forma-nastavnika [nastavnik]="nastavnikUpdate" (createEvent)="update($event)"></app-forma-nastavnika>
+<app-forma-nastavnika *ngIf="prikaz"  [nastavnik]="nastavnikUpdate" (createEvent)="update($event)"></app-forma-nastavnika>
 </mat-tab>
 <mat-tab label="Add Nastavnik">
     <app-forma-nastavnika (createEvent)="create($event)"></app-forma-nastavnika>

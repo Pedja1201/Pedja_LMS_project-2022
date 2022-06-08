@@ -8,7 +8,8 @@ import { DrzaveService } from '../../service/drzave.service';
   styleUrls: ['./drzave.component.css']
 })
 export class DrzaveComponent implements OnInit {
-  title="Primer Drzave"
+  title="Primer Drzave";
+  prikaz = false;
   
   //Drzava
   drzave : Drzava[] = [];
@@ -61,6 +62,7 @@ export class DrzaveComponent implements OnInit {
 
   setUpdate(drzava: any) {
     this.drzavaUpdate = { ...drzava };
+    this.prikaz = true;
   }
 
 }

@@ -9,7 +9,8 @@ import { PredmetiService } from '../../service/predmeti.service';
   styleUrls: ['./godine-studija.component.css']
 })
 export class GodineStudijaComponent implements OnInit {
-  title="Primer Godine studija"
+  title="Primer Godine studija";
+  prikaz = false;
   
   //Godine studija
   godineStudija : GodinaStudija[]=[];
@@ -65,6 +66,7 @@ export class GodineStudijaComponent implements OnInit {
 
   setUpdate(godinaStudija: any) {
     this.godinaStudijaUpdate = { ...godinaStudija };
+    this.prikaz = true;
   }
 
 }

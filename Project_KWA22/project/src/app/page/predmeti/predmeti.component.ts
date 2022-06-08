@@ -8,7 +8,8 @@ import { PredmetiService } from '../../service/predmeti.service';
   styleUrls: ['./predmeti.component.css']
 })
 export class PredmetiComponent implements OnInit {
-  title="Primer Predmeta"
+  title="Primer Predmeta";
+  prikaz = false;
   
   predmeti : Predmet[] = [];
   predmetUpdate: Predmet | null = null;
@@ -60,6 +61,7 @@ export class PredmetiComponent implements OnInit {
 
   setUpdate(predmet: any) {
     this.predmetUpdate = { ...predmet };
+    this.prikaz = true;
   }
 
 }

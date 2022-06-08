@@ -8,7 +8,8 @@ import { PohadjanjaPredmetaService } from '../../service/pohadjanja-predmeta.ser
   styleUrls: ['./pohadjanja-predmeta.component.css']
 })
 export class PohadjanjaPredmetaComponent implements OnInit {
-  title="Primer pohadjanih predmeta"
+  title="Primer pohadjanih predmeta";
+  prikaz = false;
   
 
   pohadjanjaPredmeta : PohadjanjePredmeta[]=[];
@@ -64,6 +65,7 @@ export class PohadjanjaPredmetaComponent implements OnInit {
 
   setUpdate(pohadjanjePredmeta: any) {
     this.itemUpdate = { ...pohadjanjePredmeta };
+    this.prikaz = true;
   }
 
 }

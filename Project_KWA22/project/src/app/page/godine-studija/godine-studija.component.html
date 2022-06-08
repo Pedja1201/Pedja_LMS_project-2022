@@ -5,7 +5,7 @@
 <app-tabela-godine-studija [elementi]="godineStudija" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-godine-studija>
 
-<app-forma-godine-studija [godinaStudija]="godinaStudijaUpdate" (createEvent)="update($event)"></app-forma-godine-studija>
+<app-forma-godine-studija *ngIf="prikaz"  [godinaStudija]="godinaStudijaUpdate" (createEvent)="update($event)"></app-forma-godine-studija>
 </mat-tab>
 <mat-tab label="Add Godina Studija">
     <app-forma-godine-studija (createEvent)="create($event)"></app-forma-godine-studija>

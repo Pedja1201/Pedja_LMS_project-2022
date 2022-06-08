@@ -8,7 +8,8 @@ import { NaucneOblastiService } from '../../service/naucne-oblasti.service';
   styleUrls: ['./naucne-oblasti.component.css']
 })
 export class NaucneOblastiComponent implements OnInit {
-  title="Primer Naucne oblasti"
+  title="Primer Naucne oblasti";
+  prikaz = false;
   
   //Naucna oblast
   naucneOblasti : NaucnaOblast[]=[];
@@ -64,6 +65,7 @@ export class NaucneOblastiComponent implements OnInit {
 
   setUpdate(naucnaOblast: any) {
     this.itemUpdate = { ...naucnaOblast };
+    this.prikaz = true;
   }
 
 

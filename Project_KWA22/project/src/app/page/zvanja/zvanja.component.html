@@ -5,7 +5,7 @@
 <app-tabela-zvanja [elementi]="zvanja" (uklanjanje)="delete($event)" 
 (izmena)="setUpdate($event)"></app-tabela-zvanja>
 
-<app-forma-zvanja [zvanje]="zvanjeUpdate" (createEvent)="update($event)"></app-forma-zvanja>
+<app-forma-zvanja *ngIf="prikaz"  [zvanje]="zvanjeUpdate" (createEvent)="update($event)"></app-forma-zvanja>
 </mat-tab>
 <mat-tab label="Add Zvanje">
     <app-forma-zvanja (createEvent)="create($event)"></app-forma-zvanja>

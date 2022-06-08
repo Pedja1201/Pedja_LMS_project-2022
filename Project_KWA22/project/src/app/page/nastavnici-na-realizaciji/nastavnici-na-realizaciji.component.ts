@@ -8,7 +8,9 @@ import { NastavniciNaRealizacijiService } from '../../service/nastavnici-na-real
   styleUrls: ['./nastavnici-na-realizaciji.component.css']
 })
 export class NastavniciNaRealizacijiComponent implements OnInit {
-  title="Primer Nastavnika na realizaciji"
+  title="Primer Nastavnika na realizaciji";
+  prikaz = false;
+
   
   //Nastavnik na realizaciji
   nastavnici : NastavnikNaRealizaciji[]=[];
@@ -64,6 +66,7 @@ export class NastavniciNaRealizacijiComponent implements OnInit {
 
   setUpdate(nastavnik: any) {
     this.itemUpdate = { ...nastavnik };
+    this.prikaz = true;
   }
 
 

@@ -8,7 +8,8 @@ import { RealizacijePredmetaService } from '../../service/realizacije-predmeta.s
   styleUrls: ['./realizacije-predmeta.component.css']
 })
 export class RealizacijePredmetaComponent implements OnInit {
-  title="Primer Realizacije predmeta"
+  title="Primer Realizacije predmeta";
+  prikaz = false;
   
   realizacijePredmeta : RealizacijaPredmeta[]=[];
   itemUpdate : RealizacijaPredmeta | null = null;
@@ -63,6 +64,7 @@ export class RealizacijePredmetaComponent implements OnInit {
 
   setUpdate(realizacijaPredmeta: any) {
     this.itemUpdate = { ...realizacijaPredmeta };
+    this.prikaz = true;
   }
 
 }

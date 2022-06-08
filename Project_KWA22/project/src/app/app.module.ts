@@ -15,6 +15,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';   
+import {MatTableModule} from '@angular/material/table';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -112,6 +113,7 @@ import { UsersComponent } from './page/users/users.component';
 import { DetailsUsersComponent } from './page/users/details-users/details-users.component';
 import { TableUsersComponent } from './page/users/table-users/table-users.component';
 import { FormUsersComponent } from './page/users/form-users/form-users.component';
+import { AboutComponent } from './page/about/about.component';
 
 @NgModule({
   declarations: [
@@ -207,6 +209,7 @@ import { FormUsersComponent } from './page/users/form-users/form-users.component
     DetailsUsersComponent,
     TableUsersComponent,
     FormUsersComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -227,7 +230,8 @@ import { FormUsersComponent } from './page/users/form-users/form-users.component
     MatMenuModule,
     MatToolbarModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule
 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login
