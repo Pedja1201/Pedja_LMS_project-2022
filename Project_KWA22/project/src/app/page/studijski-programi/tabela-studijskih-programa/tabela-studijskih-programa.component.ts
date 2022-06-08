@@ -11,6 +11,8 @@ import { StudijskiProgramiService } from 'src/app/service/studijski-programi.ser
   styleUrls: ['./tabela-studijskih-programa.component.css']
 })
 export class TabelaStudijskihProgramaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'naziv', 'fakultet', 'nastavnik', 'godinaStudija', "akcije"];
+  dataSource : StudijskiProgram[]=[];
   title="Tabela Studijskih programa";
 
   @Input()

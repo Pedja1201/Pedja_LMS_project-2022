@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Ishod } from '../../model/ishod';
 import { IshodiService } from '../../service/ishodi.service';
@@ -18,7 +19,7 @@ export class IshodiComponent implements OnInit {
   ishodUpdate : Ishod | null = null;
 
 
-  constructor(private service : IshodiService, private predmetiService : PredmetiService) {
+  constructor(private service : IshodiService, private predmetiService : PredmetiService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe(ishodi => {
       this.ishodi = ishodi;
     })
@@ -49,6 +50,7 @@ export class IshodiComponent implements OnInit {
   create(ishod: Ishod) {
     this.service.create(ishod).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

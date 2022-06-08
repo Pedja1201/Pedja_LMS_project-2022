@@ -10,6 +10,8 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-studenta-na-godini.component.css']
 })
 export class TabelaStudentaNaGodiniComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'datumUpisa', 'brojIndeksa', 'godinaStudija', "akcije"];
+  dataSource : StudentNaGodini[]=[];
   title="Tabela Studenata na godini";
 
   @Input()

@@ -11,7 +11,8 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-fakulteta.component.css']
 })
 export class TabelaFakultetaComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'naziv', 'univerzitet', 'adresa', 'nastavnik', "akcije"];
+  dataSource : Fakultet[]=[];
   title="Tabela Fakulteta";
 
   @Input()

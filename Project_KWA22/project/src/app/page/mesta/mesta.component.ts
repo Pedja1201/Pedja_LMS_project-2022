@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Mesto } from '../../model/mesto';
 import { DrzaveService } from '../../service/drzave.service';
 import { MestaService } from '../../service/mesta.service';
@@ -17,7 +18,7 @@ export class MestaComponent implements OnInit {
   mestoUpdate : Mesto | null = null;
 
 
-  constructor(private service : MestaService, private drazveService : DrzaveService) {
+  constructor(private service : MestaService, private drazveService : DrzaveService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe(mesta => {
       this.mesta = mesta;
     })
@@ -48,6 +49,7 @@ export class MestaComponent implements OnInit {
   create(mesto: Mesto) {
     this.service.create(mesto).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

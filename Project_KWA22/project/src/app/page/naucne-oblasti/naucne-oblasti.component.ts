@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NaucnaOblast } from '../../model/naucna-oblast';
 import { NaucneOblastiService } from '../../service/naucne-oblasti.service';
 
@@ -16,7 +17,7 @@ export class NaucneOblastiComponent implements OnInit {
   itemUpdate : NaucnaOblast | null = null;
 
 
-  constructor(private service : NaucneOblastiService) {
+  constructor(private service : NaucneOblastiService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe(naucneOblasti => {
       this.naucneOblasti = naucneOblasti;
     })
@@ -47,6 +48,7 @@ export class NaucneOblastiComponent implements OnInit {
   create(naucnaOblast: NaucnaOblast) {
     this.service.create(naucnaOblast).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

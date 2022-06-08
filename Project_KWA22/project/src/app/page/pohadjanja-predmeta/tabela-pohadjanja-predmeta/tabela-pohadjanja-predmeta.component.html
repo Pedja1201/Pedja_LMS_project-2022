@@ -1,47 +1,36 @@
 <h1>{{title}}</h1>
-<div cdkDropListGroup>
-<table mat-table class="mat-elevation-z20">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Konacna ocena</th>
-        <th>Realizacija predmeta</th>
-        <th>Akcije</th>
-      </tr>
-    </thead>
-    <tbody [cdkDropListData]="elementi" cdkDropList (cdkDropListDropped)="drop($event)">                        
-      <tr cdkDrag *ngFor="let e of elementi">
-        <td><button mat-stroked-button  (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
-        <td><span *ngIf="e['konacnaOcena']; else praznoPolje">{{e["konacnaOcena"]}}</span></td>
-        <td><span *ngIf="e['realizacijaPredmeta']">{{e["realizacijaPredmeta"]["naziv"]}}</span></td>
-        <td>
-          <button mat-icon-button color="warn" (click)="ukloni(e['id'])"><mat-icon>delete</mat-icon></button>
-          <button mat-icon-button (click)="izmeni(e)"><mat-icon>edit</mat-icon></button>
-        </td>
-  
-      </tr>
-    </tbody>
-  </table>
-  <ng-template #praznoPolje>-</ng-template>
-<br>
-                                                 <!-- dragAndDrop table-->
+<table mat-table [dataSource]="elementi" class="mat-elevation-z8">
 
-<table mat-table class="mat-elevation-z20">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Konacna ocena</th>
-      <th>Realizacija predmeta</th>
-      <th>Akcije</th>
-    </tr>
-  </thead>
-  <tbody [cdkDropListData]="dropped" cdkDropList (cdkDropListDropped)="drop($event)">                        
-    <tr cdkDrag *ngFor="let e of dropped">
-      <td>{{e["id"]}}</td>
-      <td>{{e["konacnaOcena"]}}</td>
-      <td><span *ngIf="e['realizacijaPredmeta']">{{e["realizacijaPredmeta"]["naziv"]}}</span></td>
-    </tr>
-  </tbody>
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-stroked-button  (click)="prikaziDetalje(element)">{{element["id"]}}</button>
+    </td>
+  </ng-container>
+
+  <!-- Konacna ocena Column -->
+  <ng-container matColumnDef="konacnaOcena">
+    <th mat-header-cell *matHeaderCellDef> Ulica </th>
+    <td mat-cell *matCellDef="let element"> {{element.konacnaOcena}} </td>
+  </ng-container>
+
+  <!-- Realziacija predmeta Column -->
+  <ng-container matColumnDef="realizacijaPredmeta">
+    <th mat-header-cell *matHeaderCellDef> Realizacija predmeta </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['realizacijaPredmeta']">{{element["realizacijaPredmeta"]["naziv"]}}</span></td>
+  </ng-container>
+
+  <ng-container matColumnDef="akcije">
+    <th mat-header-cell *matHeaderCellDef> Akcija </th>
+    <td mat-cell *matCellDef="let element"> {{element.akcije}}
+      <button mat-icon-button color="warn" (click)="ukloni(element['id'])"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="izmeni(element)"><mat-icon>edit</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-</div>

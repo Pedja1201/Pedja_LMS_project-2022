@@ -137,6 +137,10 @@
     {
       "id": 3,
       "naziv": "Bosna i Hercegovina"
+    },
+    {
+      "naziv": "Bugarska",
+      "id": 4
     }
   ],
   "fakulteti": [
@@ -315,20 +319,7 @@
   ],
   "naucneOblasti": [
     {
-      "naziv": "Softverski inzenjer",
-      "zvanje": {
-        "id": 1,
-        "datumIzbora": "2021-05-25",
-        "datumPrestanka": "2021-05-25",
-        "naucnaOblast": {
-          "id": 1,
-          "naziv": "Softverski inzenjer"
-        },
-        "tipZvanja": {
-          "id": 1,
-          "naziv": "Profesor"
-        }
-      },
+      "naziv": "Softversko informacioni inzenjer",
       "id": 1
     }
   ],

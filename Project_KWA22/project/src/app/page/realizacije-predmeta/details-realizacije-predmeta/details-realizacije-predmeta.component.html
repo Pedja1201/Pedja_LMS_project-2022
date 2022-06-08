@@ -1,7 +1,7 @@
-<ul>
+<mat-list>
     <mat-list-item>ID: {{realizacijaPredmeta["id"]}}</mat-list-item>
     <mat-list-item>Naziv: {{realizacijaPredmeta["naziv"]}}</mat-list-item>
     <mat-list-item>Nastavnik na realizaciji: <span *ngIf="realizacijaPredmeta['nastavnikNaRealizaciji']">{{realizacijaPredmeta["nastavnikNaRealizaciji"]["id"]}}</span></mat-list-item>
     <mat-list-item>Predmet: <span *ngIf="realizacijaPredmeta['predmet']">{{realizacijaPredmeta["predmet"]["naziv"]}}</span></mat-list-item>
-</ul>
+</mat-list>
 <button mat-raised-button color="primary" (click)="back()">Nazad</button>

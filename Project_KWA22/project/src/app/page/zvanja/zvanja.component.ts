@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Zvanje } from '../../model/zvanje';
 import { ZvanjaService } from '../../service/zvanja.service';
 
@@ -16,7 +17,7 @@ export class ZvanjaComponent implements OnInit {
   zvanjeUpdate : Zvanje | null = null;
 
 
-  constructor(private service : ZvanjaService) {
+  constructor(private service : ZvanjaService, public snackBar:MatSnackBar) {
     service.getAll().subscribe(zvanja => {
       this.zvanja = zvanja;
     })
@@ -47,6 +48,7 @@ export class ZvanjaComponent implements OnInit {
   create(zvanje: Zvanje) {
     this.service.create(zvanje).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

@@ -8,7 +8,8 @@ import { Predmet } from 'src/app/model/predmet';
   styleUrls: ['./tabela-predmeta.component.css']
 })
 export class TabelaPredmetaComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'naziv', 'espb', 'obavezan','brojPredavanja', 'brojVezbi', 'drugiObliciNastave', 'istrazivackiRad', "akcije"];
+  dataSource : Predmet[]=[];
   title="Tabela Predmeta";
 
   @Input()

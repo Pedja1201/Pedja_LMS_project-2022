@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Predmet } from '../../model/predmet';
 import { PredmetiService } from '../../service/predmeti.service';
 
@@ -14,7 +15,7 @@ export class PredmetiComponent implements OnInit {
   predmeti : Predmet[] = [];
   predmetUpdate: Predmet | null = null;
 
-  constructor(private service : PredmetiService) {
+  constructor(private service : PredmetiService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe(predmeti => {
       this.predmeti = predmeti;
     })
@@ -43,6 +44,7 @@ export class PredmetiComponent implements OnInit {
   create(predmet: Predmet) {
     this.service.create(predmet).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

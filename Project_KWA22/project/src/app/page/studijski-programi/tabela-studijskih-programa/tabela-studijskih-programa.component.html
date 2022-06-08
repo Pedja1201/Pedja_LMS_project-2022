@@ -1,30 +1,48 @@
 <h1>{{title}}</h1>
-<table mat-table class="mat-elevation-z20">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Naziv</th>
-        <th>Fakultet</th>
-        <th>Nastavnik</th>
-        <th>Godina studija</th>
-        <th>Akcije</th>
-      </tr>
-    </thead>
-    <tbody>                        
-                                    <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
-      <tr *ngFor="let e of elementi">
-        <td><button mat-stroked-button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
-        <td>{{e["naziv"]}}</td>
-        <td><span *ngIf="e['fakultet']">{{e["fakultet"]["naziv"]}}</span></td>
-        <td><span *ngIf="e['nastavnik']">{{e["nastavnik"]["ime"]}}</span></td>
-        <td><span *ngIf="e['godinaStudija']">{{e["godinaStudija"]["godina"]}}</span></td>
-        <td>
-          <button mat-icon-button color="warn" (click)="ukloni(e['id'])"><mat-icon>delete</mat-icon></button>
-          <button mat-icon-button (click)="izmeni(e)"><mat-icon>edit</mat-icon></button>
-        </td>
-  
-      </tr>
-    </tbody>
-  </table>
-  
-  <ng-template #praznoPolje>-</ng-template>
+<table mat-table [dataSource]="elementi" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-stroked-button  (click)="prikaziDetalje(element)">{{element["id"]}}</button>
+    </td>
+  </ng-container>
+
+  <!-- Naziv Column -->
+  <ng-container matColumnDef="naziv">
+    <th mat-header-cell *matHeaderCellDef> Naziv </th>
+    <td mat-cell *matCellDef="let element"> {{element.naziv}} </td>
+  </ng-container>
+
+  <!-- Fax Column -->
+  <ng-container matColumnDef="fakultet">
+    <th mat-header-cell *matHeaderCellDef> Fakultet </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['fakultet']">{{element["fakultet"]["naziv"]}}</span></td>
+  </ng-container>
+
+  <!-- Nastavnik Column -->
+  <ng-container matColumnDef="nastavnik">
+    <th mat-header-cell *matHeaderCellDef> Nastavnik </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['nastavnik']">{{element["nastavnik"]["ime"]}}</span></td>
+  </ng-container>
+
+  <!-- Godina studija Column -->
+  <ng-container matColumnDef="godinaStudija">
+    <th mat-header-cell *matHeaderCellDef> Godina studija </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['godinaStudija']">{{element["godinaStudija"]["godina"]}}</span></td>
+  </ng-container>
+
+  <ng-container matColumnDef="akcije">
+    <th mat-header-cell *matHeaderCellDef> Akcija </th>
+    <td mat-cell *matCellDef="let element"> {{element.akcije}}
+      <button mat-icon-button color="warn" (click)="ukloni(element['id'])"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="izmeni(element)"><mat-icon>edit</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

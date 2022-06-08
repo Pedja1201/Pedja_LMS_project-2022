@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TipNastave } from '../../model/tip-nastave';
 import { TipoviNastaveService } from '../../service/tipovi-nastave.service';
 
@@ -14,7 +15,7 @@ export class TipoviNastaveComponent implements OnInit {
   tipoviNastave : TipNastave[] = [];
   itemUpdate: TipNastave | null = null;
 
-  constructor(private service : TipoviNastaveService) {
+  constructor(private service : TipoviNastaveService, public snackBar:MatSnackBar) {
     service.getAll().subscribe(tipoviNastave => {
       this.tipoviNastave = tipoviNastave;
     })
@@ -43,6 +44,7 @@ export class TipoviNastaveComponent implements OnInit {
   create(tipNastave: TipNastave) {
     this.service.create(tipNastave).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

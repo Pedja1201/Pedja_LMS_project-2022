@@ -12,6 +12,8 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-pohadjanja-predmeta.component.css']
 })
 export class TabelaPohadjanjaPredmetaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'konacnaOcena', 'realizacijaPredmeta', "akcije"];
+  dataSource : PohadjanjePredmeta[]=[];
   title="Tabela Pohadjanja predmeta";
 
   @Input()

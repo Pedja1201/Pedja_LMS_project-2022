@@ -1,46 +1,66 @@
 <h1>{{title}}</h1>
-<table mat-table class="mat-elevation-z20">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Naziv</th>
-        <th>ESPB</th>
-        <th>Obavezan</th>
-        <th>Broj predavanja</th>
-        <th>Broj vezbi</th>
-        <th>Drugi oblici nastave</th>
-        <th>Istrazivacki rad</th>
-        <th>Ostali casovi</th>
-        <th>Akcije</th>
-      </tr>
-    </thead>
-    <tbody *appPorukaOGresci="elementi; poruka : praznaTabela">                        
-                                    <!-- Kod boje teksta mozemo i naznaciti boju za godinu Upisa npr ="'blue'" -->
-      <tr *ngFor="let e of elementi" [appProveraNepostojecihVrednosti]="e['espb']" 
-                                    [bojaTeksta]="undefined" appPomeranjeKursora>
-        <td><button mat-stroked-button (click)="prikaziDetalje(e)">{{e["id"]}}</button></td>
-        <td>{{e["naziv"]}}</td>
-        <td>{{e["espb"]}}</td>
-        <td>{{e["obavezan"]}}</td>
-        <td>{{e["brojPredavanja"]}}</td>
-        <td>{{e["brojVezbi"]}}</td>
-        <td>{{e["drugiObliciNastave"]}}</td>
-        <td>{{e["istrazivackiRad"]}}</td>
-        <td>{{e["ostaliCasovi"]}}</td>
-        <td>
-          <button mat-icon-button color="warn" (click)="ukloni(e['id'])"><mat-icon>delete</mat-icon></button>
-          <button mat-icon-button (click)="izmeni(e)"><mat-icon>edit</mat-icon></button>
-        </td>
-  
-      </tr>
-    </tbody>
-  </table>
-  
-  <ng-template #praznoPolje>-</ng-template>
-  <ng-template #praznaTabela>
-    <tbody>
-      <tr>
-        <td colspan="9">Nema sadrzaja prikaz</td>
-      </tr>
-    </tbody>
-  </ng-template>
+<table mat-table [dataSource]="elementi" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-stroked-button  (click)="prikaziDetalje(element)">{{element["id"]}}</button>
+    </td>
+  </ng-container>
+
+  <!-- Naziv Column -->
+  <ng-container matColumnDef="naziv">
+    <th mat-header-cell *matHeaderCellDef> Naziv </th>
+    <td mat-cell *matCellDef="let element"> {{element.naziv}} </td>
+  </ng-container>
+
+  <!-- Espb Column -->
+  <ng-container matColumnDef="espb">
+    <th mat-header-cell *matHeaderCellDef> ESPB </th>
+    <td mat-cell *matCellDef="let element"> {{element.espb}} </td>
+  </ng-container>
+
+  <!-- Obavezan Column -->
+  <ng-container matColumnDef="obavezan">
+    <th mat-header-cell *matHeaderCellDef> Obavezan </th>
+    <td mat-cell *matCellDef="let element"> {{element.obavezan}} </td>
+  </ng-container>
+
+  <!-- Broj predavanja Column -->
+  <ng-container matColumnDef="brojPredavanja">
+    <th mat-header-cell *matHeaderCellDef> Broj predavanja </th>
+    <td mat-cell *matCellDef="let element"> {{element.brojPredavanja}} </td>
+  </ng-container>
+
+  <!-- Broj vezbi Column -->
+  <ng-container matColumnDef="brojVezbi">
+    <th mat-header-cell *matHeaderCellDef> Broj vezbi </th>
+    <td mat-cell *matCellDef="let element"> {{element.brojVezbi}} </td>
+  </ng-container>
+
+  <!-- Drugi oblici nastave Column -->
+  <ng-container matColumnDef="drugiObliciNastave">
+    <th mat-header-cell *matHeaderCellDef> Drugi oblici nastave </th>
+    <td mat-cell *matCellDef="let element"> {{element.drugiObliciNastave}} </td>
+  </ng-container>
+
+  <!-- Istrazivacki rad Column -->
+  <ng-container matColumnDef="istrazivackiRad">
+    <th mat-header-cell *matHeaderCellDef> Istrazivacki rad </th>
+    <td mat-cell *matCellDef="let element"> {{element.istrazivackiRad}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="akcije">
+    <th mat-header-cell *matHeaderCellDef> Akcija </th>
+    <td mat-cell *matCellDef="let element"> {{element.akcije}}
+      <button mat-icon-button color="warn" (click)="ukloni(element['id'])"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="izmeni(element)"><mat-icon>edit</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

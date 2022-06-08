@@ -47,6 +47,7 @@ import { UsersComponent } from './page/users/users.component';
 import { DetailsUsersComponent } from './page/users/details-users/details-users.component';
 import { TableUsersComponent } from './page/users/table-users/table-users.component';
 import { FormUsersComponent } from './page/users/form-users/form-users.component';
+import { AboutComponent } from './page/about/about.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},

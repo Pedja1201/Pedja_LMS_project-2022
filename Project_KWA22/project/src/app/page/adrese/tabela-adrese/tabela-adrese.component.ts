@@ -6,21 +6,14 @@ import { Student } from 'src/app/model/student';
 import { AdreseService } from 'src/app/service/adrese.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 
-
-const ELEMENT_DATA: Adresa[] = [
-  {"id": 1, "ulica": 'Ulica', "broj": "Broj", "mesto":[],displayFn: (x)=>{
-    return `${x['naziv']}`;
-  } }
-];
-
 @Component({
   selector: 'app-tabela-adrese',
   templateUrl: './tabela-adrese.component.html',
   styleUrls: ['./tabela-adrese.component.css']
 })
 export class TabelaAdreseComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'ulica', 'broj', 'mesto', 'akcije'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'ulica', 'broj', 'mesto', "akcije"];
+  dataSource : Adresa[]=[];
 
   title="Tabela Adresa";
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { StudijskiProgram } from '../../model/studijski-program';
 import { StudijskiProgramiService } from '../../service/studijski-programi.service';
 
@@ -16,7 +17,7 @@ export class StudijskiProgramiComponent implements OnInit {
   itemUpdate : StudijskiProgram | null = null;
 
 
-  constructor(private service : StudijskiProgramiService) {
+  constructor(private service : StudijskiProgramiService, public snackBar:MatSnackBar) {
     service.getAll().subscribe(studijskiProgrami => {
       this.studijskiProgrami = studijskiProgrami;
     })
@@ -47,6 +48,7 @@ export class StudijskiProgramiComponent implements OnInit {
   create(studijskiProgram: StudijskiProgram) {
     this.service.create(studijskiProgram).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

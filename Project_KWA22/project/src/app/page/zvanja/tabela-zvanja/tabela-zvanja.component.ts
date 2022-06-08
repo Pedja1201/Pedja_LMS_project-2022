@@ -9,6 +9,8 @@ import { ZvanjaService } from 'src/app/service/zvanja.service';
   styleUrls: ['./tabela-zvanja.component.css']
 })
 export class TabelaZvanjaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'datumIzbora', 'datumPrestanka', 'naucnaOblast', 'tipZvanja', "akcije"];
+  dataSource : Zvanje[]=[];
   title="Tabela Zvanja";
 
   @Input()

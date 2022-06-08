@@ -8,6 +8,8 @@ import { TipZvanja } from 'src/app/model/tip-zvanja';
   styleUrls: ['./tabela-tipa-zvanja.component.css']
 })
 export class TabelaTipaZvanjaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'naziv', "akcije"];
+  dataSource : TipZvanja[]=[];
   title="Tabela Tipa zvanja";
 
   @Input()

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { StudentNaGodini } from '../../model/student-na-godini';
 import { StudentiNaGodiniService } from '../../service/studenti-na-godini.service';
 
@@ -16,7 +17,7 @@ export class StudentiNaGodiniComponent implements OnInit {
   itemUpdate : StudentNaGodini | null = null;
 
 
-  constructor(private service : StudentiNaGodiniService) {
+  constructor(private service : StudentiNaGodiniService, public snackBar:MatSnackBar) {
     service.getAll().subscribe(studentiNaGodini => {
       this.studentiNaGodini = studentiNaGodini;
     })
@@ -47,6 +48,7 @@ export class StudentiNaGodiniComponent implements OnInit {
   create(studentNaGodini: StudentNaGodini) {
     this.service.create(studentNaGodini).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

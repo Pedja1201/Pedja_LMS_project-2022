@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Nastavnik } from '../../model/nastavnik';
 import { NastavniciService } from '../../service/nastavnici.service';
 
@@ -17,7 +18,7 @@ export class NastavniciComponent implements OnInit {
   parametri : any = {}; //Za pretragu
 
 
-  constructor(private service : NastavniciService) {
+  constructor(private service : NastavniciService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe(nastavnici => {
       this.nastavnici = nastavnici;
     })
@@ -48,6 +49,7 @@ export class NastavniciComponent implements OnInit {
   create(nastavnik: Nastavnik) {
     this.service.create(nastavnik).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

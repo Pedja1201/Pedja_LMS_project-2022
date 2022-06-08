@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Fakultet } from '../../model/fakultet';
 import { AdreseService } from '../../service/adrese.service';
 import { FakultetiService } from '../../service/fakulteti.service';
@@ -20,7 +21,8 @@ export class FakultetiComponent implements OnInit {
   fakultetUpdate : Fakultet | null = null;
 
 
-  constructor(private service : FakultetiService, private univerzitetiService : UniverzitetiService, private adreseService : AdreseService, private nastavniciService : NastavniciService) {
+  constructor(private service : FakultetiService, private univerzitetiService : UniverzitetiService, 
+    private adreseService : AdreseService, private nastavniciService : NastavniciService, public snackBar:MatSnackBar) {
     service.getAll().subscribe(fakulteti => {
       this.fakulteti = fakulteti;
     })
@@ -50,6 +52,7 @@ export class FakultetiComponent implements OnInit {
   create(fakultet: Fakultet) {
     this.service.create(fakultet).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

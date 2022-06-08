@@ -5,10 +5,5 @@ export interface Adresa {
     ulica:String;
     broj:String;
     mesto:Mesto[];
-    displayFn?:DisplayFn;
-}
-
-interface DisplayFn{
-    (cellValue:any, data:any, key:any):any
 }
 

@@ -16,6 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';   
 import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -231,7 +232,8 @@ import { AboutComponent } from './page/about/about.component';
     MatToolbarModule,
     MatTabsModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login

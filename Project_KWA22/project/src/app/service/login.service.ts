@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Token } from '../model/token';
@@ -17,7 +18,7 @@ export class LoginService {
   loggedOut = false;  //Ispis da je uspesno izlogovan
   loggedIn = false;  //Za prikaz dugmica nakkon Login-a
 
-  constructor(private client : HttpClient) { }
+  constructor(private client : HttpClient, public snackBar : MatSnackBar) { }
 
   login(user:User){
     return this.client.post<Token>(`${this.baseUrl}/login`, user).pipe(
@@ -34,6 +35,7 @@ export class LoginService {
     this.user = null;
     this.rolesSubject.next(new Set<string>([]));
     this.loggedOut = true; //Ispis da je uspesno izlogovan
+    let snackBarRef = this.snackBar.open('Successfully logged out!', 'Confrim', {duration: 3000 });
   }
 
   //Za proveru prava pristupa rutiranja

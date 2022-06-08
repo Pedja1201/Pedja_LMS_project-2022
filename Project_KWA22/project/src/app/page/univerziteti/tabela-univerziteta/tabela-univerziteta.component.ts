@@ -11,7 +11,8 @@ import { UniverzitetiService } from 'src/app/service/univerziteti.service';
   styleUrls: ['./tabela-univerziteta.component.css']
 })
 export class TabelaUniverzitetaComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'naziv', 'datumVremeOsnivanja', 'adresa', 'nastavnik', "akcije"];
+  dataSource : Univerzitet[]=[];
   title="Tabela Univerziteta";
 
   @Input()

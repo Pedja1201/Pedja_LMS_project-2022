@@ -8,6 +8,8 @@ import { TipNastave } from 'src/app/model/tip-nastave';
   styleUrls: ['./tabela-tipa-nastave.component.css']
 })
 export class TabelaTipaNastaveComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'naziv', "akcije"];
+  dataSource : TipNastave[]=[];
   title="Tabela Tipa nastave";
 
   @Input()

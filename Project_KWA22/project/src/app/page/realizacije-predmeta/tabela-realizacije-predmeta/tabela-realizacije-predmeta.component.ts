@@ -10,7 +10,8 @@ import { RealizacijePredmetaService } from 'src/app/service/realizacije-predmeta
   styleUrls: ['./tabela-realizacije-predmeta.component.css']
 })
 export class TabelaRealizacijePredmetaComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'naziv', 'nastavnikNaRealizaciji', 'predmet', "akcije"];
+  dataSource : RealizacijaPredmeta[]=[];
   title="Tabela Realizacije predmeta";
 
   @Input()

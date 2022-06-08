@@ -9,6 +9,8 @@ import { GodineStudijaService } from 'src/app/service/godine-studija.service';
   styleUrls: ['./tabela-godine-studija.component.css']
 })
 export class TabelaGodineStudijaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'godina', 'predmet', "akcije"];
+  dataSource : GodinaStudija[]=[];
   title="Tabela Godine studija";
 
   @Input()

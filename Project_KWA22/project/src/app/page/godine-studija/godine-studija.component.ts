@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GodinaStudija } from '../../model/godina-studija';
 import { GodineStudijaService } from '../../service/godine-studija.service';
 import { PredmetiService } from '../../service/predmeti.service';
@@ -17,7 +18,7 @@ export class GodineStudijaComponent implements OnInit {
   godinaStudijaUpdate : GodinaStudija | null = null;
 
 
-  constructor(private service : GodineStudijaService, private predmetiService : PredmetiService) {
+  constructor(private service : GodineStudijaService, private predmetiService : PredmetiService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe(godineStudija => {
       this.godineStudija = godineStudija;
     })
@@ -48,6 +49,7 @@ export class GodineStudijaComponent implements OnInit {
   create(godinaStudija: GodinaStudija) {
     this.service.create(godinaStudija).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

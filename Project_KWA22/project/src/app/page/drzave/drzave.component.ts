@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Drzava } from '../../model/drzava';
 import { DrzaveService } from '../../service/drzave.service';
 
@@ -15,7 +16,7 @@ export class DrzaveComponent implements OnInit {
   drzave : Drzava[] = [];
   drzavaUpdate: Drzava | null = null;
 
-  constructor(private service : DrzaveService) {
+  constructor(private service : DrzaveService, public snackBar:MatSnackBar) {
     service.getAll().subscribe(drzave => {
       this.drzave = drzave;
     })
@@ -44,6 +45,7 @@ export class DrzaveComponent implements OnInit {
   create(drzava: Drzava) {
     this.service.create(drzava).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Created', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

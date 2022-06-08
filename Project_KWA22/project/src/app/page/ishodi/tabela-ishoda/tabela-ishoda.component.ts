@@ -9,6 +9,8 @@ import { IshodiService } from 'src/app/service/ishodi.service';
   styleUrls: ['./tabela-ishoda.component.css']
 })
 export class TabelaIshodaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'opis', 'predmet', "akcije"];
+  dataSource : Ishod[]=[];
   title="Tabela Ishoda";
 
   @Input()

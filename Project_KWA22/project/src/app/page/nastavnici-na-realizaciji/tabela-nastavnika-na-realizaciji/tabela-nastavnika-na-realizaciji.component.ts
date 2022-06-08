@@ -11,6 +11,8 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-nastavnika-na-realizaciji.component.css']
 })
 export class TabelaNastavnikaNaRealizacijiComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'brojCasova', 'nastavnik', 'tipNastave', "akcije"];
+  dataSource : NastavnikNaRealizaciji[]=[];
   title="Tabela Nastavnika na realizaciji";
 
   @Input()

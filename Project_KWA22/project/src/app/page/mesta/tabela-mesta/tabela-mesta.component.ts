@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Mesto } from 'src/app/model/mesto';
 import { Student } from 'src/app/model/student';
 import { MestaService } from 'src/app/service/mesta.service';
 import { StudentiService } from 'src/app/service/studenti.service';
@@ -10,6 +11,8 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-mesta.component.css']
 })
 export class TabelaMestaComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'naziv', 'drzava', "akcije"];
+  dataSource : Mesto[]=[];
   title="Tabela Mesta";
 
   @Input()

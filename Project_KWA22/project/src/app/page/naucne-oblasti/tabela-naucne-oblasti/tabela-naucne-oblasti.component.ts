@@ -9,7 +9,8 @@ import { NaucneOblastiService } from 'src/app/service/naucne-oblasti.service';
   styleUrls: ['./tabela-naucne-oblasti.component.css']
 })
 export class TabelaNaucneOblastiComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'naziv', "akcije"];
+  dataSource : NaucnaOblast[]=[];
   title="Tabela Naucnih oblasti";
 
   @Input()

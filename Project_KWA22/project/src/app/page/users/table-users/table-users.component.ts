@@ -8,6 +8,8 @@ import { User } from 'src/app/model/user';
   styleUrls: ['./table-users.component.css']
 })
 export class TableUsersComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'username', 'password',  "akcije"];
+  dataSource : User[]=[];
   title="Table Users";
 
   @Input()

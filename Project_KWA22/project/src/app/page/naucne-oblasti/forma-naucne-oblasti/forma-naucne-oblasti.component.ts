@@ -16,7 +16,6 @@ export class FormaNaucneOblastiComponent implements OnInit {
   
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
-    "zvanje": new FormControl(null, [Validators.required]),
 
   })
   
@@ -26,23 +25,18 @@ export class FormaNaucneOblastiComponent implements OnInit {
   @Input()
   naucnaOblast: NaucnaOblast|null = null;
 
-  constructor(private zvanjaService : ZvanjaService) { }
+  constructor( ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     console.log(this.naucnaOblast);
     this.forma.get("id")?.setValue(this.naucnaOblast?.id);
     this.forma.get("naziv")?.setValue(this.naucnaOblast?.naziv);
-    this.forma.get("zvanje")?.setValue(this.naucnaOblast?.zvanje);
   }
 
   ngOnInit(): void {
-    this.zvanjaService.getAll().subscribe(zvanja =>{
-      this.zvanja = zvanja;
-    });
     this.forma.get("id")?.setValue(this.naucnaOblast?.id);
     this.forma.get("naziv")?.setValue(this.naucnaOblast?.id);
-    this.forma.get("zvanje")?.setValue(this.naucnaOblast?.id);
   }
 
   create() {
@@ -51,12 +45,5 @@ export class FormaNaucneOblastiComponent implements OnInit {
     }
   }
 
-
-  //Metoda koja proverava 
-  comparator(zvanje1: any, zvanje2:any) {
-    return zvanje1 && zvanje2
-    ? zvanje1.id === zvanje2.id
-    : zvanje1 === zvanje2;
-  }
 
 }

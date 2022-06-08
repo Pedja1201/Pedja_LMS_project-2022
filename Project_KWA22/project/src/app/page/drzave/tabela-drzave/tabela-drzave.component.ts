@@ -8,6 +8,8 @@ import { Drzava } from 'src/app/model/drzava';
   styleUrls: ['./tabela-drzave.component.css']
 })
 export class TabelaDrzaveComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'naziv', "akcije"];
+  dataSource : Drzava[]=[];
   title="Tabela Drzave";
 
   @Input()

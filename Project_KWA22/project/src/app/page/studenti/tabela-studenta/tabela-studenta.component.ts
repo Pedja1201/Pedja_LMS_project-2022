@@ -9,7 +9,9 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-studenta.component.css']
 })
 export class TabelaStudentaComponent implements OnInit {
-  title="Tabela studenata";
+  displayedColumns: string[] = ['id', 'jmbg', 'ime', 'adresa', 'pohadjanjePredmeta', 'studentNaGodini', "akcije"];
+  dataSource : Student[]=[];
+  title="Tabela Studenata";
 
   @Input()
   elementi: any[] = [];
