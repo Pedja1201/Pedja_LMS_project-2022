@@ -112,7 +112,7 @@
       }
     },
     {
-      "ulica": "ada",
+      "ulica": "Una",
       "broj": "2",
       "mesto": {
         "id": 2,
@@ -123,6 +123,19 @@
         }
       },
       "id": 3
+    },
+    {
+      "ulica": "Prvomasjka",
+      "broj": "4",
+      "mesto": {
+        "id": 1,
+        "naziv": "Vrsac",
+        "drzava": {
+          "id": 1,
+          "naziv": "Srbija"
+        }
+      },
+      "id": 4
     }
   ],
   "drzave": [
@@ -141,6 +154,10 @@
     {
       "naziv": "Bugarska",
       "id": 4
+    },
+    {
+      "naziv": "Crna Gora",
+      "id": 5
     }
   ],
   "fakulteti": [

@@ -41,6 +41,7 @@ export class StudentiComponent implements OnInit {
   delete(id: any) {
     this.studentiService.delete(id).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Deleted...', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })

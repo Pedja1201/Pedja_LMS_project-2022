@@ -37,6 +37,7 @@ export class UsersComponent implements OnInit {
   delete(id: any) {
     this.service.delete(id).subscribe((value) => {
       this.getAll();
+      let snackBarRef = this.snackBar.open('Deleted...', 'OK!',  {duration: 3000 });
     }, (error) => {
       console.log(error);
     })
