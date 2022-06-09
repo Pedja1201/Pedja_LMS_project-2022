@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import rs.ac.singidunum.isa.app.service.TipZvanjaService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/api/tipZvanja")
@@ -25,41 +28,33 @@ public class TipZvanjaController {
     @Autowired
     private TipZvanjaService tipZvanjaService;
 
-    @Logged
+    //    @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<TipZvanjaDTO>> getAllTipZvanja() {
-        ArrayList<TipZvanjaDTO> tipoviZvanja = new ArrayList<TipZvanjaDTO>();
-        for (TipZvanja tipZvanja : tipZvanjaService.findAll()) {
-            ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
-            for (Zvanje zvanje : tipZvanja.getZvanja()) {
-                zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
-                        new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(), zvanje.getNaucnaOblast().getNaziv(), null),
-                        null));
-            }
-            tipoviZvanja.add(
-                    new TipZvanjaDTO(tipZvanja.getId(), tipZvanja.getNaziv(), zvanja));
-        }
-
-        return new ResponseEntity<Iterable<TipZvanjaDTO>>(tipoviZvanja, HttpStatus.OK);
+    public ResponseEntity<Page<TipZvanjaDTO>> getAllTipZvanja(Pageable pageable) {
+        Page<TipZvanja> tipoviZvanja = tipZvanjaService.findAll(pageable);
+        return new ResponseEntity<Page<TipZvanjaDTO>>(
+                tipoviZvanja.map(tipZvanja -> new TipZvanjaDTO(tipZvanja.getId(), tipZvanja.getNaziv(),
+                        (ArrayList<ZvanjeDTO>) tipZvanja.getZvanja().stream()
+                                .map(zvanja -> new ZvanjeDTO(zvanja.getId(), zvanja.getDatumIzbora(),
+                                        zvanja.getDatumPrestanka(),
+                                        new NaucnaOblastDTO(zvanja.getNaucnaOblast().getId(),
+                                                zvanja.getNaucnaOblast().getNaziv(), null),null))
+                                .collect(Collectors.toList()))),
+                HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{tipZvanjaId}", method = RequestMethod.GET)
     public ResponseEntity<TipZvanjaDTO> getTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId) {
         Optional<TipZvanja> tipZvanja = tipZvanjaService.findOne(tipZvanjaId);
-
         TipZvanjaDTO tipZvanjaDTO;
-
         if (tipZvanja.isPresent()) {
-
             ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
             for (Zvanje zvanje : tipZvanja.get().getZvanja()) {
                 zvanja.add(new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(),zvanje.getDatumPrestanka(),
                         new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(),
                                 zvanje.getNaucnaOblast().getNaziv(), null),null));
             }
-
             tipZvanjaDTO = new TipZvanjaDTO(tipZvanja.get().getId(), tipZvanja.get().getNaziv(), zvanja);
-
             return new ResponseEntity<TipZvanjaDTO>(tipZvanjaDTO, HttpStatus.OK);
         }
         return new ResponseEntity<TipZvanjaDTO>(HttpStatus.NOT_FOUND);
@@ -85,7 +80,7 @@ public class TipZvanjaController {
 
     @RequestMapping(path = "/{tipZvanjaId}", method = RequestMethod.PUT)
     public ResponseEntity<TipZvanjaDTO> updateTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId,
-                                                           @RequestBody TipZvanja izmenjenTipZvanja) {
+                                                        @RequestBody TipZvanja izmenjenTipZvanja) {
         TipZvanja tipZvanja = tipZvanjaService.findOne(tipZvanjaId).orElse(null);
         if (tipZvanja != null) {
             izmenjenTipZvanja.setId(tipZvanjaId);

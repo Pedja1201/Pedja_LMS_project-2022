@@ -15,7 +15,7 @@ public class Zvanje {
     @Temporal(TemporalType.TIMESTAMP)
     private Date datumPrestanka;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private NaucnaOblast naucnaOblast;
     @ManyToOne(optional = false)
     private TipZvanja tipZvanja;

@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import rs.ac.singidunum.isa.app.aspect.Logged;
 import rs.ac.singidunum.isa.app.aspect.LoggedZvanje;
 import rs.ac.singidunum.isa.app.dto.NaucnaOblastDTO;
 import rs.ac.singidunum.isa.app.dto.TipZvanjaDTO;
@@ -18,6 +19,7 @@ import rs.ac.singidunum.isa.app.service.ZvanjeService;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping(path = "/api/zvanja")
@@ -25,19 +27,21 @@ public class ZvanjeController {
     @Autowired
     private ZvanjeService zvanjeService;
 
-    @LoggedZvanje //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
+//    @LoggedZvanje //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<ZvanjeDTO>> getAll() {
-
-        ArrayList<ZvanjeDTO> zvanja = new ArrayList<ZvanjeDTO>();
-
-        for (Zvanje zvanje : zvanjeService.findAll()) {
-            zvanja.add(new ZvanjeDTO(zvanje.getId(),zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
-                    new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(), zvanje.getNaucnaOblast().getNaziv(),null),
-                    new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(),null)));
-        }
-
-        return new ResponseEntity<Iterable<ZvanjeDTO>>(zvanja, HttpStatus.OK);
+    public ResponseEntity<Page<ZvanjeDTO>> getAll(Pageable pageable) {
+        Page<Zvanje> zvanje = zvanjeService.findAll(pageable);
+        Page<ZvanjeDTO> zvanja = zvanje.map(new Function<Zvanje, ZvanjeDTO>() {
+            public ZvanjeDTO apply(Zvanje zvanje) {
+                ZvanjeDTO zvanjeDTO = new ZvanjeDTO(zvanje.getId(),zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(),
+                        new NaucnaOblastDTO(zvanje.getNaucnaOblast().getId(), zvanje.getNaucnaOblast().getNaziv(),null),
+                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(), zvanje.getTipZvanja().getNaziv(),null)
+                );
+                // Conversion logic
+                return zvanjeDTO;
+            }
+        });
+        return new ResponseEntity<Page<ZvanjeDTO>>(zvanja, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.GET)
@@ -69,16 +73,14 @@ public class ZvanjeController {
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.PUT)
     public ResponseEntity<ZvanjeDTO> update(@PathVariable("zvanjeId") Long zvanjeId,
-                                             @RequestBody Zvanje izmenjenoZvanje) {
+                                            @RequestBody Zvanje izmenjenoZvanje) {
         Zvanje zvanje = zvanjeService.findOne(zvanjeId).orElse(null);
         if (zvanje != null) {
             izmenjenoZvanje.setId(zvanjeId);
             izmenjenoZvanje = zvanjeService.save(izmenjenoZvanje);
             NaucnaOblastDTO naucnaOblastDTO = new NaucnaOblastDTO(izmenjenoZvanje.getNaucnaOblast().getId(), izmenjenoZvanje.getNaucnaOblast().getNaziv(),null);
             TipZvanjaDTO tipZvanjaDTO = new TipZvanjaDTO(izmenjenoZvanje.getTipZvanja().getId(), izmenjenoZvanje.getTipZvanja().getNaziv(),null);
-
             ZvanjeDTO zvanjeDTO = new ZvanjeDTO(izmenjenoZvanje.getId(), izmenjenoZvanje.getDatumIzbora(), izmenjenoZvanje.getDatumPrestanka(),naucnaOblastDTO, tipZvanjaDTO);
-
             return new ResponseEntity<ZvanjeDTO>(zvanjeDTO, HttpStatus.OK);
         }
         return new ResponseEntity<ZvanjeDTO>(HttpStatus.NOT_FOUND);

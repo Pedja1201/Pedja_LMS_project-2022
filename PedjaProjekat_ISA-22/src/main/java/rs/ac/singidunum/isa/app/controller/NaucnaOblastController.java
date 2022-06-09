@@ -33,9 +33,9 @@ public class NaucnaOblastController {
         return new ResponseEntity<Page<NaucnaOblastDTO>>(
                 naucneOblasti.map(naucnaOblast -> new NaucnaOblastDTO(naucnaOblast.getId(), naucnaOblast.getNaziv(),
                         (ArrayList<ZvanjeDTO>) naucnaOblast.getZvanja().stream()
-                                .map(karta -> new ZvanjeDTO(karta.getId(), karta.getDatumIzbora(), karta.getDatumPrestanka(), null,
-                                        new TipZvanjaDTO(karta.getTipZvanja().getId(),
-                                                karta.getTipZvanja().getNaziv(), null)))
+                                .map(zvanje -> new ZvanjeDTO(zvanje.getId(), zvanje.getDatumIzbora(), zvanje.getDatumPrestanka(), null,
+                                        new TipZvanjaDTO(zvanje.getTipZvanja().getId(),
+                                                zvanje.getTipZvanja().getNaziv(), null)))
                                 .collect(Collectors.toList()))),
                 HttpStatus.OK);
     }

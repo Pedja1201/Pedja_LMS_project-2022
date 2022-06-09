@@ -13,7 +13,7 @@ public class TipZvanja {
     @Column(nullable = false)
     private String naziv;
 
-    /*@neToOne(mappedBy = "tipZvanja") private Zvanje zvanja;*/
+
     @OneToMany(mappedBy = "tipZvanja")
     private Set<Zvanje> zvanja = new HashSet<Zvanje>();
 
