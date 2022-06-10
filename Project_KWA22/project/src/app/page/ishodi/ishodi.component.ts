@@ -61,6 +61,7 @@ export class IshodiComponent implements OnInit {
     if(this.ishodUpdate && this.ishodUpdate.id) {
       this.service.update(this.ishodUpdate.id, ishod).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

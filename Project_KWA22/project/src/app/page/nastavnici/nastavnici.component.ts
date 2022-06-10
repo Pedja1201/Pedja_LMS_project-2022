@@ -60,6 +60,7 @@ export class NastavniciComponent implements OnInit {
     if(this.nastavnikUpdate && this.nastavnikUpdate.id) {
       this.service.update(this.nastavnikUpdate.id, nastavnik).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

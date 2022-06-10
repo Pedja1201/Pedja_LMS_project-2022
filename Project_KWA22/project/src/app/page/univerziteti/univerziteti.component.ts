@@ -59,6 +59,7 @@ export class UniverzitetiComponent implements OnInit {
     if(this.univerzitetUpdate && this.univerzitetUpdate.id) {
       this.service.update(this.univerzitetUpdate.id, univerzitet).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

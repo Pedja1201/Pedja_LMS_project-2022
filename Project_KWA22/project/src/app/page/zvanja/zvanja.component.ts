@@ -59,6 +59,7 @@ export class ZvanjaComponent implements OnInit {
     if(this.zvanjeUpdate && this.zvanjeUpdate.id) {
       this.service.update(this.zvanjeUpdate.id, zvanje).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

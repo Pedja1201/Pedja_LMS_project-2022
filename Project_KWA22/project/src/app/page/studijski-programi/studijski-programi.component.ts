@@ -59,6 +59,7 @@ export class StudijskiProgramiComponent implements OnInit {
     if(this.itemUpdate && this.itemUpdate.id) {
       this.service.update(this.itemUpdate.id, studijskiProgram).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

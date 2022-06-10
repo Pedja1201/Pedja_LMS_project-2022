@@ -63,6 +63,7 @@ export class FakultetiComponent implements OnInit {
     if(this.fakultetUpdate && this.fakultetUpdate.id) {
       this.service.update(this.fakultetUpdate.id, fakultet).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

@@ -60,6 +60,7 @@ export class MestaComponent implements OnInit {
     if(this.mestoUpdate && this.mestoUpdate.id) {
       this.service.update(this.mestoUpdate.id, mesto).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

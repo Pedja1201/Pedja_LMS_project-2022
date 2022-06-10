@@ -56,6 +56,7 @@ export class AdreseComponent implements OnInit {
     if(this.adresaUpdate && this.adresaUpdate.id) {
       this.service.update(this.adresaUpdate.id, adresa).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 });
       }, (error) => {
         console.log(error);
       })

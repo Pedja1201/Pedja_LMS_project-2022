@@ -55,6 +55,7 @@ export class PredmetiComponent implements OnInit {
     if(this.predmetUpdate && this.predmetUpdate.id) {
       this.service.update(this.predmetUpdate.id, predmet).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

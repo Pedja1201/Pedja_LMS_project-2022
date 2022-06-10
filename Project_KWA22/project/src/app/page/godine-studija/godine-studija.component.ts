@@ -60,6 +60,7 @@ export class GodineStudijaComponent implements OnInit {
     if(this.godinaStudijaUpdate && this.godinaStudijaUpdate.id) {
       this.service.update(this.godinaStudijaUpdate.id, godinaStudija).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

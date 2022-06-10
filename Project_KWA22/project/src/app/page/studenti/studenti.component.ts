@@ -60,6 +60,7 @@ export class StudentiComponent implements OnInit {
     if(this.studentUpdate && this.studentUpdate.id) {
       this.studentiService.update(this.studentUpdate.id, student).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })

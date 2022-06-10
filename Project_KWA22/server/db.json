@@ -125,15 +125,15 @@
       "id": 3
     },
     {
-      "ulica": "Prvomasjka",
-      "broj": "4",
+      "ulica": 4,
+      "broj": "66",
       "mesto": {
-        "id": 1,
-        "naziv": "Vrsac",
+        "naziv": "Temisvar",
         "drzava": {
-          "id": 1,
-          "naziv": "Srbija"
-        }
+          "id": 2,
+          "naziv": "Rumunija"
+        },
+        "id": 3
       },
       "id": 4
     }

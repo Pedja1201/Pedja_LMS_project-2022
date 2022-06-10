@@ -56,6 +56,7 @@ export class DrzaveComponent implements OnInit {
     if(this.drzavaUpdate && this.drzavaUpdate.id) {
       this.service.update(this.drzavaUpdate.id, drzava).subscribe((value) => {
         this.getAll();
+        let snackBarRef = this.snackBar.open('Updated', 'OK!',  {duration: 2000 }); //SnackPoruka nakon izmene
       }, (error) => {
         console.log(error);
       })
