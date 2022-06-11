@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Adresa } from 'src/app/model/adresa';
 import { Mesto } from 'src/app/model/mesto';
@@ -13,7 +14,9 @@ import { StudentiService } from 'src/app/service/studenti.service';
 })
 export class TabelaAdreseComponent implements OnInit {
   displayedColumns: string[] = ['id', 'ulica', 'broj', 'mesto', "akcije"];
-  dataSource : Adresa[]=[];
+  dataSource : Adresa[]=[]; //U dataSource je problem prilikom dobavljanja za backend
+  // dataSource = new MatTableDataSource();
+  // this.dataSource.data = val as any;
 
   title="Tabela Adresa";
 

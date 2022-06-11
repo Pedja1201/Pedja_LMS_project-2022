@@ -18,7 +18,7 @@ export class DetailsAdreseComponent implements OnInit {
       this.adresa = value;
     }, (error) => {
       console.log(error);
-      this.router.navigate(["smerovi"]);
+      this.router.navigate(["adrese"]);
     });
   }
 
