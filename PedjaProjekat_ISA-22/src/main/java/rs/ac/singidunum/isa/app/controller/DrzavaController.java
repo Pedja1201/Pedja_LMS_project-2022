@@ -6,10 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.DrzavaDTO;
 import rs.ac.singidunum.isa.app.dto.MestoDTO;
 import rs.ac.singidunum.isa.app.model.Drzava;
@@ -26,6 +23,7 @@ public class DrzavaController {
     @Autowired
     private DrzavaService drzavaService;
 
+    @CrossOrigin
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<DrzavaDTO>> getAll(Pageable pageable) {
         Page<Drzava> drzave = drzavaService.findAll(pageable);

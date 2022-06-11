@@ -18,12 +18,13 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
-//@CrossOrigin(origins = "http://localhost:4200")  //CrosPolicy na clientu
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/adrese")
 public class AdresaController {
     @Autowired
     private AdresaService adresaService;
 
+    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<AdresaDTO>> getAll(Pageable pageable) {
         Page<Adresa> adresa = adresaService.findAll(pageable);
@@ -33,6 +34,7 @@ public class AdresaController {
                         new MestoDTO(adresa.getMesto().getId(), adresa.getMesto().getNaziv(),null)
                 );
                 // Conversion logic
+
                 return adresaDTO;
             }
         });
