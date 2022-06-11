@@ -13,6 +13,7 @@ public class StudentNaGodiniDTO {
     private GodinaStudijaDTO godinaStudija;
 
     private ArrayList<StudentDTO> studenti = new ArrayList<StudentDTO>();
+    private ArrayList<PolaganjeDTO> polaganja = new ArrayList<PolaganjeDTO>();
 
     public StudentNaGodiniDTO() {super();
     }
@@ -62,5 +63,13 @@ public class StudentNaGodiniDTO {
 
     public void setStudenti(ArrayList<StudentDTO> studenti) {
         this.studenti = studenti;
+    }
+
+    public ArrayList<PolaganjeDTO> getPolaganja() {
+        return polaganja;
+    }
+
+    public void setPolaganja(ArrayList<PolaganjeDTO> polaganja) {
+        this.polaganja = polaganja;
     }
 }

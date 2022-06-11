@@ -22,6 +22,9 @@ public class StudentNaGodini {
     @OneToMany(mappedBy = "studentNaGodini")
     private Set<Student> studenti = new HashSet<Student>();
 
+    @OneToMany(mappedBy = "studentNaGodini")
+    private Set<Polaganje> polaganja = new HashSet<Polaganje>();
+
     public StudentNaGodini() {super();
     }
 
@@ -70,5 +73,13 @@ public class StudentNaGodini {
 
     public void setStudenti(Set<Student> studenti) {
         this.studenti = studenti;
+    }
+
+    public Set<Polaganje> getPolaganja() {
+        return polaganja;
+    }
+
+    public void setPolaganja(Set<Polaganje> polaganja) {
+        this.polaganja = polaganja;
     }
 }

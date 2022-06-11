@@ -26,7 +26,7 @@ import java.util.HashSet;
 
 @Controller
 @RequestMapping("/api")
-public class LoginController {
+public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_ADMIN, ROLE_STUDENT, ROLE_NASTAVNIK, ROLE_KORISNIK
 
     @Autowired
     private AuthenticationManager authenticationManager;

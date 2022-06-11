@@ -1,30 +1,28 @@
 package rs.ac.singidunum.isa.app.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Ishod {
+public class TipEvaluacije {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String opis;
+    private String naziv;
 
-    @ManyToOne(optional = false)
-    private Predmet predmet;
 
-    @OneToMany(mappedBy = "ishod")
+    @OneToMany(mappedBy = "tipEvaluacije")
     private Set<EvaluacijaZnanja> evaluacijeZnanja = new HashSet<EvaluacijaZnanja>();
 
-    public Ishod() {super();
+    public TipEvaluacije() {super();
     }
 
-    public Ishod(Long id, String opis, Predmet predmet) {
+    public TipEvaluacije(Long id, String naziv) {
         this.id = id;
-        this.opis = opis;
-        this.predmet = predmet;
+        this.naziv = naziv;
     }
 
     public Long getId() {
@@ -35,20 +33,12 @@ public class Ishod {
         this.id = id;
     }
 
-    public String getOpis() {
-        return opis;
+    public String getNaziv() {
+        return naziv;
     }
 
-    public void setOpis(String opis) {
-        this.opis = opis;
-    }
-
-    public Predmet getPredmet() {
-        return predmet;
-    }
-
-    public void setPredmet(Predmet predmet) {
-        this.predmet = predmet;
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 
     public Set<EvaluacijaZnanja> getEvaluacijeZnanja() {

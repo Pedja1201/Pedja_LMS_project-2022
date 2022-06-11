@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import rs.ac.singidunum.isa.app.aspect.LoggedStudent;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Student;
+import rs.ac.singidunum.isa.app.service.NastavnikService;
 import rs.ac.singidunum.isa.app.service.StudentService;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ import java.util.function.Function;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private NastavnikService nastavnikService;
 
     @LoggedStudent
     @RequestMapping(path = "", method = RequestMethod.GET)
@@ -111,5 +115,20 @@ public class StudentController {
             return new ResponseEntity<Student>(HttpStatus.OK);
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
+        ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
+        for (Student student : this.studentService.studentiNaPredmetimaNastavnika(this.nastavnikService.findOne(nastavnikId).orElse(null))) {
+            studentDTOS.add(new StudentDTO(student.getId(), student.getKorisnickoIme(), student.getLozinka(), student.getJmbg(), student.getIme(),
+                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
+                            student.getAdresa().getBroj(), null),
+                    new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
+                            null),
+                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
+                            student.getStudentNaGodini().getBrojIndeksa(), null)));
+        }
+        return new ResponseEntity<Iterable<StudentDTO>>(studentDTOS, HttpStatus.OK);
     }
 }

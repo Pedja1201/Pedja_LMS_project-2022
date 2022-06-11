@@ -1,6 +1,8 @@
 package rs.ac.singidunum.isa.app.dto;
 
 
+import rs.ac.singidunum.isa.app.model.EvaluacijaZnanja;
+
 import java.util.ArrayList;
 
 
@@ -9,17 +11,19 @@ public class RealizacijaPredmetaDTO {
     private String naziv;
     private NastavnikNaRealizacijiDTO nastavnikNaRealizaciji;
     private PredmetDTO predmet;
+    private EvaluacijaZnanjaDTO evaluacijaZnanja;
 
     private ArrayList<PohadjanjePredmetaDTO> pohadjanjaPredmeta = new ArrayList<PohadjanjePredmetaDTO>();
 
     public RealizacijaPredmetaDTO() {super();
     }
 
-    public RealizacijaPredmetaDTO(Long id, String naziv, NastavnikNaRealizacijiDTO nastavnikNaRealizaciji, PredmetDTO predmet) {
+    public RealizacijaPredmetaDTO(Long id, String naziv, NastavnikNaRealizacijiDTO nastavnikNaRealizaciji, PredmetDTO predmet, EvaluacijaZnanjaDTO evaluacijaZnanja) {
         this.id = id;
         this.naziv = naziv;
         this.nastavnikNaRealizaciji = nastavnikNaRealizaciji;
         this.predmet = predmet;
+        this.evaluacijaZnanja = evaluacijaZnanja;
     }
 
     public Long getId() {
@@ -60,5 +64,13 @@ public class RealizacijaPredmetaDTO {
 
     public void setPohadjanjaPredmeta(ArrayList<PohadjanjePredmetaDTO> pohadjanjaPredmeta) {
         this.pohadjanjaPredmeta = pohadjanjaPredmeta;
+    }
+
+    public EvaluacijaZnanjaDTO getEvaluacijaZnanja() {
+        return evaluacijaZnanja;
+    }
+
+    public void setEvaluacijaZnanja(EvaluacijaZnanjaDTO evaluacijaZnanja) {
+        this.evaluacijaZnanja = evaluacijaZnanja;
     }
 }

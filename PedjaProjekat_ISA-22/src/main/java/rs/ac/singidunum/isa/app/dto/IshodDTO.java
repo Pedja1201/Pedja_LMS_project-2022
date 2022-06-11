@@ -1,10 +1,14 @@
 package rs.ac.singidunum.isa.app.dto;
 
 
+import java.util.ArrayList;
+
 public class IshodDTO {
     private Long id;
     private String opis;
     private PredmetDTO predmet;
+
+    private ArrayList<EvaluacijaZnanjaDTO> evalucijeZnanja = new ArrayList<EvaluacijaZnanjaDTO>();
 
     public IshodDTO() {super();
     }
@@ -37,5 +41,13 @@ public class IshodDTO {
 
     public void setPredmet(PredmetDTO predmet) {
         this.predmet = predmet;
+    }
+
+    public ArrayList<EvaluacijaZnanjaDTO> getEvalucijeZnanja() {
+        return evalucijeZnanja;
+    }
+
+    public void setEvalucijeZnanja(ArrayList<EvaluacijaZnanjaDTO> evalucijeZnanja) {
+        this.evalucijeZnanja = evalucijeZnanja;
     }
 }

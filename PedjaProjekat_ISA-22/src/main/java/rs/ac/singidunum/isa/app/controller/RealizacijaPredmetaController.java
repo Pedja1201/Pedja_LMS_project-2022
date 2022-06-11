@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import rs.ac.singidunum.isa.app.dto.EvaluacijaZnanjaDTO;
 import rs.ac.singidunum.isa.app.dto.NastavnikNaRealizacijiDTO;
 import rs.ac.singidunum.isa.app.dto.PredmetDTO;
 import rs.ac.singidunum.isa.app.dto.RealizacijaPredmetaDTO;
@@ -38,7 +39,9 @@ public class RealizacijaPredmetaController {
                                 realizacijaPredmeta.getPredmet().getEspb(),realizacijaPredmeta.getPredmet().isObavezan(),
                                 realizacijaPredmeta.getPredmet().getBrojPredavanja(),realizacijaPredmeta.getPredmet().getBrojVezbi(),
                                 realizacijaPredmeta.getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.getPredmet().getIstrazivackiRad(),
-                                realizacijaPredmeta.getPredmet().getOstaliCasovi())
+                                realizacijaPredmeta.getPredmet().getOstaliCasovi()),
+                        new EvaluacijaZnanjaDTO(realizacijaPredmeta.getEvaluacijaZnanja().getId(),
+                                realizacijaPredmeta.getEvaluacijaZnanja().getVremePocetka(),realizacijaPredmeta.getEvaluacijaZnanja().getVremeZavrsetka(),null,null)
                 );
                 // Conversion logic
                 return realizacijaPredmetaDTO;
@@ -59,7 +62,9 @@ public class RealizacijaPredmetaController {
                             realizacijaPredmeta.get().getPredmet().getEspb(), realizacijaPredmeta.get().getPredmet().isObavezan(),
                             realizacijaPredmeta.get().getPredmet().getBrojPredavanja(),realizacijaPredmeta.get().getPredmet().getBrojVezbi(),
                             realizacijaPredmeta.get().getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.get().getPredmet().getIstrazivackiRad(),
-                            realizacijaPredmeta.get().getPredmet().getOstaliCasovi()));
+                            realizacijaPredmeta.get().getPredmet().getOstaliCasovi()),
+                    new EvaluacijaZnanjaDTO(realizacijaPredmeta.get().getEvaluacijaZnanja().getId(),
+                            realizacijaPredmeta.get().getEvaluacijaZnanja().getVremePocetka(),realizacijaPredmeta.get().getEvaluacijaZnanja().getVremeZavrsetka(),null,null));
 
             return new ResponseEntity<RealizacijaPredmetaDTO>(realizacijaPredmetaDTO, HttpStatus.OK);
         }
@@ -77,9 +82,11 @@ public class RealizacijaPredmetaController {
                     realizacijaPredmeta.getPredmet().getBrojPredavanja(),realizacijaPredmeta.getPredmet().getBrojVezbi(),
                     realizacijaPredmeta.getPredmet().getDrugiObliciNastave(),realizacijaPredmeta.getPredmet().getIstrazivackiRad(),
                     realizacijaPredmeta.getPredmet().getOstaliCasovi());
+            EvaluacijaZnanjaDTO evaluacijaZnanjaDTO = new EvaluacijaZnanjaDTO(realizacijaPredmeta.getEvaluacijaZnanja().getId(), realizacijaPredmeta.getEvaluacijaZnanja().getVremePocetka(),
+                    realizacijaPredmeta.getEvaluacijaZnanja().getVremeZavrsetka(), null,null);
 
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(realizacijaPredmeta.getId(),
-                    realizacijaPredmeta.getNaziv(),  nastavnikNaRealizacijiDTO, predmetDTO);
+                    realizacijaPredmeta.getNaziv(),  nastavnikNaRealizacijiDTO, predmetDTO, evaluacijaZnanjaDTO);
 
             return new ResponseEntity<RealizacijaPredmetaDTO>(realizacijaPredmetaDTO, HttpStatus.OK);
         } catch (Exception e) {
@@ -102,9 +109,11 @@ public class RealizacijaPredmetaController {
                     izmenjenaRealizacijaPredmeta.getPredmet().getBrojPredavanja(),izmenjenaRealizacijaPredmeta.getPredmet().getBrojVezbi(),
                     izmenjenaRealizacijaPredmeta.getPredmet().getDrugiObliciNastave(),izmenjenaRealizacijaPredmeta.getPredmet().getIstrazivackiRad(),
                     izmenjenaRealizacijaPredmeta.getPredmet().getOstaliCasovi());
+            EvaluacijaZnanjaDTO evaluacijaZnanjaDTO = new EvaluacijaZnanjaDTO(izmenjenaRealizacijaPredmeta.getEvaluacijaZnanja().getId(), izmenjenaRealizacijaPredmeta.getEvaluacijaZnanja().getVremePocetka(),
+                    izmenjenaRealizacijaPredmeta.getEvaluacijaZnanja().getVremeZavrsetka(), null,null);
 
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(izmenjenaRealizacijaPredmeta.getId(),
-                    izmenjenaRealizacijaPredmeta.getNaziv(),  nastavnikNaRealizacijiDTO, predmetDTO);
+                    izmenjenaRealizacijaPredmeta.getNaziv(),  nastavnikNaRealizacijiDTO, predmetDTO,evaluacijaZnanjaDTO);
             return new ResponseEntity<RealizacijaPredmetaDTO>(realizacijaPredmetaDTO, HttpStatus.OK);
         }
         return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.NOT_FOUND);
@@ -132,7 +141,7 @@ public class RealizacijaPredmetaController {
                     realizacijaPredmeta.getPredmet().getOstaliCasovi());
 
             realizacijePredmetaDTO.add(new RealizacijaPredmetaDTO(realizacijaPredmeta.getId(), realizacijaPredmeta.getNaziv(),
-                    null,predmetDTO));
+                    null,predmetDTO, null));
         }
         return new ResponseEntity<Iterable<RealizacijaPredmetaDTO>>(realizacijePredmetaDTO, HttpStatus.OK);
 

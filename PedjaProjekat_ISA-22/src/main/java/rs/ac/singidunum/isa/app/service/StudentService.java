@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rs.ac.singidunum.isa.app.model.Nastavnik;
 import rs.ac.singidunum.isa.app.model.Student;
 import rs.ac.singidunum.isa.app.repository.StudentRepository;
 
@@ -55,4 +56,7 @@ public class StudentService {
     public void delete(Student student) {
         studentRepository.delete(student);
     }
+
+    public Iterable<Student> studentiNaPredmetimaNastavnika(Nastavnik nastavnik) { return this.studentRepository.pronadjiSpisakStudenataZaPredmeteNaKojimaJeAngazovanProfesor(nastavnik); }
+
 }
