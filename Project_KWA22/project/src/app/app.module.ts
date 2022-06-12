@@ -127,6 +127,18 @@ import { TipoviEvaluacijeComponent } from './page/tipovi-evaluacije/tipovi-evalu
 import { TableTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/table-tipovi-evaluacije/table-tipovi-evaluacije.component';
 import { FormTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/form-tipovi-evaluacije/form-tipovi-evaluacije.component';
 import { DetailsTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/details-tipovi-evaluacije/details-tipovi-evaluacije.component';
+import { TerminiNastaveComponent } from './page/termini-nastave/termini-nastave.component';
+import { TableTerminiNastaveComponent } from './page/termini-nastave/table-termini-nastave/table-termini-nastave.component';
+import { FormTerminiNastaveComponent } from './page/termini-nastave/form-termini-nastave/form-termini-nastave.component';
+import { DetailsTerminiNastaveComponent } from './page/termini-nastave/details-termini-nastave/details-termini-nastave.component';
+import { NastavniMaterijalComponent } from './page/nastavni-materijal/nastavni-materijal.component';
+import { TableNastavniMaterijalComponent } from './page/nastavni-materijal/table-nastavni-materijal/table-nastavni-materijal.component';
+import { FormNastavniMaterijalComponent } from './page/nastavni-materijal/form-nastavni-materijal/form-nastavni-materijal.component';
+import { DetailsNastavniMaterijalComponent } from './page/nastavni-materijal/details-nastavni-materijal/details-nastavni-materijal.component';
+import { IshodiNastaveComponent } from './page/ishodi-nastave/ishodi-nastave.component';
+import { TableIshodiNastaveComponent } from './page/ishodi-nastave/table-ishodi-nastave/table-ishodi-nastave.component';
+import { FormIshodiNastaveComponent } from './page/ishodi-nastave/form-ishodi-nastave/form-ishodi-nastave.component';
+import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ishodi-nastave/details-ishodi-nastave.component';
 
 
 @NgModule({
@@ -236,6 +248,18 @@ import { DetailsTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/detai
     TableTipoviEvaluacijeComponent,
     FormTipoviEvaluacijeComponent,
     DetailsTipoviEvaluacijeComponent,
+    TerminiNastaveComponent,
+    TableTerminiNastaveComponent,
+    FormTerminiNastaveComponent,
+    DetailsTerminiNastaveComponent,
+    NastavniMaterijalComponent,
+    TableNastavniMaterijalComponent,
+    FormNastavniMaterijalComponent,
+    DetailsNastavniMaterijalComponent,
+    IshodiNastaveComponent,
+    TableIshodiNastaveComponent,
+    FormIshodiNastaveComponent,
+    DetailsIshodiNastaveComponent,
   ],
   imports: [
     BrowserModule,

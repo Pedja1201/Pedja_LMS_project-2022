@@ -54,6 +54,12 @@ import { EvaluacijeZnanjaComponent } from './page/evaluacije-znanja/evaluacije-z
 import { DetailsEvaluacijeZnanjaComponent } from './page/evaluacije-znanja/details-evaluacije-znanja/details-evaluacije-znanja.component';
 import { TipoviEvaluacijeComponent } from './page/tipovi-evaluacije/tipovi-evaluacije.component';
 import { DetailsTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/details-tipovi-evaluacije/details-tipovi-evaluacije.component';
+import { TerminiNastaveComponent } from './page/termini-nastave/termini-nastave.component';
+import { DetailsTerminiNastaveComponent } from './page/termini-nastave/details-termini-nastave/details-termini-nastave.component';
+import { NastavniMaterijalComponent } from './page/nastavni-materijal/nastavni-materijal.component';
+import { DetailsNastavniMaterijalComponent } from './page/nastavni-materijal/details-nastavni-materijal/details-nastavni-materijal.component';
+import { IshodiNastaveComponent } from './page/ishodi-nastave/ishodi-nastave.component';
+import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ishodi-nastave/details-ishodi-nastave.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},
@@ -175,6 +181,22 @@ const routes: Routes = [
   {path: "tipoviEvaluacije", component: TipoviEvaluacijeComponent, 
         data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
   {path: "tipoviEvaluacije/:id", component: DetailsTipoviEvaluacijeComponent},
+
+
+    //TerminNastave
+  {path: "terminiNastave", component: TerminiNastaveComponent, 
+   data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: "terminiNastave/:id", component: DetailsTerminiNastaveComponent},
+
+  //Nastavni materijal
+  {path: "nastavniMaterijali", component: NastavniMaterijalComponent, 
+  data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: "nastavniMaterijali/:id", component: DetailsNastavniMaterijalComponent},
+
+  //Ishodi nastave
+  {path: "ishodiNastave", component: IshodiNastaveComponent, 
+    data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: "ishodiNastave/:id", component: DetailsIshodiNastaveComponent},
 
   //Stablo
   {path:"tree", component:TreeViewComponent},

@@ -1,0 +1,8 @@
+<mat-list>
+    <mat-list-item>ID: {{terminNastave["id"]}}</mat-list-item>
+    <mat-list-item>Vreme pocetka: {{terminNastave["vremePocetka"]}}</mat-list-item>
+    <mat-list-item>Vreme kraja: {{terminNastave["vremeKraja"]}}</mat-list-item>
+    <mat-list-item>Ishod Nastave: <span *ngIf="terminNastave['ishodNastave']">{{terminNastave["ishodNastave"]["opis"]}}</span></mat-list-item>
+    <mat-list-item>Tip Nastave: <span *ngIf="terminNastave['tipNastave']">{{terminNastave["tipNastave"]["naziv"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

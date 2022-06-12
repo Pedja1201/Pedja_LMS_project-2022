@@ -1,0 +1,12 @@
+<h2>{{title}}</h2>
+<mat-tab-group>
+<mat-tab label="Table Ishoda Nastave">
+    <app-table-ishodi-nastave  [elementi]="ishodiNastave" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-table-ishodi-nastave>
+    <app-form-ishodi-nastave *ngIf="prikaz" [ishodNastave]="ishodUpdate" (createEvent)="update($event)"></app-form-ishodi-nastave>
+
+</mat-tab>
+<mat-tab label="Add Ishod Nastave">
+    <app-form-ishodi-nastave (createEvent)="create($event)"></app-form-ishodi-nastave>
+</mat-tab>
+</mat-tab-group>

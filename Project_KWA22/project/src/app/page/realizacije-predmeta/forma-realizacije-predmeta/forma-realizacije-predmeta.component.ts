@@ -4,9 +4,11 @@ import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
 import { NastavnikNaRealizaciji } from 'src/app/model/nastavnik-na-realizaciji';
 import { Predmet } from 'src/app/model/predmet';
 import { RealizacijaPredmeta } from 'src/app/model/realizacija-predmeta';
+import { TerminNastave } from 'src/app/model/termin-nastave';
 import { EvaluacijeZnanjaService } from 'src/app/service/evaluacije-znanja.service';
 import { NastavniciNaRealizacijiService } from 'src/app/service/nastavnici-na-realizaciji.service';
 import { PredmetiService } from 'src/app/service/predmeti.service';
+import { TerminiNastaveService } from 'src/app/service/termini-nastave.service';
 
 @Component({
   selector: 'app-forma-realizacije-predmeta',
@@ -19,12 +21,14 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
   nastavniciNaRealizaciji: NastavnikNaRealizaciji[] = [];
   predmeti: Predmet[] = [];
   evaluacijeZnanja : EvaluacijaZnanja[] = [];
+  terminiNastave : TerminNastave[] = [];
   
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
     "nastavnikNaRealizaciji": new FormControl(null, [Validators.required]),
     "predmet": new FormControl(null, [Validators.required]),
     "evaluacijaZnanja": new FormControl(null, [Validators.required]),
+    "terminNastave": new FormControl(null, [Validators.required]),
   })
   
   @Output()
@@ -33,7 +37,8 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
   @Input()
   realizacijaPredmeta: RealizacijaPredmeta|null = null;
 
-  constructor(private nastavniciNaRealizacijiService : NastavniciNaRealizacijiService, private predmetiService : PredmetiService,  private evZnanjaService : EvaluacijeZnanjaService) { }
+  constructor(private nastavniciNaRealizacijiService : NastavniciNaRealizacijiService, 
+    private predmetiService : PredmetiService,  private evZnanjaService : EvaluacijeZnanjaService, private terminService : TerminiNastaveService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
@@ -43,6 +48,8 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
     this.forma.get("nastavnikNaRealizaciji")?.setValue(this.realizacijaPredmeta?.nastavnikNaRealizaciji);
     this.forma.get("predmet")?.setValue(this.realizacijaPredmeta?.predmet);
     this.forma.get("evaluacijaZnanja")?.setValue(this.realizacijaPredmeta?.evaluacijaZnanja);
+    this.forma.get("terminNastave")?.setValue(this.realizacijaPredmeta?.terminNastave);
+
   }
 
   ngOnInit(): void {
@@ -55,11 +62,15 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
     this.evZnanjaService.getAll().subscribe(evaluacijeZnanja =>{
       this.evaluacijeZnanja = evaluacijeZnanja;
     });
+    this.terminService.getAll().subscribe(terminiNastave =>{
+      this.terminiNastave = terminiNastave;
+    });
     this.forma.get("id")?.setValue(this.realizacijaPredmeta?.id);
     this.forma.get("naziv")?.setValue(this.realizacijaPredmeta?.id);
     this.forma.get("nastavnikNaRealizaciji")?.setValue(this.realizacijaPredmeta?.id);
     this.forma.get("predmet")?.setValue(this.realizacijaPredmeta?.id);
     this.forma.get("evaluacijaZnanja")?.setValue(this.realizacijaPredmeta?.id);
+    this.forma.get("terminNastave")?.setValue(this.realizacijaPredmeta?.id);
   }
 
   create() {
@@ -85,5 +96,11 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
     return evZnanja1 && evZnanja2
     ? evZnanja1.id === evZnanja2.id
     : evZnanja1 === evZnanja2;
+  }
+
+  comparator4(termin1: any, termin2:any) {
+    return termin1 && termin2
+    ? termin1.id === termin2.id
+    : termin1 === termin2;
   }
 }

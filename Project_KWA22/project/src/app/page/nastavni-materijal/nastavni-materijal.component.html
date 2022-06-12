@@ -1,0 +1,13 @@
+<h2>{{title}}</h2>
+
+<mat-tab-group>
+<mat-tab label="Table Nastavni Materijal">
+    <app-table-nastavni-materijal  [elementi]="nastavniMaterijali" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-table-nastavni-materijal>
+
+    <app-form-nastavni-materijal *ngIf="prikaz" [nastavniMaterijal]="materijalUpdate" (createEvent)="update($event)"></app-form-nastavni-materijal>
+</mat-tab>
+<mat-tab label="Add Nastavni Materijal">
+    <app-form-nastavni-materijal (createEvent)="create($event)"></app-form-nastavni-materijal>
+</mat-tab>
+</mat-tab-group>

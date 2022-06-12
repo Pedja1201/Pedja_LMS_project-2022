@@ -428,6 +428,11 @@
           }
         }
       },
+      "terminNastave": {
+        "id": 1,
+        "vremePocetka": "2021-05-25",
+        "vremeKraja": "2021-05-25"
+    },
       "id": 1
     },
     {
@@ -481,6 +486,11 @@
           }
         }
       },
+      "terminNastave": {
+        "id": 1,
+        "vremePocetka": "2021-05-25",
+        "vremeKraja": "2021-05-25"
+    },
       "id": 2
     }
   ],
@@ -677,5 +687,46 @@
         "brojIndeksa": "2019270487"
       }
     }
+  ],
+  "ishodiNastave":[
+    {
+      "id": 1,
+      "opis": "Savladati teorijsku verziju u datoj oblasti",
+      "nastavniMaterijal": {
+          "id": 1,
+          "naziv": "Programiranje2",
+          "autor": "Zavod BG",
+          "godinaIzdavanja": "2021-05-25"
+      }
+  }
+  ],
+  "nastavniMaterijali":[
+    {
+      "id": 1,
+      "naziv": "Programiranje2",
+      "autor": "Zavod BG",
+      "godinaIzdavanja": "2021-05-25"
+  }
+  ],
+  "terminiNastave":[
+    {
+      "id": 1,
+      "vremePocetka": "2021-05-25",
+      "vremeKraja": "2021-05-25",
+      "ishodNastave": {
+          "id": 1,
+          "opis": "Savladati teorijsku verziju u datoj oblasti",
+          "nastavniMaterijal": {
+              "id": 1,
+              "naziv": "Programiranje2",
+              "autor": "Zavod BG",
+              "godinaIzdavanja": "2021-05-25"
+          }
+      },
+      "tipNastave": {
+          "id": 1,
+          "naziv": "Predavanje"
+      }
+  }
   ]
 }

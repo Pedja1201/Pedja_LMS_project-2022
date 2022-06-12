@@ -1,0 +1,6 @@
+<mat-list>
+    <mat-list-item>ID: {{ishodNastave["id"]}}</mat-list-item>
+    <mat-list-item>Opis: {{ishodNastave["opis"]}}</mat-list-item>
+    <mat-list-item>Nastavni Materijal: <span *ngIf="ishodNastave['nastavniMaterijal']">{{ishodNastave["nastavniMaterijal"]["naziv"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

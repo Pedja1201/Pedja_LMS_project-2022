@@ -4,5 +4,6 @@
     <mat-list-item>Nastavnik na realizaciji: <span *ngIf="realizacijaPredmeta['nastavnikNaRealizaciji']">{{realizacijaPredmeta["nastavnikNaRealizaciji"]["id"]}}</span></mat-list-item>
     <mat-list-item>Predmet: <span *ngIf="realizacijaPredmeta['predmet']">{{realizacijaPredmeta["predmet"]["naziv"]}}</span></mat-list-item>
     <mat-list-item>Evaluacija Znanja: <span *ngIf="realizacijaPredmeta['evaluacijaZnanja']">{{realizacijaPredmeta["evaluacijaZnanja"]["id"]}}</span></mat-list-item>
+    <mat-list-item>Termin Nastave: <span *ngIf="realizacijaPredmeta['terminNastave']">{{realizacijaPredmeta["terminNastave"]["vremePocetka"]}}</span></mat-list-item>
 </mat-list>
 <button mat-raised-button color="primary" (click)="back()">Nazad</button>

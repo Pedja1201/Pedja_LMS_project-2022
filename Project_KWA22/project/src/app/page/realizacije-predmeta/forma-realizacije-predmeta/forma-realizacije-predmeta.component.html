@@ -38,6 +38,16 @@
         </mat-form-field>
       </div>
       <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Termin Nastave:</mat-label>
+          <mat-select name="terminNastave" formControlName="terminNastave" [compareWith]="comparator4" required>
+            <mat-option *ngFor="let terminNastave of terminiNastave"  [value]="terminNastave"> 
+              {{terminNastave.vremePocetka}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
         <button mat-raised-button color="primary"  type="submit">Dodaj</button>
     </div>
 </form>
