@@ -49,7 +49,13 @@
     <button mat-menu-item [routerLink]="['/nastavnici']"><mat-icon>group_add</mat-icon>Dodavanje nastavnika</button>
     <button mat-menu-item [routerLink]="['/nastavniciNaRealizaciji']"><mat-icon> list_alt</mat-icon>Evidencija o Nastavnicima na realizaciji</button>
     <button mat-menu-item [routerLink]="['/tipoviZvanja']">	<mat-icon> short_text</mat-icon>Tipovi zvanja</button>
-    <button mat-menu-item [routerLink]="['/zvanja']">	<mat-icon> show_chart</mat-icon>Zvanja</button>
+    <button mat-menu-item [routerLink]="['/zvanja']">	<mat-icon>school</mat-icon>Zvanja</button>
+  </mat-menu>
+  <button id='desno2'   *ngIf="loginService.loggedIn" mat-button [matMenuTriggerFor]="menuNastava">	<mat-icon>settings_applications</mat-icon>Nastava</button>
+  <mat-menu #menuNastava="matMenu">
+    <button mat-menu-item [routerLink]="['/polaganja']"><mat-icon>book</mat-icon>Polaganja</button>
+    <button mat-menu-item [routerLink]="['/evaluacijeZnanja']">	<mat-icon> show_chart</mat-icon>Evaluacija Znanja</button>
+    <button mat-menu-item [routerLink]="['/tipoviEvaluacije']"><mat-icon> merge_type</mat-icon>Tip Evaluacije</button>
   </mat-menu>
 
   <!-- <button id='desno' mat-button  mat-raised-button color="primary" [matMenuTriggerFor]="menuPrijava">Prijavi se</button> -->

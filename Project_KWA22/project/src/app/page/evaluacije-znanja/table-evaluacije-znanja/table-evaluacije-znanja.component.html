@@ -11,28 +11,28 @@
     </td>
   </ng-container>
 
-  <!-- Naziv Column -->
-  <ng-container matColumnDef="naziv">
-    <th mat-header-cell *matHeaderCellDef> Naziv </th>
-    <td mat-cell *matCellDef="let element"> {{element.naziv}} </td>
+  <!-- vremePocetka Column -->
+  <ng-container matColumnDef="vremePocetka">
+    <th mat-header-cell *matHeaderCellDef> Vreme Pocetka </th>
+    <td mat-cell *matCellDef="let element"> {{element.vremePocetka}} </td>
   </ng-container>
 
-  <!-- Nasatvnik na realizaciji Column -->
-  <ng-container matColumnDef="nastavnikNaRealizaciji">
-    <th mat-header-cell *matHeaderCellDef> Nasatvnik na realizaciji </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['nastavnikNaRealizaciji']">{{element["nastavnikNaRealizaciji"]["id"]}}</span> </td>
+  <!-- vremeZavrsetka Column -->
+  <ng-container matColumnDef="vremeZavrsetka">
+    <th mat-header-cell *matHeaderCellDef> Vreme Zavrsetka </th>
+    <td mat-cell *matCellDef="let element"> {{element.vremeZavrsetka}} </td>
   </ng-container>
 
-  <!-- Predmet Column -->
-  <ng-container matColumnDef="predmet">
-    <th mat-header-cell *matHeaderCellDef> Predmet </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['predmet']">{{element["predmet"]["naziv"]}}</span></td>
+  <!-- ishod Column -->
+  <ng-container matColumnDef="ishod">
+    <th mat-header-cell *matHeaderCellDef style="text-align:center;"> Ishod </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['ishod']">{{element["ishod"]["opis"]}}</span></td>
   </ng-container>
 
-  <!-- Ev Znanja Column -->
-  <ng-container matColumnDef="evaluacijaZnanja">
-    <th mat-header-cell *matHeaderCellDef> Evaluacija Znanja </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['evaluacijaZnanja']">{{element["evaluacijaZnanja"]["id"]}}</span></td>
+  <!-- tipEvaluacije Column -->
+  <ng-container matColumnDef="tipEvaluacije">
+    <th mat-header-cell *matHeaderCellDef> Tip Evaluacije </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['tipEvaluacije']">{{element["tipEvaluacije"]["naziv"]}}</span></td>
   </ng-container>
 
   <ng-container matColumnDef="akcije">

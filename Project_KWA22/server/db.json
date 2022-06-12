@@ -72,6 +72,18 @@
     "/zvanja": [
       "ROLE_ADMIN",
       "ROLE_USER"
+    ],
+    "/evaluacijeZnanja": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/tipoviEvaluacije": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
+    ],
+    "/polaganja": [
+      "ROLE_ADMIN",
+      "ROLE_USER"
     ]
   },
   "users": [
@@ -376,7 +388,6 @@
   ],
   "realizacijePredmeta": [
     {
-      "id": 1,
       "naziv": "Polaganje predmetnog projekta",
       "nastavnikNaRealizaciji": {
         "id": 1,
@@ -392,7 +403,85 @@
         "drugiObliciNastave": 2,
         "istrazivackiRad": 2,
         "ostaliCasovi": 2
-      }
+      },
+      "evaluacijaZnanja": {
+        "id": 1,
+        "vremePocetka": "2021-05-25",
+        "vremeZavrsetka": "2021-05-25",
+        "tipEvaluacije": {
+          "id": 1,
+          "naziv": "Kolokvijum"
+        },
+        "ishod": {
+          "id": 1,
+          "opis": "Student će po uspešnom završetku kursa umeti da koristi ",
+          "predmet": {
+            "id": 1,
+            "naziv": "Internet arhiteture",
+            "espb": 8,
+            "obavezan": false,
+            "brojPredavanja": 12,
+            "brojVezbi": 12,
+            "drugiObliciNastave": 2,
+            "istrazivackiRad": 2,
+            "ostaliCasovi": 2
+          }
+        }
+      },
+      "id": 1
+    },
+    {
+      "naziv": "aaaaaaa",
+      "nastavnikNaRealizaciji": {
+        "id": 1,
+        "brojCasova": 4,
+        "nastavnik": {
+          "id": 1,
+          "ime": "Milorad",
+          "biografija": "Uspesna saradnja u prethodnim ustanovama",
+          "jmbg": "90876543"
+        },
+        "tipNastave": {
+          "id": 1,
+          "naziv": "Predavanja"
+        }
+      },
+      "predmet": {
+        "id": 2,
+        "naziv": "Klijentske Web aplikacije",
+        "espb": 6,
+        "obavezan": true,
+        "brojPredavanja": 12,
+        "brojVezbi": 12,
+        "drugiObliciNastave": 2,
+        "istrazivackiRad": 2,
+        "ostaliCasovi": 3
+      },
+      "evaluacijaZnanja": {
+        "id": 1,
+        "vremePocetka": "2021-05-25",
+        "vremeZavrsetka": "2021-05-25",
+        "tipEvaluacije": {
+          "id": 1,
+          "naziv": "Kolokvijum"
+        },
+        "ishod": {
+          "id": 1,
+          "opis": "Student će po uspešnom završetku kursa umeti da koristi ",
+          "predmet": {
+            "id": 1,
+            "naziv": "Internet arhiteture",
+            "espb": 8,
+            "obavezan": false,
+            "brojPredavanja": 12,
+            "brojVezbi": 12,
+            "drugiObliciNastave": 2,
+            "istrazivackiRad": 2,
+            "ostaliCasovi": 2
+          }
+        }
+      },
+      "id": 2
     }
   ],
   "studenti": [
@@ -505,6 +594,87 @@
       "tipZvanja": {
         "id": 1,
         "naziv": "Profesor"
+      }
+    }
+  ],
+  "evaluacijeZnanja": [
+    {
+      "id": 1,
+      "vremePocetka": "2021-05-25",
+      "vremeZavrsetka": "2021-05-25",
+      "tipEvaluacije": {
+        "id": 1,
+        "naziv": "Kolokvijum"
+      },
+      "ishod": {
+        "id": 1,
+        "opis": "Student će po uspešnom završetku kursa umeti da koristi ",
+        "predmet": {
+          "id": 1,
+          "naziv": "Internet arhiteture",
+          "espb": 8,
+          "obavezan": false,
+          "brojPredavanja": 12,
+          "brojVezbi": 12,
+          "drugiObliciNastave": 2,
+          "istrazivackiRad": 2,
+          "ostaliCasovi": 2
+        }
+      }
+    },
+    {
+      "vremePocetka": "2022-06-09",
+      "vremeZavrsetka": "2022-06-22",
+      "ishod": {
+        "id": 2,
+        "opis": "Studenti će po završetku kursa umeti da naprave klijentski deo web aplikacije korišćenjem",
+        "predmet": {
+          "id": 2,
+          "naziv": "Klijentske Web aplikacije",
+          "espb": 6,
+          "obavezan": true,
+          "brojPredavanja": 12,
+          "brojVezbi": 12,
+          "drugiObliciNastave": 2,
+          "istrazivackiRad": 2,
+          "ostaliCasovi": 3
+        }
+      },
+      "tipEvaluacije": {
+        "id": 3,
+        "naziv": "Ispit"
+      },
+      "id": 2
+    }
+  ],
+  "tipoviEvaluacije": [
+    {
+      "id": 1,
+      "naziv": "Kolokvijum"
+    },
+    {
+      "id": 2,
+      "naziv": "Test"
+    },
+    {
+      "id": 3,
+      "naziv": "Ispit"
+    }
+  ],
+  "polaganja": [
+    {
+      "id": 1,
+      "bodovi": 25,
+      "napomena": "Prisustvo kamere",
+      "evaluacijaZnanja": {
+        "id": 1,
+        "vremePocetka": "2021-05-25",
+        "vremeZavrsetka": "2021-05-25"
+      },
+      "studentNaGodini": {
+        "id": 1,
+        "datumUpisa": "2021-05-25",
+        "brojIndeksa": "2019270487"
       }
     }
   ]

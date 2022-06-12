@@ -1,0 +1,8 @@
+<mat-list>
+    <mat-list-item>ID: {{polaganje["id"]}}</mat-list-item>
+    <mat-list-item>Bodovi: {{polaganje["bodovi"]}}</mat-list-item>
+    <mat-list-item>Napomena: {{polaganje["napomena"]}}</mat-list-item>
+    <mat-list-item>Evaluacija Znanja: <span *ngIf="polaganje['evaluacijaZnanja']">{{polaganje["evaluacijaZnanja"]["id"]}}</span></mat-list-item>
+    <mat-list-item>Student na Godini: <span *ngIf="polaganje['studentNaGodini']">{{polaganje["studentNaGodini"]["brojIndeksa"]}}</span></mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" (click)="back()">Nazad</button>

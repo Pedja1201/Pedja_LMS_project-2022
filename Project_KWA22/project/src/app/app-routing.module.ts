@@ -48,6 +48,12 @@ import { DetailsUsersComponent } from './page/users/details-users/details-users.
 import { TableUsersComponent } from './page/users/table-users/table-users.component';
 import { FormUsersComponent } from './page/users/form-users/form-users.component';
 import { AboutComponent } from './page/about/about.component';
+import { PolaganjaComponent } from './page/polaganja/polaganja.component';
+import { DetailsPolaganjaComponent } from './page/polaganja/details-polaganja/details-polaganja.component';
+import { EvaluacijeZnanjaComponent } from './page/evaluacije-znanja/evaluacije-znanja.component';
+import { DetailsEvaluacijeZnanjaComponent } from './page/evaluacije-znanja/details-evaluacije-znanja/details-evaluacije-znanja.component';
+import { TipoviEvaluacijeComponent } from './page/tipovi-evaluacije/tipovi-evaluacije.component';
+import { DetailsTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/details-tipovi-evaluacije/details-tipovi-evaluacije.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},
@@ -154,6 +160,21 @@ const routes: Routes = [
   {path: 'zvanja', component: ZvanjaComponent, 
         data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "zvanja/:id", component: DetailsZvanjaComponent},
+
+  //Polaganja
+  {path: "polaganja", component: PolaganjaComponent, 
+        data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: "polaganja/:id", component: DetailsPolaganjaComponent},
+
+  //EvaluacijeZnanja
+  {path: "evaluacijeZnanja", component: EvaluacijeZnanjaComponent, 
+        data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: "evaluacijeZnanja/:id", component: DetailsEvaluacijeZnanjaComponent},
+
+  //Tipovievaluacije
+  {path: "tipoviEvaluacije", component: TipoviEvaluacijeComponent, 
+        data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
+  {path: "tipoviEvaluacije/:id", component: DetailsTipoviEvaluacijeComponent},
 
   //Stablo
   {path:"tree", component:TreeViewComponent},

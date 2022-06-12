@@ -115,6 +115,19 @@ import { DetailsUsersComponent } from './page/users/details-users/details-users.
 import { TableUsersComponent } from './page/users/table-users/table-users.component';
 import { FormUsersComponent } from './page/users/form-users/form-users.component';
 import { AboutComponent } from './page/about/about.component';
+import { PolaganjaComponent } from './page/polaganja/polaganja.component';
+import { TablePolaganjaComponent } from './page/polaganja/table-polaganja/table-polaganja.component';
+import { DetailsPolaganjaComponent } from './page/polaganja/details-polaganja/details-polaganja.component';
+import { FormPolaganjaComponent } from './page/polaganja/form-polaganja/form-polaganja.component';
+import { EvaluacijeZnanjaComponent } from './page/evaluacije-znanja/evaluacije-znanja.component';
+import { TableEvaluacijeZnanjaComponent } from './page/evaluacije-znanja/table-evaluacije-znanja/table-evaluacije-znanja.component';
+import { FormEvaluacijeZnanjaComponent } from './page/evaluacije-znanja/form-evaluacije-znanja/form-evaluacije-znanja.component';
+import { DetailsEvaluacijeZnanjaComponent } from './page/evaluacije-znanja/details-evaluacije-znanja/details-evaluacije-znanja.component';
+import { TipoviEvaluacijeComponent } from './page/tipovi-evaluacije/tipovi-evaluacije.component';
+import { TableTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/table-tipovi-evaluacije/table-tipovi-evaluacije.component';
+import { FormTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/form-tipovi-evaluacije/form-tipovi-evaluacije.component';
+import { DetailsTipoviEvaluacijeComponent } from './page/tipovi-evaluacije/details-tipovi-evaluacije/details-tipovi-evaluacije.component';
+
 
 @NgModule({
   declarations: [
@@ -211,6 +224,18 @@ import { AboutComponent } from './page/about/about.component';
     TableUsersComponent,
     FormUsersComponent,
     AboutComponent,
+    PolaganjaComponent,
+    TablePolaganjaComponent,
+    DetailsPolaganjaComponent,
+    FormPolaganjaComponent,
+    EvaluacijeZnanjaComponent,
+    TableEvaluacijeZnanjaComponent,
+    FormEvaluacijeZnanjaComponent,
+    DetailsEvaluacijeZnanjaComponent,
+    TipoviEvaluacijeComponent,
+    TableTipoviEvaluacijeComponent,
+    FormTipoviEvaluacijeComponent,
+    DetailsTipoviEvaluacijeComponent,
   ],
   imports: [
     BrowserModule,

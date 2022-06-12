@@ -11,28 +11,28 @@
     </td>
   </ng-container>
 
-  <!-- Naziv Column -->
-  <ng-container matColumnDef="naziv">
-    <th mat-header-cell *matHeaderCellDef> Naziv </th>
-    <td mat-cell *matCellDef="let element"> {{element.naziv}} </td>
+  <!-- Bodovi Column -->
+  <ng-container matColumnDef="bodovi">
+    <th mat-header-cell *matHeaderCellDef> Bodovi </th>
+    <td mat-cell *matCellDef="let element"> {{element.bodovi}} </td>
   </ng-container>
 
-  <!-- Nasatvnik na realizaciji Column -->
-  <ng-container matColumnDef="nastavnikNaRealizaciji">
-    <th mat-header-cell *matHeaderCellDef> Nasatvnik na realizaciji </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['nastavnikNaRealizaciji']">{{element["nastavnikNaRealizaciji"]["id"]}}</span> </td>
+  <!-- napomena Column -->
+  <ng-container matColumnDef="napomena">
+    <th mat-header-cell *matHeaderCellDef> Napomena </th>
+    <td mat-cell *matCellDef="let element"> {{element.napomena}} </td>
   </ng-container>
 
-  <!-- Predmet Column -->
-  <ng-container matColumnDef="predmet">
-    <th mat-header-cell *matHeaderCellDef> Predmet </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['predmet']">{{element["predmet"]["naziv"]}}</span></td>
-  </ng-container>
-
-  <!-- Ev Znanja Column -->
+  <!-- evaluacijaZnanja Column -->
   <ng-container matColumnDef="evaluacijaZnanja">
     <th mat-header-cell *matHeaderCellDef> Evaluacija Znanja </th>
     <td mat-cell *matCellDef="let element"><span *ngIf="element['evaluacijaZnanja']">{{element["evaluacijaZnanja"]["id"]}}</span></td>
+  </ng-container>
+
+   <!-- studentNaGodini Column -->
+   <ng-container matColumnDef="studentNaGodini">
+    <th mat-header-cell *matHeaderCellDef> Student na godini </th>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['studentNaGodini']">{{element["studentNaGodini"]["brojIndeksa"]}}</span></td>
   </ng-container>
 
   <ng-container matColumnDef="akcije">

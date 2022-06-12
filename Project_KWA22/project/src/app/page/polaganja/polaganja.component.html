@@ -1,0 +1,12 @@
+<h2>{{title}}</h2>
+<mat-tab-group>
+<mat-tab label="Table Polaganje">
+    <app-table-polaganja  [elementi]="polaganja" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-table-polaganja>
+    <app-form-polaganja *ngIf="prikaz" [polaganje]="polaganjeUpdate" (createEvent)="update($event)"></app-form-polaganja>
+
+</mat-tab>
+<mat-tab label="Add Polaganje">
+    <app-form-polaganja (createEvent)="create($event)"></app-form-polaganja>
+</mat-tab>
+</mat-tab-group>

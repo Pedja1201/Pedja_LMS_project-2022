@@ -1,0 +1,13 @@
+<h2>{{title}}</h2>
+
+<mat-tab-group>
+<mat-tab label="Table Tip Evaluacije">
+    <app-table-tipovi-evaluacije  [elementi]="tipoviEvaluacije" (uklanjanje)="delete($event)" 
+(izmena)="setUpdate($event)"></app-table-tipovi-evaluacije>
+
+    <app-form-tipovi-evaluacije *ngIf="prikaz" [tipEvaluacije]="tipoviUpdate" (createEvent)="update($event)"></app-form-tipovi-evaluacije>
+</mat-tab>
+<mat-tab label="Add Tip Evaluacije">
+    <app-form-tipovi-evaluacije (createEvent)="create($event)"></app-form-tipovi-evaluacije>
+</mat-tab>
+</mat-tab-group>
