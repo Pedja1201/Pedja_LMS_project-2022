@@ -7,6 +7,7 @@ public class TipNastaveDTO {
     private String naziv;
 
     private ArrayList<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji = new ArrayList<NastavnikNaRealizacijiDTO>();
+    private ArrayList<TerminNastaveDTO> terminiNastave = new ArrayList<TerminNastaveDTO>();
 
     public TipNastaveDTO() {super();
     }
@@ -38,5 +39,13 @@ public class TipNastaveDTO {
 
     public void setNastavniciNaRealizaciji(ArrayList<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji) {
         this.nastavniciNaRealizaciji = nastavniciNaRealizaciji;
+    }
+
+    public ArrayList<TerminNastaveDTO> getTerminiNastave() {
+        return terminiNastave;
+    }
+
+    public void setTerminiNastave(ArrayList<TerminNastaveDTO> terminiNastave) {
+        this.terminiNastave = terminiNastave;
     }
 }

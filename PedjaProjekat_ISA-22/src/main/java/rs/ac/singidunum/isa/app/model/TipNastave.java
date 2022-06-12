@@ -14,6 +14,8 @@ public class TipNastave {
 
     @OneToMany(mappedBy = "tipNastave")
     private Set<NastavnikNaRealizaciji> nastavniciNaRealizaciji = new HashSet<NastavnikNaRealizaciji>();
+    @OneToMany(mappedBy = "tipNastave")
+    private Set<TerminNastave> terminiNastave = new HashSet<TerminNastave>();
 
     public TipNastave() {super();
     }
@@ -45,5 +47,13 @@ public class TipNastave {
 
     public void setNastavniciNaRealizaciji(Set<NastavnikNaRealizaciji> nastavniciNaRealizaciji) {
         this.nastavniciNaRealizaciji = nastavniciNaRealizaciji;
+    }
+
+    public Set<TerminNastave> getTerminiNastave() {
+        return terminiNastave;
+    }
+
+    public void setTerminiNastave(Set<TerminNastave> terminiNastave) {
+        this.terminiNastave = terminiNastave;
     }
 }

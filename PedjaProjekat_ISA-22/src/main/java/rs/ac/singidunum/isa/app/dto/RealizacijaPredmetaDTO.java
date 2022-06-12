@@ -12,18 +12,21 @@ public class RealizacijaPredmetaDTO {
     private NastavnikNaRealizacijiDTO nastavnikNaRealizaciji;
     private PredmetDTO predmet;
     private EvaluacijaZnanjaDTO evaluacijaZnanja;
+    private TerminNastaveDTO terminNastave;
 
     private ArrayList<PohadjanjePredmetaDTO> pohadjanjaPredmeta = new ArrayList<PohadjanjePredmetaDTO>();
 
     public RealizacijaPredmetaDTO() {super();
     }
 
-    public RealizacijaPredmetaDTO(Long id, String naziv, NastavnikNaRealizacijiDTO nastavnikNaRealizaciji, PredmetDTO predmet, EvaluacijaZnanjaDTO evaluacijaZnanja) {
+    public RealizacijaPredmetaDTO(Long id, String naziv, NastavnikNaRealizacijiDTO nastavnikNaRealizaciji,
+                                  PredmetDTO predmet, EvaluacijaZnanjaDTO evaluacijaZnanja, TerminNastaveDTO terminNastave) {
         this.id = id;
         this.naziv = naziv;
         this.nastavnikNaRealizaciji = nastavnikNaRealizaciji;
         this.predmet = predmet;
         this.evaluacijaZnanja = evaluacijaZnanja;
+        this.terminNastave = terminNastave;
     }
 
     public Long getId() {
@@ -72,5 +75,13 @@ public class RealizacijaPredmetaDTO {
 
     public void setEvaluacijaZnanja(EvaluacijaZnanjaDTO evaluacijaZnanja) {
         this.evaluacijaZnanja = evaluacijaZnanja;
+    }
+
+    public TerminNastaveDTO getTerminNastave() {
+        return terminNastave;
+    }
+
+    public void setTerminNastave(TerminNastaveDTO terminNastave) {
+        this.terminNastave = terminNastave;
     }
 }

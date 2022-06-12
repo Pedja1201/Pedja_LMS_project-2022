@@ -19,6 +19,8 @@ public class RealizacijaPredmeta {
     private Predmet predmet;
     @ManyToOne
     private EvaluacijaZnanja evaluacijaZnanja;
+    @ManyToOne
+    private TerminNastave terminNastave;
 
     @OneToMany(mappedBy = "realizacijaPredmeta")
     private Set<PohadjanjePredmeta> pohadjanjaPredmeta = new HashSet<PohadjanjePredmeta>();
@@ -26,12 +28,14 @@ public class RealizacijaPredmeta {
     public RealizacijaPredmeta() {super();
     }
 
-    public RealizacijaPredmeta(Long id, String naziv, NastavnikNaRealizaciji nastavnikNaRealizaciji, Predmet predmet, EvaluacijaZnanja evaluacijaZnanja) {
+    public RealizacijaPredmeta(Long id, String naziv, NastavnikNaRealizaciji nastavnikNaRealizaciji,
+                               Predmet predmet, EvaluacijaZnanja evaluacijaZnanja, TerminNastave terminNastave) {
         this.id = id;
         this.naziv = naziv;
         this.nastavnikNaRealizaciji = nastavnikNaRealizaciji;
         this.predmet = predmet;
         this.evaluacijaZnanja = evaluacijaZnanja;
+        this.terminNastave = terminNastave;
     }
 
     public Long getId() {
@@ -72,6 +76,14 @@ public class RealizacijaPredmeta {
 
     public void setEvaluacijaZnanja(EvaluacijaZnanja evaluacijaZnanja) {
         this.evaluacijaZnanja = evaluacijaZnanja;
+    }
+
+    public TerminNastave getTerminNastave() {
+        return terminNastave;
+    }
+
+    public void setTerminNastave(TerminNastave terminNastave) {
+        this.terminNastave = terminNastave;
     }
 
     public Set<PohadjanjePredmeta> getPohadjanjaPredmeta() {

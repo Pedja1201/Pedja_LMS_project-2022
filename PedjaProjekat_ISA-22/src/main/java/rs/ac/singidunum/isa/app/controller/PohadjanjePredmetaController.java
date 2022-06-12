@@ -32,7 +32,7 @@ public class PohadjanjePredmetaController {
             public PohadjanjePredmetaDTO apply(PohadjanjePredmeta pohadjanjePredmeta) {
                 PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(), pohadjanjePredmeta.getKonacnaOcena(),
                         new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
-                                pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null)
+                                pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null)
                 );
                 // Conversion logic
                 return pohadjanjePredmetaDTO;
@@ -48,7 +48,7 @@ public class PohadjanjePredmetaController {
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.get().getId(),
                     pohadjanjePredmeta.get().getKonacnaOcena(),
                     new RealizacijaPredmetaDTO(pohadjanjePredmeta.get().getRealizacijaPredmeta().getId(),
-                            pohadjanjePredmeta.get().getRealizacijaPredmeta().getNaziv(),null,null,null));
+                            pohadjanjePredmeta.get().getRealizacijaPredmeta().getNaziv(),null,null,null,null));
             return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.OK);
         }
         return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.NOT_FOUND);
@@ -59,7 +59,7 @@ public class PohadjanjePredmetaController {
         try {
             pohadjanjePredmetaService.save(pohadjanjePredmeta);
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
-                    pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null);
+                    pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null);
 
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(),
                     pohadjanjePredmeta.getKonacnaOcena(),realizacijaPredmetaDTO);
@@ -79,7 +79,7 @@ public class PohadjanjePredmetaController {
             izmenjenaPohadjeniPredmet.setId(pohadjanjePredmetaId);
             izmenjenaPohadjeniPredmet = pohadjanjePredmetaService.save(izmenjenaPohadjeniPredmet);
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getId(),
-                    izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getNaziv(),null,null,null);
+                    izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getNaziv(),null,null,null,null);
 
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(izmenjenaPohadjeniPredmet.getId(),
                     izmenjenaPohadjeniPredmet.getKonacnaOcena(),realizacijaPredmetaDTO);
