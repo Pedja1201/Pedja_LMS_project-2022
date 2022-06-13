@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,6 +58,7 @@ public class EvaluacijaZnanjaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> create(@RequestBody EvaluacijaZnanja evaluacijaZnanja) {
         try {
             evaluacijaZnanjaService.save(evaluacijaZnanja);
@@ -76,6 +78,7 @@ public class EvaluacijaZnanjaController {
     }
 
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> update(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId,
                                             @RequestBody EvaluacijaZnanja izmenjenaEvaluacijaZnanja) {
         EvaluacijaZnanja evaluacijaZnanja = evaluacijaZnanjaService.findOne(evaluacijaZnanjaId).orElse(null);
@@ -95,6 +98,7 @@ public class EvaluacijaZnanjaController {
     }
 
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> delete(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId) {
         if (evaluacijaZnanjaService.findOne(evaluacijaZnanjaId).isPresent()) {
             evaluacijaZnanjaService.delete(evaluacijaZnanjaId);

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,7 @@ public class PredmetController {
 
     @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<Page<PredmetDTO>> getAll(Pageable pageable) {
         Page<Predmet> predmet = predmetService.findAll(pageable);
         Page<PredmetDTO> predmeti = predmet.map(new Function<Predmet, PredmetDTO>() {
@@ -47,6 +49,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PredmetDTO> get(@PathVariable("predmetId") Long predmetId) {
         Optional<Predmet> predmet = predmetService.findOne(predmetId);
         if (predmet.isPresent()) {
@@ -61,6 +64,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PredmetDTO> create(@RequestBody Predmet predmet) {
         try {
             predmetService.save(predmet);
@@ -76,6 +80,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PredmetDTO> update(@PathVariable("predmetId") Long predmetId,
                                                    @RequestBody Predmet izmenjenPredmet) {
         Predmet predmet = predmetService.findOne(predmetId).orElse(null);
@@ -91,6 +96,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PredmetDTO> delete(@PathVariable("predmetId") Long predmetId) {
         if (predmetService.findOne(predmetId).isPresent()) {
             predmetService.delete(predmetId);
@@ -100,6 +106,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/nastavnik/{nastavnikId}", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<Iterable<PredmetDTO>> getPredmyByNastavnik(@PathVariable("nastavnikId")Long nastavnikId){
         if(nastavnikService.findOne(nastavnikId).isPresent()){
             ArrayList<PredmetDTO> predmeti = new ArrayList<PredmetDTO>();

@@ -47,6 +47,7 @@ public class NastavnikController {
     }
 
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<NastavnikDTO> getNastavnik(@PathVariable("nastavnikId") Long nastavnikId) {
         Optional<Nastavnik> nastavnik = nastavnikService.findOne(nastavnikId);
         if (nastavnik.isPresent()) {
@@ -62,6 +63,7 @@ public class NastavnikController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<NastavnikDTO> create(@RequestBody Nastavnik nastavnik) {
         try {
             nastavnikService.save(nastavnik);
@@ -79,6 +81,7 @@ public class NastavnikController {
     }
 
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<NastavnikDTO> update(@PathVariable("nastavnikId") Long nastavnikId,
                                                @RequestBody Nastavnik izmenjenNastavnik) {
         Nastavnik nastavnik = nastavnikService.findOne(nastavnikId).orElse(null);
@@ -97,6 +100,7 @@ public class NastavnikController {
     }
 
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Nastavnik> delete(@PathVariable("nastavnikId") Long nastavnikId) {
         if (nastavnikService.findOne(nastavnikId).isPresent()) {
             nastavnikService.delete(nastavnikId);

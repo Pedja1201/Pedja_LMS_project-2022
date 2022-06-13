@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,6 +60,7 @@ public class TipEvaluacijeController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> create(@RequestBody TipEvaluacije tipEvaluacije) {
         try {
             tipEvaluacijeService.save(tipEvaluacije);
@@ -77,6 +79,7 @@ public class TipEvaluacijeController {
     }
 
     @RequestMapping(path = "/{tipEvaluacijeId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> update(@PathVariable("tipEvaluacijeId") Long tipEvaluacijeId,
                                             @RequestBody TipEvaluacije izmenjenTipEvaluacije) {
         TipEvaluacije tipEvaluacije = tipEvaluacijeService.findOne(tipEvaluacijeId).orElse(null);
@@ -96,6 +99,7 @@ public class TipEvaluacijeController {
     }
 
     @RequestMapping(path = "/{tipEvaluacijeId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> delete(@PathVariable("tipEvaluacijeId") Long tipEvaluacijeId) {
         if (tipEvaluacijeService.findOne(tipEvaluacijeId).isPresent()) {
             tipEvaluacijeService.delete(tipEvaluacijeId);

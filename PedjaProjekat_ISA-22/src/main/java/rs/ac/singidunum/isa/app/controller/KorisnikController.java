@@ -42,6 +42,7 @@ public class KorisnikController {
     }
 
     @RequestMapping(path = "/{korisnikId}", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<KorisnikDTO> get(@PathVariable("korisnikId") Long korisnikId) {
         Optional<Korisnik> korisnik = korisnikService.findOne(korisnikId);
         if (korisnik.isPresent()) {
@@ -53,6 +54,7 @@ public class KorisnikController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<KorisnikDTO> create(@RequestBody Korisnik korisnik) {
         try {
             korisnikService.save(korisnik);
@@ -66,6 +68,7 @@ public class KorisnikController {
     }
 
     @RequestMapping(path = "/{korisnikId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<KorisnikDTO> update(@PathVariable("korisnikId") Long korisnikId,
                                               @RequestBody Korisnik izmenjenKorisnik) {
         Korisnik korisnik = korisnikService.findOne(korisnikId).orElse(null);
@@ -80,6 +83,7 @@ public class KorisnikController {
     }
 
     @RequestMapping(path = "/{korisnikId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Korisnik> delete(@PathVariable("korisnikId") Long korisnikId) {
         if (korisnikService.findOne(korisnikId).isPresent()) {
             korisnikService.delete(korisnikId);

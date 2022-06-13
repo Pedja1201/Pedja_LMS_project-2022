@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,6 +67,7 @@ public class StudijskiProgramController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudijskiProgramDTO> create(@RequestBody StudijskiProgram studijskiProgram) {
         try {
             studijskiProgramService.save(studijskiProgram);
@@ -87,6 +89,7 @@ public class StudijskiProgramController {
     }
 
     @RequestMapping(path = "/{studisjkiProgramId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudijskiProgramDTO> update(@PathVariable("studisjkiProgramId") Long studisjkiProgramId,
                                                @RequestBody StudijskiProgram izmenjeniStudijskiProgram) {
         StudijskiProgram studijskiProgram = studijskiProgramService.findOne(studisjkiProgramId).orElse(null);
@@ -108,6 +111,7 @@ public class StudijskiProgramController {
     }
 
     @RequestMapping(path = "/{studisjkiProgramId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudijskiProgramDTO> delete(@PathVariable("studisjkiProgramId") Long studisjkiProgramId) {
         if (studijskiProgramService.findOne(studisjkiProgramId).isPresent()) {
             studijskiProgramService.delete(studisjkiProgramId);

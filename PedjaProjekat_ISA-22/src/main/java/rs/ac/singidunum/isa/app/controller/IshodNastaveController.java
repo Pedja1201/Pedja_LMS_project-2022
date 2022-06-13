@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,6 +57,7 @@ public class IshodNastaveController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<IshodNastaveDTO> create(@RequestBody IshodNastave ishodNastave) {
         try {
             ishodNastaveService.save(ishodNastave);
@@ -74,6 +76,7 @@ public class IshodNastaveController {
     }
 
     @RequestMapping(path = "/{ishodNastaveId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<IshodNastaveDTO> update(@PathVariable("ishodNastaveId") Long ishodNastaveId,
                                             @RequestBody IshodNastave izmenjenIshodNastave) {
         IshodNastave ishodNastave = ishodNastaveService.findOne(ishodNastaveId).orElse(null);
@@ -92,6 +95,7 @@ public class IshodNastaveController {
     }
 
     @RequestMapping(path = "/{ishodNastaveId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<IshodNastaveDTO> delete(@PathVariable("ishodNastaveId") Long ishodNastaveId) {
         if (ishodNastaveService.findOne(ishodNastaveId).isPresent()) {
             ishodNastaveService.delete(ishodNastaveId);

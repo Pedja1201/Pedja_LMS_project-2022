@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ public class RealizacijaPredmetaController {
     private RealizacijaPredmetaService realizacijaPredmetaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
+//    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<Page<RealizacijaPredmetaDTO>> getAll(Pageable pageable) {
         Page<RealizacijaPredmeta> realizacijaPredmeta = realizacijaPredmetaService.findAll(pageable);
         Page<RealizacijaPredmetaDTO> realizacijePredmeta = realizacijaPredmeta.map(new Function<RealizacijaPredmeta, RealizacijaPredmetaDTO>() {
@@ -50,6 +52,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.GET)
+//    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<RealizacijaPredmetaDTO> get(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId) {
         Optional<RealizacijaPredmeta> realizacijaPredmeta = realizacijaPredmetaService.findOne(realizacijaPredmetaId);
         if (realizacijaPredmeta.isPresent()) {
@@ -73,6 +76,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<RealizacijaPredmetaDTO> create(@RequestBody RealizacijaPredmeta realizacijaPredmeta) {
         try {
             realizacijaPredmetaService.save(realizacijaPredmeta);
@@ -99,6 +103,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<RealizacijaPredmetaDTO> update(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId,
                                                    @RequestBody RealizacijaPredmeta izmenjenaRealizacijaPredmeta) {
         RealizacijaPredmeta realizacijaPredmeta = realizacijaPredmetaService.findOne(realizacijaPredmetaId).orElse(null);
@@ -125,6 +130,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<RealizacijaPredmetaDTO> delete(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId) {
         if (realizacijaPredmetaService.findOne(realizacijaPredmetaId).isPresent()) {
             realizacijaPredmetaService.delete(realizacijaPredmetaId);
@@ -135,6 +141,7 @@ public class RealizacijaPredmetaController {
 
     //DONE: Metoda i upit za pronalaženje Predmeta u realizcaiji
     @RequestMapping(path = "/findPredmet/{predmetNaziv}", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<Iterable<RealizacijaPredmetaDTO>> findPredmetURealizaciji(@PathVariable("predmetNaziv") String predmetNaziv) {
         ArrayList<RealizacijaPredmetaDTO> realizacijePredmetaDTO = new ArrayList<>();
         for(RealizacijaPredmeta realizacijaPredmeta : realizacijaPredmetaService.findPredmetURealizaciji(predmetNaziv)) {

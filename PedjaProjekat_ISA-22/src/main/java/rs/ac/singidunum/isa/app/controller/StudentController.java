@@ -118,6 +118,7 @@ public class StudentController {
     }
 
     @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
         ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
         for (Student student : this.studentService.studentiNaPredmetimaNastavnika(this.nastavnikService.findOne(nastavnikId).orElse(null))) {

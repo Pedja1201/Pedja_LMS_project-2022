@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,6 +65,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> create(@RequestBody NastavnikNaRealizaciji nastavnikNaRealizaciji) {
         try {
             nastavnikNaRealizacijiService.save(nastavnikNaRealizaciji);
@@ -84,6 +86,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> update(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId,
                                                         @RequestBody NastavnikNaRealizaciji izmenjenNastavnikNaRealizaciji) {
         NastavnikNaRealizaciji nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId).orElse(null);
@@ -104,6 +107,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> delete(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {
         if (nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId).isPresent()) {
             nastavnikNaRealizacijiService.delete(nastavnikNaRealizacijiId);

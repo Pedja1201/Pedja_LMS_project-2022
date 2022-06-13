@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ public class PohadjanjePredmetaController {
     private PohadjanjePredmetaService pohadjanjePredmetaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
+//    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<Page<PohadjanjePredmetaDTO>> getAll(Pageable pageable) {
         Page<PohadjanjePredmeta> pohadjanjePredmeta = pohadjanjePredmetaService.findAll(pageable);
         Page<PohadjanjePredmetaDTO> pohadjanjaPredmeta = pohadjanjePredmeta.map(new Function<PohadjanjePredmeta, PohadjanjePredmetaDTO>() {
@@ -42,6 +44,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<PohadjanjePredmetaDTO> get(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId) {
         Optional<PohadjanjePredmeta> pohadjanjePredmeta = pohadjanjePredmetaService.findOne(pohadjanjePredmetaId);
         if (pohadjanjePredmeta.isPresent()) {
@@ -55,6 +58,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PohadjanjePredmetaDTO> create(@RequestBody PohadjanjePredmeta pohadjanjePredmeta) {
         try {
             pohadjanjePredmetaService.save(pohadjanjePredmeta);
@@ -72,6 +76,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PohadjanjePredmetaDTO> update(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId,
                                                    @RequestBody PohadjanjePredmeta izmenjenaPohadjeniPredmet) {
         PohadjanjePredmeta pohadjanjePredmeta = pohadjanjePredmetaService.findOne(pohadjanjePredmetaId).orElse(null);
@@ -89,6 +94,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PohadjanjePredmetaDTO> delete(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId) {
         if (pohadjanjePredmetaService.findOne(pohadjanjePredmetaId).isPresent()) {
             pohadjanjePredmetaService.delete(pohadjanjePredmetaId);
