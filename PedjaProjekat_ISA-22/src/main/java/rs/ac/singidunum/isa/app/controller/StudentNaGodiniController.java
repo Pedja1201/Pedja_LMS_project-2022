@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
-@RequestMapping(path = "/api/studentNaGodini")
+@RequestMapping(path = "/api/studentiNaGodini")
 public class StudentNaGodiniController {
     @Autowired
     private StudentNaGodiniService studentNaGodiniService;

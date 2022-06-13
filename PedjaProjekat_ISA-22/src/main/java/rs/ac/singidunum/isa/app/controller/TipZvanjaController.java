@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(path = "/api/tipZvanja")
+@RequestMapping(path = "/api/tipoviZvanja")
 public class TipZvanjaController {
     @Autowired
     private TipZvanjaService tipZvanjaService;

@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
-@RequestMapping(path = "/api/tipNastave")
+@RequestMapping(path = "/api/tipoviNastave")
 public class TipNastaveController {
     @Autowired
     private TipNastaveService tipNastaveService;
