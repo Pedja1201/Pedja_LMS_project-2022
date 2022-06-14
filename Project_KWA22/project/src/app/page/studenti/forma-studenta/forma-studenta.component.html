@@ -25,16 +25,6 @@
       </div>
       <div>
         <mat-form-field appearance="fill">
-          <mat-label>Pohadjanje predmeta:</mat-label>
-          <mat-select name="pohadjanjePredmeta" formControlName="pohadjanjePredmeta" [compareWith]="comparator2" required>
-            <mat-option *ngFor="let pohadjanjePredmeta of pohadjanjaPredmeta"  [value]="pohadjanjePredmeta"> 
-              -Ocena:{{pohadjanjePredmeta.konacnaOcena}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field appearance="fill">
           <mat-label>Student na godini:</mat-label>
           <mat-select name="studentNaGodini" formControlName="studentNaGodini" [compareWith]="comparator3" required>
             <mat-option *ngFor="let studentNaGodini of studentiNaGodini"  [value]="studentNaGodini"> 

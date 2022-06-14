@@ -29,12 +29,6 @@
     <td mat-cell *matCellDef="let element"><span *ngIf="element['adresa']">{{element["adresa"]["ulica"]}}</span></td>
   </ng-container>
 
-  <!-- Pohadjanje predmeta Column -->
-  <ng-container matColumnDef="pohadjanjePredmeta">
-    <th mat-header-cell *matHeaderCellDef> Pohadjanje predmeta  </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['pohadjanjePredmeta']">{{element["pohadjanjePredmeta"]["konacnaOcena"]}}</span></td>
-  </ng-container>
-
   <!-- Student na godini Column -->
   <ng-container matColumnDef="studentNaGodini">
     <th mat-header-cell *matHeaderCellDef> Student na godini  </th>

@@ -2,6 +2,7 @@
     <mat-list-item>ID: {{pohadjanjePredmeta["id"]}}</mat-list-item>
     <mat-list-item>Konacna ocena: {{pohadjanjePredmeta["konacnaOcena"]}}</mat-list-item>
     <mat-list-item>Realizacija predmeta: <span *ngIf="pohadjanjePredmeta['realizacijaPredmeta']">{{pohadjanjePredmeta["realizacijaPredmeta"]["naziv"]}}</span></mat-list-item>
+    <mat-list-item>Student: <span *ngIf="pohadjanjePredmeta['student']">{{pohadjanjePredmeta["student"]["ime"]}}</span></mat-list-item>
 
 </mat-list>
 <button mat-raised-button color="primary"  (click)="back()">Nazad</button>

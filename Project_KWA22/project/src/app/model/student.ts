@@ -1,5 +1,4 @@
 import { Adresa } from "./adresa";
-import { PohadjanjePredmeta } from "./pohadjanje-predmeta";
 import { StudentNaGodini } from "./student-na-godini";
 
 export interface Student {
@@ -7,6 +6,5 @@ export interface Student {
     jmbg:String;
     ime:String;
     adresa:Adresa[];
-    pohadjanjePredmeta:PohadjanjePredmeta[];
     studentNaGodini:StudentNaGodini[]
 }

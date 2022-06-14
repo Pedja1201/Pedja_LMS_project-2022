@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Adresa } from 'src/app/model/adresa';
-import { Mesto } from 'src/app/model/mesto';
 import { AdreseService } from 'src/app/service/adrese.service';
 
 @Component({

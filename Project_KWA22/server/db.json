@@ -372,7 +372,87 @@
       "realizacijaPredmeta": {
         "id": 1,
         "naziv": "Polaganje predmetnog projekta"
+      },
+      "student": {
+        "id": 1,
+        "jmbg": "129098766",
+        "ime": "Predrag"
       }
+    },
+    {
+      "konacnaOcena": 7,
+      "realizacijaPredmeta": {
+        "naziv": "Polaganje predmetnog projekta",
+        "nastavnikNaRealizaciji": {
+          "id": 1,
+          "brojCasova": 4
+        },
+        "predmet": {
+          "id": 1,
+          "naziv": "Internet arhiteture",
+          "espb": 8,
+          "obavezan": false,
+          "brojPredavanja": 12,
+          "brojVezbi": 12,
+          "drugiObliciNastave": 2,
+          "istrazivackiRad": 2,
+          "ostaliCasovi": 2
+        },
+        "evaluacijaZnanja": {
+          "id": 1,
+          "vremePocetka": "2021-05-25",
+          "vremeZavrsetka": "2021-05-25",
+          "tipEvaluacije": {
+            "id": 1,
+            "naziv": "Kolokvijum"
+          },
+          "ishod": {
+            "id": 1,
+            "opis": "Student će po uspešnom završetku kursa umeti da koristi ",
+            "predmet": {
+              "id": 1,
+              "naziv": "Internet arhiteture",
+              "espb": 8,
+              "obavezan": false,
+              "brojPredavanja": 12,
+              "brojVezbi": 12,
+              "drugiObliciNastave": 2,
+              "istrazivackiRad": 2,
+              "ostaliCasovi": 2
+            }
+          }
+        },
+        "terminNastave": {
+          "id": 1,
+          "vremePocetka": "2021-05-25",
+          "vremeKraja": "2021-05-25"
+        },
+        "id": 1
+      },
+      "student": {
+        "jmbg": "3423423",
+        "ime": "Maja",
+        "adresa": {
+          "id": 2,
+          "ulica": "Bosanska",
+          "broj": "2",
+          "mesto": {
+            "id": 2,
+            "naziv": "Prijedor"
+          }
+        },
+        "studentNaGodini": {
+          "id": 1,
+          "datumUpisa": "2021-05-25",
+          "brojIndeksa": "2019270487",
+          "godinaStudija": {
+            "id": 1,
+            "godina": "2021-05-25"
+          }
+        },
+        "id": 2
+      },
+      "id": 2
     }
   ],
   "predmeti": [
@@ -517,15 +597,34 @@
         "ulica": "Prvomajska",
         "broj": "23"
       },
-      "pohadjanjePredmeta": {
-        "id": 1,
-        "konacnaOcena": 10
-      },
       "studentNaGodini": {
         "id": 1,
         "datumUpisa": "2021-05-25",
         "brojIndeksa": "2019270487"
       }
+    },
+    {
+      "jmbg": "3423423",
+      "ime": "Maja",
+      "adresa": {
+        "id": 2,
+        "ulica": "Bosanska",
+        "broj": "2",
+        "mesto": {
+          "id": 2,
+          "naziv": "Prijedor"
+        }
+      },
+      "studentNaGodini": {
+        "id": 1,
+        "datumUpisa": "2021-05-25",
+        "brojIndeksa": "2019270487",
+        "godinaStudija": {
+          "id": 1,
+          "godina": "2021-05-25"
+        }
+      },
+      "id": 2
     }
   ],
   "studentiNaGodini": [

@@ -17,7 +17,6 @@ export class PretragaStudentaComponent implements OnInit {
   title="Pretraga studenta";
 
   adrese: Adresa[] = [];
-  pohadjanjaPredmeta: PohadjanjePredmeta[] = [];
   studentiNaGodini: StudentNaGodini[] = [];
 
   @Output()
@@ -28,20 +27,15 @@ export class PretragaStudentaComponent implements OnInit {
     jmbg: new FormControl(),
     ime: new FormControl(),
     adresa: new FormControl(),
-    pohadjanjePredmeta: new FormControl(),
     studentNaGodini: new FormControl(),
 
   });
 
-  constructor(private adreseServis : AdreseService,private pohadjanjaPredmetaServis : PohadjanjaPredmetaService,
-          private studentiNaGodiniServis : StudentiNaGodiniService, private router : Router) { }
+  constructor(private adreseServis : AdreseService,  private studentiNaGodiniServis : StudentiNaGodiniService, private router : Router) { }
 
   ngOnInit(): void {
     this.adreseServis.getAll().subscribe(adrese =>{
       this.adrese = adrese;
-    });
-    this.pohadjanjaPredmetaServis.getAll().subscribe(pohadjanjaPredmeta =>{
-      this.pohadjanjaPredmeta = pohadjanjaPredmeta;
     });
     this.studentiNaGodiniServis.getAll().subscribe(studentiNaGodini =>{
       this.studentiNaGodini = studentiNaGodini;
@@ -51,9 +45,6 @@ export class PretragaStudentaComponent implements OnInit {
 
   itemTrackBy1(indeks: number, adresa: any) {
     return adresa.id;
-  }
-  itemTrackBy2(indeks: number, pohadjanjePredmeta: any) {
-    return pohadjanjePredmeta.id;
   }
   itemTrackBy3(indeks: number, studentNaGodini: any) {
     return studentNaGodini.id;

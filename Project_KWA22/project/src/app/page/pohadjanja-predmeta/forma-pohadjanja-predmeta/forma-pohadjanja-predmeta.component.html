@@ -17,6 +17,16 @@
         </mat-form-field>
       </div>
       <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Student:</mat-label>
+          <mat-select name="student" formControlName="student" [compareWith]="comparator2" required>
+            <mat-option *ngFor="let student of studenti"  [value]="student"> 
+              {{student.ime}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
         <button  mat-raised-button color="primary" type="submit">Dodaj</button>
     </div>
 </form>

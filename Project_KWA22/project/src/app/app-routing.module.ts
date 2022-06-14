@@ -73,7 +73,8 @@ const routes: Routes = [
       {component: FormUsersComponent, path: ':id/update', data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},
     ]},{path: 'users/:id',component: DetailsUsersComponent},
   //Adrese
-  {path: "adrese", component: AdreseComponent}, //Login pre otvaranja
+  {path: "adrese", component: AdreseComponent,
+      data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_USER']}, canActivate: [AuthGuard]}, //Login pre otvaranja
   {path: "adrese/:id", component: DetailsAdreseComponent},
 
   //drzave
