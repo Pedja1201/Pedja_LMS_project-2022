@@ -14,17 +14,21 @@ public class PohadjanjePredmeta {
 
     @ManyToOne
     private RealizacijaPredmeta realizacijaPredmeta;
+    @ManyToOne
+    private Student student;
 
-    @OneToMany(mappedBy = "pohadjanjePredmeta")
-    private Set<Student> studenti = new HashSet<Student>();
+//    @OneToMany(mappedBy = "pohadjanjePredmeta")
+//    private Set<Student> studenti = new HashSet<Student>();
+
 
     public PohadjanjePredmeta() {
     }
 
-    public PohadjanjePredmeta(Long id, int konacnaOcena, RealizacijaPredmeta realizacijaPredmeta) {
+    public PohadjanjePredmeta(Long id, int konacnaOcena, RealizacijaPredmeta realizacijaPredmeta, Student student) {
         this.id = id;
         this.konacnaOcena = konacnaOcena;
         this.realizacijaPredmeta = realizacijaPredmeta;
+        this.student = student;
     }
 
     public Long getId() {
@@ -51,11 +55,11 @@ public class PohadjanjePredmeta {
         this.realizacijaPredmeta = realizacijaPredmeta;
     }
 
-    public Set<Student> getStudenti() {
-        return studenti;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudenti(Set<Student> studenti) {
-        this.studenti = studenti;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

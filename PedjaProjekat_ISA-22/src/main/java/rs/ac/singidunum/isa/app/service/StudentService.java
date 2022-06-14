@@ -57,6 +57,6 @@ public class StudentService {
         studentRepository.delete(student);
     }
 
-    public Iterable<Student> studentiNaPredmetimaNastavnika(Nastavnik nastavnik) { return this.studentRepository.pronadjiSpisakStudenataZaPredmeteNaKojimaJeAngazovanProfesor(nastavnik); }
+//    public Iterable<Student> studentiNaPredmetimaNastavnika(Nastavnik nastavnik) { return this.studentRepository.pronadjiSpisakStudenataZaPredmeteNaKojimaJeAngazovanProfesor(nastavnik); }
 
 }

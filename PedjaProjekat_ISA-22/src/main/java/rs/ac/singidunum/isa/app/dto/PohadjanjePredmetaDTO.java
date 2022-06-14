@@ -9,15 +9,17 @@ public class PohadjanjePredmetaDTO {
     private int konacnaOcena;
     private RealizacijaPredmetaDTO realizacijaPredmeta;
 
-    private ArrayList<StudentDTO> studenti = new ArrayList<StudentDTO>();
+//    private ArrayList<StudentDTO> studenti = new ArrayList<StudentDTO>();
+    private StudentDTO student;
 
     public PohadjanjePredmetaDTO() {super();
     }
 
-    public PohadjanjePredmetaDTO(Long id, int konacnaOcena, RealizacijaPredmetaDTO realizacijaPredmeta) {
+    public PohadjanjePredmetaDTO(Long id, int konacnaOcena, RealizacijaPredmetaDTO realizacijaPredmeta, StudentDTO student) {
         this.id = id;
         this.konacnaOcena = konacnaOcena;
         this.realizacijaPredmeta = realizacijaPredmeta;
+        this.student = student;
     }
 
     public Long getId() {
@@ -44,11 +46,11 @@ public class PohadjanjePredmetaDTO {
         this.realizacijaPredmeta = realizacijaPredmeta;
     }
 
-    public ArrayList<StudentDTO> getStudenti() {
-        return studenti;
+    public StudentDTO getStudent() {
+        return student;
     }
 
-    public void setStudenti(ArrayList<StudentDTO> studenti) {
-        this.studenti = studenti;
+    public void setStudent(StudentDTO student) {
+        this.student = student;
     }
 }

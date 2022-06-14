@@ -1,21 +1,24 @@
 package rs.ac.singidunum.isa.app.dto;
 
+import java.util.ArrayList;
+
 public class StudentDTO extends KorisnikDTO {
     private String jmbg;
     private String ime;
     private AdresaDTO adresa;
-    private PohadjanjePredmetaDTO pohadjanjePredmeta;
+//    private PohadjanjePredmetaDTO pohadjanjePredmeta;
     private StudentNaGodiniDTO studentNaGodini;
+
+    private ArrayList<PohadjanjePredmetaDTO> pohadjanjaPredmeta = new ArrayList<PohadjanjePredmetaDTO>();
 
     public StudentDTO() {super();
     }
 
-    public StudentDTO(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, AdresaDTO adresa, PohadjanjePredmetaDTO pohadjanjePredmeta, StudentNaGodiniDTO studentNaGodini) {
+    public StudentDTO(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, AdresaDTO adresa, StudentNaGodiniDTO studentNaGodini) {
         super(id, korisnickoIme, lozinka);
         this.jmbg = jmbg;
         this.ime = ime;
         this.adresa = adresa;
-        this.pohadjanjePredmeta = pohadjanjePredmeta;
         this.studentNaGodini = studentNaGodini;
     }
 
@@ -49,13 +52,7 @@ public class StudentDTO extends KorisnikDTO {
         this.adresa = adresa;
     }
 
-    public PohadjanjePredmetaDTO getPohadjanjePredmeta() {
-        return pohadjanjePredmeta;
-    }
 
-    public void setPohadjanjePredmeta(PohadjanjePredmetaDTO pohadjanjePredmeta) {
-        this.pohadjanjePredmeta = pohadjanjePredmeta;
-    }
 
     public StudentNaGodiniDTO getStudentNaGodini() {
         return studentNaGodini;
@@ -63,5 +60,13 @@ public class StudentDTO extends KorisnikDTO {
 
     public void setStudentNaGodini(StudentNaGodiniDTO studentNaGodini) {
         this.studentNaGodini = studentNaGodini;
+    }
+
+    public ArrayList<PohadjanjePredmetaDTO> getPohadjanjaPredmeta() {
+        return pohadjanjaPredmeta;
+    }
+
+    public void setPohadjanjaPredmeta(ArrayList<PohadjanjePredmetaDTO> pohadjanjaPredmeta) {
+        this.pohadjanjaPredmeta = pohadjanjaPredmeta;
     }
 }

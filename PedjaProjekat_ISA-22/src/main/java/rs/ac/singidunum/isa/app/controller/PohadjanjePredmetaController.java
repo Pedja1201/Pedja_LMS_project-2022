@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import rs.ac.singidunum.isa.app.dto.PohadjanjePredmetaDTO;
-import rs.ac.singidunum.isa.app.dto.RealizacijaPredmetaDTO;
+import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.PohadjanjePredmeta;
 import rs.ac.singidunum.isa.app.service.PohadjanjePredmetaService;
 
@@ -34,7 +33,10 @@ public class PohadjanjePredmetaController {
             public PohadjanjePredmetaDTO apply(PohadjanjePredmeta pohadjanjePredmeta) {
                 PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(), pohadjanjePredmeta.getKonacnaOcena(),
                         new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
-                                pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null)
+                                pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null),
+                        new StudentDTO(pohadjanjePredmeta.getStudent().getId(), pohadjanjePredmeta.getStudent().getKorisnickoIme(),null,pohadjanjePredmeta.getStudent().getJmbg(),pohadjanjePredmeta.getStudent().getIme(),
+                                new AdresaDTO(pohadjanjePredmeta.getStudent().getAdresa().getId(), pohadjanjePredmeta.getStudent().getAdresa().getUlica(), pohadjanjePredmeta.getStudent().getAdresa().getBroj(),null),
+                                new StudentNaGodiniDTO(pohadjanjePredmeta.getStudent().getStudentNaGodini().getId(),pohadjanjePredmeta.getStudent().getStudentNaGodini().getDatumUpisa(),pohadjanjePredmeta.getStudent().getStudentNaGodini().getBrojIndeksa(), null))
                 );
                 // Conversion logic
                 return pohadjanjePredmetaDTO;
@@ -51,7 +53,10 @@ public class PohadjanjePredmetaController {
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.get().getId(),
                     pohadjanjePredmeta.get().getKonacnaOcena(),
                     new RealizacijaPredmetaDTO(pohadjanjePredmeta.get().getRealizacijaPredmeta().getId(),
-                            pohadjanjePredmeta.get().getRealizacijaPredmeta().getNaziv(),null,null,null,null));
+                            pohadjanjePredmeta.get().getRealizacijaPredmeta().getNaziv(),null,null,null,null),
+                    new StudentDTO(pohadjanjePredmeta.get().getStudent().getId(), pohadjanjePredmeta.get().getStudent().getKorisnickoIme(),null,pohadjanjePredmeta.get().getStudent().getJmbg(),pohadjanjePredmeta.get().getStudent().getIme(),
+                            new AdresaDTO(pohadjanjePredmeta.get().getStudent().getAdresa().getId(), pohadjanjePredmeta.get().getStudent().getAdresa().getUlica(), pohadjanjePredmeta.get().getStudent().getAdresa().getBroj(),null),
+                            new StudentNaGodiniDTO(pohadjanjePredmeta.get().getStudent().getStudentNaGodini().getId(),pohadjanjePredmeta.get().getStudent().getStudentNaGodini().getDatumUpisa(),pohadjanjePredmeta.get().getStudent().getStudentNaGodini().getBrojIndeksa(), null)));
             return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.OK);
         }
         return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.NOT_FOUND);
@@ -64,9 +69,11 @@ public class PohadjanjePredmetaController {
             pohadjanjePredmetaService.save(pohadjanjePredmeta);
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
                     pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null);
+            StudentDTO studentDTO = new StudentDTO(pohadjanjePredmeta.getStudent().getId(),
+                    pohadjanjePredmeta.getStudent().getKorisnickoIme(), null, pohadjanjePredmeta.getStudent().getJmbg(), pohadjanjePredmeta.getStudent().getIme(),null,null);
 
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(),
-                    pohadjanjePredmeta.getKonacnaOcena(),realizacijaPredmetaDTO);
+                    pohadjanjePredmeta.getKonacnaOcena(),realizacijaPredmetaDTO, studentDTO);
 
             return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -85,9 +92,11 @@ public class PohadjanjePredmetaController {
             izmenjenaPohadjeniPredmet = pohadjanjePredmetaService.save(izmenjenaPohadjeniPredmet);
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getId(),
                     izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getNaziv(),null,null,null,null);
+            StudentDTO studentDTO = new StudentDTO(izmenjenaPohadjeniPredmet.getStudent().getId(),
+                    izmenjenaPohadjeniPredmet.getStudent().getKorisnickoIme(), null, izmenjenaPohadjeniPredmet.getStudent().getJmbg(), izmenjenaPohadjeniPredmet.getStudent().getIme(),null,null);
 
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(izmenjenaPohadjeniPredmet.getId(),
-                    izmenjenaPohadjeniPredmet.getKonacnaOcena(),realizacijaPredmetaDTO);
+                    izmenjenaPohadjeniPredmet.getKonacnaOcena(),realizacijaPredmetaDTO, studentDTO);
             return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.OK);
         }
         return new ResponseEntity<PohadjanjePredmetaDTO>(HttpStatus.NOT_FOUND);

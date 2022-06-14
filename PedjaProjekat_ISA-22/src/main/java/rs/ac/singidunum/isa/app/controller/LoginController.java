@@ -80,7 +80,6 @@ public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_
         Student noviKorisnik = new Student(null, korisnik.getKorisnickoIme(),
                 passwordEncoder.encode(korisnik.getLozinka()), korisnik.getJmbg(), korisnik.getIme(),
                 new Adresa(korisnik.getAdresa().getId(), korisnik.getAdresa().getUlica(), korisnik.getAdresa().getBroj(),null),
-                new PohadjanjePredmeta(korisnik.getPohadjanjePredmeta().getId(), korisnik.getPohadjanjePredmeta().getKonacnaOcena(),null),
                 new StudentNaGodini(korisnik.getStudentNaGodini().getId(), korisnik.getStudentNaGodini().getDatumUpisa(),
                             korisnik.getStudentNaGodini().getBrojIndeksa(), null));
         noviKorisnik = studentService.save(noviKorisnik);
@@ -95,8 +94,6 @@ public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_
                         noviKorisnik.getJmbg(), noviKorisnik.getIme(),
                         new AdresaDTO(noviKorisnik.getAdresa().getId(),noviKorisnik.getAdresa().getUlica(),
                                 noviKorisnik.getAdresa().getBroj(),null),
-                        new PohadjanjePredmetaDTO(noviKorisnik.getPohadjanjePredmeta().getId(),
-                                noviKorisnik.getPohadjanjePredmeta().getKonacnaOcena(),null),
                         new StudentNaGodiniDTO(noviKorisnik.getStudentNaGodini().getId(), noviKorisnik.getStudentNaGodini().getDatumUpisa(),
                                 noviKorisnik.getStudentNaGodini().getBrojIndeksa(),null)), HttpStatus.OK);
     }

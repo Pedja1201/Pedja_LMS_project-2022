@@ -41,8 +41,6 @@ public class StudentController {
                         student.getJmbg(), student.getIme(),
                         new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
                                 student.getAdresa().getBroj(),null),
-                        new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
-                                null),
                         new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
                                 student.getStudentNaGodini().getBrojIndeksa(),null)
                 );
@@ -61,8 +59,6 @@ public class StudentController {
                     student.get().getJmbg(),student.get().getIme(),
                     new AdresaDTO(student.get().getAdresa().getId(), student.get().getAdresa().getUlica(),
                             student.get().getAdresa().getBroj(), null),
-                    new PohadjanjePredmetaDTO(student.get().getPohadjanjePredmeta().getId(),
-                            student.get().getPohadjanjePredmeta().getKonacnaOcena(), null),
                     new StudentNaGodiniDTO(student.get().getStudentNaGodini().getId(), student.get().getStudentNaGodini().getDatumUpisa(),
                             student.get().getStudentNaGodini().getBrojIndeksa(),null));
 
@@ -78,8 +74,6 @@ public class StudentController {
             StudentDTO studentDTO = new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),student.getJmbg(), student.getIme(),
                     new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
                             student.getAdresa().getBroj(),null),
-                    new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
-                            null),
                     new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
                             student.getStudentNaGodini().getBrojIndeksa(),null));
             return new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.CREATED);
@@ -99,8 +93,6 @@ public class StudentController {
             StudentDTO studentDTO = new StudentDTO(izmenjenStudent.getId(),izmenjenStudent.getKorisnickoIme(),izmenjenStudent.getLozinka(),izmenjenStudent.getJmbg(), izmenjenStudent.getIme(),
                     new AdresaDTO(izmenjenStudent.getAdresa().getId(), izmenjenStudent.getAdresa().getUlica(),
                             izmenjenStudent.getAdresa().getBroj(),null),
-                    new PohadjanjePredmetaDTO(izmenjenStudent.getPohadjanjePredmeta().getId(), izmenjenStudent.getPohadjanjePredmeta().getKonacnaOcena(),
-                            null),
                     new StudentNaGodiniDTO(izmenjenStudent.getStudentNaGodini().getId(), izmenjenStudent.getStudentNaGodini().getDatumUpisa(),
                             izmenjenStudent.getStudentNaGodini().getBrojIndeksa(),null));
             return new ResponseEntity<Student>(izmenjenStudent, HttpStatus.OK);
@@ -116,20 +108,18 @@ public class StudentController {
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
-
-    @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
-    public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
-        ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
-        for (Student student : this.studentService.studentiNaPredmetimaNastavnika(this.nastavnikService.findOne(nastavnikId).orElse(null))) {
-            studentDTOS.add(new StudentDTO(student.getId(), student.getKorisnickoIme(), student.getLozinka(), student.getJmbg(), student.getIme(),
-                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
-                            student.getAdresa().getBroj(), null),
-                    new PohadjanjePredmetaDTO(student.getPohadjanjePredmeta().getId(), student.getPohadjanjePredmeta().getKonacnaOcena(),
-                            null),
-                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
-                            student.getStudentNaGodini().getBrojIndeksa(), null)));
-        }
-        return new ResponseEntity<Iterable<StudentDTO>>(studentDTOS, HttpStatus.OK);
-    }
+//TODO:
+//    @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
+//    @Secured({"ROLE_NASTAVNIK"})
+//    public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
+//        ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
+//        for (Student student : this.studentService.studentiNaPredmetimaNastavnika(this.nastavnikService.findOne(nastavnikId).orElse(null))) {
+//            studentDTOS.add(new StudentDTO(student.getId(), student.getKorisnickoIme(), student.getLozinka(), student.getJmbg(), student.getIme(),
+//                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
+//                            student.getAdresa().getBroj(), null),
+//                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
+//                            student.getStudentNaGodini().getBrojIndeksa(), null)));
+//        }
+//        return new ResponseEntity<Iterable<StudentDTO>>(studentDTOS, HttpStatus.OK);
+//    }
 }
