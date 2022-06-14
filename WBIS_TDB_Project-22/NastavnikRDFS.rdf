@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xml:lang="en"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:fakultet = "http://www.singidunum.ac.rs/fakultet#">
+    
+    <!-- Kreiranje klasa -->
+    <rdfs:Class rdf:about="http://www.singidunum.ac.rs/fakultet#Korisnik"/>
+    
+    <rdfs:Class rdf:about="http://www.singidunum.ac.rs/fakultet#Nastavnik">
+        <rdfs:subClassOf rdf:resource="http://www.singidunum.ac.rs/fakultet#Korisnik"/>
+    </rdfs:Class>
+    
+    <rdfs:Class rdf:about="http://www.singidunum.ac.rs/fakultet#Adresa"/>
+    
+    <rdfs:Class rdf:about="http://www.singidunum.ac.rs/fakultet#Zvanje"/>
+    
+    <!-- Kreiranje Svojstva -->
+    <rdf:Property rdf:about="http://www.singidunum.ac.rs/fakultet#imaIme">
+        <rdfs:domain rdf:resource="http://www.singidunum.ac.rs/fakultet#Nastavnik"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://www.singidunum.ac.rs/fakultet#imaBiografiju">
+        <rdfs:domain rdf:resource="http://www.singidunum.ac.rs/fakultet#Nastavnik"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://www.singidunum.ac.rs/fakultet#imaJMBG">
+        <rdfs:domain rdf:resource="http://www.singidunum.ac.rs/fakultet#Nastavnik"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://www.singidunum.ac.rs/fakultet#imaAdresu">
+        <rdfs:domain rdf:resource="http://www.singidunum.ac.rs/fakultet#Adresa"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://www.singidunum.ac.rs/fakultet#imaZvanje">
+        <rdfs:domain rdf:resource="http://www.singidunum.ac.rs/fakultet#Zvanje"/>
+        <rdfs:range rdf:resource="http://www.singidunum.ac.rs/fakultet#tipZvanja"/>
+    </rdf:Property>
+    
+    
+    <!-- Kreiranje instance -->
+    <rdf:Description rdf:about="http://www.singidunum.ac.rs/fakultet#pedja">
+        <rdf:type rdf:resource="http://www.singidunum.ac.rs/fakultet#Nastavnik"/>
+        <fakultet:imaIme rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pedja</fakultet:imaIme>  <!-- Dodati svakako datatype -->
+        <fakultet:imaBiografiju rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Iskustvo u inostranstvu!</fakultet:imaBiografiju>
+        <fakultet:imaJMBG rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1234567</fakultet:imaJMBG>
+        <fakultet:imaAdresu rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mihajla Pupina 8</fakultet:imaAdresu>
+        <fakultet:imaZvanje rdf:resource="http://www.singidunum.ac.rs/fakultet#profesor"/>
+    </rdf:Description>
+    
+    
+    
+    
+    
+    
+</rdf:RDF>

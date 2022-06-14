@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Project_Spring-Email" />
         <module name="PedjaProjekat_ISA-22" />
+        <module name="WBIS_TDB_Project-22" />
         <module name="Project_ISA_KWA-logger" />
       </profile>
     </annotationProcessing>

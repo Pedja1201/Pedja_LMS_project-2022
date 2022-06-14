@@ -3,9 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Adresa } from 'src/app/model/adresa';
 import { Mesto } from 'src/app/model/mesto';
-import { Student } from 'src/app/model/student';
 import { AdreseService } from 'src/app/service/adrese.service';
-import { StudentiService } from 'src/app/service/studenti.service';
 
 @Component({
   selector: 'app-tabela-adrese',
@@ -16,7 +14,6 @@ export class TabelaAdreseComponent implements OnInit {
   displayedColumns: string[] = ['id', 'ulica', 'broj', 'mesto', "akcije"];
   dataSource : Adresa[]=[]; //U dataSource je problem prilikom dobavljanja za backend
   // dataSource = new MatTableDataSource();
-  // this.dataSource.data = val as any;
 
   title="Tabela Adresa";
 

@@ -148,6 +148,19 @@
         "id": 3
       },
       "id": 4
+    },
+    {
+      "ulica": "sasa",
+      "broj": "asas",
+      "mesto": {
+        "id": 2,
+        "naziv": "Prijedor",
+        "drzava": {
+          "id": 3,
+          "naziv": "Bosna i Hercegovina"
+        }
+      },
+      "id": 5
     }
   ],
   "drzave": [
@@ -432,7 +445,7 @@
         "id": 1,
         "vremePocetka": "2021-05-25",
         "vremeKraja": "2021-05-25"
-    },
+      },
       "id": 1
     },
     {
@@ -490,7 +503,7 @@
         "id": 1,
         "vremePocetka": "2021-05-25",
         "vremeKraja": "2021-05-25"
-    },
+      },
       "id": 2
     }
   ],
@@ -688,45 +701,45 @@
       }
     }
   ],
-  "ishodiNastave":[
+  "ishodiNastave": [
     {
       "id": 1,
       "opis": "Savladati teorijsku verziju u datoj oblasti",
       "nastavniMaterijal": {
-          "id": 1,
-          "naziv": "Programiranje2",
-          "autor": "Zavod BG",
-          "godinaIzdavanja": "2021-05-25"
+        "id": 1,
+        "naziv": "Programiranje2",
+        "autor": "Zavod BG",
+        "godinaIzdavanja": "2021-05-25"
       }
-  }
+    }
   ],
-  "nastavniMaterijali":[
+  "nastavniMaterijali": [
     {
       "id": 1,
       "naziv": "Programiranje2",
       "autor": "Zavod BG",
       "godinaIzdavanja": "2021-05-25"
-  }
+    }
   ],
-  "terminiNastave":[
+  "terminiNastave": [
     {
       "id": 1,
       "vremePocetka": "2021-05-25",
       "vremeKraja": "2021-05-25",
       "ishodNastave": {
+        "id": 1,
+        "opis": "Savladati teorijsku verziju u datoj oblasti",
+        "nastavniMaterijal": {
           "id": 1,
-          "opis": "Savladati teorijsku verziju u datoj oblasti",
-          "nastavniMaterijal": {
-              "id": 1,
-              "naziv": "Programiranje2",
-              "autor": "Zavod BG",
-              "godinaIzdavanja": "2021-05-25"
-          }
+          "naziv": "Programiranje2",
+          "autor": "Zavod BG",
+          "godinaIzdavanja": "2021-05-25"
+        }
       },
       "tipNastave": {
-          "id": 1,
-          "naziv": "Predavanje"
+        "id": 1,
+        "naziv": "Predavanje"
       }
-  }
+    }
   ]
 }
