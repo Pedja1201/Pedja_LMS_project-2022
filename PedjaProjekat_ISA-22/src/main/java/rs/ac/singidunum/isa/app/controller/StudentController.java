@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.LoggedStudent;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Student;
@@ -22,6 +19,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/studenti")
 public class StudentController {
     @Autowired

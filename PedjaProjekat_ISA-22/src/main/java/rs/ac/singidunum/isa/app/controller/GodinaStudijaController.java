@@ -6,10 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.GodinaStudijaDTO;
 import rs.ac.singidunum.isa.app.dto.PredmetDTO;
 import rs.ac.singidunum.isa.app.model.GodinaStudija;
@@ -20,6 +17,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/godinaStudija")
 public class GodinaStudijaController {
     @Autowired

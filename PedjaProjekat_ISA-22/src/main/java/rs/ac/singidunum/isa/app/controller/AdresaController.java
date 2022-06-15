@@ -24,7 +24,7 @@ public class AdresaController {
     @Autowired
     private AdresaService adresaService;
 
-    @CrossOrigin  //CrosPolicy na clientu
+//    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<AdresaDTO>> getAll(Pageable pageable) {
         Page<Adresa> adresa = adresaService.findAll(pageable);
@@ -41,7 +41,7 @@ public class AdresaController {
         return new ResponseEntity<Page<AdresaDTO>>(adrese, HttpStatus.OK);
     }
 
-
+    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.GET)
     public ResponseEntity<AdresaDTO> get(@PathVariable("adresaId") Long adresaId) {
         Optional<Adresa> adresa = adresaService.findOne(adresaId);
@@ -52,7 +52,7 @@ public class AdresaController {
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.NOT_FOUND);
     }
-
+    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<AdresaDTO> create(@RequestBody Adresa adresa) {
         try {
@@ -67,7 +67,7 @@ public class AdresaController {
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.BAD_REQUEST);
     }
-
+    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.PUT)
     public ResponseEntity<AdresaDTO> update(@PathVariable("adresaId") Long adresaId,
                                                    @RequestBody Adresa izmenjenaAdresa) {
@@ -82,7 +82,7 @@ public class AdresaController {
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.NOT_FOUND);
     }
-
+    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.DELETE)
     public ResponseEntity<AdresaDTO> delete(@PathVariable("adresaId") Long adresaId) {
         if (adresaService.findOne(adresaId).isPresent()) {
@@ -93,6 +93,7 @@ public class AdresaController {
     }
 
     //DONE: Metoda i upit za pronalaženje mesta po nazivu
+    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/findMesto/{mestoNaziv}", method = RequestMethod.GET)
     public ResponseEntity<Iterable<AdresaDTO>> findMestoAdresee(@PathVariable("mestoNaziv") String mestoNaziv) {
         ArrayList<AdresaDTO> adreseDTO = new ArrayList<>();

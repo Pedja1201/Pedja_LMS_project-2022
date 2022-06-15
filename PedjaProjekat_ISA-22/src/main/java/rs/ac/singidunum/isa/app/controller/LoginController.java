@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import rs.ac.singidunum.isa.app.utlis.TokenUtils;
 import java.util.HashSet;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_ADMIN, ROLE_STUDENT, ROLE_NASTAVNIK, ROLE_KORISNIK
 

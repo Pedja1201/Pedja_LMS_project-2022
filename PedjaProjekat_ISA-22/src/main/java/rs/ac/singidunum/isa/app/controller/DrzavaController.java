@@ -18,12 +18,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/drzave")
 public class DrzavaController {
     @Autowired
     private DrzavaService drzavaService;
 
-    @CrossOrigin
+//    @CrossOrigin
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<DrzavaDTO>> getAll(Pageable pageable) {
         Page<Drzava> drzave = drzavaService.findAll(pageable);

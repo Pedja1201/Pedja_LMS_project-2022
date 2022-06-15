@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/api/mesta")
 public class MestoController {
     @Autowired
