@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
+import { EvaluacijaZnanja, EvaluacijaZnanjaPage } from 'src/app/model/evaluacija-znanja';
 import { EvaluacijeZnanjaService } from 'src/app/service/evaluacije-znanja.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class EvaluacijeZnanjaComponent implements OnInit {
   znanjeUpdate: EvaluacijaZnanja | null = null;
 
   constructor(private service : EvaluacijeZnanjaService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(evaluacijeZnanja => {
-      this.evaluacijeZnanja = evaluacijeZnanja;
+    service.getAll().subscribe((evaluacijeZnanja : EvaluacijaZnanjaPage<EvaluacijaZnanja>)=> {
+      this.evaluacijeZnanja = evaluacijeZnanja.content;
     })
   }
 
@@ -29,7 +29,7 @@ export class EvaluacijeZnanjaComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.evaluacijeZnanja = value;
+      this.evaluacijeZnanja = value.content;
     }, (error) => {
       console.log(error);
     });

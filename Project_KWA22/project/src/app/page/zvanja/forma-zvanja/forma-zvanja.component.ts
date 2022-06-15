@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NaucnaOblast } from 'src/app/model/naucna-oblast';
+import { NaucnaOblast, NaucnaOblastPage } from 'src/app/model/naucna-oblast';
 import { Student } from 'src/app/model/student';
-import { TipZvanja } from 'src/app/model/tip-zvanja';
+import { TipZvanja, TipZvanjaPage } from 'src/app/model/tip-zvanja';
 import { Zvanje } from 'src/app/model/zvanje';
 import { NaucneOblastiService } from 'src/app/service/naucne-oblasti.service';
 import { TipoviZvanjaService } from 'src/app/service/tipovi-zvanja.service';
@@ -45,11 +45,11 @@ export class FormaZvanjaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.naucneOblastiService.getAll().subscribe(naucneOblasti =>{
-      this.naucneOblasti = naucneOblasti;
+    this.naucneOblastiService.getAll().subscribe((naucneOblasti : NaucnaOblastPage<NaucnaOblast>) =>{
+      this.naucneOblasti = naucneOblasti.content;
     });
-    this.tipoviZvanjaService.getAll().subscribe(tipoviZvanja =>{
-      this.tipoviZvanja = tipoviZvanja;
+    this.tipoviZvanjaService.getAll().subscribe((tipoviZvanja : TipZvanjaPage<TipZvanja>) =>{
+      this.tipoviZvanja = tipoviZvanja.content;
     });
     this.forma.get("id")?.setValue(this.zvanje?.id);
     this.forma.get("datumIzbora")?.setValue(this.zvanje?.id);

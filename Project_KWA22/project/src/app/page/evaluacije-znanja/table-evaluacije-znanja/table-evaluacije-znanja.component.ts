@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
+import { EvaluacijaZnanja, EvaluacijaZnanjaPage } from 'src/app/model/evaluacija-znanja';
 import { EvaluacijeZnanjaService } from 'src/app/service/evaluacije-znanja.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { EvaluacijeZnanjaService } from 'src/app/service/evaluacije-znanja.servi
 })
 export class TableEvaluacijeZnanjaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'vremePocetka', 'vremeZavrsetka', 'ishod','tipEvaluacije', "akcije"];
-  dataSource : EvaluacijaZnanja[]=[];
+  dataSource : EvaluacijaZnanjaPage<EvaluacijaZnanja> | undefined;
   title="Tabela Evaluacije Znanja";
 
   @Input()
@@ -24,8 +24,8 @@ export class TableEvaluacijeZnanjaComponent implements OnInit {
 
 
   constructor(private service : EvaluacijeZnanjaService, private router : Router) { 
-    service.getAll().subscribe(evaluacijeZnanja => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = evaluacijeZnanja;                            //Rutiranja posebne tabele komponenete       
+    service.getAll().subscribe((evaluacijeZnanja : EvaluacijaZnanjaPage<EvaluacijaZnanja>)=> { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = evaluacijeZnanja.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

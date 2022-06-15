@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Zvanje } from '../../model/zvanje';
+import { Zvanje, ZvanjePage } from '../../model/zvanje';
 import { ZvanjaService } from '../../service/zvanja.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class ZvanjaComponent implements OnInit {
 
 
   constructor(private service : ZvanjaService, public snackBar:MatSnackBar) {
-    service.getAll().subscribe(zvanja => {
-      this.zvanja = zvanja;
+    service.getAll().subscribe((zvanja : ZvanjePage<Zvanje>) => {
+      this.zvanja = zvanja.content;
     })
   }
 
@@ -31,7 +31,7 @@ export class ZvanjaComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.zvanja = value;
+      this.zvanja = value.content;
     }, (error) => {
       console.log(error);
     });

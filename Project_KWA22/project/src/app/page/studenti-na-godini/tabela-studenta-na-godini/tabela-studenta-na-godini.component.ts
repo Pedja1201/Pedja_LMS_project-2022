@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/model/student';
-import { StudentNaGodini } from 'src/app/model/student-na-godini';
+import { StudentNaGodini, StudentNaGodiniPage } from 'src/app/model/student-na-godini';
+import { StudentiNaGodiniService } from 'src/app/service/studenti-na-godini.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { StudentiService } from 'src/app/service/studenti.service';
 })
 export class TabelaStudentaNaGodiniComponent implements OnInit {
   displayedColumns: string[] = ['id', 'datumUpisa', 'brojIndeksa', 'godinaStudija', "akcije"];
-  dataSource : StudentNaGodini[]=[];
+  dataSource : StudentNaGodiniPage<StudentNaGodini> | undefined;
   title="Tabela Studenata na godini";
 
   @Input()
@@ -23,10 +24,10 @@ export class TabelaStudentaNaGodiniComponent implements OnInit {
   @Output()
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
-
-  constructor(private servis : StudentiService, private router : Router) { 
-    servis.getAll().subscribe(studentiNaGodini => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = studentiNaGodini;                            //Rutiranja posebne tabele komponenete       
+                      //Izmeni servis
+  constructor(private servis : StudentiNaGodiniService, private router : Router) { 
+    servis.getAll().subscribe((studentiNaGodini : StudentNaGodiniPage<StudentNaGodini>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = studentiNaGodini.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

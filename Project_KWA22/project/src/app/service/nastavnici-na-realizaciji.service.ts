@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { NastavnikNaRealizaciji } from '../model/nastavnik-na-realizaciji';
+import { NastavnikNaRealizaciji, NastavnikNaRealizacijiPage } from '../model/nastavnik-na-realizaciji';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class NastavniciNaRealizacijiService {
 
   
   getAll(){
-    return this.client.get<NastavnikNaRealizaciji[]>(`${this.baseUrl}/nastavniciNaRealizaciji`)
+    return this.client.get<NastavnikNaRealizacijiPage<NastavnikNaRealizaciji>>(`${this.baseUrl}/nastavniciNaRealizaciji`)
   }
 
   getOne(id : number){

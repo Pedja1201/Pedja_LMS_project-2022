@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Ishod } from '../model/ishod';
+import { Ishod, IshodPage } from '../model/ishod';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class IshodiService {
 
 
   getAll(){
-    return this.client.get<Ishod[]>(`${this.baseUrl}/ishodi`)
+    return this.client.get<IshodPage<Ishod>>(`${this.baseUrl}/ishodi`)
   }
 
   getOne(id : number){

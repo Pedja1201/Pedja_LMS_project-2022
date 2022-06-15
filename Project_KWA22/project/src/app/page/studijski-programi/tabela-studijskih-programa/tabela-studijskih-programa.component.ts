@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/model/student';
-import { StudijskiProgram } from 'src/app/model/studijski-program';
+import { StudijskiProgram, StudijskiProgramPage } from 'src/app/model/studijski-program';
 import { StudentiService } from 'src/app/service/studenti.service';
 import { StudijskiProgramiService } from 'src/app/service/studijski-programi.service';
 
@@ -12,7 +12,7 @@ import { StudijskiProgramiService } from 'src/app/service/studijski-programi.ser
 })
 export class TabelaStudijskihProgramaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', 'fakultet', 'nastavnik', 'godinaStudija', "akcije"];
-  dataSource : StudijskiProgram[]=[];
+  dataSource : StudijskiProgramPage<StudijskiProgram> | undefined;
   title="Tabela Studijskih programa";
 
   @Input()
@@ -26,8 +26,8 @@ export class TabelaStudijskihProgramaComponent implements OnInit {
 
 
   constructor(private servis : StudijskiProgramiService, private router : Router) { 
-    servis.getAll().subscribe(studijskiProgrami => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = studijskiProgrami;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((studijskiProgrami : StudijskiProgramPage<StudijskiProgram>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = studijskiProgrami.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

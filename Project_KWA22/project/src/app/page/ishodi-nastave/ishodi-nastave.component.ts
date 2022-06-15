@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IshodNastave } from 'src/app/model/ishod-nastave';
+import { IshodNastave, IshodNastavePage } from 'src/app/model/ishod-nastave';
 import { IshodiNastaveService } from 'src/app/service/ishodi-nastave.service';
 
 @Component({
@@ -17,8 +17,8 @@ export class IshodiNastaveComponent implements OnInit {
   ishodUpdate: IshodNastave | null = null;
 
   constructor(private service : IshodiNastaveService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(ishodiNastave => {
-      this.ishodiNastave = ishodiNastave;
+    service.getAll().subscribe((ishodiNastave : IshodNastavePage<IshodNastave>) => {
+      this.ishodiNastave = ishodiNastave.content;
     })
   }
 
@@ -28,7 +28,7 @@ export class IshodiNastaveComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.ishodiNastave = value;
+      this.ishodiNastave = value.content;
     }, (error) => {
       console.log(error);
     });

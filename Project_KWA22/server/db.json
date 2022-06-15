@@ -86,19 +86,19 @@
       "ROLE_USER"
     ]
   },
-  "users": [
+  "korisnici": [
     {
       "id": 1,
-      "username": "korisnik",
-      "password": "korisnik",
+      "korisnickoIme": "korisnik",
+      "lozinka": "korisnik",
       "roles": [
         "ROLE_USER"
       ]
     },
     {
       "id": 2,
-      "username": "admin",
-      "password": "admin",
+      "korisnickoIme": "admin",
+      "lozinka": "admin",
       "roles": [
         "ROLE_ADMIN"
       ]
@@ -137,30 +137,17 @@
       "id": 3
     },
     {
-      "ulica": 4,
-      "broj": "66",
+      "ulica": "saa",
+      "broj": "s",
       "mesto": {
-        "naziv": "Temisvar",
+        "id": 1,
+        "naziv": "Vrsac",
         "drzava": {
-          "id": 2,
-          "naziv": "Rumunija"
-        },
-        "id": 3
-      },
-      "id": 4
-    },
-    {
-      "ulica": "sasa",
-      "broj": "asas",
-      "mesto": {
-        "id": 2,
-        "naziv": "Prijedor",
-        "drzava": {
-          "id": 3,
-          "naziv": "Bosna i Hercegovina"
+          "id": 1,
+          "naziv": "Srbija"
         }
       },
-      "id": 5
+      "id": 4
     }
   ],
   "drzave": [

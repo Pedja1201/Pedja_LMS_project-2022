@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { RealizacijaPredmeta } from '../model/realizacija-predmeta';
+import { RealizacijaPredmeta, RealizacijaPredmetaPage } from '../model/realizacija-predmeta';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class RealizacijePredmetaService {
 
 
   getAll(){
-    return this.client.get<RealizacijaPredmeta[]>(`${this.baseUrl}/realizacijePredmeta`)
+    return this.client.get<RealizacijaPredmetaPage<RealizacijaPredmeta>>(`${this.baseUrl}/realizacijePredmeta`)
   }
 
   getOne(id : number){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TerminNastave } from 'src/app/model/termin-nastave';
+import { TerminNastave, TerminNastavePage } from 'src/app/model/termin-nastave';
 import { TerminiNastaveService } from 'src/app/service/termini-nastave.service';
 
 @Component({
@@ -17,8 +17,8 @@ export class TerminiNastaveComponent implements OnInit {
   terminUpdate: TerminNastave | null = null;
 
   constructor(private service : TerminiNastaveService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(terminiNastave => {
-      this.terminiNastave = terminiNastave;
+    service.getAll().subscribe((terminiNastave : TerminNastavePage<TerminNastave>) => {
+      this.terminiNastave = terminiNastave.content;
     })
   }
 
@@ -28,7 +28,7 @@ export class TerminiNastaveComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.terminiNastave = value;
+      this.terminiNastave = value.content;
     }, (error) => {
       console.log(error);
     });

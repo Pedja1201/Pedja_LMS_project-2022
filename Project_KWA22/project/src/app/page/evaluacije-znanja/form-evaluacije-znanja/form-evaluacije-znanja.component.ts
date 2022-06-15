@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
 import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
-import { Ishod } from 'src/app/model/ishod';
-import { TipEvaluacije } from 'src/app/model/tip-evaluacije';
+import { Ishod, IshodPage } from 'src/app/model/ishod';
+import { TipEvaluacije, TipEvaluacijePage } from 'src/app/model/tip-evaluacije';
 import { IshodiService } from 'src/app/service/ishodi.service';
 import { MestaService } from 'src/app/service/mesta.service';
 import { TipoviEvaluacijeService } from 'src/app/service/tipovi-evaluacije.service';
@@ -47,11 +47,11 @@ export class FormEvaluacijeZnanjaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ishodiService.getAll().subscribe(ishodi =>{
-      this.ishodi = ishodi;
+    this.ishodiService.getAll().subscribe((ishodi : IshodPage<Ishod>)=>{
+      this.ishodi = ishodi.content;
     });
-    this.tipoviEvaluacijeService.getAll().subscribe(tipoviEvaluacije =>{
-      this.tipoviEvaluacije = tipoviEvaluacije;
+    this.tipoviEvaluacijeService.getAll().subscribe((tipoviEvaluacije : TipEvaluacijePage<TipEvaluacije>)=>{
+      this.tipoviEvaluacije = tipoviEvaluacije.content;
     });
     this.forma.get("id")?.setValue(this.evaluacijaZnanja?.id);
     this.forma.get("vremePocetka")?.setValue(this.evaluacijaZnanja?.id);

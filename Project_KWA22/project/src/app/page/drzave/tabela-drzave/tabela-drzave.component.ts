@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Drzava } from 'src/app/model/drzava';
+import { Drzava, DrzavaPage } from 'src/app/model/drzava';
 
 @Component({
   selector: 'app-tabela-drzave',
@@ -9,7 +9,7 @@ import { Drzava } from 'src/app/model/drzava';
 })
 export class TabelaDrzaveComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', "akcije"];
-  dataSource : Drzava[]=[];
+  dataSource : DrzavaPage<Drzava> | undefined;
   title="Tabela Drzave";
 
   @Input()

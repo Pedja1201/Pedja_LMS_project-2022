@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Zvanje } from 'src/app/model/zvanje';
+import { Zvanje, ZvanjePage } from 'src/app/model/zvanje';
 import { ZvanjaService } from 'src/app/service/zvanja.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ZvanjaService } from 'src/app/service/zvanja.service';
 })
 export class TabelaZvanjaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'datumIzbora', 'datumPrestanka', 'naucnaOblast', 'tipZvanja', "akcije"];
-  dataSource : Zvanje[]=[];
+  dataSource : ZvanjePage<Zvanje> | undefined;
   title="Tabela Zvanja";
 
   @Input()
@@ -24,8 +24,8 @@ export class TabelaZvanjaComponent implements OnInit {
 
 
   constructor(private servis : ZvanjaService, private router : Router) { 
-    servis.getAll().subscribe(zvanja => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = zvanja;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((zvanja : ZvanjePage<Zvanje>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = zvanja.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

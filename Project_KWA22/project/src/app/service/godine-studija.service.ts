@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { GodinaStudija } from '../model/godina-studija';
+import { GodinaStudija, GodinaStudijaPage } from '../model/godina-studija';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class GodineStudijaService {
 
 
   getAll(){
-    return this.client.get<GodinaStudija[]>(`${this.baseUrl}/godineStudija`)
+    return this.client.get<GodinaStudijaPage<GodinaStudija>>(`${this.baseUrl}/godineStudija`)
   }
 
   getOne(id : number){

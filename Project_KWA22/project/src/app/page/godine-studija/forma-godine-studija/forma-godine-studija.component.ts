@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GodinaStudija } from 'src/app/model/godina-studija';
-import { Predmet } from 'src/app/model/predmet';
+import { Predmet, PredmetPage } from 'src/app/model/predmet';
 import { Student } from 'src/app/model/student';
 import { PredmetiService } from 'src/app/service/predmeti.service';
 
@@ -38,8 +38,8 @@ export class FormaGodineStudijaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.predmetiService.getAll().subscribe(predmeti =>{
-      this.predmeti = predmeti;
+    this.predmetiService.getAll().subscribe((predmeti: PredmetPage<Predmet>) =>{
+      this.predmeti = predmeti.content;
     });
     this.forma.get("id")?.setValue(this.godinaStudija?.id);
     this.forma.get("godina")?.setValue(this.godinaStudija?.id);

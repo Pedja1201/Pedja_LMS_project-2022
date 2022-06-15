@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PohadjanjePredmeta } from '../model/pohadjanje-predmeta';
+import { PohadjanjePredmeta, PohadjanjePredmetaPage } from '../model/pohadjanje-predmeta';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class PohadjanjaPredmetaService {
 
 
   getAll(){
-    return this.client.get<PohadjanjePredmeta[]>(`${this.baseUrl}/pohadjanjaPredmeta`)
+    return this.client.get<PohadjanjePredmetaPage<PohadjanjePredmeta>>(`${this.baseUrl}/pohadjanjaPredmeta`)
   }
 
   getOne(id : number){

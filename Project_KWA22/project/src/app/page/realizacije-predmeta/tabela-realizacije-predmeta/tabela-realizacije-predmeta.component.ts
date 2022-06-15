@@ -1,7 +1,7 @@
 import { CdkDragDrop, CdkDragEnd, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { RealizacijaPredmeta } from 'src/app/model/realizacija-predmeta';
+import { RealizacijaPredmeta, RealizacijaPredmetaPage } from 'src/app/model/realizacija-predmeta';
 import { RealizacijePredmetaService } from 'src/app/service/realizacije-predmeta.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { RealizacijePredmetaService } from 'src/app/service/realizacije-predmeta
 })
 export class TabelaRealizacijePredmetaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', 'nastavnikNaRealizaciji', 'predmet', 'evaluacijaZnanja','terminNastave', "akcije"];
-  dataSource : RealizacijaPredmeta[]=[];
+  dataSource : RealizacijaPredmetaPage<RealizacijaPredmeta> | undefined;
   title="Tabela Realizacije predmeta";
 
   @Input()
@@ -27,8 +27,8 @@ export class TabelaRealizacijePredmetaComponent implements OnInit {
 
 
   constructor(private servis : RealizacijePredmetaService, private router : Router) { 
-    servis.getAll().subscribe(realizacijePredmeta => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = realizacijePredmeta;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((realizacijePredmeta : RealizacijaPredmetaPage<RealizacijaPredmeta>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = realizacijePredmeta.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

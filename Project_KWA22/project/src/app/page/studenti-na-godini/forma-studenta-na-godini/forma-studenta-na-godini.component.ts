@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { GodinaStudija } from 'src/app/model/godina-studija';
+import { GodinaStudija, GodinaStudijaPage } from 'src/app/model/godina-studija';
 import { Student } from 'src/app/model/student';
 import { StudentNaGodini } from 'src/app/model/student-na-godini';
 import { GodineStudijaService } from 'src/app/service/godine-studija.service';
@@ -41,8 +41,8 @@ export class FormaStudentaNaGodiniComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.godineStudijaService.getAll().subscribe(godineStudija =>{
-      this.godineStudija = godineStudija;
+    this.godineStudijaService.getAll().subscribe((godineStudija : GodinaStudijaPage<GodinaStudija>) =>{
+      this.godineStudija = godineStudija.content;
     });
     this.forma.get("id")?.setValue(this.studentNaGodini?.id);
     this.forma.get("datumUpisa")?.setValue(this.studentNaGodini?.id);

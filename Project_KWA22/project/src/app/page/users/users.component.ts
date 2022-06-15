@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from 'src/app/model/user';
+import { User, UserPage } from 'src/app/model/user';
 import { UsersService } from 'src/app/service/users.service';
 
 @Component({
@@ -17,8 +17,8 @@ export class UsersComponent implements OnInit {
   userUpdate: User | null = null;
 
   constructor(private service : UsersService, public snackBar:MatSnackBar) {
-    service.getAll().subscribe(users => {
-      this.users = users;
+    service.getAll().subscribe((users : UserPage<User>) => {
+      this.users = users.content;
     })
   }
 
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.users = value;
+      this.users = value.content;
     }, (error) => {
       console.log(error);
     });

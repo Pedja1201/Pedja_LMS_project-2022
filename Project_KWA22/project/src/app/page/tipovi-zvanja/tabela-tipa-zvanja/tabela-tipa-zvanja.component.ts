@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { TipZvanja } from 'src/app/model/tip-zvanja';
+import { TipZvanja, TipZvanjaPage } from 'src/app/model/tip-zvanja';
 
 @Component({
   selector: 'app-tabela-tipa-zvanja',
@@ -9,7 +9,7 @@ import { TipZvanja } from 'src/app/model/tip-zvanja';
 })
 export class TabelaTipaZvanjaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', "akcije"];
-  dataSource : TipZvanja[]=[];
+  dataSource : TipZvanjaPage<TipZvanja> | undefined;
   title="Tabela Tipa zvanja";
 
   @Input()

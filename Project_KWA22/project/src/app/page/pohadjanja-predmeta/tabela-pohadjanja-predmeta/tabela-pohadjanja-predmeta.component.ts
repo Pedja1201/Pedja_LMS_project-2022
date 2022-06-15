@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { PohadjanjePredmeta } from 'src/app/model/pohadjanje-predmeta';
+import { PohadjanjePredmeta, PohadjanjePredmetaPage } from 'src/app/model/pohadjanje-predmeta';
 import { Student } from 'src/app/model/student';
 import { PohadjanjaPredmetaService } from 'src/app/service/pohadjanja-predmeta.service';
 import { StudentiService } from 'src/app/service/studenti.service';
@@ -13,7 +13,7 @@ import { StudentiService } from 'src/app/service/studenti.service';
 })
 export class TabelaPohadjanjaPredmetaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'konacnaOcena', 'realizacijaPredmeta','student', "akcije"];
-  dataSource : PohadjanjePredmeta[]=[];
+  dataSource : PohadjanjePredmetaPage<PohadjanjePredmeta> | undefined;
   title="Tabela Pohadjanja predmeta";
 
   @Input()
@@ -29,8 +29,8 @@ export class TabelaPohadjanjaPredmetaComponent implements OnInit {
 
 
   constructor(private servis : PohadjanjaPredmetaService, private router : Router) { 
-    servis.getAll().subscribe(pohadjanjaPredmeta => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = pohadjanjaPredmeta;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((pohadjanjaPredmeta : PohadjanjePredmetaPage<PohadjanjePredmeta>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = pohadjanjaPredmeta.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

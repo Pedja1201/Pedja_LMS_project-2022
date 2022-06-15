@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NastavnikNaRealizaciji } from '../../model/nastavnik-na-realizaciji';
+import { NastavnikNaRealizaciji, NastavnikNaRealizacijiPage } from '../../model/nastavnik-na-realizaciji';
 import { NastavniciNaRealizacijiService } from '../../service/nastavnici-na-realizaciji.service';
 
 @Component({
@@ -19,8 +19,8 @@ export class NastavniciNaRealizacijiComponent implements OnInit {
 
 
   constructor(private service : NastavniciNaRealizacijiService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(nastavniciNaRealizaciji => {
-      this.nastavnici = nastavniciNaRealizaciji;
+    service.getAll().subscribe((nastavniciNaRealizaciji : NastavnikNaRealizacijiPage<NastavnikNaRealizaciji>) => {
+      this.nastavnici = nastavniciNaRealizaciji.content;
     })
   }
 
@@ -32,7 +32,7 @@ export class NastavniciNaRealizacijiComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.nastavnici = value;
+      this.nastavnici = value.content;
     }, (error) => {
       console.log(error);
     });

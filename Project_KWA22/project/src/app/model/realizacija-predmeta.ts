@@ -3,6 +3,9 @@ import { NastavnikNaRealizaciji } from "./nastavnik-na-realizaciji";
 import { Predmet } from "./predmet";
 import { TerminNastave } from "./termin-nastave";
 
+export interface RealizacijaPredmetaPage<RealizacijaPredmeta> {
+    content: RealizacijaPredmeta[];
+  }
 export interface RealizacijaPredmeta {
     id:number;
     naziv:String;

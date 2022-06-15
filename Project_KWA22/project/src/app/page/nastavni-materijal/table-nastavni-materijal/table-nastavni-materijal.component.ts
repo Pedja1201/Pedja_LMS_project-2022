@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NastavniMaterijal } from 'src/app/model/nastavni-materijal';
+import { NastavniMaterijal, NastavniMaterijalPage } from 'src/app/model/nastavni-materijal';
 
 @Component({
   selector: 'app-table-nastavni-materijal',
@@ -9,7 +9,7 @@ import { NastavniMaterijal } from 'src/app/model/nastavni-materijal';
 })
 export class TableNastavniMaterijalComponent implements OnInit {
   displayedColumns: string[] = ['id', 'autor','godinaIzdavanja', 'naziv', "akcije"];
-  dataSource : NastavniMaterijal[]=[];
+  dataSource : NastavniMaterijalPage<NastavniMaterijal> | undefined;
   title="Tabela Nastavni Materijal";
 
   @Input()

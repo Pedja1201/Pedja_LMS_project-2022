@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
 import { IshodNastave } from 'src/app/model/ishod-nastave';
 import { Mesto } from 'src/app/model/mesto';
-import { NastavniMaterijal } from 'src/app/model/nastavni-materijal';
+import { NastavniMaterijal, NastavniMaterijalPage } from 'src/app/model/nastavni-materijal';
 import { MestaService } from 'src/app/service/mesta.service';
 import { NastavniMaterijaliService } from 'src/app/service/nastavni-materijali.service';
 
@@ -39,8 +39,8 @@ export class FormIshodiNastaveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nastavniMatService.getAll().subscribe(nastavniMaterijali =>{
-      this.nastavniMaterijali = nastavniMaterijali;
+    this.nastavniMatService.getAll().subscribe((nastavniMaterijali : NastavniMaterijalPage<NastavniMaterijal>) =>{
+      this.nastavniMaterijali = nastavniMaterijali.content;
     });
     this.forma.get("id")?.setValue(this.ishodNastave?.id);
     this.forma.get("opis")?.setValue(this.ishodNastave?.id);

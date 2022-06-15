@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Ishod } from '../../model/ishod';
+import { Ishod, IshodPage } from '../../model/ishod';
 import { IshodiService } from '../../service/ishodi.service';
 import { PredmetiService } from '../../service/predmeti.service';
 
@@ -20,8 +20,8 @@ export class IshodiComponent implements OnInit {
 
 
   constructor(private service : IshodiService, private predmetiService : PredmetiService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(ishodi => {
-      this.ishodi = ishodi;
+    service.getAll().subscribe((ishodi : IshodPage<Ishod>) => {
+      this.ishodi = ishodi.content;
     })
   }
 
@@ -33,7 +33,7 @@ export class IshodiComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.ishodi = value;
+      this.ishodi = value.content;
     }, (error) => {
       console.log(error);
     });

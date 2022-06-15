@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Adresa } from 'src/app/model/adresa';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { AdreseService } from 'src/app/service/adrese.service';
 
 @Component({
@@ -11,13 +11,13 @@ import { AdreseService } from 'src/app/service/adrese.service';
 })
 export class TabelaAdreseComponent implements OnInit {
   displayedColumns: string[] = ['id', 'ulica', 'broj', 'mesto', "akcije"];
-  dataSource : Adresa[]=[]; //U dataSource je problem prilikom dobavljanja za backend
-  // dataSource = new MatTableDataSource();
+  // dataSource : AdresaPage<Adresa> | undefined; //U dataSource je problem prilikom dobavljanja za backend
+  dataSource = new MatTableDataSource();
 
   title="Tabela Adresa";
 
   @Input()
-  elementi: any[] = [];
+  elementi: any[] =[];
 
   @Output()
   uklanjanje : EventEmitter<any> = new EventEmitter<any>();
@@ -27,8 +27,8 @@ export class TabelaAdreseComponent implements OnInit {
 
 
   constructor(private service : AdreseService, private router : Router) { 
-    service.getAll().subscribe(adrese => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = adrese;                            //Rutiranja posebne tabele komponenete       
+    service.getAll().subscribe((adrese : AdresaPage<Adresa>)=> { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = adrese.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

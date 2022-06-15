@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Fakultet } from 'src/app/model/fakultet';
+import { Fakultet, FakultetPage } from 'src/app/model/fakultet';
 import { Student } from 'src/app/model/student';
 import { FakultetiService } from 'src/app/service/fakulteti.service';
 import { StudentiService } from 'src/app/service/studenti.service';
@@ -12,7 +12,7 @@ import { StudentiService } from 'src/app/service/studenti.service';
 })
 export class TabelaFakultetaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', 'univerzitet', 'adresa', 'nastavnik', "akcije"];
-  dataSource : Fakultet[]=[];
+  dataSource : FakultetPage<Fakultet> | undefined;
   title="Tabela Fakulteta";
 
   @Input()
@@ -26,8 +26,8 @@ export class TabelaFakultetaComponent implements OnInit {
 
 
   constructor(private servis : FakultetiService, private router : Router) { 
-    servis.getAll().subscribe(fakulteti => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = fakulteti;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((fakulteti : FakultetPage<Fakultet>)=> { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = fakulteti.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

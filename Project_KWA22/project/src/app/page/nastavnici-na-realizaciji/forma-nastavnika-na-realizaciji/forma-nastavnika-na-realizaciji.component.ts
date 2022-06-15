@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Nastavnik } from 'src/app/model/nastavnik';
+import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { NastavnikNaRealizaciji } from 'src/app/model/nastavnik-na-realizaciji';
-import { TipNastave } from 'src/app/model/tip-nastave';
+import { TipNastave, TipNastavePage } from 'src/app/model/tip-nastave';
 import { NastavniciService } from 'src/app/service/nastavnici.service';
 import { TipoviNastaveService } from 'src/app/service/tipovi-nastave.service';
 
@@ -42,11 +42,11 @@ export class FormaNastavnikaNaRealizacijiComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nastavniciService.getAll().subscribe(nastavnici =>{
-      this.nastavnici = nastavnici;
+    this.nastavniciService.getAll().subscribe((nastavnici : NastavnikPage<Nastavnik>) =>{
+      this.nastavnici = nastavnici.content;
     });
-    this.tipoviNastaveService.getAll().subscribe(tipoviNastave =>{
-      this.tipoviNastave = tipoviNastave;
+    this.tipoviNastaveService.getAll().subscribe((tipoviNastave : TipNastavePage<TipNastave>) =>{
+      this.tipoviNastave = tipoviNastave.content;
     });
     this.forma.get("id")?.setValue(this.nastavnikNaRealizaciji?.id);
     this.forma.get("brojCasova")?.setValue(this.nastavnikNaRealizaciji?.id);

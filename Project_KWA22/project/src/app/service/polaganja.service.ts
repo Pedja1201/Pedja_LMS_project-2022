@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Polaganje } from '../model/polaganje';
+import { Polaganje, PolaganjePage } from '../model/polaganje';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class PolaganjaService {
 
 
   getAll(){
-    return this.client.get<Polaganje[]>(`${this.baseUrl}/polaganja`)
+    return this.client.get<PolaganjePage<Polaganje>>(`${this.baseUrl}/polaganja`)
   }
 
   getOne(id : number){

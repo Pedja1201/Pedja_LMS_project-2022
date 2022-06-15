@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   title = "Login page"
 
   loginForma : FormGroup = new FormGroup({
-    "username": new FormControl(null, Validators.required),
-    "password": new FormControl(null, Validators.required),
+    "korisnickoIme": new FormControl(null, Validators.required),
+    "lozinka": new FormControl(null, Validators.required),
   });
   loginFailed = false;
 

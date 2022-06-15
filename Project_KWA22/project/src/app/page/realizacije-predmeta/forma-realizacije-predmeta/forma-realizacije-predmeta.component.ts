@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
-import { NastavnikNaRealizaciji } from 'src/app/model/nastavnik-na-realizaciji';
-import { Predmet } from 'src/app/model/predmet';
+import { EvaluacijaZnanja, EvaluacijaZnanjaPage } from 'src/app/model/evaluacija-znanja';
+import { NastavnikNaRealizaciji, NastavnikNaRealizacijiPage } from 'src/app/model/nastavnik-na-realizaciji';
+import { Predmet, PredmetPage } from 'src/app/model/predmet';
 import { RealizacijaPredmeta } from 'src/app/model/realizacija-predmeta';
-import { TerminNastave } from 'src/app/model/termin-nastave';
+import { TerminNastave, TerminNastavePage } from 'src/app/model/termin-nastave';
 import { EvaluacijeZnanjaService } from 'src/app/service/evaluacije-znanja.service';
 import { NastavniciNaRealizacijiService } from 'src/app/service/nastavnici-na-realizaciji.service';
 import { PredmetiService } from 'src/app/service/predmeti.service';
@@ -53,17 +53,17 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nastavniciNaRealizacijiService.getAll().subscribe(nastavniciNaRealizaciji =>{
-      this.nastavniciNaRealizaciji = nastavniciNaRealizaciji;
+    this.nastavniciNaRealizacijiService.getAll().subscribe((nastavniciNaRealizaciji : NastavnikNaRealizacijiPage<NastavnikNaRealizaciji>) =>{
+      this.nastavniciNaRealizaciji = nastavniciNaRealizaciji.content;
     });
-    this.predmetiService.getAll().subscribe(predmeti =>{
-      this.predmeti = predmeti;
+    this.predmetiService.getAll().subscribe((predmeti : PredmetPage<Predmet>) =>{
+      this.predmeti = predmeti.content;
     });
-    this.evZnanjaService.getAll().subscribe(evaluacijeZnanja =>{
-      this.evaluacijeZnanja = evaluacijeZnanja;
+    this.evZnanjaService.getAll().subscribe((evaluacijeZnanja : EvaluacijaZnanjaPage<EvaluacijaZnanja>) =>{
+      this.evaluacijeZnanja = evaluacijeZnanja.content;
     });
-    this.terminService.getAll().subscribe(terminiNastave =>{
-      this.terminiNastave = terminiNastave;
+    this.terminService.getAll().subscribe((terminiNastave : TerminNastavePage<TerminNastave>) =>{
+      this.terminiNastave = terminiNastave.content;
     });
     this.forma.get("id")?.setValue(this.realizacijaPredmeta?.id);
     this.forma.get("naziv")?.setValue(this.realizacijaPredmeta?.id);

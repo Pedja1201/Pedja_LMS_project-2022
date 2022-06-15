@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Ishod } from 'src/app/model/ishod';
+import { Ishod, IshodPage } from 'src/app/model/ishod';
 import { IshodiService } from 'src/app/service/ishodi.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { IshodiService } from 'src/app/service/ishodi.service';
 })
 export class TabelaIshodaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'opis', 'predmet', "akcije"];
-  dataSource : Ishod[]=[];
+  dataSource :IshodPage<Ishod> | undefined;
   title="Tabela Ishoda";
 
   @Input()
@@ -24,8 +24,8 @@ export class TabelaIshodaComponent implements OnInit {
 
 
   constructor(private servis : IshodiService, private router : Router) { 
-    servis.getAll().subscribe(ishodi => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = ishodi;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((ishodi : IshodPage<Ishod>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = ishodi.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

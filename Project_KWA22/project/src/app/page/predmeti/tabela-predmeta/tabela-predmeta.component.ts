@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Predmet } from 'src/app/model/predmet';
+import { Predmet, PredmetPage } from 'src/app/model/predmet';
 
 @Component({
   selector: 'app-tabela-predmeta',
@@ -9,7 +9,7 @@ import { Predmet } from 'src/app/model/predmet';
 })
 export class TabelaPredmetaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', 'espb', 'obavezan','brojPredavanja', 'brojVezbi', 'drugiObliciNastave', 'istrazivackiRad', "akcije"];
-  dataSource : Predmet[]=[];
+  dataSource : PredmetPage<Predmet> |undefined;
   title="Tabela Predmeta";
 
   @Input()

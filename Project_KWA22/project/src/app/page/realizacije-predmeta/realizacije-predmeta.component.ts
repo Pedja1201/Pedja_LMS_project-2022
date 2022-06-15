@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RealizacijaPredmeta } from '../../model/realizacija-predmeta';
+import { RealizacijaPredmeta, RealizacijaPredmetaPage } from '../../model/realizacija-predmeta';
 import { RealizacijePredmetaService } from '../../service/realizacije-predmeta.service';
 
 @Component({
@@ -17,8 +17,8 @@ export class RealizacijePredmetaComponent implements OnInit {
 
 
   constructor(private service : RealizacijePredmetaService, public snackBar:MatSnackBar) {
-    service.getAll().subscribe(realizacijePredmeta => {
-      this.realizacijePredmeta = realizacijePredmeta;
+    service.getAll().subscribe((realizacijePredmeta : RealizacijaPredmetaPage<RealizacijaPredmeta>) => {
+      this.realizacijePredmeta = realizacijePredmeta.content;
     })
   }
 
@@ -30,7 +30,7 @@ export class RealizacijePredmetaComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.realizacijePredmeta = value;
+      this.realizacijePredmeta = value.content;
     }, (error) => {
       console.log(error);
     });

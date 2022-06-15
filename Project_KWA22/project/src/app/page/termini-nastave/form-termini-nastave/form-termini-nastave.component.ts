@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IshodNastave } from 'src/app/model/ishod-nastave';
+import { IshodNastave, IshodNastavePage } from 'src/app/model/ishod-nastave';
 import { TerminNastave } from 'src/app/model/termin-nastave';
-import { TipNastave } from 'src/app/model/tip-nastave';
+import { TipNastave, TipNastavePage } from 'src/app/model/tip-nastave';
 import { IshodiNastaveService } from 'src/app/service/ishodi-nastave.service';
 import { MestaService } from 'src/app/service/mesta.service';
 import { TipoviNastaveService } from 'src/app/service/tipovi-nastave.service';
@@ -45,11 +45,11 @@ export class FormTerminiNastaveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ishodiService.getAll().subscribe(ishodiNastave =>{
-      this.ishodiNastave = ishodiNastave;
+    this.ishodiService.getAll().subscribe((ishodiNastave : IshodNastavePage<IshodNastave>) =>{
+      this.ishodiNastave = ishodiNastave.content;
     });
-    this.tipoviService.getAll().subscribe(tipoviNastave =>{
-      this.tipoviNastave = tipoviNastave;
+    this.tipoviService.getAll().subscribe((tipoviNastave : TipNastavePage<TipNastave>) =>{
+      this.tipoviNastave = tipoviNastave.content;
     });
     this.forma.get("id")?.setValue(this.terminNastave?.id);
     this.forma.get("vremePocetka")?.setValue(this.terminNastave?.id);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Polaganje } from 'src/app/model/polaganje';
+import { Polaganje, PolaganjePage } from 'src/app/model/polaganje';
 import { PolaganjaService } from 'src/app/service/polaganja.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class PolaganjaComponent implements OnInit {
   polaganjeUpdate: Polaganje | null = null;
 
   constructor(private service : PolaganjaService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(polaganja => {
-      this.polaganja = polaganja;
+    service.getAll().subscribe((polaganja : PolaganjePage<Polaganje>) => {
+      this.polaganja = polaganja.content;
     })
   }
 
@@ -29,7 +29,7 @@ export class PolaganjaComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.polaganja = value;
+      this.polaganja = value.content;
     }, (error) => {
       console.log(error);
     });

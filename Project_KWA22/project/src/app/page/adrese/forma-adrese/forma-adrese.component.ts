@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
-import { Mesto } from 'src/app/model/mesto';
+import { Mesto, MestoPage } from 'src/app/model/mesto';
 import { MestaService } from 'src/app/service/mesta.service';
 
 @Component({
@@ -38,8 +38,8 @@ export class FormaAdreseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mestaService.getAll().subscribe(mesta =>{
-      this.mesta = mesta;
+    this.mestaService.getAll().subscribe((mesta : MestoPage<Mesto>)=>{
+      this.mesta = mesta.content;
     });
     this.forma.get("id")?.setValue(this.adresa?.id);
     this.forma.get("ulica")?.setValue(this.adresa?.id);

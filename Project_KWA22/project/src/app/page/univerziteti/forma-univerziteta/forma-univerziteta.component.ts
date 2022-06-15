@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Adresa } from 'src/app/model/adresa';
-import { Nastavnik } from 'src/app/model/nastavnik';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
+import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { Student } from 'src/app/model/student';
 import { Univerzitet } from 'src/app/model/univerzitet';
 import { AdreseService } from 'src/app/service/adrese.service';
@@ -45,11 +45,11 @@ export class FormaUniverzitetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adreseService.getAll().subscribe(adrese =>{
-      this.adrese = adrese;
+    this.adreseService.getAll().subscribe((adrese : AdresaPage<Adresa>) =>{
+      this.adrese = adrese.content;
     });
-    this.nastavniciService.getAll().subscribe(nastavnici =>{
-      this.nastavnici = nastavnici;
+    this.nastavniciService.getAll().subscribe((nastavnici : NastavnikPage<Nastavnik>) =>{
+      this.nastavnici = nastavnici.content;
     });
     this.forma.get("id")?.setValue(this.univerzitet?.id);
     this.forma.get("naziv")?.setValue(this.univerzitet?.id);

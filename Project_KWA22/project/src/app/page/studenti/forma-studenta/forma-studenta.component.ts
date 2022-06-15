@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Adresa } from 'src/app/model/adresa';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { PohadjanjePredmeta } from 'src/app/model/pohadjanje-predmeta';
 import { Student } from 'src/app/model/student';
-import { StudentNaGodini } from 'src/app/model/student-na-godini';
+import { StudentNaGodini, StudentNaGodiniPage } from 'src/app/model/student-na-godini';
 import { AdreseService } from 'src/app/service/adrese.service';
 import { PohadjanjaPredmetaService } from 'src/app/service/pohadjanja-predmeta.service';
 import { StudentiNaGodiniService } from 'src/app/service/studenti-na-godini.service';
@@ -45,11 +45,11 @@ export class FormaStudentaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adreseService.getAll().subscribe(adrese =>{
-      this.adrese = adrese;
+    this.adreseService.getAll().subscribe((adrese : AdresaPage<Adresa>)=>{
+      this.adrese = adrese.content;
     });
-    this.studentiNaGodiniService.getAll().subscribe(studentiNaGodini =>{
-      this.studentiNaGodini = studentiNaGodini;
+    this.studentiNaGodiniService.getAll().subscribe((studentiNaGodini : StudentNaGodiniPage<StudentNaGodini>) =>{
+      this.studentiNaGodini = studentiNaGodini.content;
     });
     this.forma.get("id")?.setValue(this.student?.id);
     this.forma.get("jmbg")?.setValue(this.student?.id);

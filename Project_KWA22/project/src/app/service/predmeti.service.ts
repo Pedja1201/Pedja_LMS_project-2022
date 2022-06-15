@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Predmet } from '../model/predmet';
+import { Predmet, PredmetPage } from '../model/predmet';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class PredmetiService {
 
 
   getAll(){
-    return this.client.get<Predmet[]>(`${this.baseUrl}/predmeti`)
+    return this.client.get<PredmetPage<Predmet>>(`${this.baseUrl}/predmeti`)
   }
 
   getOne(id : number){

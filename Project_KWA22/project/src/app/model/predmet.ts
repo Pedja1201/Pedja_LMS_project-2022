@@ -1,3 +1,7 @@
+export interface PredmetPage<Predmet> {
+    content: Predmet[];
+  }
+
 export interface Predmet {
     id:number;
     naziv:String;

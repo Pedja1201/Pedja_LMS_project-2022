@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PohadjanjePredmeta } from 'src/app/model/pohadjanje-predmeta';
-import { RealizacijaPredmeta } from 'src/app/model/realizacija-predmeta';
-import { Student } from 'src/app/model/student';
+import { RealizacijaPredmeta, RealizacijaPredmetaPage } from 'src/app/model/realizacija-predmeta';
+import { Student, StudentPage } from 'src/app/model/student';
 import { RealizacijePredmetaService } from 'src/app/service/realizacije-predmeta.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 
@@ -42,11 +42,11 @@ export class FormaPohadjanjaPredmetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.realizacijePredmetaService.getAll().subscribe(realizacijePredmeta =>{
-      this.realizacijePredmeta = realizacijePredmeta;
+    this.realizacijePredmetaService.getAll().subscribe((realizacijePredmeta : RealizacijaPredmetaPage<RealizacijaPredmeta>) =>{
+      this.realizacijePredmeta = realizacijePredmeta.content;
     });
-    this.studentiService.getAll().subscribe(studenti =>{
-      this.studenti = studenti;
+    this.studentiService.getAll().subscribe((studenti : StudentPage<Student>) =>{
+      this.studenti = studenti.content;
     });
     this.forma.get("id")?.setValue(this.pohadjanjePredmeta?.id);
     this.forma.get("konacnaOcena")?.setValue(this.pohadjanjePredmeta?.id);

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Fakultet } from '../model/fakultet';
+import { Fakultet, FakultetPage } from '../model/fakultet';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class FakultetiService {
 
 
   getAll(){
-    return this.client.get<Fakultet[]>(`${this.baseUrl}/fakulteti`)
+    return this.client.get<FakultetPage<Fakultet>>(`${this.baseUrl}/fakulteti`)
   }
 
   getOne(id : number){

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Drzava } from '../model/drzava';
+import { Drzava, DrzavaPage } from '../model/drzava';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class DrzaveService {
 
 
   getAll(){
-    return this.client.get<Drzava[]>(`${this.baseUrl}/drzave`)
+    return this.client.get<DrzavaPage<Drzava>>(`${this.baseUrl}/drzave`)
   }
 
   getOne(id : number){

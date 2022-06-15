@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NaucnaOblast } from '../../model/naucna-oblast';
+import { NaucnaOblast, NaucnaOblastPage } from '../../model/naucna-oblast';
 import { NaucneOblastiService } from '../../service/naucne-oblasti.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class NaucneOblastiComponent implements OnInit {
 
 
   constructor(private service : NaucneOblastiService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(naucneOblasti => {
-      this.naucneOblasti = naucneOblasti;
+    service.getAll().subscribe((naucneOblasti : NaucnaOblastPage<NaucnaOblast>) => {
+      this.naucneOblasti = naucneOblasti.content;
     })
   }
 
@@ -31,7 +31,7 @@ export class NaucneOblastiComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.naucneOblasti = value;
+      this.naucneOblasti = value.content;
     }, (error) => {
       console.log(error);
     });

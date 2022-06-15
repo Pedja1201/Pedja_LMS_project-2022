@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Drzava } from 'src/app/model/drzava';
-import { NastavniMaterijal } from 'src/app/model/nastavni-materijal';
+import { NastavniMaterijal, NastavniMaterijalPage } from 'src/app/model/nastavni-materijal';
 import { NastavniMaterijaliService } from 'src/app/service/nastavni-materijali.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class NastavniMaterijalComponent implements OnInit {
   materijalUpdate: NastavniMaterijal | null = null;
 
   constructor(private service : NastavniMaterijaliService, public snackBar:MatSnackBar) {
-    service.getAll().subscribe(nastavniMaterijali => {
-      this.nastavniMaterijali = nastavniMaterijali;
+    service.getAll().subscribe((nastavniMaterijali : NastavniMaterijalPage<NastavniMaterijal>) => {
+      this.nastavniMaterijali = nastavniMaterijali.content;
     })
   }
 
@@ -29,7 +29,7 @@ export class NastavniMaterijalComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.nastavniMaterijali = value;
+      this.nastavniMaterijali = value.content;
     }, (error) => {
       console.log(error);
     });

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Drzava } from 'src/app/model/drzava';
-import { TipEvaluacije } from 'src/app/model/tip-evaluacije';
+import { TipEvaluacije, TipEvaluacijePage } from 'src/app/model/tip-evaluacije';
 
 @Component({
   selector: 'app-table-tipovi-evaluacije',
@@ -10,7 +10,7 @@ import { TipEvaluacije } from 'src/app/model/tip-evaluacije';
 })
 export class TableTipoviEvaluacijeComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', "akcije"];
-  dataSource : TipEvaluacije[]=[];
+  dataSource : TipEvaluacijePage<TipEvaluacije> | undefined;
   title="Tabela Tipova Evaluacije";
 
   @Input()

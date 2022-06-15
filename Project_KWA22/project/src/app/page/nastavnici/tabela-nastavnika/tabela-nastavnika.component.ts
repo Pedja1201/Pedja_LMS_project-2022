@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Nastavnik } from 'src/app/model/nastavnik';
+import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { NastavniciService } from 'src/app/service/nastavnici.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { NastavniciService } from 'src/app/service/nastavnici.service';
 })
 export class TabelaNastavnikaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'ime', 'biografija', 'jmbg', 'adresa', 'zvanje', "akcije"];
-  dataSource : Nastavnik[]=[];
+  dataSource : NastavnikPage<Nastavnik> | undefined;
   title="Tabela Nastavnika";
 
   @Input()
@@ -24,8 +24,8 @@ export class TabelaNastavnikaComponent implements OnInit {
 
 
   constructor(private servis : NastavniciService, private router : Router) { 
-    servis.getAll().subscribe(nastavnici => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = nastavnici;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((nastavnici : NastavnikPage<Nastavnik>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = nastavnici.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

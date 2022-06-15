@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TipEvaluacije } from 'src/app/model/tip-evaluacije';
+import { TipEvaluacije, TipEvaluacijePage } from 'src/app/model/tip-evaluacije';
 import { TipoviEvaluacijeService } from 'src/app/service/tipovi-evaluacije.service';
 
 @Component({
@@ -17,8 +17,8 @@ export class TipoviEvaluacijeComponent implements OnInit {
   tipoviUpdate: TipEvaluacije | null = null;
 
   constructor(private service : TipoviEvaluacijeService, public snackBar:MatSnackBar) {
-    service.getAll().subscribe(tipoviEvaluacije => {
-      this.tipoviEvaluacije = tipoviEvaluacije;
+    service.getAll().subscribe((tipoviEvaluacije : TipEvaluacijePage<TipEvaluacije>) => {
+      this.tipoviEvaluacije = tipoviEvaluacije.content;
     })
   }
 
@@ -28,7 +28,7 @@ export class TipoviEvaluacijeComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.tipoviEvaluacije = value;
+      this.tipoviEvaluacije = value.content;
     }, (error) => {
       console.log(error);
     });

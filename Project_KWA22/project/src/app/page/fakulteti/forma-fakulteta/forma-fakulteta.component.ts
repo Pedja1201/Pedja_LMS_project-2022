@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Adresa } from 'src/app/model/adresa';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { Fakultet } from 'src/app/model/fakultet';
-import { Nastavnik } from 'src/app/model/nastavnik';
+import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { Student } from 'src/app/model/student';
-import { Univerzitet } from 'src/app/model/univerzitet';
+import { Univerzitet, UniverzitetPage } from 'src/app/model/univerzitet';
 import { AdreseService } from 'src/app/service/adrese.service';
 import { NastavniciService } from 'src/app/service/nastavnici.service';
 import { UniverzitetiService } from 'src/app/service/univerziteti.service';
@@ -47,14 +47,14 @@ export class FormaFakultetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.univerzitetiService.getAll().subscribe(univerziteti =>{
-      this.univerziteti = univerziteti;
+    this.univerzitetiService.getAll().subscribe((univerziteti : UniverzitetPage<Univerzitet>)=>{
+      this.univerziteti = univerziteti.content;
     });
-    this.adreseService.getAll().subscribe(adrese =>{
-      this.adrese = adrese;
+    this.adreseService.getAll().subscribe((adrese : AdresaPage<Adresa>) =>{
+      this.adrese = adrese.content;
     });
-    this.nastavniciService.getAll().subscribe(nastavnici =>{
-      this.nastavnici = nastavnici;
+    this.nastavniciService.getAll().subscribe((nastavnici : NastavnikPage<Nastavnik>) =>{
+      this.nastavnici = nastavnici.content;
     });
     this.forma.get("id")?.setValue(this.fakultet?.id);
     this.forma.get("naziv")?.setValue(this.fakultet?.id);

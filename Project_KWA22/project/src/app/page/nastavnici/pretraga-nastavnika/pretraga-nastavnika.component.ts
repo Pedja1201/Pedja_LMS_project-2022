@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Adresa } from 'src/app/model/adresa';
-import { Zvanje } from 'src/app/model/zvanje';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
+import { Zvanje, ZvanjePage } from 'src/app/model/zvanje';
 import { AdreseService } from 'src/app/service/adrese.service';
 import { ZvanjaService } from 'src/app/service/zvanja.service';
 
@@ -35,11 +35,11 @@ export class PretragaNastavnikaComponent implements OnInit {
   constructor(private adreseServis : AdreseService,private zvanjaService : ZvanjaService, private router : Router) { }
 
   ngOnInit(): void {
-    this.adreseServis.getAll().subscribe(adrese =>{
-      this.adrese = adrese;
+    this.adreseServis.getAll().subscribe((adrese : AdresaPage<Adresa>) =>{
+      this.adrese = adrese.content;
     });
-    this.zvanjaService.getAll().subscribe(zvanja =>{
-      this.zvanja = zvanja;
+    this.zvanjaService.getAll().subscribe((zvanja : ZvanjePage<Zvanje>) =>{
+      this.zvanja = zvanja.content;
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/user';
+import { User, UserPage } from 'src/app/model/user';
 
 @Component({
   selector: 'app-table-users',
@@ -9,7 +9,7 @@ import { User } from 'src/app/model/user';
 })
 export class TableUsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'username', 'password',  "akcije"];
-  dataSource : User[]=[];
+  dataSource : UserPage<User> | undefined;
   title="Table Users";
 
   @Input()

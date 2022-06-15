@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { NaucnaOblast } from '../model/naucna-oblast';
+import { NaucnaOblast, NaucnaOblastPage } from '../model/naucna-oblast';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class NaucneOblastiService {
 
 
   getAll(){
-    return this.client.get<NaucnaOblast[]>(`${this.baseUrl}/naucneOblasti`)
+    return this.client.get<NaucnaOblastPage<NaucnaOblast>>(`${this.baseUrl}/naucneOblasti`)
   }
 
   getOne(id : number){

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { TerminNastave } from 'src/app/model/termin-nastave';
+import { TerminNastave, TerminNastavePage } from 'src/app/model/termin-nastave';
 import { TerminiNastaveService } from 'src/app/service/termini-nastave.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { TerminiNastaveService } from 'src/app/service/termini-nastave.service';
 })
 export class TableTerminiNastaveComponent implements OnInit {
   displayedColumns: string[] = ['id', 'vremePocetka', 'vremeKraja', 'ishodNastave', 'tipNastave', "akcije"];
-  dataSource : TerminNastave[]=[];
+  dataSource : TerminNastavePage<TerminNastave> | undefined;
   title="Tabela Termina Nastave";
 
   @Input()
@@ -24,8 +24,8 @@ export class TableTerminiNastaveComponent implements OnInit {
 
 
   constructor(private service : TerminiNastaveService, private router : Router) { 
-    service.getAll().subscribe(termini => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = termini;                            //Rutiranja posebne tabele komponenete       
+    service.getAll().subscribe((termini : TerminNastavePage<TerminNastave>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = termini.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

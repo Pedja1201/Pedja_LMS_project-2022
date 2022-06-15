@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Adresa } from 'src/app/model/adresa';
-import { Polaganje } from 'src/app/model/polaganje';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
+import { Polaganje, PolaganjePage } from 'src/app/model/polaganje';
 import { AdreseService } from 'src/app/service/adrese.service';
 import { PolaganjaService } from 'src/app/service/polaganja.service';
 
@@ -12,7 +12,7 @@ import { PolaganjaService } from 'src/app/service/polaganja.service';
 })
 export class TablePolaganjaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'bodovi', 'napomena', 'evaluacijaZnanja', 'studentNaGodini', "akcije"];
-  dataSource : Adresa[]=[];
+  dataSource : PolaganjePage<Polaganje> | undefined
   title="Tabela Polaganja";
 
   @Input()
@@ -26,8 +26,8 @@ export class TablePolaganjaComponent implements OnInit {
 
 
   constructor(private service : PolaganjaService, private router : Router) { 
-    service.getAll().subscribe(polaganja => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = polaganja;                            //Rutiranja posebne tabele komponenete       
+    service.getAll().subscribe((polaganja : PolaganjePage<Polaganje>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = polaganja.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

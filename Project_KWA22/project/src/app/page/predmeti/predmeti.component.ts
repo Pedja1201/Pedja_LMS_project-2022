@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Predmet } from '../../model/predmet';
+import { Predmet, PredmetPage } from '../../model/predmet';
 import { PredmetiService } from '../../service/predmeti.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class PredmetiComponent implements OnInit {
   predmetUpdate: Predmet | null = null;
 
   constructor(private service : PredmetiService,  public snackBar:MatSnackBar) {
-    service.getAll().subscribe(predmeti => {
-      this.predmeti = predmeti;
+    service.getAll().subscribe((predmeti : PredmetPage<Predmet>) => {
+      this.predmeti = predmeti.content;
     })
   }
 
@@ -27,7 +27,7 @@ export class PredmetiComponent implements OnInit {
 
   getAll() {
     this.service.getAll().subscribe((value) => {
-      this.predmeti = value;
+      this.predmeti = value.content;
     }, (error) => {
       console.log(error);
     });

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Fakultet } from 'src/app/model/fakultet';
-import { GodinaStudija } from 'src/app/model/godina-studija';
-import { Nastavnik } from 'src/app/model/nastavnik';
+import { Fakultet, FakultetPage } from 'src/app/model/fakultet';
+import { GodinaStudija, GodinaStudijaPage } from 'src/app/model/godina-studija';
+import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { Student } from 'src/app/model/student';
 import { StudijskiProgram } from 'src/app/model/studijski-program';
 import { FakultetiService } from 'src/app/service/fakulteti.service';
@@ -47,14 +47,14 @@ export class FormaStudijskihProgramaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fakultetiService.getAll().subscribe(fakulteti =>{
-      this.fakulteti = fakulteti;
+    this.fakultetiService.getAll().subscribe((fakulteti : FakultetPage<Fakultet>) =>{
+      this.fakulteti = fakulteti.content;
     });
-    this.nastavniciService.getAll().subscribe(nastavnici =>{
-      this.nastavnici = nastavnici;
+    this.nastavniciService.getAll().subscribe((nastavnici : NastavnikPage<Nastavnik>) =>{
+      this.nastavnici = nastavnici.content;
     });
-    this.godineStudijaService.getAll().subscribe(godineStudija =>{
-      this.godineStudija = godineStudija;
+    this.godineStudijaService.getAll().subscribe((godineStudija : GodinaStudijaPage<GodinaStudija>) =>{
+      this.godineStudija = godineStudija.content;
     });
     this.forma.get("id")?.setValue(this.studijskiProgram?.id);
     this.forma.get("naziv")?.setValue(this.studijskiProgram?.id);

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { GodinaStudija } from 'src/app/model/godina-studija';
+import { GodinaStudija, GodinaStudijaPage } from 'src/app/model/godina-studija';
 import { GodineStudijaService } from 'src/app/service/godine-studija.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { GodineStudijaService } from 'src/app/service/godine-studija.service';
 })
 export class TabelaGodineStudijaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'godina', 'predmet', "akcije"];
-  dataSource : GodinaStudija[]=[];
+  dataSource : GodinaStudijaPage<GodinaStudija> | undefined;
   title="Tabela Godine studija";
 
   @Input()
@@ -24,8 +24,8 @@ export class TabelaGodineStudijaComponent implements OnInit {
 
 
   constructor(private servis : GodineStudijaService, private router : Router) { 
-    servis.getAll().subscribe(godineStudija => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = godineStudija;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((godineStudija : GodinaStudijaPage<GodinaStudija>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = godineStudija.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Drzava } from 'src/app/model/drzava';
+import { Drzava, DrzavaPage } from 'src/app/model/drzava';
 import { Mesto } from 'src/app/model/mesto';
 import { Student } from 'src/app/model/student';
 import { DrzaveService } from 'src/app/service/drzave.service';
@@ -38,8 +38,8 @@ export class FormaMestaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.drzaveService.getAll().subscribe(drzave =>{
-      this.drzave = drzave;
+    this.drzaveService.getAll().subscribe((drzave : DrzavaPage<Drzava>) =>{
+      this.drzave = drzave.content;
     });
     this.forma.get("id")?.setValue(this.mesto?.id);
     this.forma.get("naziv")?.setValue(this.mesto?.id);

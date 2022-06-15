@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ishod } from 'src/app/model/ishod';
-import { Predmet } from 'src/app/model/predmet';
+import { Predmet, PredmetPage } from 'src/app/model/predmet';
 import { PredmetiService } from 'src/app/service/predmeti.service';
 
 @Component({
@@ -37,8 +37,8 @@ export class FormaIshodaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.predmetiService.getAll().subscribe(predmeti =>{
-      this.predmeti = predmeti;
+    this.predmetiService.getAll().subscribe((predmeti : PredmetPage<Predmet>) =>{
+      this.predmeti = predmeti.content;
     });
     this.forma.get("id")?.setValue(this.ishod?.id);
     this.forma.get("opis")?.setValue(this.ishod?.id);

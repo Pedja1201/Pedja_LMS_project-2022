@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
-import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
+import { EvaluacijaZnanja, EvaluacijaZnanjaPage } from 'src/app/model/evaluacija-znanja';
 import { Polaganje } from 'src/app/model/polaganje';
-import { StudentNaGodini } from 'src/app/model/student-na-godini';
+import { StudentNaGodini, StudentNaGodiniPage } from 'src/app/model/student-na-godini';
 import { EvaluacijeZnanjaService } from 'src/app/service/evaluacije-znanja.service';
 import { MestaService } from 'src/app/service/mesta.service';
 import { StudentiNaGodiniService } from 'src/app/service/studenti-na-godini.service';
@@ -46,11 +46,11 @@ export class FormPolaganjaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.evZnanjaervice.getAll().subscribe(evaluacijeZnanja =>{
-      this.evaluacijeZnanja = evaluacijeZnanja;
+    this.evZnanjaervice.getAll().subscribe((evaluacijeZnanja : EvaluacijaZnanjaPage<EvaluacijaZnanja>) =>{
+      this.evaluacijeZnanja = evaluacijeZnanja.content;
     });
-    this.studentiNaGod.getAll().subscribe(studentiNaGodini =>{
-      this.studentiNaGodini = studentiNaGodini;
+    this.studentiNaGod.getAll().subscribe((studentiNaGodini : StudentNaGodiniPage<StudentNaGodini>) =>{
+      this.studentiNaGodini = studentiNaGodini.content;
     });
     this.forma.get("id")?.setValue(this.polaganje?.id);
     this.forma.get("bodovi")?.setValue(this.polaganje?.id);

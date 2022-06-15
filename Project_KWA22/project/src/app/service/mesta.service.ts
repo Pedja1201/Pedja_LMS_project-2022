@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Mesto } from '../model/mesto';
+import { Mesto, MestoPage } from '../model/mesto';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class MestaService {
 
 
   getAll(){
-    return this.client.get<Mesto[]>(`${this.baseUrl}/mesta`)
+    return this.client.get<MestoPage<Mesto>>(`${this.baseUrl}/mesta`)
   }
 
   getOne(id : number){

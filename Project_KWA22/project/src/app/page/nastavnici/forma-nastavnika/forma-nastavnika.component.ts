@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Adresa } from 'src/app/model/adresa';
+import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { Nastavnik } from 'src/app/model/nastavnik';
-import { Zvanje } from 'src/app/model/zvanje';
+import { Zvanje, ZvanjePage } from 'src/app/model/zvanje';
 import { AdreseService } from 'src/app/service/adrese.service';
 import { ZvanjaService } from 'src/app/service/zvanja.service';
 
@@ -45,11 +45,11 @@ export class FormaNastavnikaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adreseService.getAll().subscribe(adrese =>{
-      this.adrese = adrese;
+    this.adreseService.getAll().subscribe((adrese : AdresaPage<Adresa>)=>{
+      this.adrese = adrese.content;
     });
-    this.zvanjaService.getAll().subscribe(zvanja =>{
-      this.zvanja = zvanja;
+    this.zvanjaService.getAll().subscribe((zvanja : ZvanjePage<Zvanje>) =>{
+      this.zvanja = zvanja.content;
     });
     this.forma.get("id")?.setValue(this.nastavnik?.id);
     this.forma.get("ime")?.setValue(this.nastavnik?.id);

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Mesto } from 'src/app/model/mesto';
+import { Mesto, MestoPage } from 'src/app/model/mesto';
 import { Student } from 'src/app/model/student';
 import { MestaService } from 'src/app/service/mesta.service';
 import { StudentiService } from 'src/app/service/studenti.service';
@@ -12,7 +12,7 @@ import { StudentiService } from 'src/app/service/studenti.service';
 })
 export class TabelaMestaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', 'drzava', "akcije"];
-  dataSource : Mesto[]=[];
+  dataSource : MestoPage<Mesto> | undefined;
   title="Tabela Mesta";
 
   @Input()
@@ -26,8 +26,8 @@ export class TabelaMestaComponent implements OnInit {
 
 
   constructor(private servis : MestaService, private router : Router) { 
-    servis.getAll().subscribe(mesta => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = mesta;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((mesta : MestoPage<Mesto>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = mesta.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 

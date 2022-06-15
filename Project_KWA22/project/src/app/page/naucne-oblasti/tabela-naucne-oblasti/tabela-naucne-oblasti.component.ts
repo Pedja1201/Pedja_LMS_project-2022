@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NaucnaOblast } from 'src/app/model/naucna-oblast';
+import { NaucnaOblast, NaucnaOblastPage } from 'src/app/model/naucna-oblast';
 import { NaucneOblastiService } from 'src/app/service/naucne-oblasti.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { NaucneOblastiService } from 'src/app/service/naucne-oblasti.service';
 })
 export class TabelaNaucneOblastiComponent implements OnInit {
   displayedColumns: string[] = ['id', 'naziv', "akcije"];
-  dataSource : NaucnaOblast[]=[];
+  dataSource : NaucnaOblastPage<NaucnaOblast> | undefined;
   title="Tabela Naucnih oblasti";
 
   @Input()
@@ -24,8 +24,8 @@ export class TabelaNaucneOblastiComponent implements OnInit {
 
 
   constructor(private servis : NaucneOblastiService, private router : Router) { 
-    servis.getAll().subscribe(naucneOblasti => { //Ovo sluzi za dobavljanje studenata prilikom
-      this.elementi = naucneOblasti;                            //Rutiranja posebne tabele komponenete       
+    servis.getAll().subscribe((naucneOblasti : NaucnaOblastPage<NaucnaOblast>) => { //Ovo sluzi za dobavljanje studenata prilikom
+      this.elementi = naucneOblasti.content;                            //Rutiranja posebne tabele komponenete       
     });
   }
 
