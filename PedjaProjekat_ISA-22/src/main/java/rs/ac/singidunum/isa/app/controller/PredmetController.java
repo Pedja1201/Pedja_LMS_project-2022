@@ -104,21 +104,21 @@ public class PredmetController {
     }
 
     //TODO: ovu metodu treba izbaciti i zameniti je sa ovom ispod getPredmetForNastavnik
-    //ovo je stara metoda koja ne radi fali joj @Param u repositoriju iz nekog razloga
-    @RequestMapping(path = "/nastavnik/{nastavnikId}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
-    public ResponseEntity<Iterable<PredmetDTO>> getPredmyByNastavnik(@PathVariable("nastavnikId")Long nastavnikId){
-        if(nastavnikService.findOne(nastavnikId).isPresent()){
-            ArrayList<PredmetDTO> predmeti = new ArrayList<PredmetDTO>();
-            for (Predmet predmet : predmetService.findByNastavnik(nastavnikService.findOne(nastavnikId))) {
-                predmeti.add(new PredmetDTO(predmet.getId(), predmet.getNaziv(), predmet.getEspb(),
-                        predmet.isObavezan(), predmet.getBrojPredavanja(), predmet.getBrojVezbi(),
-                        predmet.getDrugiObliciNastave(), predmet.getIstrazivackiRad(), predmet.getOstaliCasovi()));
-            }
-            return new ResponseEntity<Iterable<PredmetDTO>>(predmeti ,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+//    //ovo je stara metoda koja ne radi fali joj @Param u repositoriju iz nekog razloga
+//    @RequestMapping(path = "/nastavnik/{nastavnikId}", method = RequestMethod.GET)
+//    @Secured({"ROLE_NASTAVNIK"})
+//    public ResponseEntity<Iterable<PredmetDTO>> getPredmyByNastavnik(@PathVariable("nastavnikId")Long nastavnikId){
+//        if(nastavnikService.findOne(nastavnikId).isPresent()){
+//            ArrayList<PredmetDTO> predmeti = new ArrayList<PredmetDTO>();
+//            for (Predmet predmet : predmetService.findByNastavnik(nastavnikService.findOne(nastavnikId))) {
+//                predmeti.add(new PredmetDTO(predmet.getId(), predmet.getNaziv(), predmet.getEspb(),
+//                        predmet.isObavezan(), predmet.getBrojPredavanja(), predmet.getBrojVezbi(),
+//                        predmet.getDrugiObliciNastave(), predmet.getIstrazivackiRad(), predmet.getOstaliCasovi()));
+//            }
+//            return new ResponseEntity<Iterable<PredmetDTO>>(predmeti ,HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
     @RequestMapping(path = "/nastavnik/{nastavnikId}", method = RequestMethod.GET)
 //    @Secured({"ROLE_NASTAVNIK"})
