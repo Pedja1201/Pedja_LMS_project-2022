@@ -6,6 +6,8 @@ import java.util.Set;
 
 @Entity
 public class Nastavnik extends Korisnik{
+    @Column(nullable = true, unique = true)
+    private String email;
     @Column(nullable = false)
     private String ime;
     @Column(nullable = true)
@@ -34,8 +36,9 @@ public class Nastavnik extends Korisnik{
     public Nastavnik() {super();
     }
 
-    public Nastavnik(Long id, String korisnickoIme, String lozinka, String ime, String biografija, String jmbg, Adresa adresa, Zvanje zvanje) {
+    public Nastavnik(Long id, String korisnickoIme, String lozinka, String email, String ime, String biografija, String jmbg, Adresa adresa, Zvanje zvanje) {
         super(id, korisnickoIme, lozinka);
+        this.email = email;
         this.ime = ime;
         this.biografija = biografija;
         this.jmbg = jmbg;
@@ -43,6 +46,13 @@ public class Nastavnik extends Korisnik{
         this.zvanje = zvanje;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getIme() {
         return ime;

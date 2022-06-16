@@ -36,7 +36,7 @@ public class FakultetController {
                                 fakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null),
                         new AdresaDTO(fakultet.getAdresa().getId(), fakultet.getAdresa().getUlica(),fakultet.getAdresa().getBroj(),null),
                         new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getKorisnickoIme(),fakultet.getNastavnik().getLozinka(),
-                                fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(),
+                                fakultet.getNastavnik().getEmail(), fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(),
                                 fakultet.getNastavnik().getJmbg(),null,null)
                 );
                 // Conversion logic
@@ -56,7 +56,7 @@ public class FakultetController {
                     new AdresaDTO(fakultet.get().getAdresa().getId(),fakultet.get().getAdresa().getUlica(),
                             fakultet.get().getAdresa().getBroj(),null),
                     new NastavnikDTO(fakultet.get().getNastavnik().getId(), fakultet.get().getNastavnik().getKorisnickoIme(),
-                            fakultet.get().getNastavnik().getLozinka(), fakultet.get().getNastavnik().getIme(),
+                            fakultet.get().getNastavnik().getLozinka(),fakultet.get().getNastavnik().getEmail(), fakultet.get().getNastavnik().getIme(),
                             fakultet.get().getNastavnik().getBiografija(),fakultet.get().getNastavnik().getJmbg(),null,null));
 
             return new ResponseEntity<FakultetDTO>(prodajaDTO, HttpStatus.OK);
@@ -72,7 +72,7 @@ public class FakultetController {
                     fakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null);
             AdresaDTO adresaDTO = new AdresaDTO(fakultet.getAdresa().getId(), fakultet.getAdresa().getUlica(),fakultet.getAdresa().getBroj(),null);
             NastavnikDTO nastavnikDTO =new NastavnikDTO(fakultet.getNastavnik().getId(), fakultet.getNastavnik().getKorisnickoIme(),
-                    fakultet.getNastavnik().getLozinka(), fakultet.getNastavnik().getIme(),
+                    fakultet.getNastavnik().getLozinka(), fakultet.getNastavnik().getEmail(),fakultet.getNastavnik().getIme(),
                     fakultet.getNastavnik().getBiografija(),fakultet.getNastavnik().getJmbg(),null,null);
 
             FakultetDTO fakultetDTO = new FakultetDTO(fakultet.getId(),fakultet.getNaziv(), univerzitetDTO, adresaDTO, nastavnikDTO);
@@ -94,7 +94,7 @@ public class FakultetController {
                     izmenjeniFakultet.getUniverzitet().getNaziv(), izmenjeniFakultet.getUniverzitet().getDatumVremeOsnivanja(),null,null);
             AdresaDTO adresaDTO = new AdresaDTO(izmenjeniFakultet.getAdresa().getId(), izmenjeniFakultet.getAdresa().getUlica(),izmenjeniFakultet.getAdresa().getBroj(),null);
             NastavnikDTO nastavnikDTO =new NastavnikDTO(izmenjeniFakultet.getNastavnik().getId(), izmenjeniFakultet.getNastavnik().getKorisnickoIme(),
-                    izmenjeniFakultet.getNastavnik().getLozinka(), izmenjeniFakultet.getNastavnik().getIme(),
+                    izmenjeniFakultet.getNastavnik().getLozinka(),izmenjeniFakultet.getNastavnik().getEmail(), izmenjeniFakultet.getNastavnik().getIme(),
                     izmenjeniFakultet.getNastavnik().getBiografija(),izmenjeniFakultet.getNastavnik().getJmbg(),null,null);
 
             FakultetDTO fakultetDTO = new FakultetDTO(izmenjeniFakultet.getId(),izmenjeniFakultet.getNaziv(), univerzitetDTO, adresaDTO, nastavnikDTO);
@@ -135,7 +135,7 @@ public class FakultetController {
         for(Fakultet fakultet : fakultetService.findNastavnikaFakulteta(nastavnikIme)) {
             System.out.println(fakultet.getAdresa());
             NastavnikDTO nastavnikDTO = new NastavnikDTO(fakultet.getNastavnik().getId(),fakultet.getNastavnik().getKorisnickoIme(),null,
-                    fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(),fakultet.getNastavnik().getJmbg(),
+                    fakultet.getNastavnik().getEmail(), fakultet.getNastavnik().getIme(), fakultet.getNastavnik().getBiografija(),fakultet.getNastavnik().getJmbg(),
                     new AdresaDTO(fakultet.getNastavnik().getAdresa().getId(),fakultet.getNastavnik().getAdresa().getUlica(),
                             fakultet.getNastavnik().getAdresa().getBroj(), null),
                     new ZvanjeDTO(fakultet.getNastavnik().getZvanje().getId(),fakultet.getNastavnik().getZvanje().getDatumIzbora(),

@@ -3,6 +3,7 @@ package rs.ac.singidunum.isa.app.dto;
 import java.util.ArrayList;
 
 public class StudentDTO extends KorisnikDTO {
+    private String email;
     private String jmbg;
     private String ime;
     private AdresaDTO adresa;
@@ -14,18 +15,28 @@ public class StudentDTO extends KorisnikDTO {
     public StudentDTO() {super();
     }
 
-    public StudentDTO(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, AdresaDTO adresa, StudentNaGodiniDTO studentNaGodini) {
+    public StudentDTO(Long id, String korisnickoIme, String lozinka,String email, String jmbg, String ime, AdresaDTO adresa, StudentNaGodiniDTO studentNaGodini) {
         super(id, korisnickoIme, lozinka);
+        this.email = email;
         this.jmbg = jmbg;
         this.ime = ime;
         this.adresa = adresa;
         this.studentNaGodini = studentNaGodini;
     }
 
-    public StudentDTO(Long id, String korisnickoIme, String lozinka, String jmbg, String ime) {
+    public StudentDTO(Long id, String korisnickoIme, String lozinka,String email, String jmbg, String ime) {
         super(id, korisnickoIme, lozinka);
+        this.email = email;
         this.jmbg = jmbg;
         this.ime = ime;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getJmbg() {

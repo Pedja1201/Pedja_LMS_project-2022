@@ -34,7 +34,7 @@ public class StudijskiProgramController {
                         new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
                                 null,null,null),
                         new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getKorisnickoIme(),
-                                studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getIme(),
+                                studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getEmail(),studijskiProgram.getNastavnik().getIme(),
                                 studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),null,null),
                         new GodinaStudijaDTO(studijskiProgram.getGodinaStudija().getId(), studijskiProgram.getGodinaStudija().getGodina(),null)
                 );
@@ -53,7 +53,7 @@ public class StudijskiProgramController {
                     new FakultetDTO(studijskiProgram.get().getFakultet().getId(),
                             studijskiProgram.get().getFakultet().getNaziv(),null,null,null),
                     new NastavnikDTO(studijskiProgram.get().getNastavnik().getId(),studijskiProgram.get().getNastavnik().getKorisnickoIme(),
-                            studijskiProgram.get().getNastavnik().getLozinka(),studijskiProgram.get().getNastavnik().getIme(),
+                            studijskiProgram.get().getNastavnik().getLozinka(),studijskiProgram.get().getNastavnik().getEmail(),studijskiProgram.get().getNastavnik().getIme(),
                             studijskiProgram.get().getNastavnik().getBiografija(), studijskiProgram.get().getNastavnik().getJmbg(),
                                             null,null),
                     new GodinaStudijaDTO(studijskiProgram.get().getGodinaStudija().getId(),
@@ -72,7 +72,7 @@ public class StudijskiProgramController {
             FakultetDTO fakultetDTO = new FakultetDTO(studijskiProgram.getFakultet().getId(),studijskiProgram.getFakultet().getNaziv(),
                                                         null,null,null);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(studijskiProgram.getNastavnik().getId(), studijskiProgram.getNastavnik().getKorisnickoIme(),
-                    studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getIme(),
+                    studijskiProgram.getNastavnik().getLozinka(),studijskiProgram.getNastavnik().getEmail(), studijskiProgram.getNastavnik().getIme(),
                     studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),null,null);
             GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(studijskiProgram.getGodinaStudija().getId(), studijskiProgram.getGodinaStudija().getGodina(),null);
 
@@ -97,7 +97,7 @@ public class StudijskiProgramController {
             FakultetDTO fakultetDTO = new FakultetDTO(izmenjeniStudijskiProgram.getFakultet().getId(),izmenjeniStudijskiProgram.getFakultet().getNaziv(),
                     null,null,null);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjeniStudijskiProgram.getNastavnik().getId(), izmenjeniStudijskiProgram.getNastavnik().getKorisnickoIme(),
-                    izmenjeniStudijskiProgram.getNastavnik().getLozinka(),izmenjeniStudijskiProgram.getNastavnik().getIme(),
+                    izmenjeniStudijskiProgram.getNastavnik().getLozinka(),izmenjeniStudijskiProgram.getNastavnik().getEmail(),izmenjeniStudijskiProgram.getNastavnik().getIme(),
                     izmenjeniStudijskiProgram.getNastavnik().getBiografija(),izmenjeniStudijskiProgram.getNastavnik().getJmbg(),null,null);
             GodinaStudijaDTO godinaStudijaDTO = new GodinaStudijaDTO(izmenjeniStudijskiProgram.getGodinaStudija().getId(), izmenjeniStudijskiProgram.getGodinaStudija().getGodina(),null);
 
@@ -145,7 +145,7 @@ public class StudijskiProgramController {
         for(StudijskiProgram studijskiProgram : studijskiProgramService.findNastavnikStudijskogProgrmama(nastavnikIme)) {
             System.out.println(studijskiProgram.getNaziv());
             NastavnikDTO nastavnikDTO = new NastavnikDTO(studijskiProgram.getNastavnik().getId(),studijskiProgram.getNastavnik().getKorisnickoIme(),null,
-                    studijskiProgram.getNastavnik().getIme(), studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),
+                    studijskiProgram.getNastavnik().getEmail(), studijskiProgram.getNastavnik().getIme(), studijskiProgram.getNastavnik().getBiografija(),studijskiProgram.getNastavnik().getJmbg(),
                     new AdresaDTO(studijskiProgram.getNastavnik().getAdresa().getId(),studijskiProgram.getNastavnik().getAdresa().getUlica(),
                             studijskiProgram.getNastavnik().getAdresa().getBroj(), null),
                     new ZvanjeDTO(studijskiProgram.getNastavnik().getZvanje().getId(),studijskiProgram.getNastavnik().getZvanje().getDatumIzbora(),

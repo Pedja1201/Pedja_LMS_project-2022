@@ -6,6 +6,8 @@ import java.util.Set;
 
 @Entity
 public class Student extends Korisnik{
+    @Column(nullable = true, unique = true)
+    private String email;
     @Column(nullable = false)
     private String jmbg;
     @Column(nullable = false)
@@ -24,13 +26,22 @@ public class Student extends Korisnik{
     public Student() {super();
     }
 
-    public Student(Long id, String korisnickoIme, String lozinka, String jmbg, String ime, Adresa adresa,
+    public Student(Long id, String korisnickoIme, String lozinka,String email, String jmbg, String ime, Adresa adresa,
           StudentNaGodini studentNaGodini) {
         super(id, korisnickoIme, lozinka);
+        this.email = email;
         this.jmbg = jmbg;
         this.ime = ime;
         this.adresa = adresa;
         this.studentNaGodini = studentNaGodini;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getJmbg() {

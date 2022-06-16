@@ -36,7 +36,7 @@ public class StudentController {
         Page<StudentDTO> studenti = student.map(new Function<Student, StudentDTO>() {
             public StudentDTO apply(Student student) {
                 StudentDTO studentDTO = new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),
-                        student.getJmbg(), student.getIme(),
+                        student.getEmail(), student.getJmbg(), student.getIme(),
                         new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
                                 student.getAdresa().getBroj(),null),
                         new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
@@ -54,7 +54,7 @@ public class StudentController {
         Optional<Student> student = studentService.findOne(studentId);
         if (student.isPresent()) {
             StudentDTO studentDTO = new StudentDTO(student.get().getId(),student.get().getKorisnickoIme(),student.get().getLozinka(),
-                    student.get().getJmbg(),student.get().getIme(),
+                    student.get().getEmail(), student.get().getJmbg(),student.get().getIme(),
                     new AdresaDTO(student.get().getAdresa().getId(), student.get().getAdresa().getUlica(),
                             student.get().getAdresa().getBroj(), null),
                     new StudentNaGodiniDTO(student.get().getStudentNaGodini().getId(), student.get().getStudentNaGodini().getDatumUpisa(),
@@ -69,7 +69,8 @@ public class StudentController {
     public ResponseEntity<StudentDTO> create(@RequestBody Student student) {
         try {
             studentService.save(student);
-            StudentDTO studentDTO = new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),student.getJmbg(), student.getIme(),
+            StudentDTO studentDTO = new StudentDTO(student.getId(),student.getKorisnickoIme(),student.getLozinka(),
+                    student.getEmail(), student.getJmbg(), student.getIme(),
                     new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
                             student.getAdresa().getBroj(),null),
                     new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
@@ -88,7 +89,8 @@ public class StudentController {
         if (student != null) {
             izmenjenStudent.setId(studentId);
             studentService.save(izmenjenStudent);  //DONE:Sa ovim radi bez BUG-a (Beskonacna rekurzija!)-Roditelj
-            StudentDTO studentDTO = new StudentDTO(izmenjenStudent.getId(),izmenjenStudent.getKorisnickoIme(),izmenjenStudent.getLozinka(),izmenjenStudent.getJmbg(), izmenjenStudent.getIme(),
+            StudentDTO studentDTO = new StudentDTO(izmenjenStudent.getId(),izmenjenStudent.getKorisnickoIme(),izmenjenStudent.getLozinka(),
+                    izmenjenStudent.getEmail(),izmenjenStudent.getJmbg(), izmenjenStudent.getIme(),
                     new AdresaDTO(izmenjenStudent.getAdresa().getId(), izmenjenStudent.getAdresa().getUlica(),
                             izmenjenStudent.getAdresa().getBroj(),null),
                     new StudentNaGodiniDTO(izmenjenStudent.getStudentNaGodini().getId(), izmenjenStudent.getStudentNaGodini().getDatumUpisa(),

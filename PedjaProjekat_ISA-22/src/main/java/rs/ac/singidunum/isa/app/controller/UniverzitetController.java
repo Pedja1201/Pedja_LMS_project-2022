@@ -38,7 +38,7 @@ public class UniverzitetController {
                         new AdresaDTO(univerzitet.getAdresa().getId(), univerzitet.getAdresa().getUlica(),
                                 univerzitet.getAdresa().getBroj(),null),
                         new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
-                                univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getIme(),
+                                univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getEmail(),univerzitet.getNastavnik().getIme(),
                                 univerzitet.getNastavnik().getBiografija(), univerzitet.getNastavnik().getJmbg(),null,null)
                 );
                 // Conversion logic
@@ -57,7 +57,7 @@ public class UniverzitetController {
                     new AdresaDTO(univerzitet.get().getAdresa().getId(), univerzitet.get().getAdresa().getUlica(),
                             univerzitet.get().getAdresa().getBroj(),null),
                     new NastavnikDTO(univerzitet.get().getNastavnik().getId(),univerzitet.get().getNastavnik().getKorisnickoIme(),
-                            univerzitet.get().getNastavnik().getLozinka(),univerzitet.get().getNastavnik().getIme(),
+                            univerzitet.get().getNastavnik().getLozinka(),univerzitet.get().getNastavnik().getEmail(),univerzitet.get().getNastavnik().getIme(),
                             univerzitet.get().getNastavnik().getBiografija(), univerzitet.get().getNastavnik().getJmbg(),
                                                      null,null));
 
@@ -73,7 +73,7 @@ public class UniverzitetController {
             AdresaDTO adresaDTO = new AdresaDTO(univerzitet.getAdresa().getId(), univerzitet.getAdresa().getUlica(),
                     univerzitet.getAdresa().getBroj(),null);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
-                    univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getIme(),
+                    univerzitet.getNastavnik().getLozinka(),univerzitet.getNastavnik().getEmail(),univerzitet.getNastavnik().getIme(),
                     univerzitet.getNastavnik().getBiografija(), univerzitet.getNastavnik().getJmbg(),null,null);
 
             UniverzitetDTO univerzitetDTO = new UniverzitetDTO(univerzitet.getId(), univerzitet.getNaziv(),
@@ -96,7 +96,7 @@ public class UniverzitetController {
             AdresaDTO adresaDTO = new AdresaDTO(izmenjenUniverzitet.getAdresa().getId(), izmenjenUniverzitet.getAdresa().getUlica(),
                     izmenjenUniverzitet.getAdresa().getBroj(),null);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjenUniverzitet.getNastavnik().getId(),izmenjenUniverzitet.getNastavnik().getKorisnickoIme(),
-                    izmenjenUniverzitet.getNastavnik().getLozinka(),izmenjenUniverzitet.getNastavnik().getIme(),
+                    izmenjenUniverzitet.getNastavnik().getLozinka(),izmenjenUniverzitet.getNastavnik().getEmail(),izmenjenUniverzitet.getNastavnik().getIme(),
                     izmenjenUniverzitet.getNastavnik().getBiografija(), izmenjenUniverzitet.getNastavnik().getJmbg(),null,null);
 
             UniverzitetDTO univerzitetDTO = new UniverzitetDTO(izmenjenUniverzitet.getId(), izmenjenUniverzitet.getNaziv(),
@@ -122,7 +122,7 @@ public class UniverzitetController {
         for(Univerzitet univerzitet : univerzitetService.findNastavnikUniverziteta(nastavnikIme)) {
             System.out.println(univerzitet.getNaziv());
             NastavnikDTO nastavnikDTO = new NastavnikDTO(univerzitet.getNastavnik().getId(),univerzitet.getNastavnik().getKorisnickoIme(),
-                    null,univerzitet.getNastavnik().getIme(),univerzitet.getNastavnik().getBiografija(),
+                    null,univerzitet.getNastavnik().getEmail(), univerzitet.getNastavnik().getIme(),univerzitet.getNastavnik().getBiografija(),
                     univerzitet.getNastavnik().getJmbg(),null,
                     new ZvanjeDTO(univerzitet.getNastavnik().getZvanje().getId(), univerzitet.getNastavnik().getZvanje().getDatumIzbora(),
                             univerzitet.getNastavnik().getZvanje().getDatumPrestanka(), null, null));

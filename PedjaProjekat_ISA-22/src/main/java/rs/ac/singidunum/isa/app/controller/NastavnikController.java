@@ -32,7 +32,7 @@ public class NastavnikController {
         Page<NastavnikDTO> nastavnici = nastavnik.map(new Function<Nastavnik, NastavnikDTO>() {
             public NastavnikDTO apply(Nastavnik nastavnik) {
                 NastavnikDTO nastavnikDTO = new NastavnikDTO(nastavnik.getId(), nastavnik.getKorisnickoIme(),
-                        nastavnik.getLozinka(), nastavnik.getIme(),nastavnik.getBiografija(), nastavnik.getJmbg(),
+                        nastavnik.getLozinka(), nastavnik.getEmail(),nastavnik.getIme(),nastavnik.getBiografija(), nastavnik.getJmbg(),
                         new AdresaDTO(nastavnik.getAdresa().getId(),nastavnik.getAdresa().getUlica(),nastavnik.getAdresa().getBroj(),null),
                         new ZvanjeDTO(nastavnik.getZvanje().getId(), nastavnik.getZvanje().getDatumIzbora(),
                                 nastavnik.getZvanje().getDatumPrestanka(),null,null)
@@ -50,7 +50,7 @@ public class NastavnikController {
         Optional<Nastavnik> nastavnik = nastavnikService.findOne(nastavnikId);
         if (nastavnik.isPresent()) {
             NastavnikDTO kartaDTO = new NastavnikDTO(nastavnik.get().getId(),nastavnik.get().getKorisnickoIme(),nastavnik.get().getLozinka(),
-                    nastavnik.get().getIme(),nastavnik.get().getBiografija(), nastavnik.get().getJmbg(),
+                    nastavnik.get().getEmail(),nastavnik.get().getIme(),nastavnik.get().getBiografija(), nastavnik.get().getJmbg(),
                     new AdresaDTO(nastavnik.get().getAdresa().getId(), nastavnik.get().getAdresa().getUlica(),
                             nastavnik.get().getAdresa().getBroj(),null),
                     new ZvanjeDTO(nastavnik.get().getZvanje().getId(), nastavnik.get().getZvanje().getDatumIzbora(),
@@ -66,7 +66,7 @@ public class NastavnikController {
         try {
             nastavnikService.save(nastavnik);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(nastavnik.getId(),nastavnik.getKorisnickoIme(),nastavnik.getLozinka(),
-                    nastavnik.getIme(),nastavnik.getBiografija(), nastavnik.getJmbg(),
+                    nastavnik.getEmail(),nastavnik.getIme(),nastavnik.getBiografija(), nastavnik.getJmbg(),
                     new AdresaDTO(nastavnik.getAdresa().getId(), nastavnik.getAdresa().getUlica(),
                             nastavnik.getAdresa().getBroj(), null),
                     new ZvanjeDTO(nastavnik.getZvanje().getId(), nastavnik.getZvanje().getDatumIzbora(),
@@ -87,7 +87,7 @@ public class NastavnikController {
             izmenjenNastavnik.setId(nastavnikId);
             nastavnikService.save(izmenjenNastavnik); //DONE: Sa ovim radi bez BUG-a (Beskonacna rekurzija!)
             NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjenNastavnik.getId(),izmenjenNastavnik.getKorisnickoIme(),izmenjenNastavnik.getLozinka(),
-                    izmenjenNastavnik.getIme(),izmenjenNastavnik.getBiografija(), izmenjenNastavnik.getJmbg(),
+                    izmenjenNastavnik.getEmail(),izmenjenNastavnik.getIme(),izmenjenNastavnik.getBiografija(), izmenjenNastavnik.getJmbg(),
                     new AdresaDTO(izmenjenNastavnik.getAdresa().getId(), izmenjenNastavnik.getAdresa().getUlica(),
                             izmenjenNastavnik.getAdresa().getBroj(),null),
                     new ZvanjeDTO(izmenjenNastavnik.getZvanje().getId(), izmenjenNastavnik.getZvanje().getDatumIzbora(),

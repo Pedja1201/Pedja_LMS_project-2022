@@ -24,7 +24,7 @@ public class DrzavaController {
     @Autowired
     private DrzavaService drzavaService;
 
-//    @CrossOrigin
+    @CrossOrigin
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<DrzavaDTO>> getAll(Pageable pageable) {
         Page<Drzava> drzave = drzavaService.findAll(pageable);

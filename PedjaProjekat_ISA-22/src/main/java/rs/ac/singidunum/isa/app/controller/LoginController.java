@@ -80,7 +80,7 @@ public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_
         // Novi korisnik se registruje kreiranjem instance korisnika
         // cija je lozinka enkodovana.
         Student noviKorisnik = new Student(null, korisnik.getKorisnickoIme(),
-                passwordEncoder.encode(korisnik.getLozinka()), korisnik.getJmbg(), korisnik.getIme(),
+                passwordEncoder.encode(korisnik.getLozinka()),korisnik.getEmail(), korisnik.getJmbg(), korisnik.getIme(),
                 new Adresa(korisnik.getAdresa().getId(), korisnik.getAdresa().getUlica(), korisnik.getAdresa().getBroj(),null),
                 new StudentNaGodini(korisnik.getStudentNaGodini().getId(), korisnik.getStudentNaGodini().getDatumUpisa(),
                             korisnik.getStudentNaGodini().getBrojIndeksa(), null));
@@ -93,7 +93,7 @@ public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_
 
         return new ResponseEntity<StudentDTO>(
                 new StudentDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null,
-                        noviKorisnik.getJmbg(), noviKorisnik.getIme(),
+                        noviKorisnik.getEmail(), noviKorisnik.getJmbg(), noviKorisnik.getIme(),
                         new AdresaDTO(noviKorisnik.getAdresa().getId(),noviKorisnik.getAdresa().getUlica(),
                                 noviKorisnik.getAdresa().getBroj(),null),
                         new StudentNaGodiniDTO(noviKorisnik.getStudentNaGodini().getId(), noviKorisnik.getStudentNaGodini().getDatumUpisa(),
@@ -105,7 +105,7 @@ public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_
         // Novi korisnik se registruje kreiranjem instance korisnika
         // cija je lozinka enkodovana.
         Nastavnik noviKorisnik = new Nastavnik(null, korisnik.getKorisnickoIme(),
-                passwordEncoder.encode(korisnik.getLozinka()), korisnik.getIme(),korisnik.getBiografija(),korisnik.getJmbg(),
+                passwordEncoder.encode(korisnik.getLozinka()),korisnik.getEmail(), korisnik.getIme(),korisnik.getBiografija(),korisnik.getJmbg(),
                 new Adresa(korisnik.getAdresa().getId(), korisnik.getAdresa().getUlica(), korisnik.getAdresa().getBroj(),null),
                 new Zvanje(korisnik.getZvanje().getId(), korisnik.getZvanje().getDatumIzbora(),korisnik.getZvanje().getDatumPrestanka(),
                         null,null));
@@ -117,7 +117,7 @@ public class LoginController { //TODO:RAspodeliti uloge prilikom register: ROLE_
         nastavnikService.save(noviKorisnik);
 
         return new ResponseEntity<NastavnikDTO>(
-                new NastavnikDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null,
+                new NastavnikDTO(noviKorisnik.getId(), noviKorisnik.getKorisnickoIme(), null,noviKorisnik.getEmail(),
                         noviKorisnik.getIme(), noviKorisnik.getBiografija(),
                         noviKorisnik.getJmbg(),
                         new AdresaDTO(noviKorisnik.getAdresa().getId(),noviKorisnik.getAdresa().getUlica(),

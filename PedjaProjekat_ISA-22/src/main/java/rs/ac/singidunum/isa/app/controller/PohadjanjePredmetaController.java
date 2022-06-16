@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path = "/api/pohadjanjePredmeta")
+@RequestMapping(path = "/api/pohadjanjaPredmeta")
 public class PohadjanjePredmetaController {
     @Autowired
     private PohadjanjePredmetaService pohadjanjePredmetaService;
@@ -32,7 +32,8 @@ public class PohadjanjePredmetaController {
                 PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(), pohadjanjePredmeta.getKonacnaOcena(),
                         new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
                                 pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null),
-                        new StudentDTO(pohadjanjePredmeta.getStudent().getId(), pohadjanjePredmeta.getStudent().getKorisnickoIme(),null,pohadjanjePredmeta.getStudent().getJmbg(),pohadjanjePredmeta.getStudent().getIme(),
+                        new StudentDTO(pohadjanjePredmeta.getStudent().getId(), pohadjanjePredmeta.getStudent().getKorisnickoIme(),null,
+                                pohadjanjePredmeta.getStudent().getEmail(),pohadjanjePredmeta.getStudent().getJmbg(),pohadjanjePredmeta.getStudent().getIme(),
                                 new AdresaDTO(pohadjanjePredmeta.getStudent().getAdresa().getId(), pohadjanjePredmeta.getStudent().getAdresa().getUlica(), pohadjanjePredmeta.getStudent().getAdresa().getBroj(),null),
                                 new StudentNaGodiniDTO(pohadjanjePredmeta.getStudent().getStudentNaGodini().getId(),pohadjanjePredmeta.getStudent().getStudentNaGodini().getDatumUpisa(),pohadjanjePredmeta.getStudent().getStudentNaGodini().getBrojIndeksa(), null))
                 );
@@ -52,7 +53,8 @@ public class PohadjanjePredmetaController {
                     pohadjanjePredmeta.get().getKonacnaOcena(),
                     new RealizacijaPredmetaDTO(pohadjanjePredmeta.get().getRealizacijaPredmeta().getId(),
                             pohadjanjePredmeta.get().getRealizacijaPredmeta().getNaziv(),null,null,null,null),
-                    new StudentDTO(pohadjanjePredmeta.get().getStudent().getId(), pohadjanjePredmeta.get().getStudent().getKorisnickoIme(),null,pohadjanjePredmeta.get().getStudent().getJmbg(),pohadjanjePredmeta.get().getStudent().getIme(),
+                    new StudentDTO(pohadjanjePredmeta.get().getStudent().getId(), pohadjanjePredmeta.get().getStudent().getKorisnickoIme(),null,
+                            pohadjanjePredmeta.get().getStudent().getEmail(), pohadjanjePredmeta.get().getStudent().getJmbg(),pohadjanjePredmeta.get().getStudent().getIme(),
                             new AdresaDTO(pohadjanjePredmeta.get().getStudent().getAdresa().getId(), pohadjanjePredmeta.get().getStudent().getAdresa().getUlica(), pohadjanjePredmeta.get().getStudent().getAdresa().getBroj(),null),
                             new StudentNaGodiniDTO(pohadjanjePredmeta.get().getStudent().getStudentNaGodini().getId(),pohadjanjePredmeta.get().getStudent().getStudentNaGodini().getDatumUpisa(),pohadjanjePredmeta.get().getStudent().getStudentNaGodini().getBrojIndeksa(), null)));
             return new ResponseEntity<PohadjanjePredmetaDTO>(pohadjanjePredmetaDTO, HttpStatus.OK);
@@ -68,7 +70,8 @@ public class PohadjanjePredmetaController {
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(pohadjanjePredmeta.getRealizacijaPredmeta().getId(),
                     pohadjanjePredmeta.getRealizacijaPredmeta().getNaziv(),null,null,null,null);
             StudentDTO studentDTO = new StudentDTO(pohadjanjePredmeta.getStudent().getId(),
-                    pohadjanjePredmeta.getStudent().getKorisnickoIme(), null, pohadjanjePredmeta.getStudent().getJmbg(), pohadjanjePredmeta.getStudent().getIme(),null,null);
+                    pohadjanjePredmeta.getStudent().getKorisnickoIme(), null,pohadjanjePredmeta.getStudent().getEmail(),
+                    pohadjanjePredmeta.getStudent().getJmbg(), pohadjanjePredmeta.getStudent().getIme(),null,null);
 
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(pohadjanjePredmeta.getId(),
                     pohadjanjePredmeta.getKonacnaOcena(),realizacijaPredmetaDTO, studentDTO);
@@ -91,7 +94,8 @@ public class PohadjanjePredmetaController {
             RealizacijaPredmetaDTO realizacijaPredmetaDTO = new RealizacijaPredmetaDTO(izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getId(),
                     izmenjenaPohadjeniPredmet.getRealizacijaPredmeta().getNaziv(),null,null,null,null);
             StudentDTO studentDTO = new StudentDTO(izmenjenaPohadjeniPredmet.getStudent().getId(),
-                    izmenjenaPohadjeniPredmet.getStudent().getKorisnickoIme(), null, izmenjenaPohadjeniPredmet.getStudent().getJmbg(), izmenjenaPohadjeniPredmet.getStudent().getIme(),null,null);
+                    izmenjenaPohadjeniPredmet.getStudent().getKorisnickoIme(), null, izmenjenaPohadjeniPredmet.getStudent().getEmail(),
+                    izmenjenaPohadjeniPredmet.getStudent().getJmbg(), izmenjenaPohadjeniPredmet.getStudent().getIme(),null,null);
 
             PohadjanjePredmetaDTO pohadjanjePredmetaDTO = new PohadjanjePredmetaDTO(izmenjenaPohadjeniPredmet.getId(),
                     izmenjenaPohadjeniPredmet.getKonacnaOcena(),realizacijaPredmetaDTO, studentDTO);

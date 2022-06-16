@@ -33,7 +33,7 @@ public class NastavnikNaRealizacijiController {
                 NastavnikNaRealizacijiDTO naRealizacijiDTO = new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.getId(),
                         nastavnikNaRealizaciji.getBrojCasova(),
                         new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(), nastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
-                                nastavnikNaRealizaciji.getNastavnik().getLozinka(),nastavnikNaRealizaciji.getNastavnik().getIme(),
+                                nastavnikNaRealizaciji.getNastavnik().getLozinka(),nastavnikNaRealizaciji.getNastavnik().getEmail(),nastavnikNaRealizaciji.getNastavnik().getIme(),
                                 nastavnikNaRealizaciji.getNastavnik().getBiografija(), nastavnikNaRealizaciji.getNastavnik().getJmbg(),
                                 null,null),
                         new TipNastaveDTO(nastavnikNaRealizaciji.getTipNastave().getId(), nastavnikNaRealizaciji.getTipNastave().getNaziv())
@@ -52,7 +52,8 @@ public class NastavnikNaRealizacijiController {
             NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO = new NastavnikNaRealizacijiDTO(nastavnikNaRealizaciji.get().getId(),
                     nastavnikNaRealizaciji.get().getBrojCasova(),
                     new NastavnikDTO(nastavnikNaRealizaciji.get().getNastavnik().getId(), nastavnikNaRealizaciji.get().getNastavnik().getKorisnickoIme(),
-                            nastavnikNaRealizaciji.get().getNastavnik().getLozinka(),nastavnikNaRealizaciji.get().getNastavnik().getIme(),
+                            nastavnikNaRealizaciji.get().getNastavnik().getLozinka(),nastavnikNaRealizaciji.get().getNastavnik().getEmail(),
+                            nastavnikNaRealizaciji.get().getNastavnik().getIme(),
                             nastavnikNaRealizaciji.get().getNastavnik().getBiografija(), nastavnikNaRealizaciji.get().getNastavnik().getJmbg(),
                             null,null),
                     new TipNastaveDTO(nastavnikNaRealizaciji.get().getTipNastave().getId(),
@@ -68,7 +69,7 @@ public class NastavnikNaRealizacijiController {
         try {
             nastavnikNaRealizacijiService.save(nastavnikNaRealizaciji);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(nastavnikNaRealizaciji.getNastavnik().getId(),nastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
-                    nastavnikNaRealizaciji.getNastavnik().getLozinka(), nastavnikNaRealizaciji.getNastavnik().getIme(),
+                    nastavnikNaRealizaciji.getNastavnik().getLozinka(), nastavnikNaRealizaciji.getNastavnik().getEmail(), nastavnikNaRealizaciji.getNastavnik().getIme(),
                     nastavnikNaRealizaciji.getNastavnik().getBiografija(), nastavnikNaRealizaciji.getNastavnik().getJmbg(),
                     null,null);
             TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(nastavnikNaRealizaciji.getTipNastave().getId(), nastavnikNaRealizaciji.getTipNastave().getNaziv());
@@ -92,7 +93,7 @@ public class NastavnikNaRealizacijiController {
             izmenjenNastavnikNaRealizaciji.setId(nastavnikNaRealizacijiId);
             izmenjenNastavnikNaRealizaciji = nastavnikNaRealizacijiService.save(izmenjenNastavnikNaRealizaciji);
             NastavnikDTO nastavnikDTO = new NastavnikDTO(izmenjenNastavnikNaRealizaciji.getNastavnik().getId(),izmenjenNastavnikNaRealizaciji.getNastavnik().getKorisnickoIme(),
-                    izmenjenNastavnikNaRealizaciji.getNastavnik().getLozinka(), izmenjenNastavnikNaRealizaciji.getNastavnik().getIme(),
+                    izmenjenNastavnikNaRealizaciji.getNastavnik().getLozinka(),  izmenjenNastavnikNaRealizaciji.getNastavnik().getEmail(), izmenjenNastavnikNaRealizaciji.getNastavnik().getIme(),
                     izmenjenNastavnikNaRealizaciji.getNastavnik().getBiografija(), izmenjenNastavnikNaRealizaciji.getNastavnik().getJmbg(),
                     null,null);
             TipNastaveDTO tipNastaveDTO = new TipNastaveDTO(izmenjenNastavnikNaRealizaciji.getTipNastave().getId(), izmenjenNastavnikNaRealizaciji.getTipNastave().getNaziv());
