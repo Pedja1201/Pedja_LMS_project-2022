@@ -24,6 +24,7 @@ export class PretragaStudentaComponent implements OnInit {
 
   parametri : FormGroup = new FormGroup({
     id: new FormControl(),
+    email: new FormControl(),
     jmbg: new FormControl(),
     ime: new FormControl(),
     adresa: new FormControl(),

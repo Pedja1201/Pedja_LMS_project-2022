@@ -3,7 +3,7 @@
     <mat-list-item>Naziv: {{univerzitet["naziv"]}}</mat-list-item>
     <mat-list-item>Datum vreme osnivanja: {{univerzitet["datumVremeOsnivanja"]}}</mat-list-item>
     <mat-list-item>Adresa: <span *ngIf="univerzitet['adresa']">{{univerzitet["adresa"]["ulica"]}}</span></mat-list-item>
-    <mat-list-item>Nastavnik: <span *ngIf="univerzitet['nastavnik']">{{univerzitet["nastavnik"]["ime"]}} ({{univerzitet["nastavnik"]["biografija"]}})</span></mat-list-item>
+    <mat-list-item>Nastavnik: <span *ngIf="univerzitet['nastavnik']">{{univerzitet["nastavnik"]["email"]}} ({{univerzitet["nastavnik"]["biografija"]}})</span></mat-list-item>
 
 </mat-list>
 <button mat-raised-button color="primary"  (click)="back()">Nazad</button>

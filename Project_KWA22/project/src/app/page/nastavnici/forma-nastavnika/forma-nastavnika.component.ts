@@ -19,6 +19,7 @@ export class FormaNastavnikaComponent implements OnInit {
   zvanja: Zvanje[] = [];
   
   forma : FormGroup = new FormGroup({
+    "email": new FormControl(null, [Validators.required]),
     "ime": new FormControl(null, [Validators.required]),
     "biografija": new FormControl(null, [Validators.required]),
     "jmbg": new FormControl(null, [Validators.required]),
@@ -38,6 +39,7 @@ export class FormaNastavnikaComponent implements OnInit {
     console.log(changes);
     console.log(this.nastavnik);
     this.forma.get("id")?.setValue(this.nastavnik?.id);
+    this.forma.get("email")?.setValue(this.nastavnik?.email);
     this.forma.get("ime")?.setValue(this.nastavnik?.ime);
     this.forma.get("biografija")?.setValue(this.nastavnik?.biografija);
     this.forma.get("jmbg")?.setValue(this.nastavnik?.jmbg);
@@ -53,6 +55,7 @@ export class FormaNastavnikaComponent implements OnInit {
       this.zvanja = zvanja.content;
     });
     this.forma.get("id")?.setValue(this.nastavnik?.id);
+    this.forma.get("email")?.setValue(this.nastavnik?.id);
     this.forma.get("ime")?.setValue(this.nastavnik?.id);
     this.forma.get("biografija")?.setValue(this.nastavnik?.id);
     this.forma.get("jmbg")?.setValue(this.nastavnik?.id);

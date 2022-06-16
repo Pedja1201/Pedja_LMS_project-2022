@@ -5,6 +5,7 @@ export interface NastavnikPage<Nastavnik> {
   }
 export interface Nastavnik {
     id:number;
+    email:String;
     ime:String;
     biografija:String;
     jmbg:String;

@@ -21,7 +21,7 @@
           <mat-label>Nastavnik:</mat-label>
           <mat-select name="nastavnik" formControlName="nastavnik" [compareWith]="comparator2" required>
             <mat-option *ngFor="let nastavnik of nastavnici"  [value]="nastavnik"> 
-              {{nastavnik.ime}}
+              {{nastavnik.email}}
             </mat-option>
           </mat-select>
         </mat-form-field>

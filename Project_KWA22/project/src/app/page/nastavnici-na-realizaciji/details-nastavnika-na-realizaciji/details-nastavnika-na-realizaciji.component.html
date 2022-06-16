@@ -1,7 +1,7 @@
 <mat-list>
     <mat-list-item>ID: {{nastavnikNaRealizaciji["id"]}}</mat-list-item>
     <mat-list-item>Broj casova: {{nastavnikNaRealizaciji["brojCasova"]}}</mat-list-item>
-    <mat-list-item>Nastavnik: <span *ngIf="nastavnikNaRealizaciji['nastavnik']">{{nastavnikNaRealizaciji["nastavnik"]["ime"]}}</span></mat-list-item>
+    <mat-list-item>Nastavnik: <span *ngIf="nastavnikNaRealizaciji['nastavnik']">{{nastavnikNaRealizaciji["nastavnik"]["email"]}}</span></mat-list-item>
     <mat-list-item>Tip nastave: <span *ngIf="nastavnikNaRealizaciji['tipNastave']">{{nastavnikNaRealizaciji["tipNastave"]["naziv"]}}</span></mat-list-item>
 </mat-list>
 <button mat-raised-button color="primary" (click)="back()">Nazad</button>

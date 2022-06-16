@@ -5,6 +5,7 @@ export interface StudentPage<Student> {
   }
 export interface Student {
     id:number;
+    email:String;
     jmbg:String;
     ime:String;
     adresa:Adresa[];

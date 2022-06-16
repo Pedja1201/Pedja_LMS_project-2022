@@ -1,5 +1,11 @@
 <h2>{{title}}</h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail: </mat-label>
+      <input matInput name="email" formControlName="email" type="email" required>
+    </mat-form-field>
+  </div>
     <div>
       <mat-form-field appearance="fill">
         <mat-label>JMBG: </mat-label>

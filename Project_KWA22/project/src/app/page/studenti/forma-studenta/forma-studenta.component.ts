@@ -21,6 +21,7 @@ export class FormaStudentaComponent implements OnInit {
   studentiNaGodini: StudentNaGodini[] = [];
   
   forma : FormGroup = new FormGroup({
+    "email": new FormControl(null, [Validators.required]),
     "jmbg": new FormControl(null, [Validators.required]),
     "ime": new FormControl(null, [Validators.required]),
     "adresa": new FormControl(null, [Validators.required]),
@@ -39,6 +40,7 @@ export class FormaStudentaComponent implements OnInit {
     console.log(changes);
     console.log(this.student);
     this.forma.get("id")?.setValue(this.student?.id);
+    this.forma.get("email")?.setValue(this.student?.email);
     this.forma.get("jmbg")?.setValue(this.student?.jmbg);
     this.forma.get("ime")?.setValue(this.student?.ime);
     this.forma.get("adresa")?.setValue(this.student?.adresa);
@@ -53,6 +55,7 @@ export class FormaStudentaComponent implements OnInit {
       this.studentiNaGodini = studentiNaGodini.content;
     });
     this.forma.get("id")?.setValue(this.student?.id);
+    this.forma.get("email")?.setValue(this.student?.id);
     this.forma.get("jmbg")?.setValue(this.student?.id);
     this.forma.get("ime")?.setValue(this.student?.id);
     this.forma.get("adresa")?.setValue(this.student?.id);

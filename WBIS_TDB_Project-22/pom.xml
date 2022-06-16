@@ -14,14 +14,14 @@
             <groupId>org.apache.jena</groupId>
             <artifactId>apache-jena-libs</artifactId>
             <type>pom</type>
-            <version>4.1.0</version>
+            <version>4.5.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.jena/jena-querybuilder -->
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-querybuilder</artifactId>
-            <version>4.1.0</version>
+            <version>4.5.0</version>
         </dependency>
 
     </dependencies>

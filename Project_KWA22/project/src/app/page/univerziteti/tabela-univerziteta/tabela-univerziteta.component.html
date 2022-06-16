@@ -32,7 +32,7 @@
   <!-- Nastavnik Column -->
   <ng-container matColumnDef="nastavnik">
     <th mat-header-cell *matHeaderCellDef> Nastavnik </th>
-    <td mat-cell *matCellDef="let element"><span *ngIf="element['nastavnik']">{{element["nastavnik"]["ime"]}}</span></td>
+    <td mat-cell *matCellDef="let element"><span *ngIf="element['nastavnik']">{{element["nastavnik"]["email"]}}</span></td>
   </ng-container>
 
   <ng-container matColumnDef="akcije">

@@ -13,9 +13,9 @@ import org.apache.jena.update.UpdateRequest;
 public class NastavnikTDB {
     public static void main(String[] args) {
         //Kreiramo triplet koji ubacujemo u RDF store
-        Node subject = NodeFactory.createURI("http://www.tdbprimer/fakultet#pedja");
+        Node subject = NodeFactory.createURI("http://www.singidunum/fakultet#pedja");
         Node predicate = NodeFactory.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
-        Node object = NodeFactory.createURI("http://www.tdbprimer/fakultet#Profesor");
+        Node object = NodeFactory.createURI("http://www.singidunum.ac.rs/fakultet#Profesor");
         //Da bismo menjali sadrzaj store-a koristimo UpdateBuilder
         UpdateBuilder ub = new UpdateBuilder()
                 //insert komanda za ubacivanje
@@ -31,7 +31,7 @@ public class NastavnikTDB {
             e.printStackTrace();
         }
         //primer dobavljanja koristeci string upit
-        String query = "SELECT ?subjekat WHERE { ?subjekat  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.tdbprimer/fakultet#Profesor> }";
+        String query = "SELECT ?subjekat WHERE { ?subjekat  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.singidunum.ac.rs/fakultet#Profesor> }";
 
         //koristimo sparqlService za slanje zahteva preko http
         QueryExecution q = QueryExecutionFactory
@@ -50,7 +50,7 @@ public class NastavnikTDB {
         SelectBuilder sb = new SelectBuilder()
                 .setDistinct(true)
                 .addPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-                .addPrefix("prim", "http://www.tdbprimer/fakultet#")
+                .addPrefix("prim", "http://www.singidunum.ac.rs/fakultet#")
                 .addVar("?subjekat")
                 .addWhere("?subjekat", "rdf:type", "prim:Profesor");
         Query q2 = sb.build();
