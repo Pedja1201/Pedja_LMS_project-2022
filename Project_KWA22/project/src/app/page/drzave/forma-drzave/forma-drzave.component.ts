@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { Drzava } from 'src/app/model/drzava';
 import { DrzaveService } from 'src/app/service/drzave.service';
 
@@ -10,7 +10,7 @@ import { DrzaveService } from 'src/app/service/drzave.service';
 })
 export class FormaDrzaveComponent implements OnInit {
   title='Forma Drzave'
-
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
 
   forma : FormGroup = new FormGroup({
@@ -40,6 +40,7 @@ export class FormaDrzaveComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)   
     }
   }
 

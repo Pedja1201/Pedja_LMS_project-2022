@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { NaucnaOblast } from 'src/app/model/naucna-oblast';
 import { Zvanje } from 'src/app/model/zvanje';
 import { ZvanjaService } from 'src/app/service/zvanja.service';
@@ -11,6 +11,7 @@ import { ZvanjaService } from 'src/app/service/zvanja.service';
 })
 export class FormaNaucneOblastiComponent implements OnInit {
   title='Forma Naucne oblasti'
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   zvanja: Zvanje[] = [];
   
@@ -42,6 +43,7 @@ export class FormaNaucneOblastiComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

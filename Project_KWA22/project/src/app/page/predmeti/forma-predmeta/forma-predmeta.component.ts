@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { Predmet } from 'src/app/model/predmet';
 
 @Component({
@@ -9,7 +9,7 @@ import { Predmet } from 'src/app/model/predmet';
 })
 export class FormaPredmetaComponent implements OnInit {
   title='Forma Predmeta'
-
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
@@ -59,6 +59,7 @@ export class FormaPredmetaComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

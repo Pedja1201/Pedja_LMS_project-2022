@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { TipNastave } from 'src/app/model/tip-nastave';
 
 @Component({
@@ -9,7 +9,7 @@ import { TipNastave } from 'src/app/model/tip-nastave';
 })
 export class FormaTipaNastaveComponent implements OnInit {
   title='Forma Tipa nastave'
-
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
   })
@@ -37,6 +37,7 @@ export class FormaTipaNastaveComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { IshodNastave, IshodNastavePage } from 'src/app/model/ishod-nastave';
 import { TerminNastave } from 'src/app/model/termin-nastave';
 import { TipNastave, TipNastavePage } from 'src/app/model/tip-nastave';
@@ -14,6 +14,7 @@ import { TipoviNastaveService } from 'src/app/service/tipovi-nastave.service';
 })
 export class FormTerminiNastaveComponent implements OnInit {
   title='Forma Termina Nsatave'
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   ishodiNastave: IshodNastave[] = [];
   tipoviNastave: TipNastave[] = [];
@@ -61,7 +62,8 @@ export class FormTerminiNastaveComponent implements OnInit {
 
   create() {
     if(this.forma.valid) {
-      this.createEvent.emit(this.forma.value);
+      this.createEvent.emit(this.forma.value);    
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

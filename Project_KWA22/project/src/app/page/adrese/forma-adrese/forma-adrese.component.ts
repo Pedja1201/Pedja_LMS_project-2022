@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
 import { Mesto, MestoPage } from 'src/app/model/mesto';
 import { MestaService } from 'src/app/service/mesta.service';
@@ -11,6 +11,7 @@ import { MestaService } from 'src/app/service/mesta.service';
 })
 export class FormaAdreseComponent implements OnInit {
   title='Forma adrese'
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   mesta: Mesto[] = [];
   
@@ -50,6 +51,7 @@ export class FormaAdreseComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

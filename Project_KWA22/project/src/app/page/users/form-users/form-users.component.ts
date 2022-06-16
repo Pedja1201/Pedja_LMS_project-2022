@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { User } from 'src/app/model/user';
 
 @Component({
@@ -9,6 +9,7 @@ import { User } from 'src/app/model/user';
 })
 export class FormUsersComponent implements OnInit {
   title='Form Users'
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   forma : FormGroup = new FormGroup({
     "korisnickoIme": new FormControl(null, [Validators.required]),
@@ -40,6 +41,7 @@ export class FormUsersComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

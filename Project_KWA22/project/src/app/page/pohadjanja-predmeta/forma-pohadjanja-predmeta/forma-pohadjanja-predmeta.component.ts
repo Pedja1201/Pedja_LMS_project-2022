@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { PohadjanjePredmeta } from 'src/app/model/pohadjanje-predmeta';
 import { RealizacijaPredmeta, RealizacijaPredmetaPage } from 'src/app/model/realizacija-predmeta';
 import { Student, StudentPage } from 'src/app/model/student';
@@ -13,6 +13,7 @@ import { StudentiService } from 'src/app/service/studenti.service';
 })
 export class FormaPohadjanjaPredmetaComponent implements OnInit {
   title='Forma Pohadjanja predmeta'
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   realizacijePredmeta: RealizacijaPredmeta[] = [];
   studenti: Student[] = [];
@@ -57,6 +58,7 @@ export class FormaPohadjanjaPredmetaComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 

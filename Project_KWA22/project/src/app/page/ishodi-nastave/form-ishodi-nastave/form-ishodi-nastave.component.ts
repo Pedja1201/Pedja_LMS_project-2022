@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
 import { IshodNastave } from 'src/app/model/ishod-nastave';
 import { Mesto } from 'src/app/model/mesto';
@@ -14,6 +14,7 @@ import { NastavniMaterijaliService } from 'src/app/service/nastavni-materijali.s
 })
 export class FormIshodiNastaveComponent implements OnInit {
   title='Forma Ishoda Nastave'
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
   nastavniMaterijali: NastavniMaterijal[] = [];
   
@@ -50,6 +51,7 @@ export class FormIshodiNastaveComponent implements OnInit {
   create() {
     if(this.forma.valid) {
       this.createEvent.emit(this.forma.value);
+      setTimeout(() => this.formGroupDirective?.resetForm(), 0)    
     }
   }
 
