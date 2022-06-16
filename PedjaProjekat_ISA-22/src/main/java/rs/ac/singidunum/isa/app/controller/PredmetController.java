@@ -103,6 +103,8 @@ public class PredmetController {
         return new ResponseEntity<PredmetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    //TODO: ovu metodu treba izbaciti i zameniti je sa ovom ispod getPredmetForNastavnik
+    //ovo je stara metoda koja ne radi fali joj @Param u repositoriju iz nekog razloga
     @RequestMapping(path = "/nastavnik/{nastavnikId}", method = RequestMethod.GET)
     @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<Iterable<PredmetDTO>> getPredmyByNastavnik(@PathVariable("nastavnikId")Long nastavnikId){
@@ -117,4 +119,20 @@ public class PredmetController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @RequestMapping(path = "/nastavnik/{nastavnikId}", method = RequestMethod.GET)
+//    @Secured({"ROLE_NASTAVNIK"})
+    public ResponseEntity<Iterable<PredmetDTO>> getPredmtForNastavnik(@PathVariable("nastavnikId")Long nastavnikId){
+        if(nastavnikService.findOne(nastavnikId).isPresent()){
+            ArrayList<PredmetDTO> predmeti = new ArrayList<PredmetDTO>();
+            for (Predmet predmet : predmetService.findPredmetForNastavnik(nastavnikService.findOne(nastavnikId))) {
+                predmeti.add(new PredmetDTO(predmet.getId(), predmet.getNaziv(), predmet.getEspb(),
+                        predmet.isObavezan(), predmet.getBrojPredavanja(), predmet.getBrojVezbi(),
+                        predmet.getDrugiObliciNastave(), predmet.getIstrazivackiRad(), predmet.getOstaliCasovi()));
+            }
+            return new ResponseEntity<Iterable<PredmetDTO>>(predmeti ,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }

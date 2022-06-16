@@ -57,7 +57,14 @@ public class PredmetService {
         predmetRepository.delete(predmet);
     }
 
+    //TODO: nepotrebna metoda
     public Iterable<Predmet> findByNastavnik(Optional<Nastavnik> nastavnik){
         return predmetRepository.findbyNastavnik(nastavnik);
     }
+
+    //metoda sa drugim imenom jer joj je falilo @param u repositoriju
+    public Iterable<Predmet> findPredmetForNastavnik(Optional<Nastavnik> nastavnik){
+        return this.predmetRepository.findPredmeteForNastavnik(nastavnik);
+    }
+
 }

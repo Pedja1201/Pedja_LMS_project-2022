@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.LoggedStudent;
 import rs.ac.singidunum.isa.app.dto.*;
+import rs.ac.singidunum.isa.app.model.Nastavnik;
+import rs.ac.singidunum.isa.app.model.Predmet;
 import rs.ac.singidunum.isa.app.model.Student;
 import rs.ac.singidunum.isa.app.service.NastavnikService;
 import rs.ac.singidunum.isa.app.service.StudentService;
@@ -108,18 +110,39 @@ public class StudentController {
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
-//TODO:
-//    @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
+    //ispravljena metoda za dobavljanje svih predmeta na kojima je angazovan nastavnik
+    @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
 //    @Secured({"ROLE_NASTAVNIK"})
-//    public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
-//        ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
-//        for (Student student : this.studentService.studentiNaPredmetimaNastavnika(this.nastavnikService.findOne(nastavnikId).orElse(null))) {
-//            studentDTOS.add(new StudentDTO(student.getId(), student.getKorisnickoIme(), student.getLozinka(), student.getJmbg(), student.getIme(),
-//                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
-//                            student.getAdresa().getBroj(), null),
-//                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
-//                            student.getStudentNaGodini().getBrojIndeksa(), null)));
-//        }
-//        return new ResponseEntity<Iterable<StudentDTO>>(studentDTOS, HttpStatus.OK);
-//    }
+    public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
+        ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
+        Nastavnik n = this.nastavnikService.findOne(nastavnikId).orElse(null);
+        for (Student student : this.studentService.studentiNaPredmetimaNastavnika(n)) {
+            studentDTOS.add(new StudentDTO(student.getId(), student.getEmail(), student.getKorisnickoIme(), student.getLozinka(), student.getJmbg(), student.getIme(),
+                    new AdresaDTO(student.getAdresa().getId(), student.getAdresa().getUlica(),
+                            student.getAdresa().getBroj(), null),
+                    new StudentNaGodiniDTO(student.getStudentNaGodini().getId(), student.getStudentNaGodini().getDatumUpisa(),
+                            student.getStudentNaGodini().getBrojIndeksa(), null)));
+        }
+        return new ResponseEntity<Iterable<StudentDTO>>(studentDTOS, HttpStatus.OK);
+    }
+
+    //TODO:upotrebiti ovo sa vise smisla
+    //metoda za dovavljanje preosecne ocene i ukupnog broja espb bodova treba je jos upotrebiti
+    @RequestMapping(path = "/{id}/prosecnaOcena", method = RequestMethod.GET)
+    public void izracunajProsecnu(@PathVariable("id")Long studentId){
+        System.out.println(this.studentService.prosecnaOcena(this.studentService.findOne(studentId).orElse(null)));
+        System.out.println(this.studentService.brojEspb(this.studentService.findOne(studentId).orElse(null)));
+    }
+
+
+    //metoda za dobavljanje svih predmeta koje slusa student sa {id}
+    @RequestMapping(path = "/{id}/predmeti", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<PredmetDTO>> predmetiKojeSlusaStudent(@PathVariable("id")Long studentId){
+        ArrayList<PredmetDTO> predmetDTOS = new ArrayList<PredmetDTO>();
+        for(Predmet p : this.studentService.predmetiKojeSlusaStudent(this.studentService.findOne(studentId).orElse(null))){
+            predmetDTOS.add(new PredmetDTO(p.getId(), p.getNaziv(),p.getEspb(),p.isObavezan(),p.getBrojPredavanja(),p.getBrojVezbi(),p.getDrugiObliciNastave(),p.getIstrazivackiRad(),p.getOstaliCasovi()));
+        }
+        return new ResponseEntity<Iterable<PredmetDTO>>(predmetDTOS, HttpStatus.OK);
+    }
+
 }

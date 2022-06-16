@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rs.ac.singidunum.isa.app.model.Nastavnik;
+import rs.ac.singidunum.isa.app.model.PohadjanjePredmeta;
+import rs.ac.singidunum.isa.app.model.Predmet;
 import rs.ac.singidunum.isa.app.model.Student;
 import rs.ac.singidunum.isa.app.repository.StudentRepository;
 
@@ -58,5 +60,34 @@ public class StudentService {
     }
 
 //    public Iterable<Student> studentiNaPredmetimaNastavnika(Nastavnik nastavnik) { return this.studentRepository.pronadjiSpisakStudenataZaPredmeteNaKojimaJeAngazovanProfesor(nastavnik); }
+//ispravljena metoda
+public Iterable<Student> studentiNaPredmetimaNastavnika(Nastavnik nastavnik) { return this.studentRepository.pronadjiStudenteZaPredmeteNastavnika(nastavnik); }
+
+    //TODO: Upotrebiti ovo verovatno ce nam trebati StudentPrikazDTO da bi dobavljali sve studente za metodu iz specifikacije kojom se dobavljaju podaci o studentu
+    public double prosecnaOcena(Student student) {
+        Iterable<PohadjanjePredmeta> polozeniPredmeti = this.studentRepository.prosecnaOcena(student);
+        double sum = 0;
+        int i = 0;
+        for(PohadjanjePredmeta p : polozeniPredmeti){
+            sum+= p.getKonacnaOcena();
+            i += 1;
+        }
+        double prosecnaOcena = sum/i;
+        return Math.round(prosecnaOcena * 100.0)/100.0;
+    }
+
+    //TODO: Upotrebiti ovo verovatno ce nam trebati StudentPrikazDTO da bi dobavljali sve studente za metodu iz specifikacije kojom se dobavljaju podaci o studentu
+    public int brojEspb(Student student){
+        Iterable<Predmet> polozeniPredmeti = this.studentRepository.ukupniBodovi(student);
+        int espb=0;
+        for(Predmet p : polozeniPredmeti){
+            espb += p.getEspb();
+        }
+        return espb;
+    }
+
+    public Iterable<Predmet> predmetiKojeSlusaStudent(Student student){
+        return this.studentRepository.predmetiKojeSlusaStudent(student);
+    }
 
 }
