@@ -35,6 +35,7 @@ export class LoginService {
     this.user = null;
     this.rolesSubject.next(new Set<string>([]));
     this.loggedOut = true; //Ispis da je uspesno izlogovan
+    this.loggedIn=false; //Za sklanjanje dugmica nakon logout-a
     let snackBarRef = this.snackBar.open('Successfully logged out!', 'Confrim', {duration: 3000 });
   }
 
