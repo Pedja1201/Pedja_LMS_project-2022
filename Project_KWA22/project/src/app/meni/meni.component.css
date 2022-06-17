@@ -4,6 +4,10 @@
     background-color: rgb(211, 211, 243);
 
 }
+.mat-toolbar {
+  background-color: rgb(14, 140, 198);
+  padding: 0 5px;
+}
 button{
     margin-left: 20px;
     outline: none;

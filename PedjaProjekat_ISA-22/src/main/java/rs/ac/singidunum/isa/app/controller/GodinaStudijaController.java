@@ -18,11 +18,11 @@ import java.util.function.Function;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path = "/api/godinaStudija")
+@RequestMapping(path = "/api/godineStudija")
 public class GodinaStudijaController {
     @Autowired
     private GodinaStudijaService godinaStudijaService;
-
+    @CrossOrigin
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<GodinaStudijaDTO>> getAll(Pageable pageable) {
         Page<GodinaStudija> godinaStudija = godinaStudijaService.findAll(pageable);
