@@ -1,4 +1,11 @@
 form, h2{
     margin-left: 10%;
     padding: 30px;
+    color: rgb(39, 108, 247);
+}
+mat-form-field{
+    background-color: rgb(161, 217, 245);
+}
+div{
+    padding: 10px;
 }

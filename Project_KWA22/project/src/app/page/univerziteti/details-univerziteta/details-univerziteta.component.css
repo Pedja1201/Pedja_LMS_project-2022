@@ -3,3 +3,6 @@ mat-list-item {
   margin: 5px;
   width: 40%;
 }
+mat-list{
+  width: 40%;
+}

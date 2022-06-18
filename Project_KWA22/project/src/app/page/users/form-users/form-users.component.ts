@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/model/user';
 
 @Component({
@@ -10,6 +10,14 @@ import { User } from 'src/app/model/user';
 export class FormUsersComponent implements OnInit {
   title='Form Users'
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
+
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
 
   forma : FormGroup = new FormGroup({
     "korisnickoIme": new FormControl(null, [Validators.required]),
@@ -22,7 +30,7 @@ export class FormUsersComponent implements OnInit {
   @Output()
   public createEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

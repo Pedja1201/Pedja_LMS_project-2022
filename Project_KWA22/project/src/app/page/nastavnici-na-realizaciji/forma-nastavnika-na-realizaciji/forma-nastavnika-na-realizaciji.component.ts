@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { NastavnikNaRealizaciji } from 'src/app/model/nastavnik-na-realizaciji';
 import { TipNastave, TipNastavePage } from 'src/app/model/tip-nastave';
@@ -18,6 +18,14 @@ export class FormaNastavnikaNaRealizacijiComponent implements OnInit {
   nastavnici: Nastavnik[] = [];
   tipoviNastave: TipNastave[] = [];
   
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
   forma : FormGroup = new FormGroup({
     "brojCasova": new FormControl(null, [Validators.required]),
     "nastavnik": new FormControl(null, [Validators.required]),
@@ -30,7 +38,7 @@ export class FormaNastavnikaNaRealizacijiComponent implements OnInit {
   @Input()
   nastavnikNaRealizaciji: NastavnikNaRealizaciji|null = null;
 
-  constructor(private nastavniciService : NastavniciService, private tipoviNastaveService : TipoviNastaveService) { }
+  constructor(private nastavniciService : NastavniciService, private tipoviNastaveService : TipoviNastaveService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

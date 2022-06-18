@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
 import { EvaluacijaZnanja, EvaluacijaZnanjaPage } from 'src/app/model/evaluacija-znanja';
 import { Polaganje } from 'src/app/model/polaganje';
@@ -21,6 +21,14 @@ export class FormPolaganjaComponent implements OnInit {
   evaluacijeZnanja: EvaluacijaZnanja[] = [];
   studentiNaGodini: StudentNaGodini[] = [];
   
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  
   forma : FormGroup = new FormGroup({
     "bodovi": new FormControl(null, [Validators.required]),
     "napomena": new FormControl(null, [Validators.required]),
@@ -34,7 +42,7 @@ export class FormPolaganjaComponent implements OnInit {
   @Input()
   polaganje: Polaganje|null = null;
 
-  constructor(private evZnanjaervice : EvaluacijeZnanjaService, private studentiNaGod : StudentiNaGodiniService) { }
+  constructor(private evZnanjaervice : EvaluacijeZnanjaService, private studentiNaGod : StudentiNaGodiniService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

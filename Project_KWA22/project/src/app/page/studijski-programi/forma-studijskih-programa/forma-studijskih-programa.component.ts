@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Fakultet, FakultetPage } from 'src/app/model/fakultet';
 import { GodinaStudija, GodinaStudijaPage } from 'src/app/model/godina-studija';
 import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
@@ -22,6 +22,15 @@ export class FormaStudijskihProgramaComponent implements OnInit {
   nastavnici: Nastavnik[] = [];
   godineStudija: GodinaStudija[] = [];
   
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
+  
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
     "fakultet": new FormControl(null, [Validators.required]),
@@ -35,7 +44,8 @@ export class FormaStudijskihProgramaComponent implements OnInit {
   @Input()
   studijskiProgram: StudijskiProgram|null = null;
 
-  constructor(private fakultetiService : FakultetiService,private nastavniciService : NastavniciService,private godineStudijaService : GodineStudijaService, ) { }
+  constructor(private fakultetiService : FakultetiService,private nastavniciService : NastavniciService,
+    private godineStudijaService : GodineStudijaService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

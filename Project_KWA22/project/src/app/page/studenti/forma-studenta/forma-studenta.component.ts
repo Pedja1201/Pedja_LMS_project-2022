@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { PohadjanjePredmeta } from 'src/app/model/pohadjanje-predmeta';
 import { Student } from 'src/app/model/student';
@@ -19,8 +19,21 @@ export class FormaStudentaComponent implements OnInit {
 
   adrese: Adresa[] = [];
   studentiNaGodini: StudentNaGodini[] = [];
+
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  trecaFormGroup = this._formBuilder.group({
+    trecaCtrl: ['', Validators.required],
+  });
   
   forma : FormGroup = new FormGroup({
+    "korisnickoIme": new FormControl(null, [Validators.required]),
+    "lozinka": new FormControl(null, [Validators.required]),
     "email": new FormControl(null, [Validators.required]),
     "jmbg": new FormControl(null, [Validators.required]),
     "ime": new FormControl(null, [Validators.required]),
@@ -34,12 +47,14 @@ export class FormaStudentaComponent implements OnInit {
   @Input()
   student: Student|null = null;
 
-  constructor(private adreseService : AdreseService,private studentiNaGodiniService : StudentiNaGodiniService) { }
+  constructor(private adreseService : AdreseService,private studentiNaGodiniService : StudentiNaGodiniService,  private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     console.log(this.student);
     this.forma.get("id")?.setValue(this.student?.id);
+    this.forma.get("korisnickoIme")?.setValue(this.student?.korisnickoIme);
+    this.forma.get("lozinka")?.setValue(this.student?.lozinka);
     this.forma.get("email")?.setValue(this.student?.email);
     this.forma.get("jmbg")?.setValue(this.student?.jmbg);
     this.forma.get("ime")?.setValue(this.student?.ime);
@@ -55,6 +70,8 @@ export class FormaStudentaComponent implements OnInit {
       this.studentiNaGodini = studentiNaGodini.content;
     });
     this.forma.get("id")?.setValue(this.student?.id);
+    this.forma.get("korisnickoIme")?.setValue(this.student?.id);
+    this.forma.get("lozinka")?.setValue(this.student?.id);
     this.forma.get("email")?.setValue(this.student?.id);
     this.forma.get("jmbg")?.setValue(this.student?.id);
     this.forma.get("ime")?.setValue(this.student?.id);

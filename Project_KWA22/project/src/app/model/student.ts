@@ -5,6 +5,8 @@ export interface StudentPage<Student> {
   }
 export interface Student {
     id:number;
+    korisnickoIme:String;
+    lozinka:String;
     email:String;
     jmbg:String;
     ime:String;

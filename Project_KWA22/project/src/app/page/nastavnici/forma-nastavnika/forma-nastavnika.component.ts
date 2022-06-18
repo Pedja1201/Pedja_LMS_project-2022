@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { Nastavnik } from 'src/app/model/nastavnik';
 import { Zvanje, ZvanjePage } from 'src/app/model/zvanje';
@@ -15,10 +15,24 @@ export class FormaNastavnikaComponent implements OnInit {
   title='Forma Nastavnika'
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
 
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  trecaFormGroup = this._formBuilder.group({
+    trecaCtrl: ['', Validators.required],
+  });
+
+
   adrese: Adresa[] = [];
   zvanja: Zvanje[] = [];
   
   forma : FormGroup = new FormGroup({
+    "korisnickoIme": new FormControl(null, [Validators.required]),
+    "lozinka": new FormControl(null, [Validators.required]),
     "email": new FormControl(null, [Validators.required]),
     "ime": new FormControl(null, [Validators.required]),
     "biografija": new FormControl(null, [Validators.required]),
@@ -33,12 +47,14 @@ export class FormaNastavnikaComponent implements OnInit {
   @Input()
   nastavnik: Nastavnik|null = null;
 
-  constructor(private adreseService : AdreseService, private zvanjaService : ZvanjaService) { }
+  constructor(private adreseService : AdreseService, private zvanjaService : ZvanjaService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     console.log(this.nastavnik);
     this.forma.get("id")?.setValue(this.nastavnik?.id);
+    this.forma.get("korisnickoIme")?.setValue(this.nastavnik?.korisnickoIme);
+    this.forma.get("lozinka")?.setValue(this.nastavnik?.lozinka);
     this.forma.get("email")?.setValue(this.nastavnik?.email);
     this.forma.get("ime")?.setValue(this.nastavnik?.ime);
     this.forma.get("biografija")?.setValue(this.nastavnik?.biografija);
@@ -55,6 +71,8 @@ export class FormaNastavnikaComponent implements OnInit {
       this.zvanja = zvanja.content;
     });
     this.forma.get("id")?.setValue(this.nastavnik?.id);
+    this.forma.get("korisnickoIme")?.setValue(this.nastavnik?.id);
+    this.forma.get("lozinka")?.setValue(this.nastavnik?.id);
     this.forma.get("email")?.setValue(this.nastavnik?.id);
     this.forma.get("ime")?.setValue(this.nastavnik?.id);
     this.forma.get("biografija")?.setValue(this.nastavnik?.id);

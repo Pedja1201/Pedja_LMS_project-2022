@@ -1,32 +1,46 @@
 <h2><i>{{title}}</i></h2>
-<form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
-    <div>
+<mat-stepper [linear]="isLinear" #stepper>
+  <form [formGroup]="forma" ngNativeValidate>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Primary data</ng-template>
       <mat-form-field appearance="fill">
         <mat-label>Broj casova: </mat-label>
-          <input matInput formControlName="brojCasova"  name="brojCasova" type="number" step="0,1" required>
+        <input matInput formControlName="brojCasova" name="brojCasova" type="number" step="0,1" required>
       </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Nastavnik:</mat-label>
-          <mat-select name="nastavnik" formControlName="nastavnik" [compareWith]="comparator1" required>
-            <mat-option *ngFor="let nastavnik of nastavnici"  [value]="nastavnik"> 
-              {{nastavnik.email}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Tip nastave:</mat-label>
-          <mat-select name="tipNastave" formControlName="tipNastave" [compareWith]="comparator2" required>
-            <mat-option *ngFor="let tipNastave of tipoviNastave"  [value]="tipNastave"> 
-              {{tipNastave.naziv}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Secondary data">
+      <mat-form-field appearance="fill">
+        <mat-label>Nastavnik:</mat-label>
+        <mat-select name="nastavnik" formControlName="nastavnik" [compareWith]="comparator1" required>
+          <mat-option *ngFor="let nastavnik of nastavnici" [value]="nastavnik">
+            {{nastavnik.email}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tip nastave:</mat-label>
+        <mat-select name="tipNastave" formControlName="tipNastave" [compareWith]="comparator2" required>
+          <mat-option *ngFor="let tipNastave of tipoviNastave" [value]="tipNastave">
+            {{tipNastave.naziv}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <div>
-        <button mat-raised-button color="primary" type="submit">Dodaj</button>
-    </div>
-</form>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-raised-button color="primary" (click)="create()">Dodaj</button>
+      </div>
+    </mat-step>
+  </form>
+</mat-stepper>

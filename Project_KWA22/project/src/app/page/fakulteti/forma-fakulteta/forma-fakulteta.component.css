@@ -2,3 +2,12 @@ form, h2{
     margin-left: 10%;
     padding: 30px;
 }
+.mat-stepper-horizontal {
+    margin-top: 8px;
+    width: 80%;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+    padding: 10px;
+  }

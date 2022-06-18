@@ -9,7 +9,7 @@ import { NastavniciService } from 'src/app/service/nastavnici.service';
   styleUrls: ['./tabela-nastavnika.component.css']
 })
 export class TabelaNastavnikaComponent implements OnInit {
-  displayedColumns: string[] = ['id','email', 'ime', 'biografija', 'jmbg', 'adresa', 'zvanje', "akcije"];
+  displayedColumns: string[] = ['id','korisnickoIme', 'email', 'ime', 'biografija', 'jmbg', 'adresa', 'zvanje', "akcije"];
   dataSource : NastavnikPage<Nastavnik> | undefined;
   title="Tabela Nastavnika";
 

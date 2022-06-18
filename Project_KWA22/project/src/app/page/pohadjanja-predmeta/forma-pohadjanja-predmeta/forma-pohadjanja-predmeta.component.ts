@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { PohadjanjePredmeta } from 'src/app/model/pohadjanje-predmeta';
 import { RealizacijaPredmeta, RealizacijaPredmetaPage } from 'src/app/model/realizacija-predmeta';
 import { Student, StudentPage } from 'src/app/model/student';
@@ -17,6 +17,14 @@ export class FormaPohadjanjaPredmetaComponent implements OnInit {
 
   realizacijePredmeta: RealizacijaPredmeta[] = [];
   studenti: Student[] = [];
+
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
   
   forma : FormGroup = new FormGroup({
     "konacnaOcena": new FormControl(null, [Validators.required]),
@@ -31,7 +39,7 @@ export class FormaPohadjanjaPredmetaComponent implements OnInit {
   @Input()
   pohadjanjePredmeta: PohadjanjePredmeta|null = null;
 
-  constructor(private realizacijePredmetaService : RealizacijePredmetaService, private studentiService : StudentiService) { }
+  constructor(private realizacijePredmetaService : RealizacijePredmetaService, private studentiService : StudentiService,private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

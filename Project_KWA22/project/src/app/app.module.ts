@@ -17,6 +17,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';   
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -282,7 +283,8 @@ import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ish
     MatTabsModule,
     MatChipsModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatStepperModule
 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login

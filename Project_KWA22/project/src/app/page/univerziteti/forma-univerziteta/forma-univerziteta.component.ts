@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { Nastavnik, NastavnikPage } from 'src/app/model/nastavnik';
 import { Student } from 'src/app/model/student';
@@ -18,7 +18,14 @@ export class FormaUniverzitetaComponent implements OnInit {
 
   adrese: Adresa[] = [];
   nastavnici: Nastavnik[] = [];
-
+  
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
   
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
@@ -33,7 +40,7 @@ export class FormaUniverzitetaComponent implements OnInit {
   @Input()
   univerzitet: Univerzitet|null = null;
 
-  constructor(private adreseService : AdreseService, private nastavniciService : NastavniciService) { }
+  constructor(private adreseService : AdreseService, private nastavniciService : NastavniciService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

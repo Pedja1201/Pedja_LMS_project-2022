@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Adresa } from 'src/app/model/adresa';
 import { EvaluacijaZnanja } from 'src/app/model/evaluacija-znanja';
 import { Ishod, IshodPage } from 'src/app/model/ishod';
@@ -20,6 +20,14 @@ export class FormEvaluacijeZnanjaComponent implements OnInit {
   ishodi: Ishod[] = [];
   tipoviEvaluacije: TipEvaluacije[] = [];
   
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  
   forma : FormGroup = new FormGroup({
     "vremePocetka": new FormControl(null, [Validators.required]),
     "vremeZavrsetka": new FormControl(null, [Validators.required]),
@@ -34,7 +42,7 @@ export class FormEvaluacijeZnanjaComponent implements OnInit {
   @Input()
   evaluacijaZnanja: EvaluacijaZnanja|null = null;
 
-  constructor(private ishodiService : IshodiService, private tipoviEvaluacijeService : TipoviEvaluacijeService) { }
+  constructor(private ishodiService : IshodiService, private tipoviEvaluacijeService : TipoviEvaluacijeService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { EvaluacijaZnanja, EvaluacijaZnanjaPage } from 'src/app/model/evaluacija-znanja';
 import { NastavnikNaRealizaciji, NastavnikNaRealizacijiPage } from 'src/app/model/nastavnik-na-realizaciji';
 import { Predmet, PredmetPage } from 'src/app/model/predmet';
@@ -23,6 +23,14 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
   predmeti: Predmet[] = [];
   evaluacijeZnanja : EvaluacijaZnanja[] = [];
   terminiNastave : TerminNastave[] = [];
+
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
   
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
@@ -39,8 +47,9 @@ export class FormaRealizacijePredmetaComponent implements OnInit {
   realizacijaPredmeta: RealizacijaPredmeta|null = null;
 
   constructor(private nastavniciNaRealizacijiService : NastavniciNaRealizacijiService, 
-    private predmetiService : PredmetiService,  private evZnanjaService : EvaluacijeZnanjaService, private terminService : TerminiNastaveService) { }
-
+    private predmetiService : PredmetiService,  private evZnanjaService : EvaluacijeZnanjaService,
+     private terminService : TerminiNastaveService, private _formBuilder: FormBuilder) { }
+     
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     console.log(this.realizacijaPredmeta);

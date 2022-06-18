@@ -26,7 +26,7 @@ public class NastavnikController {
 
     @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.GET)
-    @Secured({"ROLE_ADMIN"})
+//    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Page<NastavnikDTO>> getAllNastavnik(Pageable pageable) {
         Page<Nastavnik> nastavnik = nastavnikService.findAll(pageable);
         Page<NastavnikDTO> nastavnici = nastavnik.map(new Function<Nastavnik, NastavnikDTO>() {

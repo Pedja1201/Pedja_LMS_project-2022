@@ -8,7 +8,7 @@ import { User, UserPage } from 'src/app/model/user';
   styleUrls: ['./table-users.component.css']
 })
 export class TableUsersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'username', 'password',  "akcije"];
+  displayedColumns: string[] = ['id', 'korisnickoIme', 'lozinka',  "akcije"];
   dataSource : UserPage<User> | undefined;
   title="Table Users";
 

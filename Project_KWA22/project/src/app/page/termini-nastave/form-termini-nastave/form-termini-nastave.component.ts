@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { IshodNastave, IshodNastavePage } from 'src/app/model/ishod-nastave';
 import { TerminNastave } from 'src/app/model/termin-nastave';
 import { TipNastave, TipNastavePage } from 'src/app/model/tip-nastave';
@@ -19,6 +19,14 @@ export class FormTerminiNastaveComponent implements OnInit {
   ishodiNastave: IshodNastave[] = [];
   tipoviNastave: TipNastave[] = [];
   
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  
   forma : FormGroup = new FormGroup({
     "vremePocetka": new FormControl(null, [Validators.required]),
     "vremeKraja": new FormControl(null, [Validators.required]),
@@ -32,7 +40,7 @@ export class FormTerminiNastaveComponent implements OnInit {
   @Input()
   terminNastave: TerminNastave|null = null;
 
-  constructor(private ishodiService : IshodiNastaveService, private tipoviService : TipoviNastaveService) { }
+  constructor(private ishodiService : IshodiNastaveService, private tipoviService : TipoviNastaveService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

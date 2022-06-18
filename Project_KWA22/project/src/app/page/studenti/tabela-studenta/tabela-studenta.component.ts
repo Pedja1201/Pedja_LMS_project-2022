@@ -9,7 +9,7 @@ import { StudentiService } from 'src/app/service/studenti.service';
   styleUrls: ['./tabela-studenta.component.css']
 })
 export class TabelaStudentaComponent implements OnInit {
-  displayedColumns: string[] = ['id','email', 'jmbg', 'ime', 'adresa', 'studentNaGodini', "akcije"];
+  displayedColumns: string[] = ['id', 'korisnickoIme', 'email', 'jmbg', 'ime', 'adresa', 'studentNaGodini', "akcije"];
   dataSource : StudentPage<Student> | undefined;
   title="Tabela Studenata";
 
