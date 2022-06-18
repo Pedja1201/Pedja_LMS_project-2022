@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Nastavnik } from '../model/nastavnik';
+import { Student } from '../model/student';
 import { Token } from '../model/token';
 import { User } from '../model/user';
 
@@ -22,6 +24,26 @@ export class LoginService {
 
   login(user:User){
     return this.client.post<Token>(`${this.baseUrl}/login`, user).pipe(
+      tap(token => {
+        this.token = token.token;
+        this.user = JSON.parse(atob(token.token.split(".")[1]));
+        this.loggedIn=true; //Za prikaz dugmica nakon Login-a
+      })
+    );
+  }
+
+  registerNastavnik(nastavnik:Nastavnik){
+    return this.client.post<Token>(`${this.baseUrl}/registerNastavnik`, nastavnik).pipe(
+      tap(token => {
+        this.token = token.token;
+        this.user = JSON.parse(atob(token.token.split(".")[1]));
+        this.loggedIn=true; //Za prikaz dugmica nakon Login-a
+      })
+    );
+  }
+
+  registerStudent(student:Student){
+    return this.client.post<Token>(`${this.baseUrl}/registerStudent`, student).pipe(
       tap(token => {
         this.token = token.token;
         this.user = JSON.parse(atob(token.token.split(".")[1]));

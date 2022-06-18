@@ -60,6 +60,7 @@ import { NastavniMaterijalComponent } from './page/nastavni-materijal/nastavni-m
 import { DetailsNastavniMaterijalComponent } from './page/nastavni-materijal/details-nastavni-materijal/details-nastavni-materijal.component';
 import { IshodiNastaveComponent } from './page/ishodi-nastave/ishodi-nastave.component';
 import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ishodi-nastave/details-ishodi-nastave.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: "", component: WelcomeComponent},
@@ -206,6 +207,9 @@ const routes: Routes = [
 
   //Login
   {path:"login", component:LoginComponent},
+
+  //Register
+  {path:"register", component:RegisterComponent},
   
   //Prazna stranica
   {path: '**', component: NotFoundComponent,},

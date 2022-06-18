@@ -140,6 +140,9 @@ import { IshodiNastaveComponent } from './page/ishodi-nastave/ishodi-nastave.com
 import { TableIshodiNastaveComponent } from './page/ishodi-nastave/table-ishodi-nastave/table-ishodi-nastave.component';
 import { FormIshodiNastaveComponent } from './page/ishodi-nastave/form-ishodi-nastave/form-ishodi-nastave.component';
 import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ishodi-nastave/details-ishodi-nastave.component';
+import { RegisterComponent } from './register/register.component';
+import { NastavnikRegisterComponent } from './register/nastavnik-register/nastavnik-register.component';
+import { StudentRegisterComponent } from './register/student-register/student-register.component';
 
 
 @NgModule({
@@ -261,6 +264,9 @@ import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ish
     TableIshodiNastaveComponent,
     FormIshodiNastaveComponent,
     DetailsIshodiNastaveComponent,
+    RegisterComponent,
+    NastavnikRegisterComponent,
+    StudentRegisterComponent,
   ],
   imports: [
     BrowserModule,
