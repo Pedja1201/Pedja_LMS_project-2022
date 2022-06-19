@@ -11,7 +11,7 @@ public class StudentNaGodini {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date datumUpisa;
     @Column(nullable = false)
     private String brojIndeksa;

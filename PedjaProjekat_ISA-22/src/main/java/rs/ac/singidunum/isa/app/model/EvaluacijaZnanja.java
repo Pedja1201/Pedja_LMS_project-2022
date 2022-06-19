@@ -11,9 +11,9 @@ public class EvaluacijaZnanja {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date vremePocetka;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date vremeZavrsetka;
     @ManyToOne(optional = false)
     private TipEvaluacije tipEvaluacije;

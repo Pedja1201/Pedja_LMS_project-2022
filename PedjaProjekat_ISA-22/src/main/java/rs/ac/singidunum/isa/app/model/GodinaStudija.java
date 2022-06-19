@@ -11,7 +11,7 @@ public class GodinaStudija {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date godina;
 
     @ManyToOne(optional = false)
