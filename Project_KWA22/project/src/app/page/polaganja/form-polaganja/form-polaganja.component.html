@@ -4,11 +4,11 @@
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Primary data</ng-template>
       <div>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Bodovi:</mat-label>
           <input matInput formControlName="bodovi" name="bodovi" type="number" step="0,1" min="0" max="30" required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Napomena:</mat-label>
           <textarea matInput formControlName="napomena" name="napomena" required></textarea>
         </mat-form-field>

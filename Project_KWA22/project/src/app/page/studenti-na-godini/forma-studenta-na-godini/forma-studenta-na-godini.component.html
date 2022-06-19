@@ -1,19 +1,19 @@
 <h2><i>{{title}}</i></h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Datum upisa: </mat-label>
         <input matInput formControlName="datumUpisa" name="datumUpisa" type="date" required>
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Broj indeksa: </mat-label>
         <input matInput formControlName="brojIndeksa" name="brojIndeksa" type="text" required>
       </mat-form-field>
     </div>
     <div>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Godina studija:</mat-label>
           <mat-select name="godinaStudija" formControlName="godinaStudija" [compareWith]="comparator" required>
             <mat-option *ngFor="let godinaStudija of godineStudija"  [value]="godinaStudija"> 

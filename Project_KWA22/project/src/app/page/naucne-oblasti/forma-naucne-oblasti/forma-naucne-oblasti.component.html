@@ -1,7 +1,7 @@
 <h2><i>{{title}}</i></h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Naziv:</mat-label>
             <input matInput formControlName="naziv"  name="naziv" type="text" required>
         </mat-form-field>

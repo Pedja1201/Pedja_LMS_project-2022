@@ -3,12 +3,12 @@
   <form [formGroup]="forma" ngNativeValidate>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Primary data</ng-template>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Naziv:</mat-label>
         <input matInput formControlName="naziv" name="naziv" type="text" required>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>ESPB:</mat-label>
         <input matInput formControlName="espb" name="espb" type="number" min="2" max="8" required>
       </mat-form-field>
@@ -17,27 +17,27 @@
         <mat-checkbox formControlName="obavezan" name="obavezan" class="example-margin">Obavezan</mat-checkbox>
       </section>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Broj predavanja: </mat-label>
         <input matInput formControlName="brojPredavanja" name="brojPredavanja" type="number" required>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Broj vezbi: </mat-label>
         <input matInput formControlName="brojVezbi" name="brojVezbi" type="number" required>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Drugi oblici nastave: </mat-label>
         <input matInput formControlName="drugiObliciNastave" name="drugiObliciNastave" type="number" required>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Istrazivacki rad: </mat-label>
         <input matInput formControlName="istrazivackiRad" name="istrazivackiRad" type="number" required>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Ostali casovi: </mat-label>
         <input matInput formControlName="ostaliCasovi" name="ostaliCasovi" type="number" required>
       </mat-form-field>

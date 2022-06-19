@@ -3,7 +3,7 @@
   <form [formGroup]="forma" ngNativeValidate>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Primary data</ng-template>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Broj casova: </mat-label>
         <input matInput formControlName="brojCasova" name="brojCasova" type="number" step="0,1" required>
       </mat-form-field>

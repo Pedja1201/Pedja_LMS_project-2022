@@ -1,14 +1,14 @@
 <h2><i>{{title}}</i></h2>
 <form  (ngSubmit)="create()" [formGroup]="forma" ngNativeValidate>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Opis:</mat-label>
             <textarea matInput formControlName="opis"  name="opis" required></textarea>
         </mat-form-field>
     </div>
 
     <div>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Nastavni Materijal:</mat-label>
           <mat-select name="nastavniMaterijal" formControlName="nastavniMaterijal" [compareWith]="comparator" required>
             <mat-option *ngFor="let nastavniMaterijal of nastavniMaterijali"  [value]="nastavniMaterijal"> 

@@ -3,13 +3,13 @@
 <h2>{{title}}</h2>
 <form (ngSubmit)="login()" [formGroup]="loginForma" class="container" ngNativeValidate>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label> <mat-icon>account_circle</mat-icon>Username</mat-label>
         <input matInput name="korisnickoIme" formControlName="korisnickoIme" type="text" required>
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label><mat-icon>lock</mat-icon>Password</mat-label>
         <input matInput name="lozinka" formControlName="lozinka" type="password" required>
       </mat-form-field>

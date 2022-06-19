@@ -9,6 +9,7 @@ import { LoginService } from './login.service';
 })
 export class PredmetiService {
   private baseUrl = environment.baseUrl //Dobavljanje url adrese da ne kucamo rucno
+  // private baseUrl="http://localhost:3030/predmeti"   //Primer url adrese za TDB primer zadtka - WBIS
 
   constructor(private client : HttpClient, private loginService : LoginService) { }
 

@@ -3,7 +3,7 @@
   <form [formGroup]="forma" ngNativeValidate>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Primary data</ng-template>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Konacna ocena:</mat-label>
         <input matInput formControlName="konacnaOcena" name="konacnaOcena" type="number" min="5" max="10" required>
       </mat-form-field>

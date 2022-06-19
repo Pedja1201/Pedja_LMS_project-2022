@@ -3,11 +3,11 @@
   <form [formGroup]="forma" ngNativeValidate>
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Primary data</ng-template>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Naziv: </mat-label>
         <input matInput formControlName="naziv" name="naziv" type="text" required>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Datum vreme osnivanja: </mat-label>
         <input matInput formControlName="datumVremeOsnivanja" name="datumVremeOsnivanja" type="date" required>
       </mat-form-field>
