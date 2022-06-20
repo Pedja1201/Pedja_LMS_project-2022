@@ -2,6 +2,7 @@
   <button  [routerLink]="['/']" aria-label="Example icon button with a home icon">
     <mat-icon>home</mat-icon>
   </button>
+
   <button mat-button  [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
   <mat-menu #menu="matMenu">
     <a href="https://singidunum.ac.rs/page/biblioteka" target="_blank"><button mat-menu-item><mat-icon>library_books</mat-icon><i>Biblioteka</i></button></a> 
@@ -10,29 +11,37 @@
     <a href="https://singidunum.ac.rs/internationalcooperation" target="_blank"><button mat-menu-item>	<mat-icon>group</mat-icon><i>Međunarodno partnerstvo</i></button></a>
     <a href="https://singidunum.ac.rs/internationalcooperation" target="_blank"><button mat-menu-item><mat-icon>games</mat-icon><i>Takmičenje za srednjoškolce</i></button></a>
     <a href="https://singipedia.singidunum.ac.rs/strana/radovi" target="_blank"><button mat-menu-item><mat-icon>public</mat-icon><i>Objavljeni radovi</i></button></a>
-
-
   </mat-menu>
-  <button mat-button  [matMenuTriggerFor]="menu1">	<mat-icon>question_answer</mat-icon><i>Šta da upišem?</i></button>
+  
+  <button mat-button  [matMenuTriggerFor]="menu1">	<mat-icon>question_answer</mat-icon><i>Savetnik</i></button>
   <mat-menu #menu1="matMenu">
-    <button mat-menu-item  [routerLink]="['/studijskiProgrami']"><mat-icon>library_add</mat-icon>Studijski programi</button>
     <button mat-menu-item [routerLink]="['/naucneOblasti']"><mat-icon>search</mat-icon>Naučne oblasti</button>
-    <button mat-menu-item [routerLink]="['/ishodi']"><mat-icon>dns</mat-icon>Ishodi i očekivanja na izabranom predmetu</button>
+    <button mat-menu-item [routerLink]="['/nastavniMaterijali']">		<mat-icon>library_books</mat-icon>Nastavni materijal</button>
   </mat-menu>
+
   <button mat-button   [matMenuTriggerFor]="menu2"><mat-icon>account_balance</mat-icon><i>Studije</i></button>
   <mat-menu #menu2="matMenu">
-    <button mat-menu-item   [routerLink]="['/predmeti']">	<mat-icon>subject</mat-icon>Predmeti</button>
-    <button mat-menu-item   [routerLink]="['/pohadjanjaPredmeta']"><mat-icon>description</mat-icon>Pohadjanja predmeta</button>
-    <button mat-menu-item [routerLink]="['/realizacijePredmeta']"><mat-icon>done_outline</mat-icon>Realizacije predmeta</button>
+    <button mat-menu-item  [routerLink]="['/studijskiProgrami']"><mat-icon>library_add</mat-icon>Studijski programi</button>
     <button mat-menu-item [routerLink]="['/godineStudija']">	<mat-icon>date_range</mat-icon>Godine studija</button>
     <button mat-menu-item [routerLink]="['/tipoviNastave']"><mat-icon> short_text</mat-icon>Tipovi nastave</button>
   </mat-menu>
+
   <button mat-button  [matMenuTriggerFor]="menu3"><mat-icon>horizontal_split</mat-icon><b><i>O Ustanovi</i></b></button>
   <mat-menu #menu3="matMenu">
     <button mat-menu-item [routerLink]="['/fakulteti']"><mat-icon>school</mat-icon>Fakulteti</button>
     <button mat-menu-item [routerLink]="['/univerziteti']">	<mat-icon>domain</mat-icon>Univerziteti</button>
     <button mat-menu-item [routerLink]="['/about']"><mat-icon> live_help</mat-icon>About</button>
   </mat-menu>
+
+  <button mat-button  [matMenuTriggerFor]="menu4"><mat-icon>library_books</mat-icon><b><i>Predmeti</i></b></button>
+  <mat-menu #menu4="matMenu">
+    <button mat-menu-item   [routerLink]="['/predmeti']">	<mat-icon>subject</mat-icon>Predmeti na studijama</button>
+    <button mat-menu-item [routerLink]="['/realizacijePredmeta']"><mat-icon>done_outline</mat-icon>Realizacije predmeta</button>
+    <button mat-menu-item   [routerLink]="['/pohadjanjaPredmeta']"><mat-icon>description</mat-icon>Pohadjanja predmeta</button>
+    <button mat-menu-item [routerLink]="['/ishodi']"><mat-icon>dns</mat-icon>Ishodi i očekivanja na izabranom predmetu</button>
+  </mat-menu>
+
+
   <button mat-button   [matMenuTriggerFor]="menu4"><mat-icon>info</mat-icon><i>Opšti podaci</i></button>
   <mat-menu #menu4="matMenu">
     <button mat-menu-item [routerLink]="['/adrese']">	<mat-icon>location_city</mat-icon>Adrese</button>
@@ -51,6 +60,7 @@
     <button mat-menu-item [routerLink]="['/tipoviZvanja']">	<mat-icon> short_text</mat-icon>Tipovi zvanja</button>
     <button mat-menu-item [routerLink]="['/zvanja']">	<mat-icon>school</mat-icon>Zvanja</button>
   </mat-menu>
+
   <button id='desno2'   *ngIf="loginService.loggedIn" mat-button [matMenuTriggerFor]="menuNastava">	<mat-icon>settings_applications</mat-icon>Nastava</button>
   <mat-menu #menuNastava="matMenu">
     <button mat-menu-item [routerLink]="['/polaganja']"><mat-icon>book</mat-icon>Polaganja</button>
