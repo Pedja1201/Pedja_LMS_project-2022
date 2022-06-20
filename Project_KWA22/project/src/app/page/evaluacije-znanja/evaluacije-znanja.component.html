@@ -1,12 +1,15 @@
-<h2>{{title}}</h2>
-<mat-tab-group>
-<mat-tab label="Table Evaluacije Znanja">
-    <app-table-evaluacije-znanja  [elementi]="evaluacijeZnanja" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-table-evaluacije-znanja>
-    <app-form-evaluacije-znanja *ngIf="prikaz" [evaluacijaZnanja]="znanjeUpdate" (createEvent)="update($event)"></app-form-evaluacije-znanja>
+<div>
+    <h2>{{title}}</h2>
+    <mat-tab-group>
+        <mat-tab label="Table Evaluacije Znanja">
+            <app-table-evaluacije-znanja [elementi]="evaluacijeZnanja" (uklanjanje)="delete($event)"
+                (izmena)="setUpdate($event)"></app-table-evaluacije-znanja>
+            <app-form-evaluacije-znanja *ngIf="prikaz" [evaluacijaZnanja]="znanjeUpdate" (createEvent)="update($event)">
+            </app-form-evaluacije-znanja>
 
-</mat-tab>
-<mat-tab label="Add Evaluacije Znanja">
-    <app-form-evaluacije-znanja (createEvent)="create($event)"></app-form-evaluacije-znanja>
-</mat-tab>
-</mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Add Evaluacije Znanja">
+            <app-form-evaluacije-znanja (createEvent)="create($event)"></app-form-evaluacije-znanja>
+        </mat-tab>
+    </mat-tab-group>
+</div>

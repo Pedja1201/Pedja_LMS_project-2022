@@ -1,13 +1,16 @@
-<h2>{{title}}</h2>
+<div>
+    <h2>{{title}}</h2>
 
-<mat-tab-group>
-<mat-tab label="Table Univerzitet">
-<app-tabela-univerziteta [elementi]="univerziteti" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-univerziteta>
+    <mat-tab-group>
+        <mat-tab label="Table Univerzitet">
+            <app-tabela-univerziteta [elementi]="univerziteti" (uklanjanje)="delete($event)"
+                (izmena)="setUpdate($event)"></app-tabela-univerziteta>
 
-<app-forma-univerziteta *ngIf="prikaz"  [univerzitet]="univerzitetUpdate" (createEvent)="update($event)"></app-forma-univerziteta>
-</mat-tab>
-<mat-tab label="Add Univeriztet">
-    <app-forma-univerziteta (createEvent)="create($event)"></app-forma-univerziteta>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-univerziteta *ngIf="prikaz" [univerzitet]="univerzitetUpdate" (createEvent)="update($event)">
+            </app-forma-univerziteta>
+        </mat-tab>
+        <mat-tab label="Add Univeriztet">
+            <app-forma-univerziteta (createEvent)="create($event)"></app-forma-univerziteta>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,13 +1,15 @@
-<h2>{{title}}</h2>
+<div>
+    <h2>{{title}}</h2>
 
-<mat-tab-group>
-<mat-tab label="Table Zvanje">
-<app-tabela-zvanja [elementi]="zvanja" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-zvanja>
+    <mat-tab-group>
+        <mat-tab label="Table Zvanje">
+            <app-tabela-zvanja [elementi]="zvanja" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
+            </app-tabela-zvanja>
 
-<app-forma-zvanja *ngIf="prikaz"  [zvanje]="zvanjeUpdate" (createEvent)="update($event)"></app-forma-zvanja>
-</mat-tab>
-<mat-tab label="Add Zvanje">
-    <app-forma-zvanja (createEvent)="create($event)"></app-forma-zvanja>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-zvanja *ngIf="prikaz" [zvanje]="zvanjeUpdate" (createEvent)="update($event)"></app-forma-zvanja>
+        </mat-tab>
+        <mat-tab label="Add Zvanje">
+            <app-forma-zvanja (createEvent)="create($event)"></app-forma-zvanja>
+        </mat-tab>
+    </mat-tab-group>
+</div>

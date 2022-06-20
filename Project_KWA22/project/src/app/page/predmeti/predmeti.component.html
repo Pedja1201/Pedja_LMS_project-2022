@@ -1,13 +1,16 @@
-<h2>{{title}}</h2>
+<div>
+    <h2>{{title}}</h2>
 
-<mat-tab-group>
-<mat-tab label="Table Predmet">
-<app-tabela-predmeta [elementi]="predmeti" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-predmeta>
+    <mat-tab-group>
+        <mat-tab label="Table Predmet">
+            <app-tabela-predmeta [elementi]="predmeti" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
+            </app-tabela-predmeta>
 
-<app-forma-predmeta *ngIf="prikaz" [predmet]="predmetUpdate" (createEvent)="update($event)"></app-forma-predmeta>
-</mat-tab>
-<mat-tab label="Add Predmet">
-    <app-forma-predmeta  (createEvent)="create($event)"></app-forma-predmeta>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-predmeta *ngIf="prikaz" [predmet]="predmetUpdate" (createEvent)="update($event)">
+            </app-forma-predmeta>
+        </mat-tab>
+        <mat-tab label="Add Predmet">
+            <app-forma-predmeta (createEvent)="create($event)"></app-forma-predmeta>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,13 +1,16 @@
-<h2>{{title}}</h2>
+<div>
+    <h2>{{title}}</h2>
 
-<mat-tab-group>
-<mat-tab label="Table Tip Nastave">
-<app-tabela-tipa-nastave [elementi]="tipoviNastave" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-tipa-nastave>
+    <mat-tab-group>
+        <mat-tab label="Table Tip Nastave">
+            <app-tabela-tipa-nastave [elementi]="tipoviNastave" (uklanjanje)="delete($event)"
+                (izmena)="setUpdate($event)"></app-tabela-tipa-nastave>
 
-<app-forma-tipa-nastave *ngIf="prikaz"  [tipNastave]="itemUpdate" (createEvent)="update($event)"></app-forma-tipa-nastave>
-</mat-tab>
-<mat-tab label="Add Tip nastave">
-    <app-forma-tipa-nastave (createEvent)="create($event)"></app-forma-tipa-nastave>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-tipa-nastave *ngIf="prikaz" [tipNastave]="itemUpdate" (createEvent)="update($event)">
+            </app-forma-tipa-nastave>
+        </mat-tab>
+        <mat-tab label="Add Tip nastave">
+            <app-forma-tipa-nastave (createEvent)="create($event)"></app-forma-tipa-nastave>
+        </mat-tab>
+    </mat-tab-group>
+</div>

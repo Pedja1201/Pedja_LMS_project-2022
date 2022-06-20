@@ -1,14 +1,17 @@
-<h2>{{title}}</h2>
-<mat-tab-group>
-<mat-tab label="Table Nastavnici">
-<app-pretraga-nastavnika (pretraga)="search($event)" ></app-pretraga-nastavnika>
+<div>
+    <h2>{{title}}</h2>
+    <mat-tab-group>
+        <mat-tab label="Table Nastavnici">
+            <app-pretraga-nastavnika (pretraga)="search($event)"></app-pretraga-nastavnika>
 
-<app-tabela-nastavnika [elementi]="nastavnici" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-nastavnika>
+            <app-tabela-nastavnika [elementi]="nastavnici" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
+            </app-tabela-nastavnika>
 
-<app-forma-nastavnika *ngIf="prikaz"  [nastavnik]="nastavnikUpdate" (createEvent)="update($event)"></app-forma-nastavnika>
-</mat-tab>
-<mat-tab label="Add Nastavnik">
-    <app-forma-nastavnika (createEvent)="create($event)"></app-forma-nastavnika>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-nastavnika *ngIf="prikaz" [nastavnik]="nastavnikUpdate" (createEvent)="update($event)">
+            </app-forma-nastavnika>
+        </mat-tab>
+        <mat-tab label="Add Nastavnik">
+            <app-forma-nastavnika (createEvent)="create($event)"></app-forma-nastavnika>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,7 +1,9 @@
-<p>Ulogovan: {{loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT'])}}</p>
+<div class="slika">
+  <p>Ulogovan: {{loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT'])}}</p>
 
-<h2>{{title}}</h2>
+
 <form (ngSubmit)="login()" [formGroup]="loginForma" class="container" ngNativeValidate>
+  <h2>{{title}}</h2>
     <div>
       <mat-form-field appearance="outline">
         <mat-label> <mat-icon>account_circle</mat-icon>Username</mat-label>
@@ -21,3 +23,5 @@
     <p *ngIf="loginFailed"><mat-icon>error</mat-icon>Login failed!</p>
     <p *ngIf="loginService.loggedOut"><mat-icon>warning</mat-icon>Successfully logged out!</p>
   </form>
+
+</div>

@@ -1,12 +1,14 @@
-<h1>{{title}}</h1>
-<mat-tab-group>
-<mat-tab label="Table Adresa">
-<app-tabela-adrese  [elementi]="adrese" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-adrese>
+<div>
+    <h1>{{title}}</h1>
+    <mat-tab-group>
+        <mat-tab label="Table Adresa">
+            <app-tabela-adrese [elementi]="adrese" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
+            </app-tabela-adrese>
 
-<app-forma-adrese *ngIf="prikaz"  [adresa]="adresaUpdate" (createEvent)="update($event)"></app-forma-adrese>
-</mat-tab>
-<mat-tab label="Add Adresa">
-    <app-forma-adrese (createEvent)="create($event)"></app-forma-adrese>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-adrese *ngIf="prikaz" [adresa]="adresaUpdate" (createEvent)="update($event)"></app-forma-adrese>
+        </mat-tab>
+        <mat-tab label="Add Adresa">
+            <app-forma-adrese (createEvent)="create($event)"></app-forma-adrese>
+        </mat-tab>
+    </mat-tab-group>
+</div>

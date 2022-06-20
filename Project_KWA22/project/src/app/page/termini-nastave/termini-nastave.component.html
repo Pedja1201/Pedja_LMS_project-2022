@@ -1,12 +1,15 @@
-<h2>{{title}}</h2>
-<mat-tab-group>
-<mat-tab label="Table Termin Nastave">
-    <app-table-termini-nastave [elementi]="terminiNastave" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-table-termini-nastave>
-<app-form-termini-nastave *ngIf="prikaz" [terminNastave]="terminUpdate" (createEvent)="update($event)"></app-form-termini-nastave>
+<div>
+    <h2>{{title}}</h2>
+    <mat-tab-group>
+        <mat-tab label="Table Termin Nastave">
+            <app-table-termini-nastave [elementi]="terminiNastave" (uklanjanje)="delete($event)"
+                (izmena)="setUpdate($event)"></app-table-termini-nastave>
+            <app-form-termini-nastave *ngIf="prikaz" [terminNastave]="terminUpdate" (createEvent)="update($event)">
+            </app-form-termini-nastave>
 
-</mat-tab>
-<mat-tab label="Add Termin">
-    <app-form-termini-nastave (createEvent)="create($event)"></app-form-termini-nastave>
-</mat-tab>
-</mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Add Termin">
+            <app-form-termini-nastave (createEvent)="create($event)"></app-form-termini-nastave>
+        </mat-tab>
+    </mat-tab-group>
+</div>

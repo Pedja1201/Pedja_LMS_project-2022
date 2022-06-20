@@ -1,13 +1,16 @@
-<h2>{{title}}</h2>
+<div>
+    <h2>{{title}}</h2>
 
-<mat-tab-group>
-<mat-tab label="Table Ishodi">
-<app-tabela-ishoda [elementi]="ishodi" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-ishoda>
+    <mat-tab-group>
+        <mat-tab label="Table Ishodi">
+            <app-tabela-ishoda [elementi]="ishodi" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
+            </app-tabela-ishoda>
 
-<app-forma-ishoda *ngIf="prikaz"  [ishod]="ishodUpdate" (createEvent)="update($event)"></app-forma-ishoda>
-</mat-tab>
-<mat-tab label="Add Ishod">
-    <app-forma-ishoda (createEvent)="create($event)"></app-forma-ishoda>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-ishoda *ngIf="prikaz" [ishod]="ishodUpdate" (createEvent)="update($event)"></app-forma-ishoda>
+        </mat-tab>
+        <mat-tab label="Add Ishod">
+            <app-forma-ishoda (createEvent)="create($event)"></app-forma-ishoda>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

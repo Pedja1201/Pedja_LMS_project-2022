@@ -1,13 +1,16 @@
-<h2>{{title}}</h2>
+<div>
+    <h2>{{title}}</h2>
 
-<mat-tab-group>
-<mat-tab label="Table Student na godini">
-<app-tabela-studenta-na-godini [elementi]="studentiNaGodini" (uklanjanje)="delete($event)" 
-(izmena)="setUpdate($event)"></app-tabela-studenta-na-godini>
+    <mat-tab-group>
+        <mat-tab label="Table Student na godini">
+            <app-tabela-studenta-na-godini [elementi]="studentiNaGodini" (uklanjanje)="delete($event)"
+                (izmena)="setUpdate($event)"></app-tabela-studenta-na-godini>
 
-<app-forma-studenta-na-godini *ngIf="prikaz"  [studentNaGodini]="itemUpdate" (createEvent)="update($event)"></app-forma-studenta-na-godini>
-</mat-tab>
-<mat-tab label="Add Student na godini">
-    <app-forma-studenta-na-godini (createEvent)="create($event)"></app-forma-studenta-na-godini>
-</mat-tab>
-</mat-tab-group>
+            <app-forma-studenta-na-godini *ngIf="prikaz" [studentNaGodini]="itemUpdate" (createEvent)="update($event)">
+            </app-forma-studenta-na-godini>
+        </mat-tab>
+        <mat-tab label="Add Student na godini">
+            <app-forma-studenta-na-godini (createEvent)="create($event)"></app-forma-studenta-na-godini>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -5,6 +5,10 @@
   .about-heading{
     padding-bottom: 30px;
   }
+  #about{
+    background-color: rgb(193, 245, 241);
+    height: 100%;
+  }
   
   .about-heading h2{
     font-size: 32px;
