@@ -18,7 +18,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -290,7 +290,8 @@ import { StudentRegisterComponent } from './register/student-register/student-re
     MatChipsModule,
     MatTableModule,
     MatSnackBarModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule
 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}],//Login
