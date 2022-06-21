@@ -14,7 +14,7 @@ public class NastavniMaterijal {
     private String naziv;
     @Column(nullable = false)
     private String autor;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date godinaIzdavanja;
 
     @OneToMany(mappedBy = "nastavniMaterijal")

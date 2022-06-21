@@ -12,7 +12,7 @@ public class Univerzitet {
     private Long id;
     @Column(nullable = false)
     private String naziv;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date datumVremeOsnivanja;
 
     @ManyToOne(optional = false)
