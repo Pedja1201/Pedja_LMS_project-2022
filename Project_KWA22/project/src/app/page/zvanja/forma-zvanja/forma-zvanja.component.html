@@ -5,12 +5,18 @@
       <ng-template matStepLabel>Primary data</ng-template>
       <mat-form-field appearance="outline">
         <mat-label>Datum izbora: </mat-label>
-        <input matInput formControlName="datumIzbora" name="datumIzbora" type="date" required>
+        <input matInput formControlName="datumIzbora" name="datumIzbora" [matDatepicker]="picker" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Datum prestanka:</mat-label>
-        <input matInput formControlName="datumPrestanka" name="datumPrestanka" type="date" required>
+        <input matInput formControlName="datumPrestanka" name="datumPrestanka" [matDatepicker]="picker2" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>

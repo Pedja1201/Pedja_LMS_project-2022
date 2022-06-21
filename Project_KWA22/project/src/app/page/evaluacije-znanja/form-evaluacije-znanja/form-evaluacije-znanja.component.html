@@ -5,15 +5,21 @@
       <ng-template matStepLabel>Time data</ng-template>
       <mat-form-field appearance="outline">
         <mat-label>Vreme Pocetka:</mat-label>
-        <input matInput formControlName="vremePocetka" name="vremePocetka" type="date" required>
+        <input matInput formControlName="vremePocetka" name="vremePocetka" [matDatepicker]="picker" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Vreme Zavrsetka:</mat-label>
-          <input matInput formControlName="vremeZavrsetka" name="vremeZavrsetka" type="date" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Vreme Zavrsetka:</mat-label>
+        <input matInput formControlName="vremeZavrsetka" name="vremeZavrsetka" [matDatepicker]="picker2" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Secondary data">
       <mat-form-field appearance="fill">

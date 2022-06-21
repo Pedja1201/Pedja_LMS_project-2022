@@ -9,7 +9,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Datum vreme osnivanja: </mat-label>
-        <input matInput formControlName="datumVremeOsnivanja" name="datumVremeOsnivanja" type="date" required>
+        <input matInput formControlName="datumVremeOsnivanja" name="datumVremeOsnivanja" [matDatepicker]="picker" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <div>
         <button mat-button matStepperNext>Next</button>
@@ -17,12 +20,12 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Secondary data">
       <mat-form-field appearance="fill">
-      <mat-label>Adresa:</mat-label>
-      <mat-select name="adresa" formControlName="adresa" [compareWith]="comparator1" required>
-        <mat-option *ngFor="let adresa of adrese" [value]="adresa">
-          {{adresa.ulica}}
-        </mat-option>
-      </mat-select>
+        <mat-label>Adresa:</mat-label>
+        <mat-select name="adresa" formControlName="adresa" [compareWith]="comparator1" required>
+          <mat-option *ngFor="let adresa of adrese" [value]="adresa">
+            {{adresa.ulica}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Nastavnik:</mat-label>

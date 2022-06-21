@@ -9,3 +9,6 @@ mat-form-field{
 div{
     padding: 10px;
 }
+form {
+    display: flex;
+}
