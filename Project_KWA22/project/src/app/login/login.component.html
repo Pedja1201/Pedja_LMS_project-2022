@@ -1,5 +1,5 @@
 <div class="slika">
-  <p>Ulogovan: {{loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT'])}}</p>
+  <p>Ulogovan: {{loginService.validateRoles("[ROLE_ADMIN, 'ROLE_NASTAVNIK', 'ROLE_STUDENT']")}}</p>
 
 
 <form (ngSubmit)="login()" [formGroup]="loginForma" class="container" ngNativeValidate>

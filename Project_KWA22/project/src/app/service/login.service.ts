@@ -62,7 +62,7 @@ export class LoginService {
   }
 
   //Za proveru prava pristupa rutiranja
-  validateRoles(roles: string[]): boolean {
+  validateRoles(roles: any): boolean {   //roles:string[] je bio
     if (this.user) {
       // @ts-ignore
       const userRoles = new Set(this.user.roles);
