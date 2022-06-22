@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { NaucnaOblast, NaucnaOblastPage } from '../../model/naucna-oblast';
 import { NaucneOblastiService } from '../../service/naucne-oblasti.service';
 
@@ -17,7 +18,7 @@ export class NaucneOblastiComponent implements OnInit {
   itemUpdate : NaucnaOblast | null = null;
 
 
-  constructor(private service : NaucneOblastiService,  public snackBar:MatSnackBar) {
+  constructor(private service : NaucneOblastiService,  public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((naucneOblasti : NaucnaOblastPage<NaucnaOblast>) => {
       this.naucneOblasti = naucneOblasti.content;
     })

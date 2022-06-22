@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { Predmet, PredmetPage } from '../../model/predmet';
 import { PredmetiService } from '../../service/predmeti.service';
 
@@ -15,7 +16,7 @@ export class PredmetiComponent implements OnInit {
   predmeti : Predmet[] = [];
   predmetUpdate: Predmet | null = null;
 
-  constructor(private service : PredmetiService,  public snackBar:MatSnackBar) {
+  constructor(private service : PredmetiService,  public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((predmeti : PredmetPage<Predmet>) => {
       this.predmeti = predmeti.content;
     })

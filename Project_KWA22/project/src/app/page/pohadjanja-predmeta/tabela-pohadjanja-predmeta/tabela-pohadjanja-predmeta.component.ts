@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PohadjanjePredmeta, PohadjanjePredmetaPage } from 'src/app/model/pohadjanje-predmeta';
 import { Student } from 'src/app/model/student';
+import { LoginService } from 'src/app/service/login.service';
 import { PohadjanjaPredmetaService } from 'src/app/service/pohadjanja-predmeta.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 
@@ -28,7 +29,7 @@ export class TabelaPohadjanjaPredmetaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : PohadjanjaPredmetaService, private router : Router) { 
+  constructor(private servis : PohadjanjaPredmetaService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((pohadjanjaPredmeta : PohadjanjePredmetaPage<PohadjanjePredmeta>) => { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = pohadjanjaPredmeta.content;                            //Rutiranja posebne tabele komponenete       
     });

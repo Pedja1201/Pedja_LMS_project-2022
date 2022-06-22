@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Fakultet, FakultetPage } from 'src/app/model/fakultet';
 import { Student } from 'src/app/model/student';
 import { FakultetiService } from 'src/app/service/fakulteti.service';
+import { LoginService } from 'src/app/service/login.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class TabelaFakultetaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : FakultetiService, private router : Router) { 
+  constructor(private servis : FakultetiService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((fakulteti : FakultetPage<Fakultet>)=> { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = fakulteti.content;                            //Rutiranja posebne tabele komponenete       
     });

@@ -9,7 +9,7 @@
             <app-forma-predmeta *ngIf="prikaz" [predmet]="predmetUpdate" (createEvent)="update($event)">
             </app-forma-predmeta>
         </mat-tab>
-        <mat-tab label="Add Predmet">
+        <mat-tab label="Add Predmet" *ngIf="loginService.loggedIn">
             <app-forma-predmeta (createEvent)="create($event)"></app-forma-predmeta>
         </mat-tab>
     </mat-tab-group>

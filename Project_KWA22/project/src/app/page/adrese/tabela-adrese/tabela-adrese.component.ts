@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Adresa, AdresaPage } from 'src/app/model/adresa';
 import { AdreseService } from 'src/app/service/adrese.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-tabela-adrese',
@@ -42,7 +43,7 @@ export class TabelaAdreseComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private service : AdreseService, private router : Router) { 
+  constructor(private service : AdreseService, private router : Router, public loginService : LoginService) { 
     service.getAll().subscribe((adrese : AdresaPage<Adresa>)=> { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = adrese.content;                            //Rutiranja posebne tabele komponenete       
     });

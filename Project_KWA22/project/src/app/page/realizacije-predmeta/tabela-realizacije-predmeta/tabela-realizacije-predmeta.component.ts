@@ -2,6 +2,7 @@ import { CdkDragDrop, CdkDragEnd, CdkDropList, moveItemInArray, transferArrayIte
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RealizacijaPredmeta, RealizacijaPredmetaPage } from 'src/app/model/realizacija-predmeta';
+import { LoginService } from 'src/app/service/login.service';
 import { RealizacijePredmetaService } from 'src/app/service/realizacije-predmeta.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class TabelaRealizacijePredmetaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : RealizacijePredmetaService, private router : Router) { 
+  constructor(private servis : RealizacijePredmetaService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((realizacijePredmeta : RealizacijaPredmetaPage<RealizacijaPredmeta>) => { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = realizacijePredmeta.content;                            //Rutiranja posebne tabele komponenete       
     });

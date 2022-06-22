@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { Fakultet, FakultetPage } from '../../model/fakultet';
 import { AdreseService } from '../../service/adrese.service';
 import { FakultetiService } from '../../service/fakulteti.service';
@@ -22,7 +23,7 @@ export class FakultetiComponent implements OnInit {
 
 
   constructor(private service : FakultetiService, private univerzitetiService : UniverzitetiService, 
-    private adreseService : AdreseService, private nastavniciService : NastavniciService, public snackBar:MatSnackBar) {
+    private adreseService : AdreseService, private nastavniciService : NastavniciService, public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((fakulteti : FakultetPage<Fakultet>)=> {
       this.fakulteti = fakulteti.content;
     })

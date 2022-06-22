@@ -9,7 +9,7 @@
          <app-forma-pohadjanja-predmeta *ngIf="prikaz" [pohadjanjePredmeta]="itemUpdate" (createEvent)="update($event)">
          </app-forma-pohadjanja-predmeta>
       </mat-tab>
-      <mat-tab label="Add Pohadjanje predmeta">
+      <mat-tab label="Add Pohadjanje predmeta" *ngIf="loginService.loggedIn">
          <app-forma-pohadjanja-predmeta (createEvent)="create($event)"></app-forma-pohadjanja-predmeta>
       </mat-tab>
    </mat-tab-group>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { StudijskiProgram, StudijskiProgramPage } from '../../model/studijski-program';
 import { StudijskiProgramiService } from '../../service/studijski-programi.service';
 
@@ -17,7 +18,7 @@ export class StudijskiProgramiComponent implements OnInit {
   itemUpdate : StudijskiProgram | null = null;
 
 
-  constructor(private service : StudijskiProgramiService, public snackBar:MatSnackBar) {
+  constructor(private service : StudijskiProgramiService, public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((studijskiProgrami : StudijskiProgramPage<StudijskiProgram>) => {
       this.studijskiProgrami = studijskiProgrami.content;
     })

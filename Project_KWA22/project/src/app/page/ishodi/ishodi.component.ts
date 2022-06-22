@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 
 import { Ishod, IshodPage } from '../../model/ishod';
 import { IshodiService } from '../../service/ishodi.service';
@@ -19,7 +20,7 @@ export class IshodiComponent implements OnInit {
   ishodUpdate : Ishod | null = null;
 
 
-  constructor(private service : IshodiService, private predmetiService : PredmetiService,  public snackBar:MatSnackBar) {
+  constructor(private service : IshodiService, private predmetiService : PredmetiService,  public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((ishodi : IshodPage<Ishod>) => {
       this.ishodi = ishodi.content;
     })

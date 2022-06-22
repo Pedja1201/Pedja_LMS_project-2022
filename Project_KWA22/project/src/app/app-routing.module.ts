@@ -80,12 +80,12 @@ const routes: Routes = [
 
   //drzave
   {path: 'drzave', component: DrzaveComponent, 
-        data: {allowedRoles: ['ROLE_NASTAVNIK', 'ROLE_STUDENT']}, canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "drzave/:id", component: DetailsDrzavaComponent},
 
   //fakulteti
   {path: 'fakulteti', component: FakultetiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN']},canActivate: [AuthGuard] },//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN']} },//Login pre otvaranja
   {path: "fakulteti/:id", component: DetailsFakultetaComponent},
 
   //godineStudija
@@ -95,7 +95,7 @@ const routes: Routes = [
 
   //ishodi
   {path: 'ishodi', component: IshodiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}, canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "ishodi/:id", component: DetailsIshodaComponent},
 
   //mesta
@@ -115,22 +115,22 @@ const routes: Routes = [
 
   //naucneOblasti
   {path: 'naucneOblasti', component: NaucneOblastiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "naucneOblasti/:id", component: DetailsNaucneOblastiComponent},
 
   //pohadjanjaPredmeta
   {path: 'pohadjanjaPredmeta', component: PohadjanjaPredmetaComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "pohadjanjaPredmeta/:id", component: DetailsPohadjanjaPredmetaComponent},
 
   //predmeti
   {path: 'predmeti', component: PredmetiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "predmeti/:id", component: DetailsPredmetaComponent},
 
   //realizacijePredmeta
   {path: 'realizacijePredmeta', component: RealizacijePredmetaComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard] },//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "realizacijePredmeta/:id", component: DetailsRealizacijePredmetaComponent},
 
   //studenti
@@ -145,7 +145,7 @@ const routes: Routes = [
 
   //studijskiProgrami
   {path: 'studijskiProgrami', component: StudijskiProgramiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}, canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "studijskiProgrami/:id", component: DetailsStudijskihProgramaComponent},
 
   //tipoviNastave
@@ -160,7 +160,7 @@ const routes: Routes = [
 
   //univerziteti
   {path: 'univerziteti', component: UniverzitetiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard] },//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "univerziteti/:id", component: DetailsUniverzitetaComponent},
 
   //zvanja
@@ -191,7 +191,7 @@ const routes: Routes = [
 
   //Nastavni materijal
   {path: "nastavniMaterijali", component: NastavniMaterijalComponent, 
-  data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]}, //Login pre otvaranja
+  data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}}, //Login pre otvaranja
   {path: "nastavniMaterijali/:id", component: DetailsNastavniMaterijalComponent},
 
   //Ishodi nastave

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Mesto, MestoPage } from 'src/app/model/mesto';
 import { Student } from 'src/app/model/student';
+import { LoginService } from 'src/app/service/login.service';
 import { MestaService } from 'src/app/service/mesta.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 
@@ -25,7 +26,7 @@ export class TabelaMestaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : MestaService, private router : Router) { 
+  constructor(private servis : MestaService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((mesta : MestoPage<Mesto>) => { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = mesta.content;                            //Rutiranja posebne tabele komponenete       
     });

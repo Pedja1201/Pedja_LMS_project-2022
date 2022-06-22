@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NastavniMaterijal, NastavniMaterijalPage } from 'src/app/model/nastavni-materijal';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-table-nastavni-materijal',
@@ -21,7 +22,7 @@ export class TableNastavniMaterijalComponent implements OnInit {
   @Output()
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, public loginService : LoginService) { }
 
   ngOnInit(): void {
   }

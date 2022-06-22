@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { RealizacijaPredmeta, RealizacijaPredmetaPage } from '../../model/realizacija-predmeta';
 import { RealizacijePredmetaService } from '../../service/realizacije-predmeta.service';
 
@@ -16,7 +17,7 @@ export class RealizacijePredmetaComponent implements OnInit {
   itemUpdate : RealizacijaPredmeta | null = null;
 
 
-  constructor(private service : RealizacijePredmetaService, public snackBar:MatSnackBar) {
+  constructor(private service : RealizacijePredmetaService, public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((realizacijePredmeta : RealizacijaPredmetaPage<RealizacijaPredmeta>) => {
       this.realizacijePredmeta = realizacijePredmeta.content;
     })

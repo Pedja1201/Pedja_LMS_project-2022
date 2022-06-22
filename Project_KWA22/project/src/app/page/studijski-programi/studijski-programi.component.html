@@ -9,7 +9,7 @@
             <app-forma-studijskih-programa *ngIf="prikaz" [studijskiProgram]="itemUpdate"
                 (createEvent)="update($event)"></app-forma-studijskih-programa>
         </mat-tab>
-        <mat-tab label="Add Studijski program">
+        <mat-tab label="Add Studijski program" *ngIf="loginService.loggedIn">
             <app-forma-studijskih-programa (createEvent)="create($event)"></app-forma-studijskih-programa>
         </mat-tab>
     </mat-tab-group>

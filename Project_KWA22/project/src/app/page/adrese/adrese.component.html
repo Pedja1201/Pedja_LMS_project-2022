@@ -7,7 +7,7 @@
 
             <app-forma-adrese *ngIf="prikaz" [adresa]="adresaUpdate" (createEvent)="update($event)"></app-forma-adrese>
         </mat-tab>
-        <mat-tab label="Add Adresa">
+        <mat-tab label="Add Adresa" *ngIf="loginService.loggedIn">
             <app-forma-adrese (createEvent)="create($event)"></app-forma-adrese>
         </mat-tab>
     </mat-tab-group>

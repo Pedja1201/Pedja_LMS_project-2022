@@ -30,7 +30,7 @@ public class PredmetController {
 
     @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
+//    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<Page<PredmetDTO>> getAll(Pageable pageable) {
         Page<Predmet> predmet = predmetService.findAll(pageable);
         Page<PredmetDTO> predmeti = predmet.map(new Function<Predmet, PredmetDTO>() {
@@ -47,7 +47,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
+//    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<PredmetDTO> get(@PathVariable("predmetId") Long predmetId) {
         Optional<Predmet> predmet = predmetService.findOne(predmetId);
         if (predmet.isPresent()) {

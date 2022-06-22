@@ -9,7 +9,7 @@
             <app-forma-realizacije-predmeta *ngIf="prikaz" [realizacijaPredmeta]="itemUpdate"
                 (createEvent)="update($event)"></app-forma-realizacije-predmeta>
         </mat-tab>
-        <mat-tab label="Add Realizacija predmeta">
+        <mat-tab label="Add Realizacija predmeta" *ngIf="loginService.loggedIn">
             <app-forma-realizacije-predmeta (createEvent)="create($event)"></app-forma-realizacije-predmeta>
         </mat-tab>
     </mat-tab-group>

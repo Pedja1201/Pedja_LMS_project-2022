@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { Adresa, AdresaPage } from '../../model/adresa';
 import { AdreseService } from '../../service/adrese.service';
 
@@ -16,7 +17,7 @@ export class AdreseComponent implements OnInit {
   adrese : Adresa[] = [];
   adresaUpdate: Adresa | null = null;
 
-  constructor(private service : AdreseService, public snackBar:MatSnackBar) {
+  constructor(private service : AdreseService, public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((adrese : AdresaPage<Adresa>)=> {
       this.adrese = adrese.content;
     })

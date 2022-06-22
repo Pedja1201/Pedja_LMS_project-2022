@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { PohadjanjePredmeta, PohadjanjePredmetaPage } from '../../model/pohadjanje-predmeta';
 import { PohadjanjaPredmetaService } from '../../service/pohadjanja-predmeta.service';
 
@@ -17,7 +18,7 @@ export class PohadjanjaPredmetaComponent implements OnInit {
   itemUpdate : PohadjanjePredmeta | null = null;
 
 
-  constructor(private service : PohadjanjaPredmetaService,  public snackBar:MatSnackBar) {
+  constructor(private service : PohadjanjaPredmetaService,  public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((pohadjanjaPredmeta : PohadjanjePredmetaPage<PohadjanjePredmeta>) => {
       this.pohadjanjaPredmeta = pohadjanjaPredmeta.content;
     })

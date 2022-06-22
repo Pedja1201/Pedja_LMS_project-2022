@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { TipNastave, TipNastavePage } from 'src/app/model/tip-nastave';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-tabela-tipa-nastave',
@@ -21,7 +22,7 @@ export class TabelaTipaNastaveComponent implements OnInit {
   @Output()
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, public loginService : LoginService) { }
 
   ngOnInit(): void {
   }

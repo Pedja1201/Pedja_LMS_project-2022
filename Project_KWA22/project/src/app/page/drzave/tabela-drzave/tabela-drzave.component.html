@@ -18,10 +18,10 @@
   </ng-container>
 
   <ng-container matColumnDef="akcije">
-    <th mat-header-cell *matHeaderCellDef> Akcija </th>
+    <th mat-header-cell *matHeaderCellDef> <span *ngIf="loginService.loggedIn">Akcija</span> </th>
     <td mat-cell *matCellDef="let element"> {{element.akcije}}
-      <button mat-icon-button color="warn" (click)="ukloni(element['id'])"><mat-icon>delete</mat-icon></button>
-          <button mat-icon-button (click)="izmeni(element)"><mat-icon>edit</mat-icon></button>
+      <button *ngIf="loginService.loggedIn" mat-icon-button color="warn" (click)="ukloni(element['id'])"><mat-icon>delete</mat-icon></button>
+          <button *ngIf="loginService.loggedIn" mat-icon-button (click)="izmeni(element)"><mat-icon>edit</mat-icon></button>
     </td>
   </ng-container>
 

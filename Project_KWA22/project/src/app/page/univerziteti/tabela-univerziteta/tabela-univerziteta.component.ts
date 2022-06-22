@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/model/student';
 import { Univerzitet, UniverzitetPage } from 'src/app/model/univerzitet';
+import { LoginService } from 'src/app/service/login.service';
 import { StudentiService } from 'src/app/service/studenti.service';
 import { UniverzitetiService } from 'src/app/service/univerziteti.service';
 
@@ -25,7 +26,7 @@ export class TabelaUniverzitetaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : UniverzitetiService, private router : Router) { 
+  constructor(private servis : UniverzitetiService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((univerziteti : UniverzitetPage<Univerzitet>) => { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = univerziteti.content;                            //Rutiranja posebne tabele komponenete       
     });

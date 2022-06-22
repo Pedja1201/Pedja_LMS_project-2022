@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { GodinaStudija, GodinaStudijaPage } from 'src/app/model/godina-studija';
 import { GodineStudijaService } from 'src/app/service/godine-studija.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-tabela-godine-studija',
@@ -23,7 +24,7 @@ export class TabelaGodineStudijaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : GodineStudijaService, private router : Router) { 
+  constructor(private servis : GodineStudijaService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((godineStudija : GodinaStudijaPage<GodinaStudija>) => { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = godineStudija.content;                            //Rutiranja posebne tabele komponenete       
     });

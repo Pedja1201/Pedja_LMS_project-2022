@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { Drzava, DrzavaPage } from '../../model/drzava';
 import { DrzaveService } from '../../service/drzave.service';
 
@@ -16,7 +17,7 @@ export class DrzaveComponent implements OnInit {
   drzave : Drzava[] = [];
   drzavaUpdate: Drzava | null = null;
 
-  constructor(private service : DrzaveService, public snackBar:MatSnackBar) {
+  constructor(private service : DrzaveService, public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((drzave : DrzavaPage<Drzava>)=> {
       this.drzave = drzave.content;
     })

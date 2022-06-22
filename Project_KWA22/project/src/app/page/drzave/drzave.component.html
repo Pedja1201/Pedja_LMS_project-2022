@@ -8,7 +8,7 @@
 
             <app-forma-drzave *ngIf="prikaz" [drzava]="drzavaUpdate" (createEvent)="update($event)"></app-forma-drzave>
         </mat-tab>
-        <mat-tab label="Add Dzava">
+        <mat-tab label="Add Dzava" *ngIf="loginService.loggedIn">
             <app-forma-drzave (createEvent)="create($event)"></app-forma-drzave>
         </mat-tab>
     </mat-tab-group>

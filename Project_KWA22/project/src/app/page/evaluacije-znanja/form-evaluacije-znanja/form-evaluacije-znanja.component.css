@@ -5,6 +5,7 @@ form, h2{
 .mat-stepper-horizontal {
     margin-top: 8px;
     width: 80%;
+    margin-left: 20px;
   }
   
   .mat-form-field {

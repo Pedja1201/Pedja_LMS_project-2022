@@ -9,7 +9,7 @@
             <app-form-nastavni-materijal *ngIf="prikaz" [nastavniMaterijal]="materijalUpdate"
                 (createEvent)="update($event)"></app-form-nastavni-materijal>
         </mat-tab>
-        <mat-tab label="Add Nastavni Materijal">
+        <mat-tab label="Add Nastavni Materijal" *ngIf="loginService.loggedIn">
             <app-form-nastavni-materijal (createEvent)="create($event)"></app-form-nastavni-materijal>
         </mat-tab>
     </mat-tab-group>

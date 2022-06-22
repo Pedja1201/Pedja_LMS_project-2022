@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/service/login.service';
 import { TipNastave, TipNastavePage } from '../../model/tip-nastave';
 import { TipoviNastaveService } from '../../service/tipovi-nastave.service';
 
@@ -15,7 +16,7 @@ export class TipoviNastaveComponent implements OnInit {
   tipoviNastave : TipNastave[] = [];
   itemUpdate: TipNastave | null = null;
 
-  constructor(private service : TipoviNastaveService, public snackBar:MatSnackBar) {
+  constructor(private service : TipoviNastaveService, public snackBar:MatSnackBar, public loginService : LoginService) {
     service.getAll().subscribe((tipoviNastave : TipNastavePage<TipNastave>) => {
       this.tipoviNastave = tipoviNastave.content;
     })

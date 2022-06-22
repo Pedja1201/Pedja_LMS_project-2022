@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ishod, IshodPage } from 'src/app/model/ishod';
 import { IshodiService } from 'src/app/service/ishodi.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-tabela-ishoda',
@@ -23,7 +24,7 @@ export class TabelaIshodaComponent implements OnInit {
   izmena: EventEmitter<any> = new EventEmitter<any>();
 
 
-  constructor(private servis : IshodiService, private router : Router) { 
+  constructor(private servis : IshodiService, private router : Router, public loginService : LoginService) { 
     servis.getAll().subscribe((ishodi : IshodPage<Ishod>) => { //Ovo sluzi za dobavljanje studenata prilikom
       this.elementi = ishodi.content;                            //Rutiranja posebne tabele komponenete       
     });
