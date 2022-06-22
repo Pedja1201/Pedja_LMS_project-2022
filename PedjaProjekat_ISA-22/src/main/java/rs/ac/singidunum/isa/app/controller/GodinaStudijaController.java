@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.GodinaStudijaDTO;
@@ -59,6 +60,7 @@ public class GodinaStudijaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<GodinaStudijaDTO> create(@RequestBody GodinaStudija godinaStudija) {
         try {
             godinaStudijaService.save(godinaStudija);
@@ -78,6 +80,7 @@ public class GodinaStudijaController {
     }
 
     @RequestMapping(path = "/{godinaStudijaId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<GodinaStudijaDTO> update(@PathVariable("godinaStudijaId") Long godinaStudijaId,
                                                    @RequestBody GodinaStudija izmenjenaGodinaStudija) {
         GodinaStudija godinaStudija = godinaStudijaService.findOne(godinaStudijaId).orElse(null);
@@ -97,6 +100,7 @@ public class GodinaStudijaController {
     }
 
     @RequestMapping(path = "/{godinaStudijaId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<GodinaStudijaDTO> delete(@PathVariable("godinaStudijaId") Long godinaStudijaId) {
         if (godinaStudijaService.findOne(godinaStudijaId).isPresent()) {
             godinaStudijaService.delete(godinaStudijaId);

@@ -45,7 +45,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
+//    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<PohadjanjePredmetaDTO> get(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId) {
         Optional<PohadjanjePredmeta> pohadjanjePredmeta = pohadjanjePredmetaService.findOne(pohadjanjePredmetaId);
         if (pohadjanjePredmeta.isPresent()) {

@@ -26,6 +26,7 @@ public class NastavnikNaRealizacijiController {
     private NastavnikNaRealizacijiService nastavnikNaRealizacijiService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<Page<NastavnikNaRealizacijiDTO>> getAll(Pageable pageable) {
         Page<NastavnikNaRealizaciji> nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findAll(pageable);
         Page<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji = nastavnikNaRealizaciji.map(new Function<NastavnikNaRealizaciji, NastavnikNaRealizacijiDTO>() {
@@ -46,6 +47,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.GET)
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> get(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {
         Optional<NastavnikNaRealizaciji> nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId);
         if (nastavnikNaRealizaciji.isPresent()) {

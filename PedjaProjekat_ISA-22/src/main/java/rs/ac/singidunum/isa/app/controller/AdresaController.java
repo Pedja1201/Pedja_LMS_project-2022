@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
@@ -54,6 +55,7 @@ public class AdresaController {
     }
     @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdresaDTO> create(@RequestBody Adresa adresa) {
         try {
             adresaService.save(adresa);
@@ -69,6 +71,7 @@ public class AdresaController {
     }
     @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdresaDTO> update(@PathVariable("adresaId") Long adresaId,
                                                    @RequestBody Adresa izmenjenaAdresa) {
         Adresa adresa = adresaService.findOne(adresaId).orElse(null);
@@ -84,6 +87,7 @@ public class AdresaController {
     }
     @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdresaDTO> delete(@PathVariable("adresaId") Long adresaId) {
         if (adresaService.findOne(adresaId).isPresent()) {
             adresaService.delete(adresaId);

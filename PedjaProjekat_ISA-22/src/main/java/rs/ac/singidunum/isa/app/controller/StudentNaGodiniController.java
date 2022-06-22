@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.GodinaStudijaDTO;
@@ -24,6 +25,7 @@ public class StudentNaGodiniController {
     private StudentNaGodiniService studentNaGodiniService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<Page<StudentNaGodiniDTO>> getAll(Pageable pageable) {
         Page<StudentNaGodini> studentNaGodini = studentNaGodiniService.findAll(pageable);
         Page<StudentNaGodiniDTO> studentiNaGodini = studentNaGodini.map(new Function<StudentNaGodini, StudentNaGodiniDTO>() {
@@ -41,6 +43,7 @@ public class StudentNaGodiniController {
     }
 
     @RequestMapping(path = "/{studentNaGodiniId}", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<StudentNaGodiniDTO> get(@PathVariable("studentNaGodiniId") Long studentNaGodiniId) {
         Optional<StudentNaGodini> studentNaGodini = studentNaGodiniService.findOne(studentNaGodiniId);
         if (studentNaGodini.isPresent()) {
@@ -54,6 +57,7 @@ public class StudentNaGodiniController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<StudentNaGodiniDTO> create(@RequestBody StudentNaGodini studentNaGodini) {
         try {
             studentNaGodiniService.save(studentNaGodini);
@@ -71,6 +75,7 @@ public class StudentNaGodiniController {
     }
 
     @RequestMapping(path = "/{studentNaGodiniId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<StudentNaGodiniDTO> update(@PathVariable("studentNaGodiniId") Long studentNaGodiniId,
                                                    @RequestBody StudentNaGodini izmenjeniStudentNaGodini) {
         StudentNaGodini studentNaGodini = studentNaGodiniService.findOne(studentNaGodiniId).orElse(null);
@@ -88,6 +93,7 @@ public class StudentNaGodiniController {
     }
 
     @RequestMapping(path = "/{studentNaGodiniId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<StudentNaGodiniDTO> delete(@PathVariable("studentNaGodiniId") Long studentNaGodiniId) {
         if (studentNaGodiniService.findOne(studentNaGodiniId).isPresent()) {
             studentNaGodiniService.delete(studentNaGodiniId);

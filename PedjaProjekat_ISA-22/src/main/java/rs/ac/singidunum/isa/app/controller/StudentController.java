@@ -32,7 +32,7 @@ public class StudentController {
 
     @LoggedStudent
     @RequestMapping(path = "", method = RequestMethod.GET)
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<Page<StudentDTO>> getAll(Pageable pageable) {
         Page<Student> student = studentService.findAll(pageable);
         Page<StudentDTO> studenti = student.map(new Function<Student, StudentDTO>() {
@@ -52,6 +52,7 @@ public class StudentController {
     }
 
     @RequestMapping(path = "/{studentId}", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<StudentDTO> get(@PathVariable("studentId") Long studentId) {
         Optional<Student> student = studentService.findOne(studentId);
         if (student.isPresent()) {
@@ -68,6 +69,7 @@ public class StudentController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudentDTO> create(@RequestBody Student student) {
         try {
             studentService.save(student);
@@ -85,6 +87,7 @@ public class StudentController {
     }
 
     @RequestMapping(path = "/{studentId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Student> update(@PathVariable("studentId") Long studentId,
                                           @RequestBody Student izmenjenStudent) {
         Student student = studentService.findOne(studentId).orElse(null);
@@ -112,7 +115,7 @@ public class StudentController {
     }
     //ispravljena metoda za dobavljanje svih predmeta na kojima je angazovan nastavnik
     @RequestMapping(path = "/nastavnik/{id}", method = RequestMethod.GET)
-//    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK"})
     public ResponseEntity<Iterable<StudentDTO>> pronadjiStudenteNaPredmetimaNastavnika(@PathVariable("id")Long nastavnikId) {
         ArrayList<StudentDTO> studentDTOS = new ArrayList<StudentDTO>();
         Nastavnik n = this.nastavnikService.findOne(nastavnikId).orElse(null);

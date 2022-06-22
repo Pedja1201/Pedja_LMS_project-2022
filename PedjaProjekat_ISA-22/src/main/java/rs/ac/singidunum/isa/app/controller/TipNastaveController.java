@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.TipNastaveDTO;
@@ -48,6 +49,7 @@ public class TipNastaveController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipNastaveDTO> create(@RequestBody TipNastave tipNastave) {
         try {
             tipNastaveService.save(tipNastave);
@@ -61,6 +63,7 @@ public class TipNastaveController {
     }
 
     @RequestMapping(path = "/{tipNastaveId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipNastaveDTO> update(@PathVariable("tipNastaveId") Long tipNastaveId,
                                              @RequestBody TipNastave izmenjenTipNastave) {
         TipNastave tipNastave = tipNastaveService.findOne(tipNastaveId).orElse(null);
@@ -75,6 +78,7 @@ public class TipNastaveController {
     }
 
     @RequestMapping(path = "/{tipNastaveId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipNastaveDTO> delete(@PathVariable("tipNastaveId") Long tipNastaveId) {
         if (tipNastaveService.findOne(tipNastaveId).isPresent()) {
             tipNastaveService.delete(tipNastaveId);

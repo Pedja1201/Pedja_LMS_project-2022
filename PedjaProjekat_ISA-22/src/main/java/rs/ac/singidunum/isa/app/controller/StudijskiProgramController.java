@@ -24,7 +24,7 @@ public class StudijskiProgramController {
     @Autowired
     private StudijskiProgramService studijskiProgramService;
 
-    @LoggedStudijskiProgram //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
+//    @LoggedStudijskiProgram //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<StudijskiProgramDTO>> getAll(Pageable pageable) {
         Page<StudijskiProgram> studijskiProgram = studijskiProgramService.findAll(pageable);

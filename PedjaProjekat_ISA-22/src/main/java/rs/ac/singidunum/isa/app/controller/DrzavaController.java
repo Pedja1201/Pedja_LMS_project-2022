@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.DrzavaDTO;
@@ -53,6 +54,7 @@ public class DrzavaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<DrzavaDTO> create(@RequestBody Drzava drzava) {
         try {
             drzavaService.save(drzava);
@@ -69,6 +71,7 @@ public class DrzavaController {
     }
 
     @RequestMapping(path = "/{drzavaId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<DrzavaDTO> update(@PathVariable("drzavaId") Long drzavaId,
                                                    @RequestBody Drzava izmenjenaDrzava) {
         Drzava drzava = drzavaService.findOne(drzavaId).orElse(null);
@@ -86,6 +89,7 @@ public class DrzavaController {
     }
 
     @RequestMapping(path = "/{drzavaId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<DrzavaDTO> delete(@PathVariable("drzavaId") Long drzavaId) {
         if (drzavaService.findOne(drzavaId).isPresent()) {
             drzavaService.delete(drzavaId);

@@ -29,7 +29,6 @@ public class UniverzitetController {
 
     @LoggedUniverzitet
     @RequestMapping(path = "", method = RequestMethod.GET)
-    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Page<UniverzitetDTO>> getAll(Pageable pageable) {
         Page<Univerzitet> univerzitet = univerzitetService.findAll(pageable);
         Page<UniverzitetDTO> univerziteti = univerzitet.map(new Function<Univerzitet, UniverzitetDTO>() {
@@ -67,6 +66,7 @@ public class UniverzitetController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<UniverzitetDTO> create(@RequestBody Univerzitet univerzitet) {
         try {
             univerzitetService.save(univerzitet);
@@ -87,6 +87,7 @@ public class UniverzitetController {
     }
 
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<UniverzitetDTO> update(@PathVariable("univerzitetId") Long univerzitetId,
                                              @RequestBody Univerzitet izmenjenUniverzitet) {
         Univerzitet univerzitet = univerzitetService.findOne(univerzitetId).orElse(null);
@@ -107,6 +108,7 @@ public class UniverzitetController {
     }
 
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<UniverzitetDTO> delete(@PathVariable("univerzitetId") Long univerzitetId) {
         if (univerzitetService.findOne(univerzitetId).isPresent()) {
             univerzitetService.delete(univerzitetId);

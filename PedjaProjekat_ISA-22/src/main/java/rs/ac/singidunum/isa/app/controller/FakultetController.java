@@ -26,7 +26,6 @@ public class FakultetController {
 
     @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
-    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Page<FakultetDTO>> getAll(Pageable pageable) {
         Page<Fakultet> fakultet = fakultetService.findAll(pageable);
         Page<FakultetDTO> fakulteti = fakultet.map(new Function<Fakultet, FakultetDTO>() {
@@ -65,6 +64,7 @@ public class FakultetController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<FakultetDTO> create(@RequestBody Fakultet fakultet) {
         try {
             fakultetService.save(fakultet);
@@ -84,6 +84,7 @@ public class FakultetController {
     }
 
     @RequestMapping(path = "/{fakultetId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<FakultetDTO> update(@PathVariable("fakultetId") Long fakultetId,
                                                @RequestBody Fakultet izmenjeniFakultet) {
         Fakultet fakultet = fakultetService.findOne(fakultetId).orElse(null);
@@ -104,6 +105,7 @@ public class FakultetController {
     }
 
     @RequestMapping(path = "/{fakultetId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<FakultetDTO> delete(@PathVariable("fakultetId") Long fakultetId) {
         if (fakultetService.findOne(fakultetId).isPresent()) {
             fakultetService.delete(fakultetId);

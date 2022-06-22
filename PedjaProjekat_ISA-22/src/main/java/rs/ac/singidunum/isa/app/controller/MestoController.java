@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.dto.DrzavaDTO;
@@ -51,6 +52,7 @@ public class MestoController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<MestoDTO> create(@RequestBody Mesto mesto) {
         try {
             mestoService.save(mesto);
@@ -66,6 +68,7 @@ public class MestoController {
     }
 
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<MestoDTO> update(@PathVariable("mestoId") Long mestoId,
                                                    @RequestBody Mesto izmenjenoMesto) {
         Mesto mesto = mestoService.findOne(mestoId).orElse(null);
@@ -81,6 +84,7 @@ public class MestoController {
     }
 
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<MestoDTO> delete(@PathVariable("mestoId") Long mestoId) {
         if (mestoService.findOne(mestoId).isPresent()) {
             mestoService.delete(mestoId);
