@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.LoggedZvanje;
@@ -55,6 +56,7 @@ public class ZvanjeController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<ZvanjeDTO> create(@RequestBody Zvanje zvanje) {
         try {
             zvanjeService.save(zvanje);
@@ -70,6 +72,7 @@ public class ZvanjeController {
     }
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.PUT)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<ZvanjeDTO> update(@PathVariable("zvanjeId") Long zvanjeId,
                                             @RequestBody Zvanje izmenjenoZvanje) {
         Zvanje zvanje = zvanjeService.findOne(zvanjeId).orElse(null);
@@ -85,6 +88,7 @@ public class ZvanjeController {
     }
 
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.DELETE)
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<ZvanjeDTO> delete(@PathVariable("zvanjeId") Long zvanjeId) {
         if (zvanjeService.findOne(zvanjeId).isPresent()) {
             zvanjeService.delete(zvanjeId);

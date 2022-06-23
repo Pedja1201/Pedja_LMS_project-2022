@@ -62,7 +62,7 @@ public class NaucnaOblastController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_ADMIN, ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NaucnaOblastDTO> createNaucnaOblast(@RequestBody NaucnaOblast naucnaOblast) {
         try {
             naucnaOblastService.save(naucnaOblast);
@@ -81,7 +81,7 @@ public class NaucnaOblastController {
     }
 
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_ADMIN, ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NaucnaOblastDTO> updateNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId,
                                                @RequestBody NaucnaOblast izmenjenaNaucnaOblast) {
         NaucnaOblast naucnaOblast = naucnaOblastService.findOne(naucnaOblastId).orElse(null);
@@ -101,7 +101,7 @@ public class NaucnaOblastController {
     }
 
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_ADMIN, ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NaucnaOblastDTO> deleteNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId) {
         if (naucnaOblastService.findOne(naucnaOblastId).isPresent()) {
             naucnaOblastService.delete(naucnaOblastId);
