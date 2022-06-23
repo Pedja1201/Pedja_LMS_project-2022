@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { GodinaStudija, GodinaStudijaPage } from 'src/app/model/godina-studija';
 import { Student } from 'src/app/model/student';
 import { StudentNaGodini } from 'src/app/model/student-na-godini';
@@ -13,6 +13,10 @@ import { GodineStudijaService } from 'src/app/service/godine-studija.service';
 export class FormaStudentaNaGodiniComponent implements OnInit {
   title='Forma Studenta na godini'
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
 
   godineStudija: GodinaStudija[] = [];
   
@@ -29,7 +33,7 @@ export class FormaStudentaNaGodiniComponent implements OnInit {
   @Input()
   studentNaGodini: StudentNaGodini|null = null;
 
-  constructor(private godineStudijaService : GodineStudijaService) { }
+  constructor(private godineStudijaService : GodineStudijaService, private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, FormBuilder } from '@angular/forms';
 import { Drzava } from 'src/app/model/drzava';
 import { NastavniMaterijal } from 'src/app/model/nastavni-materijal';
 
@@ -12,7 +12,10 @@ export class FormNastavniMaterijalComponent implements OnInit {
   title='Forma Nastavni Materijal'
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
-
+  isLinear = false;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
 
   forma : FormGroup = new FormGroup({
     "autor": new FormControl(null, [Validators.required]),
@@ -26,7 +29,7 @@ export class FormNastavniMaterijalComponent implements OnInit {
   @Output()
   public createEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
