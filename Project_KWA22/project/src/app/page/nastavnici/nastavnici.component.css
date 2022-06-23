@@ -6,3 +6,7 @@ div{
     background-color: rgb(193, 245, 241);
     height: 100%;
 }
+button{
+    margin: 30px;
+    width: 20%;
+}

@@ -37,9 +37,9 @@ export class NastavniciService {
     if (parametri == undefined) {
       return this.client.get<Nastavnik[]>(`${this.baseUrl}/nastavnici`);
     }
-    return this.client.get<Nastavnik[]>(`${this.baseUrl}/nastavnici`).pipe(
+    return this.client.get<NastavnikPage<Nastavnik>>(`${this.baseUrl}/nastavnici`).pipe(
       map(nastavnici => {
-        return nastavnici.filter(nastavnik => {
+        return nastavnici.content.filter(nastavnik => {
           let rezultat = true;
           if (nastavnik["ime"] && parametri["ime"]) {
             rezultat &&= nastavnik["ime"] == parametri["ime"];

@@ -11,6 +11,7 @@ import { StudentiService } from '../../service/studenti.service';
 export class StudentiComponent implements OnInit {
   title="Primer studenata";
   prikaz = false;
+  prikazPretrage = false;
   
   //Studenti
   studenti : Student[]=[];
@@ -24,7 +25,9 @@ export class StudentiComponent implements OnInit {
     })
   }
 
-
+  open(){
+    this.prikazPretrage = true
+  }
 
   ngOnInit(): void {
     this.getAll();

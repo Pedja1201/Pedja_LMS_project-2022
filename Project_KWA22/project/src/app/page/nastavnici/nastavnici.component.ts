@@ -11,6 +11,7 @@ import { NastavniciService } from '../../service/nastavnici.service';
 export class NastavniciComponent implements OnInit {
   title="Primer Nastavnika";
   prikaz = false;
+  prikazPretrage = false;
   
   //Nastavnik
   nastavnici : Nastavnik[]=[];
@@ -24,7 +25,9 @@ export class NastavniciComponent implements OnInit {
     })
   }
 
-
+  open(){
+    this.prikazPretrage = true
+  }
 
   ngOnInit(): void {
     this.getAll();

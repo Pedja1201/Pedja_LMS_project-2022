@@ -105,7 +105,7 @@ const routes: Routes = [
 
   //nastavnici
   {path: 'nastavnici', component: NastavniciComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN']},canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: [ "[ROLE_ADMIN]", "[ROLE_NASTAVNIK]" ]},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "nastavnici/:id", component: DetailsNastavnikaComponent},
 
   //nastavniciNaRealizaciji

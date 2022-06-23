@@ -37,9 +37,9 @@ export class StudentiService {
     if (parametri == undefined) {
       return this.client.get<Student[]>(`${this.baseUrl}/studenti`);
     }
-    return this.client.get<Student[]>(`${this.baseUrl}/studenti`).pipe(
+    return this.client.get<StudentPage<Student>>(`${this.baseUrl}/studenti`).pipe(
       map(studenti => {
-        return studenti.filter(student => {
+        return studenti.content.filter(student => {
           let rezultat = true;
           if (student["jmbg"] && parametri["jmbg"]) {
             rezultat &&= student["jmbg"] == parametri["jmbg"];
