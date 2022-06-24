@@ -33,7 +33,7 @@
     <button mat-menu-item [routerLink]="['/about']"><mat-icon> live_help</mat-icon>About</button>
   </mat-menu>
 
-  <button mat-button  [matMenuTriggerFor]="menu4"><mat-icon>library_books</mat-icon><b><i>Predmeti</i></b></button>
+  <button mat-button  *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT'])"  [matMenuTriggerFor]="menu4"><mat-icon>library_books</mat-icon><b><i>Predmeti</i></b></button>
   <mat-menu #menu4="matMenu">
     <button mat-menu-item   [routerLink]="['/predmeti']">	<mat-icon>subject</mat-icon>Predmeti na studijama</button>
     <button mat-menu-item [routerLink]="['/realizacijePredmeta']"><mat-icon>done_outline</mat-icon>Realizacije predmeta</button>
@@ -49,20 +49,20 @@
     <button mat-menu-item  [routerLink]="['/drzave']">	<mat-icon> my_location</mat-icon>Drzave</button>
   </mat-menu>
 
-  <button id='desno2'   *ngIf="loginService.loggedIn" mat-button [matMenuTriggerFor]="menuSifarnik"><mat-icon>settings</mat-icon>Šifarnik</button>
+  <button id='desno2'   *ngIf="loginService.validateRoles(['ROLE_ADMIN'])" mat-button [matMenuTriggerFor]="menuSifarnik"><mat-icon>settings</mat-icon>Šifarnik</button>
   <mat-menu #menuSifarnik="matMenu">
     <button mat-menu-item  [routerLink]="['/studenti']">	<mat-icon>security</mat-icon>Administracija Studenata</button>
-    <button mat-menu-item [routerLink]="['/studentiNaGodini']">	<mat-icon>image_search</mat-icon>Pregled studenta na godini</button>
+    <button mat-menu-item [routerLink]="['/nastavnici']"><mat-icon>group_add</mat-icon>Administracija nastavnika</button>
     <button mat-menu-item  [routerLink]="['/studijskiProgrami']">	<mat-icon>security</mat-icon>Administracija Studijskih programa</button>
     <button mat-menu-item [routerLink]="['/univerziteti']">	<mat-icon>security</mat-icon>Administracija univerziteta</button>
-    <button mat-menu-item [routerLink]="['/nastavnici']"><mat-icon>group_add</mat-icon>Dodavanje nastavnika</button>
     <button mat-menu-item [routerLink]="['/nastavniciNaRealizaciji']"><mat-icon> list_alt</mat-icon>Evidencija o Nastavnicima na realizaciji</button>
     <button mat-menu-item [routerLink]="['/tipoviZvanja']">	<mat-icon> short_text</mat-icon>Tipovi zvanja</button>
     <button mat-menu-item [routerLink]="['/zvanja']">	<mat-icon>school</mat-icon>Zvanja</button>
   </mat-menu>
 
-  <button id='desno2'   *ngIf="loginService.loggedIn" mat-button [matMenuTriggerFor]="menuNastava">	<mat-icon>settings_applications</mat-icon>Nastava</button>
+  <button id='desno2'   *ngIf="loginService.validateRoles(['ROLE_ADMIN' , 'ROLE_NASTAVNIK'])" mat-button [matMenuTriggerFor]="menuNastava">	<mat-icon>settings_applications</mat-icon>Nastava</button>
   <mat-menu #menuNastava="matMenu">
+    <button mat-menu-item [routerLink]="['/studentiNaGodini']">	<mat-icon>image_search</mat-icon>Pregled studenta na godini</button>
     <button mat-menu-item [routerLink]="['/polaganja']"><mat-icon>book</mat-icon>Polaganja</button>
     <button mat-menu-item [routerLink]="['/evaluacijeZnanja']">	<mat-icon> show_chart</mat-icon>Evaluacija Znanja</button>
     <button mat-menu-item [routerLink]="['/tipoviEvaluacije']"><mat-icon> merge_type</mat-icon>Tip Evaluacije</button>

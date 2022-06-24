@@ -1,12 +1,15 @@
 <div>
     <h2>{{title}}</h2>
     <mat-tab-group>
-        <mat-tab label="Register Nastavnik">
+        <mat-tab label="Register Nastavnik" *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK'])">
             <app-nastavnik-register (createEvent)="createNastavnik($event)"></app-nastavnik-register>
         </mat-tab>
 
-        <mat-tab label="Register Student">
+        <mat-tab label="Register Student" *ngIf="loginService.validateRoles(['ROLE_ADMIN'])">
             <app-student-register (createEvent)="createStudent($event)"></app-student-register>
+        </mat-tab>
+        <mat-tab label="Register Administrator"  *ngIf="loginService.validateRoles(['ROLE_ADMIN'])">
+            <app-admin-register (createEvent)="createAdmin($event)"></app-admin-register>
         </mat-tab>
     </mat-tab-group>
 </div>

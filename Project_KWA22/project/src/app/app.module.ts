@@ -145,6 +145,7 @@ import { DetailsIshodiNastaveComponent } from './page/ishodi-nastave/details-ish
 import { RegisterComponent } from './register/register.component';
 import { NastavnikRegisterComponent } from './register/nastavnik-register/nastavnik-register.component';
 import { StudentRegisterComponent } from './register/student-register/student-register.component';
+import { AdminRegisterComponent } from './register/admin-register/admin-register.component';
 
 
 @NgModule({
@@ -269,6 +270,7 @@ import { StudentRegisterComponent } from './register/student-register/student-re
     RegisterComponent,
     NastavnikRegisterComponent,
     StudentRegisterComponent,
+    AdminRegisterComponent,
   ],
   imports: [
     BrowserModule,

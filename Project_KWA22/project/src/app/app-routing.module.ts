@@ -69,7 +69,7 @@ const routes: Routes = [
   //Users
   {path: 'korisnici',component: UsersComponent, data: { allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard],
   children: [
-      {component: TableUsersComponent, path: '', data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}, canActivate: [AuthGuard]},
+      {component: TableUsersComponent, path: '', data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},
       {component: FormUsersComponent, path: 'create', data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},
       {component: FormUsersComponent, path: ':id/update', data: {allowedRoles: ['ROLE_ADMIN']}, canActivate: [AuthGuard]},
     ]},{path: 'users/:id',component: DetailsUsersComponent},
@@ -80,7 +80,7 @@ const routes: Routes = [
 
   //drzave
   {path: 'drzave', component: DrzaveComponent, 
-        data: {allowedRoles: ['ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN','ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
   {path: "drzave/:id", component: DetailsDrzavaComponent},
 
   //fakulteti
@@ -105,7 +105,7 @@ const routes: Routes = [
 
   //nastavnici
   {path: 'nastavnici', component: NastavniciComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK']},canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN']},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "nastavnici/:id", component: DetailsNastavnikaComponent},
 
   //nastavniciNaRealizaciji
@@ -135,7 +135,7 @@ const routes: Routes = [
 
   //studenti
   {path: 'studenti', component: StudentiComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN']},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "studenti/:id", component: DetailsStudentaComponent},
 
   //studentiNaGodini
@@ -175,7 +175,7 @@ const routes: Routes = [
 
   //EvaluacijeZnanja
   {path: "evaluacijeZnanja", component: EvaluacijeZnanjaComponent, 
-        data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard] }, //Login pre otvaranja
+        data: { allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK']},canActivate: [AuthGuard] }, //Login pre otvaranja
   {path: "evaluacijeZnanja/:id", component: DetailsEvaluacijeZnanjaComponent},
 
   //Tipovievaluacije
