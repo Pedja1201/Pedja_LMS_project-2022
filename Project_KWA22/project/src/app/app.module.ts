@@ -146,6 +146,7 @@ import { RegisterComponent } from './register/register.component';
 import { NastavnikRegisterComponent } from './register/nastavnik-register/nastavnik-register.component';
 import { StudentRegisterComponent } from './register/student-register/student-register.component';
 import { AdminRegisterComponent } from './register/admin-register/admin-register.component';
+import { PretragaStudentaNaGodiniComponent } from './page/studenti-na-godini/pretraga-studenta-na-godini/pretraga-studenta-na-godini.component';
 
 
 @NgModule({
@@ -271,6 +272,7 @@ import { AdminRegisterComponent } from './register/admin-register/admin-register
     NastavnikRegisterComponent,
     StudentRegisterComponent,
     AdminRegisterComponent,
+    PretragaStudentaNaGodiniComponent,
   ],
   imports: [
     BrowserModule,

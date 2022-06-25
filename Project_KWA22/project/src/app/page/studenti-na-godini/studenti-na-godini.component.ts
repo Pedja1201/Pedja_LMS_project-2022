@@ -11,10 +11,12 @@ import { StudentiNaGodiniService } from '../../service/studenti-na-godini.servic
 export class StudentiNaGodiniComponent implements OnInit {
   title="Primer Studenta na godini";
   prikaz = false;
+  prikazPretrage = false;
   
 
   studentiNaGodini : StudentNaGodini[]=[];
   itemUpdate : StudentNaGodini | null = null;
+  parametri : any = {}; //Za pretragu
 
 
   constructor(private service : StudentiNaGodiniService, public snackBar:MatSnackBar) {
@@ -23,6 +25,9 @@ export class StudentiNaGodiniComponent implements OnInit {
     })
   }
 
+  open(){
+    this.prikazPretrage = true
+  }
 
 
   ngOnInit(): void {
@@ -70,6 +75,18 @@ export class StudentiNaGodiniComponent implements OnInit {
   setUpdate(studentNaGodini: any) {
     this.itemUpdate = { ...studentNaGodini };
     this.prikaz = true;
+  }
+
+  // Pretraga
+  search(parametri : any) {
+    if(parametri === undefined) {
+      parametri = this.parametri;
+    } else {
+      this.parametri = parametri;
+    }
+    this.service.pretrazi(parametri).subscribe((studentiNaGodini : StudentNaGodini[]) => {
+      this.studentiNaGodini = studentiNaGodini;
+    });
   }
 
 }

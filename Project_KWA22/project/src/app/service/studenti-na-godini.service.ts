@@ -37,9 +37,9 @@ export class StudentiNaGodiniService {
     if (parametri == undefined) {
       return this.client.get<StudentNaGodini[]>(`${this.baseUrl}/studentiNaGodini`);
     }
-    return this.client.get<StudentNaGodini[]>(`${this.baseUrl}/studentiNaGodini`).pipe(
+    return this.client.get<StudentNaGodiniPage<StudentNaGodini>>(`${this.baseUrl}/studentiNaGodini`).pipe(
       map(studenti => {
-        return studenti.filter(student => {
+        return studenti.content.filter(student => {
           let rezultat = true;
           if (student["brojIndeksa"] && parametri["brojIndeksa"]) {
             rezultat &&= student["brojIndeksa"] == parametri["brojIndeksa"];

@@ -1,0 +1,14 @@
+<h2>{{title}}</h2>
+<form (submit)="pretrazi()" [formGroup]="parametri"  ngNativeValidate>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Broj Indeksa: </mat-label>
+        <input matInput name="brojIndeksa" formControlName="brojIndeksa" type="text" >
+      </mat-form-field>
+    </div>
+
+  <div>
+    <button mat-raised-button type="submit">Pretrazi </button>
+  </div>
+</form>

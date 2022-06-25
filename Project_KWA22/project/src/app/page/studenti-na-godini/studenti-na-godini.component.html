@@ -3,6 +3,9 @@
 
     <mat-tab-group>
         <mat-tab label="Table Student na godini">
+            <button mat-stroked-button   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Studente na godini </button>
+            <app-pretraga-studenta-na-godini *ngIf="prikazPretrage" (pretraga)="search($event)"></app-pretraga-studenta-na-godini>
+
             <app-tabela-studenta-na-godini [elementi]="studentiNaGodini" (uklanjanje)="delete($event)"
                 (izmena)="setUpdate($event)"></app-tabela-studenta-na-godini>
 
