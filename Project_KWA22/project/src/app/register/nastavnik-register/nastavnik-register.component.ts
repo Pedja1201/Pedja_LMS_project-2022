@@ -15,6 +15,7 @@ import { ZvanjaService } from 'src/app/service/zvanja.service';
 })
 export class NastavnikRegisterComponent implements OnInit {
   title='Registrovanje Nastavnika'
+  hide = true;
 
 
   adrese: Adresa[] = [];

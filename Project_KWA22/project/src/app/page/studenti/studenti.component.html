@@ -3,7 +3,7 @@
 
     <mat-tab-group>
         <mat-tab label="Table Student">
-            <button mat-stroked-button   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Studente </button>
+            <button  mat-mini-fab color="link"   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Studente </button>
             <app-pretraga-studenta *ngIf="prikazPretrage" (pretraga)="search($event)"></app-pretraga-studenta>
 
             <app-tabela-studenta [elementi]="studenti" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">

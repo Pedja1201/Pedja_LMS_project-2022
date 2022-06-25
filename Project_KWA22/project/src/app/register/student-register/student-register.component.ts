@@ -17,7 +17,8 @@ export class StudentRegisterComponent implements OnInit {
   title='Registrovanje Studenta'
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective | undefined;
-
+  hide = true;
+  
   adrese: Adresa[] = [];
   studentiNaGodini: StudentNaGodini[] = [];
 

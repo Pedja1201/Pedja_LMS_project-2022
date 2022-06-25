@@ -11,6 +11,7 @@ import { Admin } from 'src/app/model/admin';
 })
 export class AdminRegisterComponent implements OnInit {
   title='Registrovanje Administratora'
+  hide = true;
 
   
   isLinear = false;

@@ -11,9 +11,14 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Lozinka:</mat-label>
-          <input matInput formControlName="lozinka" name="lozinka" type="password" required>
+          <!-- <input matInput formControlName="lozinka" name="lozinka" type="password" required> -->
+          <input matInput formControlName="lozinka" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
-    
+
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
@@ -32,10 +37,10 @@
           <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>

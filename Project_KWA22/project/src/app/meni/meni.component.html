@@ -52,7 +52,7 @@
   <button id='desno2'   *ngIf="loginService.validateRoles(['ROLE_ADMIN'])" mat-button [matMenuTriggerFor]="menuSifarnik"><mat-icon>settings</mat-icon>Šifarnik</button>
   <mat-menu #menuSifarnik="matMenu">
     <button mat-menu-item  [routerLink]="['/studenti']">	<mat-icon>security</mat-icon>Administracija Studenata</button>
-    <button mat-menu-item [routerLink]="['/nastavnici']"><mat-icon>group_add</mat-icon>Administracija nastavnika</button>
+    <button mat-menu-item [routerLink]="['/nastavnici']"><mat-icon>group_add</mat-icon>Administracija Nastavnika</button>
     <button mat-menu-item  [routerLink]="['/studijskiProgrami']">	<mat-icon>security</mat-icon>Administracija Studijskih programa</button>
     <button mat-menu-item [routerLink]="['/univerziteti']">	<mat-icon>security</mat-icon>Administracija univerziteta</button>
     <button mat-menu-item [routerLink]="['/nastavniciNaRealizaciji']"><mat-icon> list_alt</mat-icon>Evidencija o Nastavnicima na realizaciji</button>

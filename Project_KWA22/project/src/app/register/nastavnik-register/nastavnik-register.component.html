@@ -11,7 +11,12 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Lozinka:</mat-label>
-          <input matInput formControlName="lozinka" name="lozinka" type="password" required>
+          <!-- <input matInput formControlName="lozinka" name="lozinka" type="password" required> -->
+          <input matInput formControlName="lozinka" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>E mail:</mat-label>

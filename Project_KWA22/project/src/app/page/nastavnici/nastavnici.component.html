@@ -2,7 +2,7 @@
     <h2>{{title}}</h2>
     <mat-tab-group>
         <mat-tab label="Table Nastavnici">
-            <button mat-stroked-button   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Nasatvnike </button>
+            <button mat-mini-fab color="link"   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Nasatvnike </button>
             <app-pretraga-nastavnika *ngIf="prikazPretrage" (pretraga)="search($event)"></app-pretraga-nastavnika>
 
             <app-tabela-nastavnika [elementi]="nastavnici" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
