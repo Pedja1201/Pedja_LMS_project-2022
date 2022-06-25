@@ -21,12 +21,12 @@ public class ZvanjeLogController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Iterable<ZvanjeLogDTO>> getAll() {
-        ArrayList<ZvanjeLogDTO> karteLog = new ArrayList<ZvanjeLogDTO>();
+        ArrayList<ZvanjeLogDTO> zvanjaLog = new ArrayList<ZvanjeLogDTO>();
         for (ZvanjeLog zvanjeLog : zvanjeLogService.findAll()) {
-            karteLog.add(new ZvanjeLogDTO(zvanjeLog.getId(),zvanjeLog.getSignature(),zvanjeLog.getMessage(),zvanjeLog.getDateTime(),
+            zvanjaLog.add(new ZvanjeLogDTO(zvanjeLog.getId(),zvanjeLog.getSignature(),zvanjeLog.getMessage(),zvanjeLog.getDateTime(),
                     zvanjeLog.getType()));
         }
 
-        return new ResponseEntity<Iterable<ZvanjeLogDTO>>(karteLog, HttpStatus.OK);
+        return new ResponseEntity<Iterable<ZvanjeLogDTO>>(zvanjaLog, HttpStatus.OK);
     }
 }
