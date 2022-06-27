@@ -9,7 +9,7 @@
             <app-forma-tipa-nastave *ngIf="prikaz" [tipNastave]="itemUpdate" (createEvent)="update($event)">
             </app-forma-tipa-nastave>
         </mat-tab>
-        <mat-tab label="Add Tip nastave" *ngIf="loginService.loggedIn">
+        <mat-tab label="Add Tip nastave" *ngIf="loginService.validateRoles(['ROLE_ADMIN'])">
             <app-forma-tipa-nastave (createEvent)="create($event)"></app-forma-tipa-nastave>
         </mat-tab>
     </mat-tab-group>

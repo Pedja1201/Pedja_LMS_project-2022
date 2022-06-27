@@ -9,7 +9,7 @@
             <app-forma-fakulteta *ngIf="prikaz" [fakultet]="fakultetUpdate" (createEvent)="update($event)">
             </app-forma-fakulteta>
         </mat-tab>
-        <mat-tab label="Add Fakultet" *ngIf="loginService.loggedIn">
+        <mat-tab label="Add Fakultet" *ngIf="loginService.validateRoles(['ROLE_ADMIN'])">
             <app-forma-fakulteta (createEvent)="create($event)"></app-forma-fakulteta>
         </mat-tab>
     </mat-tab-group>

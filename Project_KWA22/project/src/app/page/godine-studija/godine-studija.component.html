@@ -9,7 +9,7 @@
             <app-forma-godine-studija *ngIf="prikaz" [godinaStudija]="godinaStudijaUpdate"
                 (createEvent)="update($event)"></app-forma-godine-studija>
         </mat-tab>
-        <mat-tab label="Add Godina Studija" *ngIf="loginService.loggedIn">
+        <mat-tab label="Add Godina Studija" *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK'])">
             <app-forma-godine-studija (createEvent)="create($event)"></app-forma-godine-studija>
         </mat-tab>
     </mat-tab-group>

@@ -8,7 +8,7 @@
 
             <app-forma-ishoda *ngIf="prikaz" [ishod]="ishodUpdate" (createEvent)="update($event)"></app-forma-ishoda>
         </mat-tab>
-        <mat-tab label="Add Ishod" *ngIf="loginService.loggedIn">
+        <mat-tab label="Add Ishod" *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK'])">
             <app-forma-ishoda (createEvent)="create($event)"></app-forma-ishoda>
         </mat-tab>
     </mat-tab-group>
