@@ -74,7 +74,7 @@
   <!-- <button id='desno' mat-button  mat-raised-button color="primary" [matMenuTriggerFor]="menuPrijava">Prijavi se</button> -->
   <span class="example-spacer"></span>
   <button mat-button  [matMenuTriggerFor]="menuPrijava"  class="user mt-2 d-flex align-items-right">
-    <img src="./assets/img/user.jpg" alt="user" class="user-image mr-1 p-2" /> User Name  </button>	<mat-icon>power_settings_new</mat-icon>
+    <img src="./assets/img/user.jpg" alt="user" class="user-image mr-1 p-2" /> User Name  	<mat-icon>power_settings_new</mat-icon></button>
   <mat-menu #menuPrijava="matMenu">
     <button mat-menu-item  [routerLink]="['/login']"><mat-icon>add_circle</mat-icon>Login</button>
     <button mat-menu-item  [routerLink]="['/register']"><mat-icon>create</mat-icon>Sign in</button>
