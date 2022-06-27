@@ -75,12 +75,12 @@ const routes: Routes = [
     ]},{path: 'users/:id',component: DetailsUsersComponent},
   //Adrese
   {path: "adrese", component: AdreseComponent,
-      data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}}, //Login pre otvaranja
+      data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]}, //Login pre otvaranja
   {path: "adrese/:id", component: DetailsAdreseComponent},
 
   //drzave
   {path: 'drzave', component: DrzaveComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN','ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN','ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "drzave/:id", component: DetailsDrzavaComponent},
 
   //fakulteti
@@ -100,7 +100,7 @@ const routes: Routes = [
 
   //mesta
   {path: 'mesta', component: MestaComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "mesta/:id", component: DetailsMestaComponent},
 
   //nastavnici
@@ -120,7 +120,7 @@ const routes: Routes = [
 
   //pohadjanjaPredmeta
   {path: 'pohadjanjaPredmeta', component: PohadjanjaPredmetaComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "pohadjanjaPredmeta/:id", component: DetailsPohadjanjaPredmetaComponent},
 
   //predmeti
@@ -130,7 +130,7 @@ const routes: Routes = [
 
   //realizacijePredmeta
   {path: 'realizacijePredmeta', component: RealizacijePredmetaComponent, 
-        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']}},//Login pre otvaranja
+        data: {allowedRoles: ['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT']},canActivate: [AuthGuard]},//Login pre otvaranja
   {path: "realizacijePredmeta/:id", component: DetailsRealizacijePredmetaComponent},
 
   //studenti
