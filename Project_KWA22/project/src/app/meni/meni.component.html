@@ -35,7 +35,7 @@
 
   <button mat-button  *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK', 'ROLE_STUDENT'])"  [matMenuTriggerFor]="menu4"><mat-icon>library_books</mat-icon><b><i>Predmeti</i></b></button>
   <mat-menu #menu4="matMenu">
-    <button mat-menu-item   [routerLink]="['/predmeti']">	<mat-icon>subject</mat-icon>Predmeti na studijama</button>
+    <button mat-menu-item   [routerLink]="['/predmeti']">	<mat-icon>subject</mat-icon>Slušani predmeti</button>
     <button mat-menu-item [routerLink]="['/realizacijePredmeta']"><mat-icon>done_outline</mat-icon>Realizacije predmeta</button>
     <button mat-menu-item   [routerLink]="['/pohadjanjaPredmeta']"><mat-icon>description</mat-icon>Pohadjanja predmeta</button>
     <button mat-menu-item [routerLink]="['/ishodi']"><mat-icon>dns</mat-icon>Ishodi i očekivanja na izabranom predmetu</button>
@@ -45,8 +45,8 @@
   <button mat-button   [matMenuTriggerFor]="menu5"><mat-icon>info</mat-icon><i>Opšti podaci</i></button>
   <mat-menu #menu5="matMenu">
     <button mat-menu-item [routerLink]="['/adrese']">	<mat-icon>location_city</mat-icon>Adrese</button>
-    <button mat-menu-item [routerLink]="['/mesta']"><mat-icon>find_replace</mat-icon>Mesta</button>
-    <button mat-menu-item  [routerLink]="['/drzave']">	<mat-icon> my_location</mat-icon>Drzave</button>
+    <button mat-menu-item *ngIf="loginService.validateRoles(['ROLE_ADMIN'])" [routerLink]="['/mesta']"><mat-icon>find_replace</mat-icon>Mesta</button>
+    <button mat-menu-item  *ngIf="loginService.validateRoles(['ROLE_ADMIN'])" [routerLink]="['/drzave']">	<mat-icon> my_location</mat-icon>Drzave</button>
   </mat-menu>
 
   <button id='desno2'   *ngIf="loginService.validateRoles(['ROLE_ADMIN'])" mat-button [matMenuTriggerFor]="menuSifarnik"><mat-icon>settings</mat-icon>Šifarnik</button>
@@ -77,7 +77,7 @@
     <img src="./assets/img/user.jpg" alt="user" class="user-image mr-1 p-2" /> User Name  	<mat-icon>power_settings_new</mat-icon></button>
   <mat-menu #menuPrijava="matMenu">
     <button mat-menu-item  [routerLink]="['/login']"><mat-icon>add_circle</mat-icon>Login</button>
-    <button mat-menu-item  [routerLink]="['/register']"><mat-icon>create</mat-icon>Sign in</button>
+    <button mat-menu-item *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_NASTAVNIK'])"  [routerLink]="['/register']"><mat-icon>create</mat-icon>Sign in</button>
     <button mat-menu-item style="color: red;" *ngIf="loginService.user" (click)="loginService.logout()" [routerLink]="['/login']"><mat-icon>exit_to_app</mat-icon>Logout</button>
   </mat-menu>
 </mat-toolbar>

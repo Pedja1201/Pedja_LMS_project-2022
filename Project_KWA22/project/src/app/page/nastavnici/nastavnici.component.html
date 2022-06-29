@@ -2,9 +2,10 @@
     <h2>{{title}}</h2>
     <mat-tab-group>
         <mat-tab label="Table Nastavnici">
-            <button mat-mini-fab color="link"   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Nasatvnike </button>
+            <button mat-mini-fab color="link"   (click)="open()"> <mat-icon>search</mat-icon> Pretrazi Nastavnike </button>
             <app-pretraga-nastavnika *ngIf="prikazPretrage" (pretraga)="search($event)"></app-pretraga-nastavnika>
-
+            
+            <!-- <button (click)="export()" mat-icon-button color="warn" ><mat-icon>picture_as_pdf</mat-icon>Export To PDF</button> -->
             <app-tabela-nastavnika [elementi]="nastavnici" (uklanjanje)="delete($event)" (izmena)="setUpdate($event)">
             </app-tabela-nastavnika>
 
