@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { data } from 'jquery';
 import { Nastavnik, NastavnikPage } from '../../model/nastavnik';
 import { NastavniciService } from '../../service/nastavnici.service';
 
@@ -22,6 +23,16 @@ export class NastavniciComponent implements OnInit {
   constructor(private service : NastavniciService,  public snackBar:MatSnackBar) {
     service.getAll().subscribe((nastavnici : NastavnikPage<Nastavnik>) => {
       this.nastavnici = nastavnici.content;
+    })
+  }
+
+  export(){
+    this.service.exportPdf().subscribe((data) => {
+      let downloadURL = window.URL.createObjectURL(data);
+      let link = document.createElement('a');
+      link.href=downloadURL;
+      link.download = 'nastavniciList.pdf';
+      link.click()
     })
   }
 

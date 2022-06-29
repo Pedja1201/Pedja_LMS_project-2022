@@ -52,4 +52,9 @@ export class NastavniciService {
       })
     );
   }
+
+  exportPdf(){
+    return this.client.get(`${this.baseUrl}/nastavnici/export`, {responseType:'blob'})
+  }
+  
 }

@@ -12,8 +12,12 @@ import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Nastavnik;
 import rs.ac.singidunum.isa.app.service.NastavnikService;
+import rs.ac.singidunum.isa.app.service.PdfService;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -23,6 +27,8 @@ import java.util.function.Function;
 public class NastavnikController {
     @Autowired
     private NastavnikService nastavnikService;
+    @Autowired
+    private  PdfService pdfService;
 
     @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.GET)
@@ -107,4 +113,19 @@ public class NastavnikController {
         return new ResponseEntity<Nastavnik>(HttpStatus.NOT_FOUND);
     }
 
+    //Metoda za preuzimanje PDF dokumenta - Potrebno (PdfService, pom.xml, resources)
+    @RequestMapping(path = "/export", method = RequestMethod.GET)
+    public void downloadPdf(HttpServletResponse response){
+        try{
+            Path file = Paths.get(pdfService.generateNastavniciPdf().getAbsolutePath());
+            if (Files.exists(file)){
+                response.setContentType("application/pdf");
+                response.addHeader("Content-Disposition", "attachment; filename"+ file.getFileName());
+                Files.copy(file, response.getOutputStream());
+                response.getOutputStream().flush();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
