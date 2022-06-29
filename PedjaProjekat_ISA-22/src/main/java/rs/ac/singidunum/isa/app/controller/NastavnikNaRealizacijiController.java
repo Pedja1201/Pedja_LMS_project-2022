@@ -26,7 +26,7 @@ public class NastavnikNaRealizacijiController {
     private NastavnikNaRealizacijiService nastavnikNaRealizacijiService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<Page<NastavnikNaRealizacijiDTO>> getAll(Pageable pageable) {
         Page<NastavnikNaRealizaciji> nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findAll(pageable);
         Page<NastavnikNaRealizacijiDTO> nastavniciNaRealizaciji = nastavnikNaRealizaciji.map(new Function<NastavnikNaRealizaciji, NastavnikNaRealizacijiDTO>() {
@@ -47,7 +47,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> get(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {
         Optional<NastavnikNaRealizaciji> nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId);
         if (nastavnikNaRealizaciji.isPresent()) {
@@ -66,7 +66,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> create(@RequestBody NastavnikNaRealizaciji nastavnikNaRealizaciji) {
         try {
             nastavnikNaRealizacijiService.save(nastavnikNaRealizaciji);
@@ -87,7 +87,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> update(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId,
                                                         @RequestBody NastavnikNaRealizaciji izmenjenNastavnikNaRealizaciji) {
         NastavnikNaRealizaciji nastavnikNaRealizaciji = nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId).orElse(null);
@@ -108,7 +108,7 @@ public class NastavnikNaRealizacijiController {
     }
 
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> delete(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {
         if (nastavnikNaRealizacijiService.findOne(nastavnikNaRealizacijiId).isPresent()) {
             nastavnikNaRealizacijiService.delete(nastavnikNaRealizacijiId);
