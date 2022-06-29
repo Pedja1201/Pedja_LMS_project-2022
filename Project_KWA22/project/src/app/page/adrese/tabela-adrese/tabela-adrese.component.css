@@ -5,6 +5,7 @@ table {
 } 
 th{
     color: rgb(89, 79, 223);
+    font-weight: bold;
   }
   h1{
       margin-left: 10%;
