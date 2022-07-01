@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.aspect.LoggedStudijskiProgram;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.StudijskiProgram;
@@ -64,6 +65,7 @@ public class StudijskiProgramController {
         return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudijskiProgramDTO> create(@RequestBody StudijskiProgram studijskiProgram) {
@@ -86,6 +88,7 @@ public class StudijskiProgramController {
         return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{studisjkiProgramId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudijskiProgramDTO> update(@PathVariable("studisjkiProgramId") Long studisjkiProgramId,
@@ -108,6 +111,7 @@ public class StudijskiProgramController {
         return new ResponseEntity<StudijskiProgramDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{studisjkiProgramId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudijskiProgramDTO> delete(@PathVariable("studisjkiProgramId") Long studisjkiProgramId) {

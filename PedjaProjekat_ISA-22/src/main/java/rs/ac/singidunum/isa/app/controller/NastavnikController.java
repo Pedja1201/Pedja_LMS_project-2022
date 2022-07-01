@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Nastavnik;
@@ -30,6 +31,7 @@ public class NastavnikController {
     @Autowired
     private  PdfService pdfService;
 
+    @LoggedAdministrator
     @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.GET)
 //    @Secured({"ROLE_ADMIN"})
@@ -50,6 +52,8 @@ public class NastavnikController {
         return new ResponseEntity<Page<NastavnikDTO>>(nastavnici, HttpStatus.OK);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<NastavnikDTO> getNastavnik(@PathVariable("nastavnikId") Long nastavnikId) {
@@ -66,6 +70,8 @@ public class NastavnikController {
         return new ResponseEntity<NastavnikDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<NastavnikDTO> create(@RequestBody Nastavnik nastavnik) {
@@ -84,6 +90,8 @@ public class NastavnikController {
         return new ResponseEntity<NastavnikDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<NastavnikDTO> update(@PathVariable("nastavnikId") Long nastavnikId,
@@ -103,6 +111,8 @@ public class NastavnikController {
         return new ResponseEntity<NastavnikDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{nastavnikId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Nastavnik> delete(@PathVariable("nastavnikId") Long nastavnikId) {

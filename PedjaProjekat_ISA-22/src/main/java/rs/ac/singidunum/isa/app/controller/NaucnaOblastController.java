@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.NaucnaOblastDTO;
 import rs.ac.singidunum.isa.app.dto.TipZvanjaDTO;
 import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
@@ -61,6 +63,8 @@ public class NaucnaOblastController {
         return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NaucnaOblastDTO> createNaucnaOblast(@RequestBody NaucnaOblast naucnaOblast) {
@@ -80,6 +84,8 @@ public class NaucnaOblastController {
         return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NaucnaOblastDTO> updateNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId,
@@ -100,6 +106,8 @@ public class NaucnaOblastController {
         return new ResponseEntity<NaucnaOblastDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{naucnaOblastId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NaucnaOblastDTO> deleteNaucnaOblast(@PathVariable("naucnaOblastId") Long naucnaOblastId) {

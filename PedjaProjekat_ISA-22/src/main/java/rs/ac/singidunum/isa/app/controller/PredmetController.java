@@ -9,6 +9,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.PredmetDTO;
 import rs.ac.singidunum.isa.app.model.Predmet;
 import rs.ac.singidunum.isa.app.service.NastavnikService;
@@ -61,6 +63,8 @@ public class PredmetController {
         return new ResponseEntity<PredmetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PredmetDTO> create(@RequestBody Predmet predmet) {
@@ -77,6 +81,8 @@ public class PredmetController {
         return new ResponseEntity<PredmetDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.PUT)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PredmetDTO> update(@PathVariable("predmetId") Long predmetId,
@@ -93,6 +99,8 @@ public class PredmetController {
         return new ResponseEntity<PredmetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PredmetDTO> delete(@PathVariable("predmetId") Long predmetId) {

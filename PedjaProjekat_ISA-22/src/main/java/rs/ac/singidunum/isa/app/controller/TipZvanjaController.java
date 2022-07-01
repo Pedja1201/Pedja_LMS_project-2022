@@ -9,6 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.NaucnaOblastDTO;
 import rs.ac.singidunum.isa.app.dto.TipZvanjaDTO;
 import rs.ac.singidunum.isa.app.dto.ZvanjeDTO;
@@ -59,6 +60,7 @@ public class TipZvanjaController {
         return new ResponseEntity<TipZvanjaDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<TipZvanjaDTO> createTipZvanja(@RequestBody TipZvanja tipZvanja) {
@@ -78,6 +80,7 @@ public class TipZvanjaController {
         return new ResponseEntity<TipZvanjaDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{tipZvanjaId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<TipZvanjaDTO> updateTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId,
@@ -98,6 +101,7 @@ public class TipZvanjaController {
         return new ResponseEntity<TipZvanjaDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{tipZvanjaId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<TipZvanjaDTO> deleteTipZvanja(@PathVariable("tipZvanjaId") Long tipZvanjaId) {

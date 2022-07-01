@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.aspect.LoggedZvanje;
 import rs.ac.singidunum.isa.app.dto.NaucnaOblastDTO;
 import rs.ac.singidunum.isa.app.dto.TipZvanjaDTO;
@@ -55,6 +56,7 @@ public class ZvanjeController {
         return new ResponseEntity<ZvanjeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<ZvanjeDTO> create(@RequestBody Zvanje zvanje) {
@@ -71,6 +73,7 @@ public class ZvanjeController {
         return new ResponseEntity<ZvanjeDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<ZvanjeDTO> update(@PathVariable("zvanjeId") Long zvanjeId,
@@ -87,6 +90,7 @@ public class ZvanjeController {
         return new ResponseEntity<ZvanjeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{zvanjeId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<ZvanjeDTO> delete(@PathVariable("zvanjeId") Long zvanjeId) {

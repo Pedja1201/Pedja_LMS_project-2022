@@ -26,7 +26,7 @@ public class AdministratorController {
 
     @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.GET)
-//    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Page<AdministratorDTO>> getAllAdministrator(Pageable pageable) {
         Page<Administrator> administrator = administratorService.findAll(pageable);
         Page<AdministratorDTO> administratori = administrator.map(new Function<Administrator, AdministratorDTO>() {
@@ -41,8 +41,9 @@ public class AdministratorController {
         return new ResponseEntity<Page<AdministratorDTO>>(administratori, HttpStatus.OK);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{administratorId}", method = RequestMethod.GET)
-//    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdministratorDTO> getAdministrator(@PathVariable("administratorId") Long administratorId) {
         Optional<Administrator> administrator = administratorService.findOne(administratorId);
         if (administrator.isPresent()) {
@@ -52,8 +53,9 @@ public class AdministratorController {
         return new ResponseEntity<AdministratorDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
-//        @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdministratorDTO> create(@RequestBody Administrator administrator) {
         try {
             administratorService.save(administrator);
@@ -65,8 +67,9 @@ public class AdministratorController {
         return new ResponseEntity<AdministratorDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{administratorId}", method = RequestMethod.PUT)
-//        @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdministratorDTO> update(@PathVariable("administratorId") Long administratorId,
                                                    @RequestBody Administrator izmenjenAdministrator) {
         Administrator administrator = administratorService.findOne(administratorId).orElse(null);
@@ -79,8 +82,9 @@ public class AdministratorController {
         return new ResponseEntity<AdministratorDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{administratorId}", method = RequestMethod.DELETE)
-//        @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Administrator> delete(@PathVariable("administratorId") Long administratorId) {
         if (administratorService.findOne(administratorId).isPresent()) {
             administratorService.delete(administratorId);

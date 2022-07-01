@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
 import rs.ac.singidunum.isa.app.dto.DrzavaDTO;
 import rs.ac.singidunum.isa.app.dto.MestoDTO;
@@ -26,6 +27,7 @@ public class AdresaController {
     private AdresaService adresaService;
 
 //    @CrossOrigin  //CrosPolicy na clientu
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<AdresaDTO>> getAll(Pageable pageable) {
         Page<Adresa> adresa = adresaService.findAll(pageable);
@@ -42,7 +44,6 @@ public class AdresaController {
         return new ResponseEntity<Page<AdresaDTO>>(adrese, HttpStatus.OK);
     }
 
-    @CrossOrigin  //CrosPolicy na clientu
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.GET)
     public ResponseEntity<AdresaDTO> get(@PathVariable("adresaId") Long adresaId) {
         Optional<Adresa> adresa = adresaService.findOne(adresaId);
@@ -53,7 +54,8 @@ public class AdresaController {
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.NOT_FOUND);
     }
-    @CrossOrigin  //CrosPolicy na clientu
+
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdresaDTO> create(@RequestBody Adresa adresa) {
@@ -69,7 +71,9 @@ public class AdresaController {
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.BAD_REQUEST);
     }
+
     @CrossOrigin  //CrosPolicy na clientu
+    @LoggedAdministrator
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdresaDTO> update(@PathVariable("adresaId") Long adresaId,
@@ -85,7 +89,9 @@ public class AdresaController {
         }
         return new ResponseEntity<AdresaDTO>(HttpStatus.NOT_FOUND);
     }
+
     @CrossOrigin  //CrosPolicy na clientu
+    @LoggedAdministrator
     @RequestMapping(path = "/{adresaId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<AdresaDTO> delete(@PathVariable("adresaId") Long adresaId) {

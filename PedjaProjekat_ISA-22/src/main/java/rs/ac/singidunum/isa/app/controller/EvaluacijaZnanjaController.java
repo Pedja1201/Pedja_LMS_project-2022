@@ -9,6 +9,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.EvaluacijaZnanjaDTO;
 import rs.ac.singidunum.isa.app.dto.IshodDTO;
 import rs.ac.singidunum.isa.app.dto.TipEvaluacijeDTO;
@@ -57,6 +59,8 @@ public class EvaluacijaZnanjaController {
         return new ResponseEntity<EvaluacijaZnanjaDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> create(@RequestBody EvaluacijaZnanja evaluacijaZnanja) {
@@ -77,6 +81,8 @@ public class EvaluacijaZnanjaController {
         return new ResponseEntity<EvaluacijaZnanjaDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> update(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId,
@@ -97,6 +103,8 @@ public class EvaluacijaZnanjaController {
         return new ResponseEntity<EvaluacijaZnanjaDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> delete(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId) {

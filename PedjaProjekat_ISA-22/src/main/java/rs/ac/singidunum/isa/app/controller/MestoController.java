@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.DrzavaDTO;
 import rs.ac.singidunum.isa.app.dto.MestoDTO;
 import rs.ac.singidunum.isa.app.model.Mesto;
@@ -23,7 +24,7 @@ import java.util.function.Function;
 public class MestoController {
     @Autowired
     private MestoService mestoService;
-    @CrossOrigin
+
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<MestoDTO>> getAll(Pageable pageable) {
         Page<Mesto> mesto = mestoService.findAll(pageable);
@@ -51,6 +52,7 @@ public class MestoController {
         return new ResponseEntity<MestoDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<MestoDTO> create(@RequestBody Mesto mesto) {
@@ -67,6 +69,7 @@ public class MestoController {
         return new ResponseEntity<MestoDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<MestoDTO> update(@PathVariable("mestoId") Long mestoId,
@@ -83,6 +86,7 @@ public class MestoController {
         return new ResponseEntity<MestoDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{mestoId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<MestoDTO> delete(@PathVariable("mestoId") Long mestoId) {

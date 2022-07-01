@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.EvaluacijaZnanjaDTO;
 import rs.ac.singidunum.isa.app.dto.IshodDTO;
 import rs.ac.singidunum.isa.app.dto.TipEvaluacijeDTO;
@@ -57,6 +59,8 @@ public class TipEvaluacijeController {
         return new ResponseEntity<TipEvaluacijeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> create(@RequestBody TipEvaluacije tipEvaluacije) {
@@ -76,6 +80,8 @@ public class TipEvaluacijeController {
         return new ResponseEntity<TipEvaluacijeDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{tipEvaluacijeId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> update(@PathVariable("tipEvaluacijeId") Long tipEvaluacijeId,
@@ -96,6 +102,8 @@ public class TipEvaluacijeController {
         return new ResponseEntity<TipEvaluacijeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{tipEvaluacijeId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> delete(@PathVariable("tipEvaluacijeId") Long tipEvaluacijeId) {

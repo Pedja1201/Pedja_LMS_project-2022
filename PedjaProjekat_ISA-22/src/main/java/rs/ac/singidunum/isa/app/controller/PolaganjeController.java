@@ -9,6 +9,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Polaganje;
 import rs.ac.singidunum.isa.app.service.PolaganjeService;
@@ -61,6 +63,8 @@ public class PolaganjeController {
         return new ResponseEntity<PolaganjeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> create(@RequestBody Polaganje polaganje) {
@@ -80,6 +84,8 @@ public class PolaganjeController {
         return new ResponseEntity<PolaganjeDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{polaganjeId}", method = RequestMethod.PUT)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> update(@PathVariable("polaganjeId") Long polaganjeId,
@@ -100,6 +106,8 @@ public class PolaganjeController {
         return new ResponseEntity<PolaganjeDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{polaganjeId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> delete(@PathVariable("polaganjeId") Long polaganjeId) {

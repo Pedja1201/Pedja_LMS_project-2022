@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
 import rs.ac.singidunum.isa.app.dto.NastavnikNaRealizacijiDTO;
 import rs.ac.singidunum.isa.app.dto.TipNastaveDTO;
@@ -65,6 +66,7 @@ public class NastavnikNaRealizacijiController {
         return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> create(@RequestBody NastavnikNaRealizaciji nastavnikNaRealizaciji) {
@@ -86,6 +88,7 @@ public class NastavnikNaRealizacijiController {
         return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.PUT)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> update(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId,
@@ -107,6 +110,7 @@ public class NastavnikNaRealizacijiController {
         return new ResponseEntity<NastavnikNaRealizacijiDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{nastavnikNaRealizacijiId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<NastavnikNaRealizacijiDTO> delete(@PathVariable("nastavnikNaRealizacijiId") Long nastavnikNaRealizacijiId) {

@@ -9,6 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.isa.app.aspect.Logged;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Fakultet;
 import rs.ac.singidunum.isa.app.service.FakultetService;
@@ -63,6 +64,7 @@ public class FakultetController {
         return new ResponseEntity<FakultetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<FakultetDTO> create(@RequestBody Fakultet fakultet) {
@@ -83,6 +85,7 @@ public class FakultetController {
         return new ResponseEntity<FakultetDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{fakultetId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<FakultetDTO> update(@PathVariable("fakultetId") Long fakultetId,
@@ -104,6 +107,7 @@ public class FakultetController {
         return new ResponseEntity<FakultetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{fakultetId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<FakultetDTO> delete(@PathVariable("fakultetId") Long fakultetId) {

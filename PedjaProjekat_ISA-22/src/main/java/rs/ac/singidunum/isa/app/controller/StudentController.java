@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.aspect.LoggedStudent;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.Nastavnik;
@@ -31,6 +33,8 @@ public class StudentController {
     private NastavnikService nastavnikService;
 
     @LoggedStudent
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<Page<StudentDTO>> getAll(Pageable pageable) {
@@ -51,6 +55,9 @@ public class StudentController {
         return new ResponseEntity<Page<StudentDTO>>(studenti, HttpStatus.OK);
     }
 
+    @LoggedStudent
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{studentId}", method = RequestMethod.GET)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<StudentDTO> get(@PathVariable("studentId") Long studentId) {
@@ -68,6 +75,9 @@ public class StudentController {
         return new ResponseEntity<StudentDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedStudent
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<StudentDTO> create(@RequestBody Student student) {
@@ -86,6 +96,9 @@ public class StudentController {
         return new ResponseEntity<StudentDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedStudent
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{studentId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Student> update(@PathVariable("studentId") Long studentId,
@@ -105,6 +118,9 @@ public class StudentController {
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedStudent
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{studentId}", method = RequestMethod.DELETE)
     public ResponseEntity<Student> delete(@PathVariable("studentId") Long studentId) {
         if (studentService.findOne(studentId).isPresent()) {

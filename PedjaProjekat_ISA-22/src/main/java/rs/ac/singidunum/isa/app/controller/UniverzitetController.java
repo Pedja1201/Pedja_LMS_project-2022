@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
 import rs.ac.singidunum.isa.app.aspect.LoggedUniverzitet;
 import rs.ac.singidunum.isa.app.dto.AdresaDTO;
 import rs.ac.singidunum.isa.app.dto.NastavnikDTO;
@@ -65,6 +66,7 @@ public class UniverzitetController {
         return new ResponseEntity<UniverzitetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<UniverzitetDTO> create(@RequestBody Univerzitet univerzitet) {
@@ -86,6 +88,7 @@ public class UniverzitetController {
         return new ResponseEntity<UniverzitetDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<UniverzitetDTO> update(@PathVariable("univerzitetId") Long univerzitetId,
@@ -107,6 +110,7 @@ public class UniverzitetController {
         return new ResponseEntity<UniverzitetDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
     @RequestMapping(path = "/{univerzitetId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<UniverzitetDTO> delete(@PathVariable("univerzitetId") Long univerzitetId) {

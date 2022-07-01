@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.IshodNastaveDTO;
 import rs.ac.singidunum.isa.app.dto.NastavniMaterijalDTO;
 
@@ -56,6 +58,8 @@ public class NastavniMaterijalController {
         return new ResponseEntity<NastavniMaterijalDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NastavniMaterijalDTO> create(@RequestBody NastavniMaterijal nastavniMaterijal) {
@@ -74,6 +78,8 @@ public class NastavniMaterijalController {
         return new ResponseEntity<NastavniMaterijalDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{nastavniMaterijalId}", method = RequestMethod.PUT)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NastavniMaterijalDTO> update(@PathVariable("nastavniMaterijalId") Long nastavniMaterijalId,
@@ -94,6 +100,8 @@ public class NastavniMaterijalController {
         return new ResponseEntity<NastavniMaterijalDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{nastavniMaterijalId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<NastavniMaterijalDTO> delete(@PathVariable("nastavniMaterijalId") Long nastavniMaterijalId) {

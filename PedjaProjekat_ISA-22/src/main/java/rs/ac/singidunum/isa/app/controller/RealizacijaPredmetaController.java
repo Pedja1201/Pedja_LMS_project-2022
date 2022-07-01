@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.*;
 import rs.ac.singidunum.isa.app.model.RealizacijaPredmeta;
 import rs.ac.singidunum.isa.app.service.RealizacijaPredmetaService;
@@ -73,6 +75,8 @@ public class RealizacijaPredmetaController {
         return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<RealizacijaPredmetaDTO> create(@RequestBody RealizacijaPredmeta realizacijaPredmeta) {
@@ -100,6 +104,8 @@ public class RealizacijaPredmetaController {
         return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.PUT)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<RealizacijaPredmetaDTO> update(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId,
@@ -127,6 +133,8 @@ public class RealizacijaPredmetaController {
         return new ResponseEntity<RealizacijaPredmetaDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<RealizacijaPredmetaDTO> delete(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId) {

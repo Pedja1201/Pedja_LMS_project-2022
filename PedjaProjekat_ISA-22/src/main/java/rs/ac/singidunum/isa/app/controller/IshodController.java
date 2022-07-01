@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.singidunum.isa.app.aspect.LoggedAdministrator;
+import rs.ac.singidunum.isa.app.aspect.LoggedNastavnik;
 import rs.ac.singidunum.isa.app.dto.IshodDTO;
 import rs.ac.singidunum.isa.app.dto.PredmetDTO;
 import rs.ac.singidunum.isa.app.model.Ishod;
@@ -59,6 +61,8 @@ public class IshodController {
         return new ResponseEntity<IshodDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "", method = RequestMethod.POST)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodDTO> create(@RequestBody Ishod ishod) {
@@ -79,6 +83,8 @@ public class IshodController {
         return new ResponseEntity<IshodDTO>(HttpStatus.BAD_REQUEST);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.PUT)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodDTO> update(@PathVariable("ishodId") Long ishodId,
@@ -99,6 +105,8 @@ public class IshodController {
         return new ResponseEntity<IshodDTO>(HttpStatus.NOT_FOUND);
     }
 
+    @LoggedAdministrator
+    @LoggedNastavnik
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.DELETE)
     @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodDTO> delete(@PathVariable("ishodId") Long ishodId) {
