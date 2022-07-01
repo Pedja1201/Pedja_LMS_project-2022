@@ -63,7 +63,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PohadjanjePredmetaDTO> create(@RequestBody PohadjanjePredmeta pohadjanjePredmeta) {
         try {
             pohadjanjePredmetaService.save(pohadjanjePredmeta);
@@ -84,7 +84,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PohadjanjePredmetaDTO> update(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId,
                                                    @RequestBody PohadjanjePredmeta izmenjenaPohadjeniPredmet) {
         PohadjanjePredmeta pohadjanjePredmeta = pohadjanjePredmetaService.findOne(pohadjanjePredmetaId).orElse(null);
@@ -105,7 +105,7 @@ public class PohadjanjePredmetaController {
     }
 
     @RequestMapping(path = "/{pohadjanjePredmetaId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PohadjanjePredmetaDTO> delete(@PathVariable("pohadjanjePredmetaId") Long pohadjanjePredmetaId) {
         if (pohadjanjePredmetaService.findOne(pohadjanjePredmetaId).isPresent()) {
             pohadjanjePredmetaService.delete(pohadjanjePredmetaId);

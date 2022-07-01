@@ -27,7 +27,7 @@ public class PolaganjeController {
 
     @Logged
     @RequestMapping(path = "", method = RequestMethod.GET)
-//    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT", "ROLE_ADMIN"})
     public ResponseEntity<Page<PolaganjeDTO>> getAll(Pageable pageable) {
         Page<Polaganje> polaganje = polaganjeService.findAll(pageable);
         Page<PolaganjeDTO> polaganja = polaganje.map(new Function<Polaganje, PolaganjeDTO>() {
@@ -46,7 +46,7 @@ public class PolaganjeController {
     }
 
     @RequestMapping(path = "/{polaganjeId}", method = RequestMethod.GET)
-    //    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_STUDENT", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> get(@PathVariable("polaganjeId") Long polaganjeId) {
         Optional<Polaganje> polaganje = polaganjeService.findOne(polaganjeId);
         if (polaganje.isPresent()) {
@@ -62,7 +62,7 @@ public class PolaganjeController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> create(@RequestBody Polaganje polaganje) {
         try {
             polaganjeService.save(polaganje);
@@ -81,7 +81,7 @@ public class PolaganjeController {
     }
 
     @RequestMapping(path = "/{polaganjeId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> update(@PathVariable("polaganjeId") Long polaganjeId,
                                               @RequestBody Polaganje izmenjenoPolaganje) {
         Polaganje polaganje = polaganjeService.findOne(polaganjeId).orElse(null);
@@ -101,7 +101,7 @@ public class PolaganjeController {
     }
 
     @RequestMapping(path = "/{polaganjeId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PolaganjeDTO> delete(@PathVariable("polaganjeId") Long polaganjeId) {
         if (polaganjeService.findOne(polaganjeId).isPresent()) {
             polaganjeService.delete(polaganjeId);
@@ -112,7 +112,7 @@ public class PolaganjeController {
 
     //Done:Metoda za pronalazenje  studenta na godini koji polazu
     @RequestMapping(path = "/findStudentNaGodini/{brojIndeksa}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<Iterable<PolaganjeDTO>> findStudentPolaganja(@PathVariable("brojIndeksa") String brojIndeksa) {
         ArrayList<PolaganjeDTO> polaganjeDTO = new ArrayList<>();
         for(Polaganje polaganje : polaganjeService.findStudentNaGodini(brojIndeksa)) {

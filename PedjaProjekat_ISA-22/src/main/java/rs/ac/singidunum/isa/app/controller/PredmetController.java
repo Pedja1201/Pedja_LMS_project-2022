@@ -62,7 +62,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PredmetDTO> create(@RequestBody Predmet predmet) {
         try {
             predmetService.save(predmet);
@@ -78,7 +78,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PredmetDTO> update(@PathVariable("predmetId") Long predmetId,
                                                    @RequestBody Predmet izmenjenPredmet) {
         Predmet predmet = predmetService.findOne(predmetId).orElse(null);
@@ -94,7 +94,7 @@ public class PredmetController {
     }
 
     @RequestMapping(path = "/{predmetId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<PredmetDTO> delete(@PathVariable("predmetId") Long predmetId) {
         if (predmetService.findOne(predmetId).isPresent()) {
             predmetService.delete(predmetId);

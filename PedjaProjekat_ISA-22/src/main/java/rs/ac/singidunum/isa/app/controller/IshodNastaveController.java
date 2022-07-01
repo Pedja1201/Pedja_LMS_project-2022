@@ -55,7 +55,7 @@ public class IshodNastaveController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodNastaveDTO> create(@RequestBody IshodNastave ishodNastave) {
         try {
             ishodNastaveService.save(ishodNastave);
@@ -74,7 +74,7 @@ public class IshodNastaveController {
     }
 
     @RequestMapping(path = "/{ishodNastaveId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodNastaveDTO> update(@PathVariable("ishodNastaveId") Long ishodNastaveId,
                                             @RequestBody IshodNastave izmenjenIshodNastave) {
         IshodNastave ishodNastave = ishodNastaveService.findOne(ishodNastaveId).orElse(null);
@@ -93,7 +93,7 @@ public class IshodNastaveController {
     }
 
     @RequestMapping(path = "/{ishodNastaveId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodNastaveDTO> delete(@PathVariable("ishodNastaveId") Long ishodNastaveId) {
         if (ishodNastaveService.findOne(ishodNastaveId).isPresent()) {
             ishodNastaveService.delete(ishodNastaveId);

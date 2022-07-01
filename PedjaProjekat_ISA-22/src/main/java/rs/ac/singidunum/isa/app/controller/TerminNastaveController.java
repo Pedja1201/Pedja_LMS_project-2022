@@ -65,7 +65,7 @@ public class TerminNastaveController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TerminNastaveDTO> create(@RequestBody TerminNastave terminNastave) {
         try {
             terminNastaveService.save(terminNastave);
@@ -87,7 +87,7 @@ public class TerminNastaveController {
     }
 
     @RequestMapping(path = "/{terminNastaveId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TerminNastaveDTO> update(@PathVariable("terminNastaveId") Long terminNastaveId,
                                             @RequestBody TerminNastave izmenjenTerminNastave) {
         TerminNastave terminNastave = terminNastaveService.findOne(terminNastaveId).orElse(null);
@@ -109,7 +109,7 @@ public class TerminNastaveController {
     }
 
     @RequestMapping(path = "/{terminNastaveId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TerminNastaveDTO> delete(@PathVariable("terminNastaveId") Long terminNastaveId) {
         if (terminNastaveService.findOne(terminNastaveId).isPresent()) {
             terminNastaveService.delete(terminNastaveId);

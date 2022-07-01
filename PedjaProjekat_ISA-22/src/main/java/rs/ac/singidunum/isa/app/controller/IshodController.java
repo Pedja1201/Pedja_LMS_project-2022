@@ -60,7 +60,7 @@ public class IshodController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodDTO> create(@RequestBody Ishod ishod) {
         try {
             ishodService.save(ishod);
@@ -80,7 +80,7 @@ public class IshodController {
     }
 
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodDTO> update(@PathVariable("ishodId") Long ishodId,
                                                 @RequestBody Ishod izmenjenIshod) {
         Ishod ishod = ishodService.findOne(ishodId).orElse(null);
@@ -100,7 +100,7 @@ public class IshodController {
     }
 
     @RequestMapping(path = "/{ishodId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<IshodDTO> delete(@PathVariable("ishodId") Long ishodId) {
         if (ishodService.findOne(ishodId).isPresent()) {
             ishodService.delete(ishodId);

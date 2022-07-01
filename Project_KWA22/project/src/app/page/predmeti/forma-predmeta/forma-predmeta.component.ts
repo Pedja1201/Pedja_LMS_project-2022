@@ -18,7 +18,7 @@ export class FormaPredmetaComponent implements OnInit {
   forma : FormGroup = new FormGroup({
     "naziv": new FormControl(null, [Validators.required]),
     "espb": new FormControl(null, [Validators.required]),
-    "obavezan": new FormControl(null, [Validators.required]),
+    "obavezan": new FormControl(null),
     "brojPredavanja": new FormControl(null, [Validators.required]),
     "brojVezbi": new FormControl(null, [Validators.required]),
     "drugiObliciNastave": new FormControl(null, [Validators.required]),

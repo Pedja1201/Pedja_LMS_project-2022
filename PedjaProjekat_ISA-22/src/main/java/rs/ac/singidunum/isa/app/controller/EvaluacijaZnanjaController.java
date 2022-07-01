@@ -26,6 +26,7 @@ public class EvaluacijaZnanjaController {
     private EvaluacijaZnanjaService evaluacijaZnanjaService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<Page<EvaluacijaZnanjaDTO>> getAll(Pageable pageable) {
         Page<EvaluacijaZnanja> evaluacijaZnanja = evaluacijaZnanjaService.findAll(pageable);
         Page<EvaluacijaZnanjaDTO> evaluacijeZnanja = evaluacijaZnanja.map(new Function<EvaluacijaZnanja, EvaluacijaZnanjaDTO>() {
@@ -44,6 +45,7 @@ public class EvaluacijaZnanjaController {
 
 
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK", "ROLE_STUDENT"})
     public ResponseEntity<EvaluacijaZnanjaDTO> get(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId) {
         Optional<EvaluacijaZnanja> evaluacijaZnanja = evaluacijaZnanjaService.findOne(evaluacijaZnanjaId);
         if (evaluacijaZnanja.isPresent()) {
@@ -56,7 +58,7 @@ public class EvaluacijaZnanjaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> create(@RequestBody EvaluacijaZnanja evaluacijaZnanja) {
         try {
             evaluacijaZnanjaService.save(evaluacijaZnanja);
@@ -76,7 +78,7 @@ public class EvaluacijaZnanjaController {
     }
 
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> update(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId,
                                             @RequestBody EvaluacijaZnanja izmenjenaEvaluacijaZnanja) {
         EvaluacijaZnanja evaluacijaZnanja = evaluacijaZnanjaService.findOne(evaluacijaZnanjaId).orElse(null);
@@ -96,7 +98,7 @@ public class EvaluacijaZnanjaController {
     }
 
     @RequestMapping(path = "/{evaluacijaZnanjaId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<EvaluacijaZnanjaDTO> delete(@PathVariable("evaluacijaZnanjaId") Long evaluacijaZnanjaId) {
         if (evaluacijaZnanjaService.findOne(evaluacijaZnanjaId).isPresent()) {
             evaluacijaZnanjaService.delete(evaluacijaZnanjaId);

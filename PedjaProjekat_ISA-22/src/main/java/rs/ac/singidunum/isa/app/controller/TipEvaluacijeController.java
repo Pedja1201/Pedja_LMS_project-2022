@@ -58,7 +58,7 @@ public class TipEvaluacijeController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> create(@RequestBody TipEvaluacije tipEvaluacije) {
         try {
             tipEvaluacijeService.save(tipEvaluacije);
@@ -77,7 +77,7 @@ public class TipEvaluacijeController {
     }
 
     @RequestMapping(path = "/{tipEvaluacijeId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> update(@PathVariable("tipEvaluacijeId") Long tipEvaluacijeId,
                                             @RequestBody TipEvaluacije izmenjenTipEvaluacije) {
         TipEvaluacije tipEvaluacije = tipEvaluacijeService.findOne(tipEvaluacijeId).orElse(null);
@@ -97,7 +97,7 @@ public class TipEvaluacijeController {
     }
 
     @RequestMapping(path = "/{tipEvaluacijeId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_ADMIN", "ROLE_NASTAVNIK"})
     public ResponseEntity<TipEvaluacijeDTO> delete(@PathVariable("tipEvaluacijeId") Long tipEvaluacijeId) {
         if (tipEvaluacijeService.findOne(tipEvaluacijeId).isPresent()) {
             tipEvaluacijeService.delete(tipEvaluacijeId);

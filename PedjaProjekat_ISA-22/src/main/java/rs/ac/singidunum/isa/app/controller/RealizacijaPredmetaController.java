@@ -74,7 +74,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<RealizacijaPredmetaDTO> create(@RequestBody RealizacijaPredmeta realizacijaPredmeta) {
         try {
             realizacijaPredmetaService.save(realizacijaPredmeta);
@@ -101,7 +101,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.PUT)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<RealizacijaPredmetaDTO> update(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId,
                                                    @RequestBody RealizacijaPredmeta izmenjenaRealizacijaPredmeta) {
         RealizacijaPredmeta realizacijaPredmeta = realizacijaPredmetaService.findOne(realizacijaPredmetaId).orElse(null);
@@ -128,7 +128,7 @@ public class RealizacijaPredmetaController {
     }
 
     @RequestMapping(path = "/{realizacijaPredmetaId}", method = RequestMethod.DELETE)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<RealizacijaPredmetaDTO> delete(@PathVariable("realizacijaPredmetaId") Long realizacijaPredmetaId) {
         if (realizacijaPredmetaService.findOne(realizacijaPredmetaId).isPresent()) {
             realizacijaPredmetaService.delete(realizacijaPredmetaId);
@@ -139,7 +139,7 @@ public class RealizacijaPredmetaController {
 
     //DONE: Metoda i upit za pronalaženje Predmeta u realizcaiji
     @RequestMapping(path = "/findPredmet/{predmetNaziv}", method = RequestMethod.GET)
-    @Secured({"ROLE_NASTAVNIK"})
+    @Secured({"ROLE_NASTAVNIK", "ROLE_ADMIN"})
     public ResponseEntity<Iterable<RealizacijaPredmetaDTO>> findPredmetURealizaciji(@PathVariable("predmetNaziv") String predmetNaziv) {
         ArrayList<RealizacijaPredmetaDTO> realizacijePredmetaDTO = new ArrayList<>();
         for(RealizacijaPredmeta realizacijaPredmeta : realizacijaPredmetaService.findPredmetURealizaciji(predmetNaziv)) {
