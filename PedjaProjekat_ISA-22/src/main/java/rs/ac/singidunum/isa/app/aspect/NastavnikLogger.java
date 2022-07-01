@@ -4,6 +4,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import rs.ac.singidunum.isa.app.model.NastavnikLog;
 import rs.ac.singidunum.isa.app.service.NastavnikLogsService;
@@ -19,7 +21,9 @@ public class NastavnikLogger {
 
     @After("@annotation(LoggedNastavnik)")
     public void logujAkcijeNastavnika(JoinPoint jp){
-        nastavnikLogsService.save(new NastavnikLog(null, null, jp.getSignature().toLongString(), "Nastavicke akcije", LocalDateTime.now()));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        nastavnikLogsService.save(new NastavnikLog(null, username, jp.getSignature().toLongString(), "Nastavicke akcije", LocalDateTime.now()));
     }
 }
 
