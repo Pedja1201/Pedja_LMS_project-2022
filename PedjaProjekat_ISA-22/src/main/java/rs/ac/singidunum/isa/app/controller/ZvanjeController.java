@@ -27,7 +27,7 @@ public class ZvanjeController {
     @Autowired
     private ZvanjeService zvanjeService;
 
-//    @LoggedZvanje //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
+    @LoggedZvanje //TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Page<ZvanjeDTO>> getAll(Pageable pageable) {
         Page<Zvanje> zvanje = zvanjeService.findAll(pageable);
