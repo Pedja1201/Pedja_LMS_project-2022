@@ -37,7 +37,7 @@ public class ZvanjeLogger {
         zvanjeLogService.save(new ZvanjeLog(null, jp.getSignature().toLongString(),
                 "Pre izvršavanja metode. [LOGGED]. ", LocalDateTime.now(), "INFO"));
         //Saljemo tu poruku u ActiveMQ TODO:Pokrenuti Artemis ukoliko koristimo izvrsavanje metode
-        jmsTemplate.convertAndSend(logQueue, new ZvanjeLogDTO(null,jp.getSignature().toLongString(), "Pre izvršavanja metode. [LOGGED]. ", LocalDateTime.now(), "INFO"));
+//        jmsTemplate.convertAndSend(logQueue, new ZvanjeLogDTO(null,jp.getSignature().toLongString(), "Pre izvršavanja metode. [LOGGED]. ", LocalDateTime.now(), "INFO"));
 
         //Ispis argumenata u konzoli sa vrednostima
         for(Object o : jp.getArgs()){
