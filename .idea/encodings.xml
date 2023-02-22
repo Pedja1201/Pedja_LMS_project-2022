@@ -9,5 +9,8 @@
     <file url="file://$PROJECT_DIR$/Project_Spring-Email/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WBIS_TDB_Project-22/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WBIS_TDB_Project-22/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-mls-logger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-mls/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend-sent_mail/src/main/java" charset="UTF-8" />
   </component>
 </project>

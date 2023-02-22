@@ -1,0 +1,13 @@
+package rs.ac.singidunum.app.repository;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
+import rs.ac.singidunum.app.model.GodinaStudija;
+
+@Repository
+public interface GodinaStudijaRepository extends PagingAndSortingRepository<GodinaStudija, Long> {
+    //Metoda i upit za pronalaženje predmeta na Godini studija
+    @Query(value = "SELECT g FROM GodinaStudija g WHERE g.predmet.naziv = :naziv")
+    public Iterable<GodinaStudija> findPredmetGodineStudija(String naziv);
+}

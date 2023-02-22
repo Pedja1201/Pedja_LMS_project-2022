@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/PedjaProjekat_ISA_KWA-22.iml" filepath="$PROJECT_DIR$/.idea/PedjaProjekat_ISA_KWA-22.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Project_ISA_KWA-logger/Project_ISA_KWA-logger.iml" filepath="$PROJECT_DIR$/Project_ISA_KWA-logger/Project_ISA_KWA-logger.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Project_Spring-Email/Project_Spring-Email.iml" filepath="$PROJECT_DIR$/Project_Spring-Email/Project_Spring-Email.iml" />
       <module fileurl="file://$PROJECT_DIR$/WBIS_TDB_Project-22/WBIS_TDB_Project-22.iml" filepath="$PROJECT_DIR$/WBIS_TDB_Project-22/WBIS_TDB_Project-22.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PedjaProjekat_ISA-22/projekat-isa.iml" filepath="$PROJECT_DIR$/PedjaProjekat_ISA-22/projekat-isa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend-mls/backend-mls.iml" filepath="$PROJECT_DIR$/backend-mls/backend-mls.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend-mls-logger/backend-mls-logger.iml" filepath="$PROJECT_DIR$/backend-mls-logger/backend-mls-logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend-sent_mail/backend-sent_mail.iml" filepath="$PROJECT_DIR$/backend-sent_mail/backend-sent_mail.iml" />
     </modules>
   </component>
 </project>

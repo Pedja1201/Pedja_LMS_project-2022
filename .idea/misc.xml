@@ -4,9 +4,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/WBIS_TDB_Project-22/pom.xml" />
-        <option value="$PROJECT_DIR$/PedjaProjekat_ISA-22/pom.xml" />
-        <option value="$PROJECT_DIR$/Project_Spring-Email/pom.xml" />
-        <option value="$PROJECT_DIR$/Project_ISA_KWA-logger/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-mls/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-mls-logger/pom.xml" />
+        <option value="$PROJECT_DIR$/backend-sent_mail/pom.xml" />
       </list>
     </option>
   </component>

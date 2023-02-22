@@ -6,13 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Project_Spring-Email" />
         <module name="WBIS_TDB_Project-22" />
-        <module name="projekat-isa" />
-        <module name="Project_ISA_KWA-logger" />
+        <module name="backend-mls" />
+        <module name="backend-sent_mail" />
+        <module name="backend-mls-logger" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="backend-mls" target="14" />
+      <module name="backend-mls-logger" target="14" />
+      <module name="backend-sent_mail" target="14" />
       <module name="Project_ISA_KWA-logger" target="14" />
       <module name="Project_Spring-Email" target="14" />
       <module name="projekat-isa" target="14" />
@@ -23,6 +26,9 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Project_ISA_KWA-logger" options="-parameters" />
       <module name="Project_Spring-Email" options="-parameters" />
+      <module name="backend-mls" options="-parameters" />
+      <module name="backend-mls-logger" options="-parameters" />
+      <module name="backend-sent_mail" options="-parameters" />
       <module name="projekat-isa" options="-parameters" />
     </option>
   </component>
