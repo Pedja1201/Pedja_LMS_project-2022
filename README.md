@@ -1,2 +1,3 @@
 # PedjaProjekat_ISA_KWA-22
-Backend and frontend development
+Learning management system Web Application
+Full Stack development
